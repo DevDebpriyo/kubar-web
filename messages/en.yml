@@ -1,0 +1,521 @@
+# ─────────────────────────────────────────────────────────────────
+#  Kubar Labs · English (en) translations
+#  All user-facing text lives here. Reference keys in components
+#  via useTranslations() / getTranslations() from next-intl.
+# ─────────────────────────────────────────────────────────────────
+
+# ── Site-wide metadata ──────────────────────────────────────────
+site:
+  name: "Kubar Labs"
+  title: "Kubar Labs — Credit Infrastructure for India's MSMEs"
+  description: "India's first embedded, plug-and-play MSME credit marketplace. Helping NBFCs lend faster, smarter, and at scale — while making credit access seamless for millions of MSMEs."
+  og_title: "Kubar Labs — Credit Infrastructure for India's MSMEs"
+  og_description: "India's first embedded, plug-and-play MSME credit marketplace. Helping NBFCs lend faster, smarter, and at scale."
+  twitter_description: "India's first embedded, plug-and-play MSME credit marketplace."
+  locale: "en_IN"
+  author: "Kubar Labs"
+
+# ── Navigation ──────────────────────────────────────────────────
+nav:
+  logo_alt: "Kubar Labs"
+  products: "Products"
+  about: "About Us"
+  contact: "Contact"
+  team: "Our Team"
+  cta: "Request Demo"
+  main_nav_aria: "Main navigation"
+  mobile_nav_aria: "Mobile navigation"
+  open_menu_aria: "Open navigation menu"
+  close_menu_aria: "Close menu"
+  
+  products_dropdown:
+    navdhan:
+      name: "NavDhan"
+      description: "India's first MSME Credit Hub"
+      href: "/products/navdhan"
+    bre:
+      name: "BRE"
+      description: "No-code engine for credit policies"
+      status: "Coming Soon"
+    underwriting:
+      name: "Underwriting Engine"
+      description: "Holistic Sector-Specific Risk Profiling"
+      status: "Coming Soon"
+
+# ── Hero section ────────────────────────────────────────────────
+hero:
+  aria_label: "Hero section"
+  badge: "India's First MSME Credit Marketplace"
+
+  title:
+    line1: "A Plug-and-Play Hub"
+    line2: "for Embedded"
+    line3: "Business Credit"
+
+  # Rich-text: tags <nbfc> and <msme> are replaced with styled spans
+  subtitle: "India's first embedded, plug-and-play business credit marketplace. We help <nbfc>NBFCs lend faster</nbfc>, smarter, and at scale — while making credit access <msme>seamless for millions of MSMEs</msme>."
+
+  cta_primary: "Request Demo"
+  cta_primary_aria: "Request a demo of Kubar Labs"
+  cta_secondary: "See How It Works"
+  cta_secondary_aria: "Watch a demo of Kubar Labs"
+
+  scroll: "Scroll"
+
+# ── Floating metric cards (hero visual) ─────────────────────────
+cards:
+  loan_approval:
+    label: "Loan Approved"
+    amount: "₹8,50,000"
+    processing_label: "Processing time"
+    processing_time: "3.2 min"
+    match_label: "Match Score"
+    match_value: "87%"
+
+  credit:
+    header: "Credit Intelligence"
+    msme_name: "Sharma Textiles Ltd."
+    score_label: "Credit Score"
+    score: "742"
+    change: "+12 pts"
+    change_period: "vs last month"
+    rate_label: "Best Rate Available"
+    rate: "12.4% p.a."
+
+  nbfc:
+    status: "3 NBFCs Active"
+    lender_1_name: "Bajaj Finance"
+    lender_1_amount: "₹45L"
+    lender_2_name: "HDFC Capital"
+    lender_2_amount: "₹30L"
+    more: "+1 more lender"
+
+# ── Infinite partner/recognition marquee ───────────────────────
+marquee:
+  aria_label: "Partners and recognitions"
+  items:
+    ondc: "ONDC"
+    indiamart: "IndiaMart"
+    gem: "GeM"
+    tally: "Tally"
+    sap: "SAP"
+    wtfund: "WTFund Top 25 Startups"
+    elevenlabs: "ElevenLabs Grants Recipient"
+    f6s: "F6S #6 FinTech"
+
+# ── Problem split section ──────────────────────────────────────
+problems:
+  aria_label: "Marketplace and lender problems"
+  conclusion: "The missing piece isn't capital. It's technology."
+
+  marketplace:
+    title: "The Marketplace Problem"
+    subtitle: "Your sellers have the orders. They just don't have the capital to fulfill them."
+    bullets:
+      1: "Sellers abandon high-value orders due to lack of working capital"
+      2: "GMV leaks out of your platform"
+      3: "Seller retention drops — they leave for platforms that offer financing"
+
+  lender:
+    title: "The Lender Problem"
+    subtitle: "You have the capital. But the infrastructure to deploy it profitably at scale doesn't exist."
+    bullets:
+      1: "₹ 3,000-5,000 cost per loan acquisition"
+      2: "15-20% approval rates from unfiltered applications"
+      3: "Manual underwriting takes days, not minutes"
+
+# ── Product showcase section ───────────────────────────────────
+product_showcase:
+  aria_label: "Our first product"
+  eyebrow: "OUR FIRST PRODUCT"
+  title: "NavDhan"
+  subtitle: "A sector-specialized embedded business credit platform that sits directly inside B2B platforms and ERPs where MSMEs already work."
+
+  platforms:
+    ondc: "ONDC"
+    indiamart: "IndiaMart"
+    gem: "GeM"
+    tally: "Tally"
+    sap: "SAP"
+
+  metrics:
+    approval_time:
+      value: "5 min"
+      label: "Need to approval"
+    cash_time:
+      value: "1 hour"
+      label: "Approval to cash in hand"
+    approval_rate:
+      value: "35-40%"
+      label: "Approval rate vs. 15-20% industry average"
+
+# ── Visual story section ───────────────────────────────────────
+visual_story:
+  aria_label: "Visual credit story"
+  implementation_label: "Our Implementation"
+  implementation_phases:
+    1: "Order Signal"
+    2: "Need Analysis"
+    3: "Instant Underwriting"
+    4: "Disbursal & Growth"
+  old_way_label: "Old Way"
+  old_way_path: "Bank branch → Paperwork → 2 weeks of waiting → Order lost"
+
+  steps:
+    1: "Textile merchant receives a ₹10L bulk order on ONDC"
+    2: "She lacks ₹4L for raw materials"
+    3: "NavDhan's embedded widget detects the capital need"
+    4: "Financial data pulled via Account Aggregator in 5 min"
+    5: "Sector-specific AI scores her creditworthiness"
+    6: "Pre-approved loan offer appears in her order screen"
+    7: "Funds hit her UPI account within 1 hour"
+    8: "Order fulfilled. Business grows."
+
+# ── Two Outcomes section ────────────────────────────────────────
+two_outcomes:
+  aria_label: "One platform, two powerful outcomes"
+  title: "One Platform. Two Powerful Outcomes."
+  
+  marketplaces:
+    tab: "For Marketplaces"
+    subtitle: "Turn your seller base into a revenue engine."
+    cta: "Partner With Us"
+    cta_email: "partnerships@kubar.tech"
+    
+    features:
+      1:
+        title: "Higher GMV"
+        description: "Sellers fulfill orders they'd otherwise abandon due to lack of working capital."
+      2:
+        title: "Seller Retention"
+        description: "Embedded financing becomes a reason sellers choose and stay on your platform."
+      3:
+        title: "New Revenue Stream"
+        description: "Earn a share on every loan facilitated through your platform — with zero hosting risk."
+      4:
+        title: "Zero Development Cost"
+        description: "Plug-and-play APIs and SDKs. We handle all credit infrastructure and compliance."
+  
+  institutions:
+    tab: "For Financial Institutions"
+    subtitle: "Deploy capital where it matters — profitably, at scale."
+    cta: "Schedule a Discovery Call"
+    cta_email: "partnerships@kubar.tech"
+    
+    features:
+      1:
+        title: "Pre-Screened Leads"
+        description: "35-40% approval rates from leads delivered directly into your existing LOS/CBS."
+      2:
+        title: "Sector-Specific Intelligence"
+        description: "AI underwriting models tailored to textiles, manufacturing, FMCG, agri, and more."
+      3:
+        title: "Complete Lifecycle Management"
+        description: "Origination through collections, monitoring, recovery, and portfolio analytics — all handled."
+      4:
+        title: "Compliance-First Architecture"
+        description: "RBI Digital Lending Guidelines, DPDP Act, Account Aggregator framework — all built in."
+
+# ── Built for Trust section ────────────────────────────────────
+built_for_trust:
+  aria_label: "Built for trust and compliance"
+  title: "Built for Trust"
+  
+  compliance:
+    1: "RBI Digital Lending Guidelines"
+    2: "DPDP Act Compliant"
+    3: "Account Aggregator Framework"
+  
+  integrations:
+    1: "ONDC"
+    2: "IndiaMart"
+    3: "GeM"
+    4: "Tally"
+    5: "SAP"
+
+# ── Built by Kubar Labs section ────────────────────────────────
+built_by:
+  aria_label: "Built by Kubar Labs products"
+  title: "Built by Kubar Labs"
+  description: "Kubar Labs is a technology research company building smarter credit assets and systems. We develop intelligent infrastructure that makes lending more accessible, efficient, and scalable — starting with India, with global ambitions."
+  
+  tagline: "New Bharat. New Methods. New Money."
+  
+  products:
+    navdhan:
+      name: "NavDhan"
+      description: "Embedded MSME credit infrastructure for India"
+      status: "LIVE"
+      status_type: "live"
+    
+    protocol:
+      name: "Kubar Protocol"
+      description: "Efficient tokenisation of cross-border trade assets"
+      status: "COMING SOON"
+      status_type: "upcoming"
+  
+  hiring_cta: "Want to help us build it? Get in touch"
+  hiring_link: "→"
+  hiring_email: "careers@kubar.tech"
+
+# ── Products section (placeholder for future) ───────────────────
+products:
+  section_label: "Products section"
+  eyebrow: "What We Build"
+  title: "One Protocol. Infinite Credit Possibilities."
+  subtitle: "Kubar Labs provides the infrastructure layer that makes embedded MSME credit a reality — for both lenders and borrowers."
+
+  embedded_credit:
+    title: "Embedded Credit Marketplace"
+    description: "A plug-and-play API suite that lets any platform embed credit products directly into their user journey — no complex integrations required."
+
+  unified_scoring:
+    title: "Unified Multi-Rail Scoring"
+    description: "Our proprietary credit scoring engine aggregates data from GST, banking, bureau, and alternate sources to generate a single, reliable MSME credit score."
+
+  nbfc_infrastructure:
+    title: "NBFC Lending Infrastructure"
+    description: "Give your NBFC a complete digital lending stack — from origination and underwriting to disbursement and collections — all via API."
+
+# ── For NBFCs section (placeholder for future) ──────────────────
+nbfcs:
+  section_label: "For NBFCs section"
+  eyebrow: "For NBFCs"
+  title: "Lend Faster. Lend Smarter. Lend at Scale."
+  subtitle: "Kubar Labs gives NBFCs the tools to reach more creditworthy MSMEs, underwrite with confidence, and deploy capital at unprecedented speed."
+
+  benefit_1:
+    title: "Instant MSME Reach"
+    description: "Tap into a pre-verified network of MSMEs across sectors and geographies — without building distribution from scratch."
+
+  benefit_2:
+    title: "Data-Driven Underwriting"
+    description: "Replace gut feel with deep, multi-source credit intelligence. Our scoring engine surfaces risk signals NBFCs can't see on their own."
+
+  benefit_3:
+    title: "Zero-Touch Disbursement"
+    description: "From application to disbursal in under 24 hours. Automated workflows handle KYC, agreements, and fund transfers end-to-end."
+
+# ── For MSMEs section (placeholder for future) ──────────────────
+msmes:
+  section_label: "For MSMEs section"
+  eyebrow: "For MSMEs"
+  title: "Get the Credit Your Business Deserves."
+  subtitle: "Kubar Labs connects your business to the best credit sources at the best rates — right where you already do business."
+
+  benefit_1:
+    title: "Credit at Point of Business"
+    description: "Access working capital, equipment loans, and invoice financing without ever leaving your existing business platform."
+
+  benefit_2:
+    title: "Fair, Transparent Rates"
+    description: "Our multi-lender marketplace ensures you always get competitive rates. No hidden fees, no opaque terms."
+
+  benefit_3:
+    title: "Your Data, Your Advantage"
+    description: "Businesses with strong operational data get better rates. We help you leverage your own financial story."
+
+# ── Footer / CTA section ────────────────────────────────────────
+footer:
+  main_cta_title: "Let's explore what Kubar can do for your platform."
+  email_link: "partnerships@kubar.tech"
+  schedule_call: "Schedule a Call"
+  schedule_link: "https://calendly.com/partnerships-kubar"
+  
+  links:
+    about: "About Kubar Labs"
+    navdhan: "NavDhan"
+    contact: "Contact"
+    privacy: "Privacy Policy"
+  
+  copyright: "© 2026 Kubar Labs. All rights reserved."
+
+# ── Contact / CTA section (placeholder for future) ──────────────
+contact:
+  page_title: "Contact Us"
+  page_description: "Get in touch with our team"
+  
+  main_heading: "Get in Touch"
+  main_description: "Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible."
+  
+  form:
+    first_name_label: "First Name"
+    first_name_placeholder: "John"
+    last_name_label: "Last Name"
+    last_name_placeholder: "Doe"
+    email_label: "Email Address"
+    email_placeholder: "you@company.com"
+    phone_label: "Phone Number"
+    phone_placeholder: "+91 98765 43210"
+    message_label: "Message"
+    message_placeholder: "Tell us what you'd like to discuss..."
+    submit: "Send Message"
+    submitting: "Sending..."
+    success: "Message sent! We'll be in touch within 24 hours."
+    error: "Something went wrong. Please try again."
+  
+  contact_info:
+    heading: "Need something specific?"
+    partner_label: "Partner enquiries"
+    partner_email: "partner@kubar.tech"
+    support_label: "Support"
+    support_email: "support@kubar.tech"
+    media_label: "Media"
+    media_email: "press@kubar.tech"
+
+# ── Common / shared strings ─────────────────────────────────────
+common:
+  learn_more: "Learn more"
+  get_started: "Get Started"
+  read_more: "Read more"
+  view_all: "View all"
+  back: "Back"
+  close: "Close"
+  loading: "Loading..."
+  error_generic: "Something went wrong. Please try again."
+  scroll_to_top: "Scroll to top"
+
+# ── About page ────────────────────────────────────────────────
+about:
+  page_title: "About Us"
+  page_description: "Meet the team building credit infrastructure for India's future"
+  
+  mission_section:
+    subtitle: "Our Mission"
+    intro: "Kubar Labs was born out of a simple truth. Small businesses move India forward, but the system that should support them often holds them back."
+    message: "We're here to change that."
+    description: "At Kubar Labs, we're building the digital foundation that connects lenders and small businesses through trust, data, and understanding. We want every business owner, no matter where they are or what they make, to have fair access to credit when they need it most."
+  
+  story_section:
+    badge: "01"
+    title: "How It All Started"
+    subtitle: "It started with one question."
+    question: "Why is getting a loan still so hard for India's small businesses?"
+    description: "We met entrepreneurs with real orders and clean records, still waiting months for approval. We met lenders who wanted to lend, but couldn't see the full picture. Data was scattered. Trust was missing."
+    insight: "That gap became our mission."
+    closing: "We built NavDhan to bridge MSMEs and lenders using verified data and intelligent systems. Kubar Labs was born to bring empathy back into finance."
+  
+  vision_section:
+    badge: "02"
+    title: "Our Vision"
+    subtitle: "We want credit to move where business happens."
+    description: "Kubar Labs builds systems that help lenders understand MSMEs better, and help MSMEs access credit without friction. We remove complexity, delay, and guesswork from lending."
+    goal: "Our goal is a fairer financial system where small businesses are judged by their strength, not their size."
+  
+  team_section:
+    badge: "03"
+    title: "Meet the Team"
+    subtitle: "We are builders who believe in small businesses."
+    description: "We have sat with MSMEs, accountants, and lenders to understand the real problems on the ground. We know how one loan can change a business."
+    closing: "That understanding drives everything we build at Kubar Labs."
+  
+  closing_section:
+    title: "The Future of Finance"
+    message: "The future of finance will be built in small factories, shops, and workshops across India. If we can make credit flow to them easily, fairly, and transparently, we can reshape the story of growth in this country."
+    final: "That's what we're here for."
+    brand: "That's what Kubar Labs stands for."
+  
+  cta_section:
+    title: "Join our mission"
+    description: "Be part of a movement reshaping credit in India."
+    button: "Get in Touch"
+    button_email: "partnerships@kubar.tech"
+
+# ── NavDhan Product Page ──────────────────────────────────────
+navdhan:
+  page_title: "NavDhan - Smart Credit Infrastructure for India's MSMEs"
+  page_description: "NavDhan by Kubar Labs powers embedded lending for the next generation of MSME finance."
+  
+  hero:
+    title: "Smart Credit Infrastructure for India's MSMEs"
+    description: "NavDhan by Kubar Labs powers embedded lending for the next generation of MSME finance. It connects lenders, marketplaces, and business platforms in one place to make credit flow where business actually happens."
+    cta_primary: "Book a Demo"
+  
+  problem_section:
+    eyebrow: "The Challenge"
+    subtitle: "Making credit available at the right time."
+    problem_text: "Thousands of businesses in India struggle to secure loans while working capital gradually disappears into receivables. At the same time, banks and NBFCs struggle to find the right borrowers spending months verifying data and chasing documentation."
+    solution_text: "NavDhan makes MSME lending faster, smarter, and deeply embedded. It bridges this gap, connecting lenders and businesses through live, verified transaction data at the exact point of need."
+  
+  use_cases:
+    title: "Use Cases"
+    cases:
+      1:
+        title: "Cash-Flow Loans"
+        description: "Disburse working capital in hours using live transaction data, verified GST filings, and Account Aggregator feeds to give lenders a 360° view of every business they finance."
+      2:
+        title: "Faster, Smarter, Embedded Lending"
+        description: "Automate GST and e-invoice validation to finance MSME receivables and reduce underwriting friction."
+      3:
+        title: "Checkout Financing"
+        description: "Enables lenders to assess, approve, and service MSME loans directly through the platforms where businesses already operate, like marketplaces, ERPs, supplier apps, or payment systems."
+  
+  why_works:
+    title: "Why NavDhan Works"
+    tagline: "Traditional credit models rely on paperwork and assumptions. We rely on proof."
+    message: "NavDhan uses real-time signals from business operations to assess creditworthiness more accurately than any static report."
+    features:
+      1: "Unified validation from GST, Account Aggregator, and marketplace sources"
+      2: "Sector-specific scoring models built for manufacturing, trading, and services"
+      3: "Embedded disbursal flows through eNACH, UPI, and DLT-powered smart contracts"
+      4: "Continuous monitoring for better risk visibility and healthier portfolios"
+  
+  integrations:
+    title: "Integrations at Every Layer"
+    subtitle: "Integrated at every layer of the financial stack. NavDhan connects seamlessly with:"
+    marketplace_partners:
+      label: "Marketplace & ERP Partners"
+      items:
+        1: "ONDC trade channels"
+        2: "Top B2B procurement platforms"
+        3: "Inventory & receivable systems"
+    lender_systems:
+      label: "Lender Systems"
+      items:
+        1: "Core banking & CBS"
+        2: "LOS/LMS orchestration"
+        3: "CRM and compliance suites"
+    data_infra:
+      label: "Data Infrastructure"
+      items:
+        1: "Account Aggregator (AA)"
+        2: "GSTN & e-invoice rails"
+        3: "UPI & cash-flow telemetry"
+  
+  for_banks:
+    title: "NavDhan for Banks and NBFCs"
+    subtitle: "A better way to reach, assess, and serve MSME borrowers. Meet MSMEs exactly where business happens with verified, structured business data."
+    features:
+      1: "Real-time underwriting - Using live transaction data"
+      2: "Embedded loan offers - At the point of purchase or sale"
+      3: "Faster disbursals - With digital KYC and LOS/LMS automation"
+      4: "Rich portfolio insights - Powered by sectoral intelligence"
+    tagline: "We help you move from reactive lending to data-driven, relationship-first MSME financing."
+    cta: "Schedule a Partner Briefing"
+    cta_email: "partnerships@kubar.tech"
+  
+  for_msmes:
+    title: "NavDhan for MSMEs"
+    subtitle: "Get the right loan at the right time, automatically. NavDhan works behind the scenes to match you with lenders that trust your data. No brokers, no endless forms."
+    features:
+      1: "Automatic loan matching - Loan offers that match your business needs and cash flow cycles. No brokers, no endless forms."
+      2: "Focus on growth - Faster access to credit means you can focus on growth instead of waiting for payments."
+    cta_primary: "Join Our Whatsapp Community"
+    cta_secondary: "Join the Waitlist"
+
+# ── Team Page ────────────────────────────────────────────
+team:
+  page_title: "Our Team"
+  page_description: "Meet the builders behind Kubar Labs"
+  
+  hero_section:
+    title: "Meet Our Team"
+    description: "We are builders, researchers, and credit experts united by one mission: to make MSME lending faster, smarter, and fairer. Every person on this team brings deep experience from fintech, technology, and financial services."
+  
+  team_section:
+    title: "The Team"
+    subtitle: "Building the future of MSME credit"
+  
+  advisors_section:
+    title: "Our Advisors"
+    subtitle: "Guiding us with industry expertise and strategic vision"
