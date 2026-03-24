@@ -29,7 +29,7 @@ function ProductCard({
       transition={{
         duration: 0.6,
         delay: index * 0.15,
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
       }}
       whileHover={{ y: -8 }}
       className="built-product-card"
@@ -148,7 +148,7 @@ export function BuiltBySection() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <h2 className="built-title">{t("title")}</h2>
           <p className="built-description">{t("description")}</p>
@@ -163,7 +163,7 @@ export function BuiltBySection() {
           transition={{
             duration: 0.8,
             delay: 0.2,
-            ease: [0.16, 1, 0.3, 1],
+            ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
           }}
           aria-hidden="true"
         />
@@ -184,7 +184,7 @@ export function BuiltBySection() {
           transition={{
             duration: 0.6,
             delay: 0.35,
-            ease: [0.16, 1, 0.3, 1],
+            ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
           }}
         >
           <a href={`mailto:${t("hiring_email")}`} className="built-hiring-link">
@@ -222,7 +222,7 @@ export function BuiltBySection() {
           transition={{
             duration: 0.6,
             delay: 0.5,
-            ease: [0.16, 1, 0.3, 1],
+            ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
           }}
         >
           <div className="built-tagline-badge">

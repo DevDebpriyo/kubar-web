@@ -28,7 +28,7 @@ export function AnimatedStat({
       const controls = animate(count, value, {
         duration: 2.4,
         delay: delay + 1.3,
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
       });
       return controls.stop;
     }

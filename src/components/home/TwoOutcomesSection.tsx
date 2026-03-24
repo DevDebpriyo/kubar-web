@@ -43,7 +43,7 @@ function FeatureCard({
       transition={{
         duration: 0.5,
         delay: index * 0.08,
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
       }}
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
       className="group outcomes-feature-card"
@@ -149,7 +149,7 @@ function TabButton({
           animate={{ width: "100%" }}
           transition={{
             duration: 0.4,
-            ease: [0.16, 1, 0.3, 1],
+            ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
           }}
           aria-hidden="true"
         />
@@ -229,7 +229,7 @@ export function TwoOutcomesSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <div className="outcomes-badge">
             <Sparkles className="h-3.5 w-3.5" />
@@ -245,7 +245,7 @@ export function TwoOutcomesSection() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <div className="outcomes-tabs">
             <TabButton
@@ -325,7 +325,7 @@ export function TwoOutcomesSection() {
           initial={{ opacity: 0, scaleX: 0 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           aria-hidden="true"
         />
       </div>

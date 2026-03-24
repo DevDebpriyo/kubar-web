@@ -40,7 +40,7 @@ function TrustBadge({
       transition={{
         duration: 0.6,
         delay,
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
       }}
       whileHover={{
         y: -6,
@@ -138,7 +138,7 @@ export function BuiltForTrustSection() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <h2 className="trust-title">{t("title")}</h2>
         </motion.div>
@@ -152,7 +152,7 @@ export function BuiltForTrustSection() {
           transition={{
             duration: 0.8,
             delay: 0.15,
-            ease: [0.16, 1, 0.3, 1],
+            ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
           }}
           aria-hidden="true"
         />
@@ -221,7 +221,7 @@ export function BuiltForTrustSection() {
           transition={{
             duration: 0.8,
             delay: 0.5,
-            ease: [0.16, 1, 0.3, 1],
+            ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
           }}
           aria-hidden="true"
         />

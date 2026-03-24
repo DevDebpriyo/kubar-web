@@ -24,7 +24,7 @@ function ProblemCard({ title, subtitle, bullets, accent, index }: ProblemCardPro
       initial={{ opacity: 0, y: 26 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35 }}
-      transition={{ duration: 0.7, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.7, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
       whileHover={{ y: -6, scale: 1.01 }}
       className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[rgba(10,10,22,0.88)] px-6 py-7 sm:px-8 sm:py-8 lg:px-9 lg:py-9 backdrop-blur-xl"
       style={{
@@ -127,7 +127,7 @@ export function ProblemSplitSection() {
         initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.65 }}
-        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         className="relative z-10 mx-auto mt-12 w-full max-w-4xl sm:mt-14"
       >
         <div className="relative mb-6 h-4 sm:mb-7">

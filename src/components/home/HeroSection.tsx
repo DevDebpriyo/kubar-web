@@ -219,7 +219,7 @@ export function HeroSection() {
               transition={{
                 duration: 1.1,
                 delay: 0.4,
-                ease: [0.16, 1, 0.3, 1],
+                ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
               }}
               className="hidden lg:block relative h-130 xl:h-140"
             >

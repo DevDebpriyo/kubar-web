@@ -58,7 +58,7 @@ function ProductsDropdown() {
       transition={{
         duration: 0.4,
         delay: 0.1,
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
       }}
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
@@ -88,7 +88,7 @@ function ProductsDropdown() {
             initial={{ opacity: 0, y: -8, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.95 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             className="absolute top-full left-0 mt-2 w-80 rounded-xl border border-white/10 bg-[rgba(10,10,22,0.95)] backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.6)] overflow-hidden z-50"
             style={{
               background:
@@ -104,7 +104,7 @@ function ProductsDropdown() {
                   transition={{
                     duration: 0.2,
                     delay: idx * 0.04,
-                    ease: [0.16, 1, 0.3, 1],
+                    ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
                   }}
                 >
                   {product.href ? (
@@ -187,7 +187,7 @@ function DesktopNav({ navLinks }: { navLinks: NavLink[] }) {
           transition={{
             duration: 0.4,
             delay: 0.15 + i * 0.06,
-            ease: [0.16, 1, 0.3, 1],
+            ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
           }}
         >
           <Link
@@ -209,7 +209,7 @@ function CTAButton({ ctaLabel }: { ctaLabel: string }) {
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, delay: 0.45, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
       className="hidden lg:flex items-center"
     >
       <Link
@@ -282,7 +282,7 @@ function MobileMenu({
             initial={{ opacity: 0, y: -16, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.98 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             className="fixed top-4 left-4 right-4 z-50 rounded-2xl border border-white/9 overflow-hidden"
             style={{
               background: "rgba(8, 8, 20, 0.96)",
@@ -313,7 +313,7 @@ function MobileMenu({
                 transition={{
                   delay: 0.06,
                   duration: 0.3,
-                  ease: [0.16, 1, 0.3, 1],
+                  ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
                 }}
               >
                 <button
@@ -397,7 +397,7 @@ function MobileMenu({
                   transition={{
                     delay: 0.12 + i * 0.05,
                     duration: 0.3,
-                    ease: [0.16, 1, 0.3, 1],
+                    ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
                   }}
                 >
                   <Link
@@ -530,7 +530,7 @@ export function Navbar() {
       <motion.header
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
           background: isScrolled ? "rgba(4, 4, 12, 0.82)" : "transparent",
@@ -558,7 +558,7 @@ export function Navbar() {
             <motion.div
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             >
               <KubarLogo />
             </motion.div>

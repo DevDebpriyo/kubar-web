@@ -122,7 +122,7 @@ export function VisualStorySection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"
         >
           {steps.map((description, index) => {
@@ -136,7 +136,7 @@ export function VisualStorySection() {
                 transition={{
                   duration: 0.5,
                   delay: index * 0.1,
-                  ease: [0.16, 1, 0.3, 1],
+                  ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
                 }}
               >
                 <StepCard

@@ -18,7 +18,7 @@ function MetricCard({ value, label, index }: MetricCardProps) {
       initial={{ opacity: 0, y: 26 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35 }}
-      transition={{ duration: 0.65, delay: 0.12 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.65, delay: 0.12 + index * 0.1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
       whileHover={{ y: -6, scale: 1.015 }}
       className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[rgba(10,10,22,0.86)] px-6 py-7 sm:px-8 sm:py-8"
       style={{
@@ -137,7 +137,7 @@ export function ProductShowcaseSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.45 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           className="mx-auto max-w-4xl text-center"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.02] px-3 py-1.5">
@@ -159,7 +159,7 @@ export function ProductShowcaseSection() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           className="mx-auto mt-10 flex max-w-4xl flex-wrap items-center justify-center gap-3.5 sm:gap-4"
         >
           {platforms.map((platform, index) => (

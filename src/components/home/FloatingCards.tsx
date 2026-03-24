@@ -22,7 +22,7 @@ function LoanApprovalCard() {
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.94 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.75, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.75, delay: 0.9, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           whileHover={{
             scale: 1.025,
             y: -3,
@@ -72,7 +72,7 @@ function LoanApprovalCard() {
                 transition={{
                   duration: 1.4,
                   delay: 1.8,
-                  ease: [0.16, 1, 0.3, 1],
+                  ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
                 }}
               />
             </div>
@@ -107,7 +107,7 @@ function CreditIntelligenceCard() {
         <motion.div
           initial={{ opacity: 0, y: 28, scale: 0.94 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.85, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.85, delay: 0.65, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           whileHover={{
             scale: 1.02,
             y: -3,
@@ -142,7 +142,7 @@ function CreditIntelligenceCard() {
                 transition={{
                   duration: 0.55,
                   delay: 1.2,
-                  ease: [0.16, 1, 0.3, 1],
+                  ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
                 }}
                 className="text-[32px] font-black tracking-[-0.04em] leading-none stat-value"
                 style={{ color: "#f0b429" }}
@@ -233,7 +233,7 @@ function NBFCNetworkCard() {
         <motion.div
           initial={{ opacity: 0, y: 18, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.7, delay: 1.15, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, delay: 1.15, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           whileHover={{
             scale: 1.025,
             y: -3,
