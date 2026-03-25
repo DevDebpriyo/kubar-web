@@ -43,7 +43,7 @@ const FOUNDER: TeamMember = {
     "Won multiple hackathons including Google ATLAS",
   ],
   image: "/team/vaibhav.jpg",
-  linkedin: "https://linkedin.com",
+  linkedin: "https://www.linkedin.com/in/fenestbuc/",
   accentColor: "orange",
 };
 
@@ -54,7 +54,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     role: "Co-Founder & COO",
     description: "People and Internal Systems | 7 YOE | Ex- Govt. Of Goa",
     image: "/team/agniva.png",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/agnivaray/",
     accentColor: "orange",
   },
   {
@@ -63,7 +63,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     role: "Data Science Lead",
     description: "NLP & Deep Learning Expert | 6 YOE | CUDA and Triton",
     image: "/team/ayan.png",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/ayan-gangopadhyay-426012157/",
     accentColor: "green",
   },
   {
@@ -72,7 +72,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     role: "Founding Engineer",
     description: "Multi-Agent AI Systems Builder | LLMs, GANs & MLOps",
     image: "/team/rayansh.png",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/rayansh-srivastava-419951219/",
     accentColor: "blue",
   },
   {
@@ -81,7 +81,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     role: "Product & Program Lead",
     description: "API & Automation Expert | 13 YOE | US Healthcare → Fintech",
     image: "/team/manchit.png",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/manchit-sanan-6b9705158/",
     accentColor: "purple",
   },
   {
@@ -90,7 +90,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     role: "Growth & Revenue Lead",
     description: "GTM & RevOps Operator | 7+ YOE | B2B Distribution",
     image: "/team/sreyan.png",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/sreyanmchowdhury/",
     accentColor: "pink",
   },
   {
@@ -99,7 +99,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     role: "Founding Engineer",
     description: "Full-Stack .NET Developer | 6 YOE | Enterprise Systems → Data Science",
     image: "/team/debjit.png",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/debjit-ghosh-914776170/",
     accentColor: "cyan",
   },
   {
@@ -108,7 +108,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     role: "Marketplace Onboarding",
     description: "Buyer-Risk Intelligence | MSME Credit Analytics",
     image: "/team/divyesh.png",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/divyesh-reddy/?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
     accentColor: "amber",
   },
   {
@@ -117,7 +117,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     role: "Engineer/Developer",
     description: "Full-Stack & AI Developer | Open-Source Contributor",
     image: "/team/debpriyo.png",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/debpriyo-ghosal-0759a92a6/",
     accentColor: "green",
   },
   {
@@ -126,7 +126,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     role: "Fundraising Lead",
     description: "MS at HEC Paris | CUDA and Triton | Ex- RIL, CWC, Earlyseed",
     image: "/team/mridul.png",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/mridulmalani/",
     accentColor: "pink",
   },
   {
@@ -144,7 +144,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     role: "Product Research Intern",
     description: "IIM-Bangalore BBA-DBE | 0→1 Product Builder",
     image: "/team/adhithya.png",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/thisisadhithyasriram/",
     accentColor: "purple",
   },
 ];
