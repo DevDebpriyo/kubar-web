@@ -155,7 +155,7 @@ const ADVISORS: TeamMember[] = [
     name: "Debayan Gupta",
     description: "Professor, CS - MIT, Ashoka University",
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+      "/advisors/debayan.png",
     linkedin: "https://linkedin.com",
     accentColor: "orange",
   },
@@ -164,7 +164,7 @@ const ADVISORS: TeamMember[] = [
     name: "Sandeep Juneja",
     description: "Director, Centre for Data - Ashoka University | Expert in AI & financial mathematics",
     image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
+      "/advisors/sandeep.png",
     linkedin: "https://linkedin.com",
     accentColor: "green",
   },
@@ -173,7 +173,7 @@ const ADVISORS: TeamMember[] = [
     name: "Amit Sagar",
     description: "Lead System Architect at Bank of England | BOE CBDC Architecture Contributor",
     image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
+      "/advisors/amit.png",
     linkedin: "https://linkedin.com",
     accentColor: "blue",
   },
@@ -182,7 +182,7 @@ const ADVISORS: TeamMember[] = [
     name: "Shridhar Sethuram",
     description: "Seasoned finance veteran, 25+ years in Private Equity",
     image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
+      "/advisors/shridhar.png",
     linkedin: "https://linkedin.com",
     accentColor: "purple",
   },
@@ -191,7 +191,7 @@ const ADVISORS: TeamMember[] = [
     name: "Tushar Jaruhar",
     description: "Ex-Pricing Actuary at Zurich Insurance Co.",
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+      "/advisors/tushar.png",
     linkedin: "https://linkedin.com",
     accentColor: "pink",
   },
@@ -228,10 +228,12 @@ function TeamMemberCard({
   member,
   delay,
   featured = false,
+  advisor = false,
 }: {
   member: TeamMember;
   delay: number;
   featured?: boolean;
+  advisor?: boolean;
 }) {
   const accentMap = {
     orange: "#fb923c",
@@ -253,7 +255,7 @@ function TeamMemberCard({
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
       whileHover={{ y: -8 }}
-      className={`team-member-card ${featured ? "team-member-card-featured" : ""}`}
+      className={`team-member-card ${featured ? "team-member-card-featured" : ""} ${advisor ? "team-member-card-advisor" : ""}`}
       style={
         {
           "--accent-color": accentMap[member.accentColor],
@@ -386,6 +388,7 @@ export default function TeamPage() {
                 key={advisor.id}
                 member={advisor}
                 delay={0.1 + idx * 0.08}
+                advisor
               />
             ))}
           </div>
