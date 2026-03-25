@@ -13,122 +13,185 @@ import "./team.css";
 interface TeamMember {
   id: string;
   name: string;
-  role: string;
+  role?: string;
   description: string;
+  achievements?: string[];
   image: string;
   linkedin: string;
-  accentColor: "orange" | "green" | "blue" | "purple" | "pink" | "cyan" | "amber";
+  accentColor:
+    | "orange"
+    | "green"
+    | "blue"
+    | "purple"
+    | "pink"
+    | "cyan"
+    | "amber";
 }
+
+const FOUNDER: TeamMember = {
+  id: "founder-1",
+  name: "Vaibhav Sharma",
+  role: "Founder",
+  description: "Past achievements",
+  achievements: [
+    "Worked in DeFi security with MIT Labs and IBM Quantum",
+    "Recipient of Perplexity AI Fellowship and NVIDIA Inception Accelerator",
+    "Youngest-ever Polkadot Blockchain Academy Graduate, Hong Kong",
+    "Previously worked with leading DeFi ventures like VaultCraft",
+    "Contributed extensively to leading Open-Source projects like Fedora OS",
+    "ML Researcher for the Director of National Chemical Laboratory and FRS Dr. Sourav Pal Delivered 5+ Blockchain MVPs for enterprise clients",
+    "Won multiple hackathons including Google ATLAS",
+  ],
+  image: "/team/vaibhav.jpg",
+  linkedin: "https://linkedin.com",
+  accentColor: "orange",
+};
 
 const TEAM_MEMBERS: TeamMember[] = [
   {
     id: "member-1",
-    name: "Rahul Sharma",
-    role: "Co-Founder & CEO",
-    description: "Former fintech lead at HDFC, 8 years credit tech",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
+    name: "Agniva Ray",
+    role: "Co-Founder & COO",
+    description: "People and Internal Systems | 7 YOE | Ex- Govt. Of Goa",
+    image: "/team/agniva.png",
     linkedin: "https://linkedin.com",
     accentColor: "orange",
   },
   {
     id: "member-2",
-    name: "Priya Desai",
-    role: "Co-Founder & CTO",
-    description: "Ex-Stripe engineer, built fintech infrastructure",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+    name: "Ayan Gangopadhyay",
+    role: "Data Science Lead",
+    description: "NLP & Deep Learning Expert | 6 YOE | CUDA and Triton",
+    image: "/team/ayan.png",
     linkedin: "https://linkedin.com",
     accentColor: "green",
   },
   {
     id: "member-3",
-    name: "Vikram Patel",
-    role: "Head of Product",
-    description: "Product at Razorpay, MSMEs = passion project",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
+    name: "Rayansh Srivastava",
+    role: "Founding Engineer",
+    description: "Multi-Agent AI Systems Builder | LLMs, GANs & MLOps",
+    image: "/team/rayansh.png",
     linkedin: "https://linkedin.com",
     accentColor: "blue",
   },
   {
     id: "member-4",
-    name: "Ananya Singh",
-    role: "Lead, Risk & Compliance",
-    description: "RBI regulation expert, 12 years banking sector",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
+    name: "Manchit Sanan",
+    role: "Product & Program Lead",
+    description: "API & Automation Expert | 13 YOE | US Healthcare → Fintech",
+    image: "/team/manchit.png",
     linkedin: "https://linkedin.com",
     accentColor: "purple",
   },
   {
     id: "member-5",
-    name: "Arjun Kumar",
-    role: "Engineering Lead",
-    description: "Built payment systems at PhonePe, scale expert",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+    name: "Sreyan M Chowdhury",
+    role: "Growth & Revenue Lead",
+    description: "GTM & RevOps Operator | 7+ YOE | B2B Distribution",
+    image: "/team/sreyan.png",
     linkedin: "https://linkedin.com",
     accentColor: "pink",
   },
   {
     id: "member-6",
-    name: "Neha Verma",
-    role: "Operations & Partnerships",
-    description: "ONDC ecosystem builder, partnerships 5+ years",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
+    name: "Debjit Ghosh",
+    role: "Founding Engineer",
+    description: "Full-Stack .NET Developer | 6 YOE | Enterprise Systems → Data Science",
+    image: "/team/debjit.png",
     linkedin: "https://linkedin.com",
     accentColor: "cyan",
   },
   {
     id: "member-7",
-    name: "Rohan Chopra",
-    role: "Research Lead",
-    description: "MSME credit research, IIM-A economics focus",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
+    name: "Divyesh Reddy",
+    role: "Marketplace Onboarding",
+    description: "Buyer-Risk Intelligence | MSME Credit Analytics",
+    image: "/team/divyesh.png",
     linkedin: "https://linkedin.com",
     accentColor: "amber",
+  },
+  {
+    id: "member-8",
+    name: "Debpriyo Ghosal",
+    role: "Engineer/Developer",
+    description: "Full-Stack & AI Developer | Open-Source Contributor",
+    image: "/team/debpriyo.png",
+    linkedin: "https://linkedin.com",
+    accentColor: "green",
+  },
+  {
+    id: "member-9",
+    name: "Mridul Malani",
+    role: "Fundraising Lead",
+    description: "MS at HEC Paris | CUDA and Triton | Ex- RIL, CWC, Earlyseed",
+    image: "/team/mridul.png",
+    linkedin: "https://linkedin.com",
+    accentColor: "pink",
+  },
+  {
+    id: "member-10",
+    name: "Parth Ahuja",
+    role: "Junior Engineer/Developer",
+    description: "Ashoka University CS | Full-Stack & Systems Dev",
+    image: "/team/parth.png",
+    linkedin: "https://linkedin.com",
+    accentColor: "cyan",
+  },
+  {
+    id: "member-11",
+    name: "Adhithya Sriram",
+    role: "Product Research Intern",
+    description: "IIM-Bangalore BBA-DBE | 0→1 Product Builder",
+    image: "/team/adhithya.png",
+    linkedin: "https://linkedin.com",
+    accentColor: "purple",
   },
 ];
 
 const ADVISORS: TeamMember[] = [
   {
     id: "advisor-1",
-    name: "Deepak Sharma",
-    role: "Banking Strategy Advisor",
-    description: "Former NBFC CEO, credit market veteran",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+    name: "Debayan Gupta",
+    description: "Professor, CS - MIT, Ashoka University",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
     linkedin: "https://linkedin.com",
     accentColor: "orange",
   },
   {
     id: "advisor-2",
-    name: "Meera Iyer",
-    role: "Fintech Strategy Advisor",
-    description: "Founded 2 fintech startups, exits to tier-1",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
+    name: "Sandeep Juneja",
+    description: "Director, Centre for Data - Ashoka University | Expert in AI & financial mathematics",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
     linkedin: "https://linkedin.com",
     accentColor: "green",
   },
   {
     id: "advisor-3",
-    name: "Karthik Reddy",
-    role: "Technology Infrastructure Advisor",
-    description: "Built infrastructure at Amazon India scale",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
+    name: "Amit Sagar",
+    description: "Lead System Architect at Bank of England | BOE CBDC Architecture Contributor",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
     linkedin: "https://linkedin.com",
     accentColor: "blue",
   },
   {
     id: "advisor-4",
-    name: "Simran Kapoor",
-    role: "Regulatory & Compliance Advisor",
-    description: "RBI & SEBI regulation counsel, 15+ years",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
+    name: "Shridhar Sethuram",
+    description: "Seasoned finance veteran, 25+ years in Private Equity",
+    image:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
     linkedin: "https://linkedin.com",
     accentColor: "purple",
   },
   {
     id: "advisor-5",
-    name: "Suresh Menon",
-    role: "MSME Ecosystem Advisor",
-    description: "Worked with 100+ SMEs, market insights",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+    name: "Tushar Jaruhar",
+    description: "Ex-Pricing Actuary at Zurich Insurance Co.",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
     linkedin: "https://linkedin.com",
     accentColor: "pink",
   },
@@ -161,7 +224,15 @@ const staggerContainer = {
 
 /* ─── Team Member Card Component ─────────────────────– */
 
-function TeamMemberCard({ member, delay }: { member: TeamMember; delay: number }) {
+function TeamMemberCard({
+  member,
+  delay,
+  featured = false,
+}: {
+  member: TeamMember;
+  delay: number;
+  featured?: boolean;
+}) {
   const accentMap = {
     orange: "#fb923c",
     green: "#22c55e",
@@ -182,7 +253,7 @@ function TeamMemberCard({ member, delay }: { member: TeamMember; delay: number }
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
       whileHover={{ y: -8 }}
-      className="team-member-card"
+      className={`team-member-card ${featured ? "team-member-card-featured" : ""}`}
       style={
         {
           "--accent-color": accentMap[member.accentColor],
@@ -204,9 +275,20 @@ function TeamMemberCard({ member, delay }: { member: TeamMember; delay: number }
 
       {/* Content */}
       <div className="team-member-content">
+        {featured && <span className="team-founder-badge">Founder</span>}
         <h3 className="team-member-name">{member.name}</h3>
-        <p className="team-member-role">{member.role}</p>
-        <p className="team-member-description">{member.description}</p>
+        {member.role && <p className="team-member-role">{member.role}</p>}
+        {featured && member.achievements?.length ? (
+          <ul className="team-member-achievements">
+            {member.achievements.map((achievement) => (
+              <li key={achievement} className="team-member-achievement-item">
+                {achievement}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="team-member-description">{member.description}</p>
+        )}
 
         {/* LinkedIn Link */}
         <div className="team-member-link">
@@ -268,8 +350,13 @@ export default function TeamPage() {
           </motion.div>
 
           <div className="team-grid">
+            <TeamMemberCard member={FOUNDER} delay={0.08} featured />
             {TEAM_MEMBERS.map((member, idx) => (
-              <TeamMemberCard key={member.id} member={member} delay={0.1 + idx * 0.05} />
+              <TeamMemberCard
+                key={member.id}
+                member={member}
+                delay={0.1 + idx * 0.05}
+              />
             ))}
           </div>
         </div>
@@ -285,13 +372,21 @@ export default function TeamPage() {
             transition={{ duration: 0.8 }}
             className="team-section-header"
           >
-            <span className="team-eyebrow">{t("advisors_section.subtitle")}</span>
-            <h2 className="team-section-title">{t("advisors_section.title")}</h2>
+            <span className="team-eyebrow">
+              {t("advisors_section.subtitle")}
+            </span>
+            <h2 className="team-section-title">
+              {t("advisors_section.title")}
+            </h2>
           </motion.div>
 
           <div className="team-advisors-grid">
             {ADVISORS.map((advisor, idx) => (
-              <TeamMemberCard key={advisor.id} member={advisor} delay={0.1 + idx * 0.08} />
+              <TeamMemberCard
+                key={advisor.id}
+                member={advisor}
+                delay={0.1 + idx * 0.08}
+              />
             ))}
           </div>
         </div>
@@ -307,9 +402,12 @@ export default function TeamPage() {
             transition={{ duration: 0.8 }}
             className="team-cta-content"
           >
-            <h2 className="team-cta-title">Interested in joining our mission?</h2>
+            <h2 className="team-cta-title">
+              Interested in joining our mission?
+            </h2>
             <p className="team-cta-description">
-              We&apos;re always looking for talented builders who want to reshape MSME credit.
+              We&apos;re always looking for talented builders who want to
+              reshape MSME credit.
             </p>
 
             <motion.a

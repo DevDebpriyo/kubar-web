@@ -157,6 +157,22 @@
   margin: 0 auto;
 }
 
+.team-founder-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #ffd8b0;
+  background: rgba(251, 146, 60, 0.18);
+  border: 1px solid rgba(251, 146, 60, 0.35);
+}
+
 /* Team Member Card */
 .team-member-card {
   display: flex;
@@ -167,6 +183,45 @@
   transition: all 0.3s ease;
   cursor: pointer;
   position: relative;
+}
+
+.team-member-card.team-member-card-featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  align-items: center;
+  padding: 24px;
+  border: 1px solid rgba(251, 146, 60, 0.28);
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(251, 146, 60, 0.08) 0%,
+    rgba(15, 15, 30, 0.65) 55%,
+    rgba(15, 15, 30, 0.9) 100%
+  );
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.team-member-achievements {
+  margin: 2px 0 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.team-member-achievement-item {
+  color: #c8c8d0;
+  line-height: 1.55;
+  font-size: 0.95rem;
+  display: list-item;
+}
+
+.team-member-achievement-item::marker {
+  color: #ffffff;
 }
 
 .team-member-card:hover {
@@ -399,6 +454,12 @@
     gap: 24px;
   }
 
+  .team-member-card.team-member-card-featured {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 18px;
+  }
+
   .team-member-card {
     gap: 16px;
   }
@@ -460,6 +521,10 @@
   .team-advisors-grid {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 16px;
+  }
+
+  .team-member-card.team-member-card-featured {
+    padding: 14px;
   }
 
   .team-member-name {
