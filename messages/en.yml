@@ -162,7 +162,7 @@ visual_story:
   old_way_path: "Bank branch → Paperwork → 2 weeks of waiting → Order lost"
 
   steps:
-    1: "Textile merchant receives a ₹10L bulk order on ONDC"
+    1: "Sheetal is a Textile merchant, who receives a ₹10L bulk order on ONDC"
     2: "She lacks ₹4L for raw materials"
     3: "NavDhan's embedded widget detects the capital need"
     4: "Financial data pulled via Account Aggregator in 5 min"

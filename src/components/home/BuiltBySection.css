@@ -73,6 +73,21 @@
   }
 }
 
+.built-header-with-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.built-header-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  transform: translateY(-12px);
+}
+
 .built-title {
   font-size: 2.25rem;
   line-height: 1.2;
@@ -173,7 +188,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 180px;
+  min-height: 140px;
   padding: 2rem 1.75rem;
   border-radius: 1.5rem;
   border: 1px solid rgba(212, 146, 12, 0.25);
@@ -187,15 +202,27 @@
 @media (min-width: 640px) {
   .built-product-card {
     padding: 2.25rem 2rem;
-    min-height: 200px;
+    min-height: 160px;
   }
 }
 
 @media (min-width: 768px) {
   .built-product-card {
     padding: 2.5rem 2.25rem;
-    min-height: 220px;
+    min-height: 180px;
   }
+}
+
+/* Grayscale effect for upcoming cards */
+.built-product-card:has(.built-card-glow.upcoming) {
+  opacity: 0.5;
+  filter: grayscale(0.85);
+}
+
+/* Highlight effect for live cards */
+.built-product-card:has(.built-card-glow.live) {
+  opacity: 1;
+  filter: brightness(1.05);
 }
 
 @media (hover: hover) {

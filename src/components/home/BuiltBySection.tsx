@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Sparkles, Zap, Lock } from "lucide-react";
 import { useTranslations } from "next-intl";
 import "./BuiltBySection.css";
@@ -150,7 +151,16 @@ export function BuiltBySection() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
-          <h2 className="built-title">{t("title")}</h2>
+          <div className="built-header-with-logo">
+            <h2 className="built-title">{t("title")}</h2>
+            <Image 
+              src="/logo.png" 
+              alt="Kubar Logo" 
+              width={72} 
+              height={72}
+              className="built-header-logo"
+            />
+          </div>
           <p className="built-description">{t("description")}</p>
         </motion.div>
 

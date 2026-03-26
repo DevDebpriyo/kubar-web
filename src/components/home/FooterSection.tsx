@@ -63,7 +63,6 @@ export function FooterSection() {
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <Mail className="footer-btn-icon" />
-              <span>{t("email_link")}</span>
               <motion.div
                 className="footer-btn-shine"
                 animate={{
