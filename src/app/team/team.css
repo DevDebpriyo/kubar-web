@@ -331,6 +331,16 @@
   font-style: italic;
 }
 
+/* Ensure team members descriptions are always 2 lines (not for founder or advisors) */
+.team-member-card:not(.team-member-card-featured):not(.team-member-card-advisor) .team-member-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: calc(1.5em * 2);
+  max-width: 85%;
+}
+
 .team-member-link {
   display: inline-flex;
   align-items: center;
