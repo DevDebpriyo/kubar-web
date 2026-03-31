@@ -7,12 +7,10 @@ export function PartnerMarquee() {
   const itemMap = t.raw("items") as Record<string, string>;
 
   const items = [
-    itemMap.ondc ?? "ONDC",
-    itemMap.indiamart ?? "IndiaMart",
-    itemMap.gem ?? "GeM",
-    itemMap.tally ?? "Tally",
-    itemMap.sap ?? "SAP",
-    itemMap.wtfund ?? "WTFund Top 25 Startups",
+    itemMap.finvision ?? "Winner of FinVision 2026 at NIBM Pune (RBI Think-Tank)",
+    itemMap.genesis ?? "Awarded GENESIS grant by GOI",
+    itemMap.startup_mahakumbh ?? "Popular Choice Award at Startup Mahakumbh 2025",
+    itemMap.perplexity ?? "Perplexity AI Fellowship Company",
     itemMap.elevenlabs ?? "ElevenLabs Grants Recipient",
     itemMap.f6s ?? "F6S #6 FinTech",
   ];

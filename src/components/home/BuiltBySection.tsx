@@ -238,7 +238,13 @@ export function BuiltBySection() {
           <div className="built-tagline-badge">
             <Sparkles className="h-3.5 w-3.5" />
           </div>
-          <h3 className="built-tagline">{t("tagline")}</h3>
+          <h3 className="built-tagline">
+            {t.rich("tagline", {
+              bharat: (chunks) => <span style={{ color: "#FF9933" }}>{chunks}</span>,
+              methods: (chunks) => <span style={{ color: "#1A4FA3" }}>{chunks}</span>,
+              money: (chunks) => <span style={{ color: "#138808" }}>{chunks}</span>,
+            })}
+          </h3>
         </motion.div>
       </div>
     </section>
