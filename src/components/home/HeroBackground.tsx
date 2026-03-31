@@ -112,7 +112,7 @@ export function HeroBackground() {
         }}
       />
 
-      {/* ── Orb 4: slim teal accent — mid-right ── */}
+      {/* ── Orb 4: flag-green accent — mid-right ── */}
       <motion.div
         className="absolute rounded-full"
         style={{
@@ -121,7 +121,7 @@ export function HeroBackground() {
           top: "55%",
           right: -120,
           background:
-            "radial-gradient(circle, rgba(20,160,140,0.08) 0%, transparent 65%)",
+            "radial-gradient(circle, rgba(19,136,8,0.13) 0%, rgba(19,136,8,0.04) 50%, transparent 70%)",
           filter: "blur(56px)",
           willChange: "transform",
         }}
@@ -144,7 +144,7 @@ export function HeroBackground() {
           bottom: "18%",
           height: 1,
           background:
-            "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.035) 20%, rgba(212,146,12,0.12) 50%, rgba(255,255,255,0.035) 80%, transparent 100%)",
+            "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.035) 20%, rgba(212,146,12,0.12) 46%, rgba(19,136,8,0.12) 64%, rgba(255,255,255,0.035) 80%, transparent 100%)",
         }}
       />
 

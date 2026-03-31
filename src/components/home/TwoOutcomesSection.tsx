@@ -28,12 +28,14 @@ function FeatureCard({
   description,
   index,
   isActive,
+  accentRgb,
 }: {
   icon: typeof marketplaceIcons[number];
   title: string;
   description: string;
   index: number;
   isActive: boolean;
+  accentRgb: string;
 }) {
   return (
     <motion.div
@@ -52,7 +54,7 @@ function FeatureCard({
       <div
         className="outcomes-card-glow"
         style={{
-          background: `linear-gradient(135deg, rgba(212, 146, 12, ${0.12 + index * 0.03}), rgba(212, 146, 12, ${0.04 + index * 0.02}))`,
+          background: `linear-gradient(135deg, rgba(${accentRgb}, ${0.12 + index * 0.03}), rgba(${accentRgb}, ${0.04 + index * 0.02}))`,
         }}
         aria-hidden="true"
       />
@@ -120,10 +122,12 @@ function FeatureCard({
 function TabButton({
   active,
   onClick,
+  activeColor,
   children,
 }: {
   active: boolean;
   onClick: () => void;
+  activeColor: string;
   children: React.ReactNode;
 }) {
   return (
@@ -134,7 +138,7 @@ function TabButton({
       <motion.div
         className="outcomes-tab-content"
         animate={{
-          color: active ? "rgb(212, 146, 12)" : "rgba(255, 255, 255, 0.48)",
+          color: active ? activeColor : "rgba(255, 255, 255, 0.48)",
         }}
         transition={{ duration: 0.3 }}
       >
@@ -208,16 +212,23 @@ export function TwoOutcomesSection() {
       : t("institutions.subtitle");
   const currentCta =
     activeTab === "marketplaces" ? t("marketplaces.cta") : t("institutions.cta");
-  const currentEmail = t("marketplaces.cta_email");
+  const currentEmail =
+    activeTab === "marketplaces"
+      ? t("marketplaces.cta_email")
+      : t("institutions.cta_email");
 
   const currentIcons =
     activeTab === "marketplaces" ? marketplaceIcons : institutionIcons;
+  const accentRgb = activeTab === "marketplaces" ? "212, 146, 12" : "19, 136, 8";
+  const accentColor =
+    activeTab === "marketplaces" ? "rgb(212, 146, 12)" : "rgb(19, 136, 8)";
 
   return (
     <section
       id="outcomes"
       aria-label={t("aria_label")}
       className="outcomes-section"
+      data-accent={activeTab === "institutions" ? "institutions" : "marketplaces"}
     >
       {/* Animated gradient background */}
       <div className="outcomes-bg-gradient" aria-hidden="true" />
@@ -251,12 +262,14 @@ export function TwoOutcomesSection() {
             <TabButton
               active={activeTab === "marketplaces"}
               onClick={() => setActiveTab("marketplaces")}
+              activeColor={accentColor}
             >
               {t("marketplaces.tab")}
             </TabButton>
             <TabButton
               active={activeTab === "institutions"}
               onClick={() => setActiveTab("institutions")}
+              activeColor={accentColor}
             >
               {t("institutions.tab")}
             </TabButton>
@@ -312,6 +325,7 @@ export function TwoOutcomesSection() {
                     description={feature.description}
                     index={index}
                     isActive={true}
+                    accentRgb={accentRgb}
                   />
                 );
               })}

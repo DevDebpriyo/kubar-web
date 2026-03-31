@@ -11,7 +11,28 @@ type MetricCardProps = {
 };
 
 function MetricCard({ value, label, index }: MetricCardProps) {
-  const accent = index === 1 ? "#4a84ff" : "#d4920c";
+  const accents = [
+    {
+      solid: "#d4920c",
+      glow: "rgba(212,146,12,0.5)",
+      topSoft: "rgba(212,146,12,0.2)",
+      topFaint: "rgba(212,146,12,0.08)",
+    },
+    {
+      solid: "#1a4fa3",
+      glow: "rgba(26,79,163,0.45)",
+      topSoft: "rgba(26,79,163,0.2)",
+      topFaint: "rgba(26,79,163,0.08)",
+    },
+    {
+      solid: "#138808",
+      glow: "rgba(19,136,8,0.45)",
+      topSoft: "rgba(19,136,8,0.2)",
+      topFaint: "rgba(19,136,8,0.08)",
+    },
+  ] as const;
+
+  const accent = accents[index % accents.length];
 
   return (
     <motion.div
@@ -27,7 +48,10 @@ function MetricCard({ value, label, index }: MetricCardProps) {
       }}
     >
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-linear-to-b from-[#d4920c]/18 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-x-0 top-0 h-16 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background: `linear-gradient(to bottom, ${accent.topSoft} 0%, ${accent.topFaint} 60%, transparent 100%)`,
+        }}
         aria-hidden="true"
       />
       <div
@@ -39,7 +63,7 @@ function MetricCard({ value, label, index }: MetricCardProps) {
         className="pointer-events-none absolute bottom-4 right-4 h-2 w-2 rounded-full"
         animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.18, 1] }}
         transition={{ duration: 2.4, delay: index * 0.18, repeat: Infinity, ease: "easeInOut" }}
-        style={{ backgroundColor: accent, boxShadow: `0 0 12px ${accent}` }}
+        style={{ backgroundColor: accent.solid, boxShadow: `0 0 12px ${accent.glow}` }}
       />
       <div className="relative z-10">
         <p className="text-[42px] sm:text-[48px] leading-none font-black tracking-[-0.035em] text-white stat-value">
@@ -54,6 +78,23 @@ function MetricCard({ value, label, index }: MetricCardProps) {
 }
 
 function PlatformChip({ platform, index }: { platform: string; index: number }) {
+  const accents = [
+    {
+      dot: "rgba(212,146,12,0.78)",
+      glow: "rgba(212,146,12,0.45)",
+    },
+    {
+      dot: "rgba(26,79,163,0.78)",
+      glow: "rgba(26,79,163,0.45)",
+    },
+    {
+      dot: "rgba(19,136,8,0.78)",
+      glow: "rgba(19,136,8,0.45)",
+    },
+  ] as const;
+
+  const accent = accents[index % accents.length];
+
   return (
     <motion.span
       whileHover={{ y: -3, scale: 1.02 }}
@@ -61,9 +102,13 @@ function PlatformChip({ platform, index }: { platform: string; index: number }) 
     >
       <motion.span
         aria-hidden="true"
-        className="h-1.5 w-1.5 rounded-full bg-[#d4920c]/75"
+        className="h-1.5 w-1.5 rounded-full"
         animate={{ opacity: [0.35, 0.95, 0.35] }}
         transition={{ duration: 2.3, delay: index * 0.14, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          backgroundColor: accent.dot,
+          boxShadow: `0 0 10px ${accent.glow}`,
+        }}
       />
       <span className="transition-colors duration-250 group-hover:text-white">{platform}</span>
       <span
@@ -127,9 +172,25 @@ export function ProductShowcaseSection() {
         }}
         aria-hidden="true"
       />
+      <motion.div
+        className="pointer-events-none absolute h-64 w-64 rounded-full"
+        animate={{ x: [0, 14, 0], y: [0, -12, 0], opacity: [0.1, 0.2, 0.1] }}
+        transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+        style={{
+          right: "24%",
+          top: "24%",
+          background: "radial-gradient(circle, rgba(19,136,8,0.16) 0%, transparent 72%)",
+          filter: "blur(48px)",
+        }}
+        aria-hidden="true"
+      />
       <div className="relative z-10 mx-auto w-full max-w-7xl rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(11,11,24,0.92)_0%,rgba(8,8,18,0.88)_100%)] px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-11">
         <div
-          className="pointer-events-none absolute inset-x-8 top-0 h-px bg-linear-to-r from-transparent via-[#d4920c]/65 to-transparent"
+          className="pointer-events-none absolute inset-x-8 top-0 h-px"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent 0%, rgba(212,146,12,0.55) 28%, rgba(26,79,163,0.45) 54%, rgba(19,136,8,0.52) 76%, transparent 100%)",
+          }}
           aria-hidden="true"
         />
 
@@ -140,7 +201,7 @@ export function ProductShowcaseSection() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           className="mx-auto max-w-4xl text-center"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.02] px-3 py-1.5">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/2 px-3 py-1.5">
             <Sparkles className="h-3.5 w-3.5 text-[#d4920c]/85" />
             <p className="text-[10.5px] font-semibold tracking-[0.24em] text-white/44 uppercase">
               {t("eyebrow")}
@@ -173,7 +234,14 @@ export function ProductShowcaseSection() {
 
         <div className="pointer-events-none relative mx-auto mt-8 hidden h-10 max-w-5xl items-center sm:flex">
           <div className="h-px w-full bg-linear-to-r from-transparent via-white/16 to-transparent" />
-          <div className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#d4920c]/80 shadow-[0_0_14px_rgba(212,146,12,0.65)]" />
+          <div
+            className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(212,146,12,0.95) 0%, rgba(26,79,163,0.95) 50%, rgba(19,136,8,0.95) 100%)",
+              boxShadow: "0 0 14px rgba(19,136,8,0.48)",
+            }}
+          />
         </div>
 
         <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-7 sm:grid-cols-3 sm:gap-5">

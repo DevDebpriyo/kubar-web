@@ -58,7 +58,7 @@
   height: 300px;
   background: radial-gradient(
     ellipse at center,
-    rgba(74, 132, 255, 0.03) 0%,
+    rgba(19, 136, 8, 0.05) 0%,
     transparent 70%
   );
   pointer-events: none;
@@ -258,12 +258,12 @@
 
 /* Integration badge specific styles */
 .trust-badge.integration {
-  border-color: rgba(74, 132, 255, 0.25);
+  border-color: rgba(19, 136, 8, 0.25);
 }
 
 @media (hover: hover) {
   .trust-badge.integration:hover {
-    border-color: rgba(74, 132, 255, 0.5);
+    border-color: rgba(19, 136, 8, 0.5);
   }
 }
 
@@ -289,8 +289,8 @@
 .trust-badge-glow.integration-glow {
   background: radial-gradient(
     ellipse at top-right,
-    rgba(74, 132, 255, 0.1) 0%,
-    rgba(74, 132, 255, 0.03) 50%,
+    rgba(19, 136, 8, 0.1) 0%,
+    rgba(19, 136, 8, 0.03) 50%,
     transparent 100%
   );
 }
@@ -333,9 +333,9 @@
 }
 
 .trust-badge.integration .trust-badge-icon {
-  border-color: rgba(74, 132, 255, 0.4);
-  background: rgba(74, 132, 255, 0.08);
-  color: rgba(74, 132, 255, 0.8);
+  border-color: rgba(19, 136, 8, 0.4);
+  background: rgba(19, 136, 8, 0.08);
+  color: rgba(19, 136, 8, 0.8);
 }
 
 .trust-badge.compliance .trust-badge-icon {
@@ -350,9 +350,9 @@
   }
 
   .trust-badge.integration:hover .trust-badge-icon {
-    border-color: rgba(74, 132, 255, 0.6);
-    background: rgba(74, 132, 255, 0.12);
-    box-shadow: 0 0 20px rgba(74, 132, 255, 0.25);
+    border-color: rgba(19, 136, 8, 0.6);
+    background: rgba(19, 136, 8, 0.12);
+    box-shadow: 0 0 20px rgba(19, 136, 8, 0.25);
   }
 }
 
@@ -376,7 +376,7 @@
 }
 
 .trust-badge.integration .trust-icon-pulse {
-  border-color: rgba(74, 132, 255, 0.4);
+  border-color: rgba(19, 136, 8, 0.4);
 }
 
 /* Badge label */
@@ -402,7 +402,7 @@
   }
 
   .trust-badge.integration:hover .trust-badge-label {
-    color: rgb(74, 132, 255);
+    color: rgb(19, 136, 8);
   }
 }
 
@@ -448,7 +448,7 @@
   background: linear-gradient(
     135deg,
     transparent 0%,
-    rgba(74, 132, 255, 0.25) 50%,
+    rgba(19, 136, 8, 0.25) 50%,
     transparent 100%
   );
 }
@@ -511,7 +511,7 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(74, 132, 255, 0.25) 50%,
+    rgba(19, 136, 8, 0.25) 50%,
     transparent 100%
   );
   transform-origin: center;

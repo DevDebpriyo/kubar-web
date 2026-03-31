@@ -61,7 +61,7 @@ function ProblemCard({ title, subtitle, bullets, accent, index }: ProblemCardPro
               className="flex items-start gap-3.5"
             >
               <span
-                className={`mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full ${bulletDotClass}`}
+                className={`mt-2.25 h-1.5 w-1.5 shrink-0 rounded-full ${bulletDotClass}`}
                 aria-hidden="true"
               />
               <span className="text-[15px] sm:text-[16px] leading-[1.58] text-white/58">
@@ -87,7 +87,7 @@ export function ProblemSplitSection() {
       <div
         className="pointer-events-none absolute left-[15%] top-[28%] h-54 w-54 rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(212,146,12,0.13) 0%, transparent 72%)",
+          background: "radial-gradient(circle, rgba(19,136,8,0.15) 0%, transparent 72%)",
           filter: "blur(36px)",
         }}
         aria-hidden="true"
@@ -134,10 +134,13 @@ export function ProblemSplitSection() {
           <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-linear-to-r from-transparent via-white/24 to-transparent" />
           <motion.span
             aria-hidden="true"
-            className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#d4920c]/80"
+            className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
             animate={{ scale: [1, 1.14, 1], opacity: [0.75, 1, 0.75] }}
             transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-            style={{ boxShadow: "0 0 14px rgba(212,146,12,0.55)" }}
+            style={{
+              background: "rgba(19,136,8,0.82)",
+              boxShadow: "0 0 14px rgba(19,136,8,0.55)",
+            }}
           />
         </div>
 

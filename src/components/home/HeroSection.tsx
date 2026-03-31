@@ -52,7 +52,7 @@ function HeroHeadline() {
           className="block text-[46px] sm:text-[58px] lg:text-[68px] xl:text-[78px]"
           style={{
             background:
-              "linear-gradient(135deg, #f5bc35 0%, #d4920c 50%, #b8780a 100%)",
+              "linear-gradient(135deg, #ff9933 0%, #d4920c 32%, #1a4fa3 68%, #138808 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -75,10 +75,10 @@ function HeroSubcopy() {
     >
       {t.rich("subtitle", {
         nbfc: (chunks) => (
-          <span className="text-white/75 font-medium">{chunks}</span>
+          <span className="text-[#8eb8ff] font-medium">{chunks}</span>
         ),
         msme: (chunks) => (
-          <span className="text-white/75 font-medium">{chunks}</span>
+          <span className="text-[#4ed56f] font-semibold">{chunks}</span>
         ),
       })}
     </motion.p>
@@ -162,7 +162,7 @@ function HeroGlowLines() {
         width: "1px",
         height: "62%",
         background:
-          "linear-gradient(to bottom, transparent 0%, rgba(212,146,12,0.14) 25%, rgba(212,146,12,0.08) 60%, transparent 100%)",
+          "linear-gradient(to bottom, transparent 0%, rgba(212,146,12,0.14) 25%, rgba(19,136,8,0.12) 62%, transparent 100%)",
       }}
     />
   );
