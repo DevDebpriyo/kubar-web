@@ -4,9 +4,10 @@
 
 .story-section {
   position: relative;
-  overflow: hidden;
   background: transparent;
   padding: 3rem 0;
+  /* Prevent horizontal scroll from inner glow but allow sticky to work vertically */
+  overflow-x: clip; 
 }
 
 @media (min-width: 768px) {
@@ -56,81 +57,160 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   HEADER CONTENT
+   THE OLD WAY (PROBLEM FLOW)
    ───────────────────────────────────────────────────────────────────── */
-.story-header-content {
+.old-way-container {
   margin-bottom: 3rem;
+  padding: 2rem 1.5rem;
+  border-radius: 1.25rem;
+  border: 1px dashed rgba(220, 38, 38, 0.3);
+  background: linear-gradient(
+    135deg,
+    rgba(220, 38, 38, 0.05) 0%,
+    rgba(153, 27, 27, 0.02) 100%
+  ), #09090b;
+  position: sticky;
+  top: 5rem;
+  z-index: 10;
+  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
 }
 
 @media (min-width: 768px) {
-  .story-header-content {
-    margin-bottom: 4rem;
+  .old-way-container {
+    padding: 3rem 2.5rem;
+    top: 6rem;
   }
 }
 
-/* Old Way Block */
-.story-old-way {
-  position: relative;
-  margin-bottom: 2rem;
-  padding: 1.5rem 1.25rem;
-  border-radius: 1rem;
-  border: 1px dashed rgba(212, 146, 12, 0.25);
-  background: linear-gradient(
-    135deg,
-    rgba(212, 146, 12, 0.05) 0%,
-    rgba(212, 146, 12, 0.03) 100%
-  );
-}
-
-@media (min-width: 640px) {
-  .story-old-way {
-    padding: 1.75rem 1.5rem;
-    margin-bottom: 2.5rem;
-  }
-}
-
-.story-old-way-line {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgba(212, 146, 12, 0.3),
-    transparent
-  );
-}
-
-.story-old-way-label {
-  margin: 0;
-  font-size: 0.65rem;
+.old-way-title {
+  margin: 0 0 2.5rem 0;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(212, 146, 12, 0.8);
+  color: rgba(248, 113, 113, 0.9);
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-@media (min-width: 768px) {
-  .story-old-way-label {
-    font-size: 0.7rem;
+.old-way-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+}
+
+@media (min-width: 860px) {
+  .old-way-timeline {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 
-.story-old-way-text {
-  margin: 0.75rem 0 0 0;
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.55);
+.old-way-step {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  z-index: 2;
+  background: rgba(15, 15, 18, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.old-way-step.failure {
+  border-color: rgba(220, 38, 38, 0.5);
+  background: rgba(220, 38, 38, 0.08);
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.15);
+}
+
+.old-way-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.old-way-step.failure .old-way-icon {
+  background: rgba(220, 38, 38, 0.15);
+  color: rgba(248, 113, 113, 1);
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+.old-way-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.old-way-step.failure .old-way-text {
+  color: rgba(248, 113, 113, 0.95);
+  font-weight: 600;
+}
+
+/* Connectors */
+.old-way-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.15);
+}
+
+@media (min-width: 860px) {
+  .old-way-connector {
+    padding: 0 0.5rem;
+  }
+  .old-way-connector svg {
+    transform: rotate(-90deg);
+  }
+}
+
+/* Our implementation header */
+.impl-container {
+  margin-bottom: 4rem;
+  padding: 2rem 1.5rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(212, 146, 12, 0.25);
+  background: linear-gradient(
+    135deg,
+    rgba(212, 146, 12, 0.03) 0%,
+    rgba(74, 132, 255, 0.01) 100%
+  ), #09090b;
+  position: sticky;
+  top: 6rem;
+  z-index: 20;
+  box-shadow: 0 -20px 50px -15px rgba(0,0,0,0.6);
+  min-height: 80vh;
 }
 
 @media (min-width: 768px) {
-  .story-old-way-text {
-    font-size: 0.9rem;
+  .impl-container {
+    padding: 3rem 2.5rem;
+    top: 7rem;
   }
+}
+
+.solution-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.5rem;
 }
 
 /* Implementation Badge */
@@ -300,6 +380,20 @@
   gap: 0.25rem;
   min-width: 0;
   flex: 1;
+}
+
+.story-tab-step-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(212, 146, 12, 0.6);
+  text-transform: uppercase;
+  margin-bottom: 0.1rem;
+  transition: color 0.3s ease;
+}
+
+.story-tab-button[data-active="true"] .story-tab-step-label {
+  color: rgba(212, 146, 12, 0.95);
 }
 
 .story-tab-title {

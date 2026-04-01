@@ -127,14 +127,17 @@ export function BuiltBySection() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <div className="built-header-with-logo">
-            <h2 className="built-title">{t("title")}</h2>
-            <Image 
-              src="/logo.png" 
-              alt="Kubar Logo" 
-              width={72} 
-              height={72}
-              className="built-header-logo"
-            />
+            <h2 className="built-title-container">
+              <span className="built-title-text">{t("title_prefix")}</span>
+              <Image 
+                src="/logo.png" 
+                alt="Kubar Logo" 
+                width={84} 
+                height={84}
+                className="built-header-logo"
+              />
+              <span className="built-title-text">{t("title_suffix")}</span>
+            </h2>
           </div>
           <p className="built-description">{t("description")}</p>
         </motion.div>

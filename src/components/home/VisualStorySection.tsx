@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   BadgeIndianRupee,
@@ -11,6 +11,12 @@ import {
   Wallet,
   TrendingUp,
   Sparkles,
+  Landmark,
+  FileText,
+  Hourglass,
+  XOctagon,
+  Ban,
+  ArrowDown,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -38,11 +44,13 @@ const phaseMapping = [
 function PhaseTabButton({
   phaseIndex,
   phaseTitle,
+  icon: Icon,
   isActive,
   onHover,
 }: {
   phaseIndex: number;
   phaseTitle: string;
+  icon: React.ElementType;
   isActive: boolean;
   onHover: () => void;
 }) {
@@ -59,12 +67,14 @@ function PhaseTabButton({
         <motion.span
           animate={{ scale: isActive ? 1.2 : 1 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
         >
-          {phaseIndex + 1}
+          <Icon className="h-4 w-4" />
         </motion.span>
       </div>
 
       <div className="story-tab-content">
+        <span className="story-tab-step-label">STEP {phaseIndex + 1}</span>
         <motion.h4
           className="story-tab-title"
           animate={{
@@ -136,10 +146,19 @@ export function VisualStorySection() {
     t("implementation_phases.4"),
   ];
 
+  const phaseIcons = [Radar, BrainCircuit, BadgeCheck, TrendingUp];
+
   const currentPhaseData = phaseMapping[activePhase];
   const currentStepDescriptions = currentPhaseData.stepIndices.map(
     (i) => steps[i]
   );
+  
+  const oldWaySteps = [
+    t("old_way_steps.1"),
+    t("old_way_steps.2"),
+    t("old_way_steps.3"),
+    t("old_way_steps.4"),
+  ];
 
   return (
     <section
@@ -150,38 +169,78 @@ export function VisualStorySection() {
       <div className="story-gradient-bg" aria-hidden="true" />
 
       <div className="story-container">
-        {/* Header */}
-        <div className="story-header-content">
-          {/* Old Way Block */}
-          <div className="story-old-way">
-            <div className="story-old-way-line" aria-hidden="true" />
-            <p className="story-old-way-label">
-              {t("old_way_label")}
-            </p>
-            <p className="story-old-way-text">
-              {t("old_way_path")}
-            </p>
-          </div>
-
-          {/* Implementation Badge */}
-          <div className="story-impl-badge">
-            <Sparkles className="h-4 w-4" />
-            <span>{t("implementation_label")}</span>
+        
+        {/* Old Way Flow */}
+        <div className="old-way-container">
+          <h3 className="old-way-title">
+            <Ban className="h-4 w-4" /> {t("old_way_label")}
+          </h3>
+          <div className="old-way-timeline">
+            {[
+              { icon: Landmark, text: oldWaySteps[0] },
+              { icon: FileText, text: oldWaySteps[1] },
+              { icon: Hourglass, text: oldWaySteps[2] },
+              { icon: XOctagon, text: oldWaySteps[3], failure: true },
+            ].map((step, idx, arr) => (
+              <React.Fragment key={idx}>
+                <motion.div
+                  className={`old-way-step ${step.failure ? "failure" : ""}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ delay: idx * 0.15, duration: 0.5 }}
+                >
+                  <div className="old-way-icon">
+                    <step.icon className="h-6 w-6" />
+                  </div>
+                  <p className="old-way-text">{step.text}</p>
+                </motion.div>
+                
+                {idx < arr.length - 1 && (
+                  <motion.div
+                    className="old-way-connector"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.15 + 0.1, duration: 0.3 }}
+                  >
+                    <ArrowDown className="h-5 w-5" />
+                  </motion.div>
+                )}
+              </React.Fragment>
+            ))}
           </div>
         </div>
 
-        {/* Phase Tabs */}
-        <div className="story-tabs">
-          {phaseMapping.map((phase) => (
-            <PhaseTabButton
-              key={phase.phaseIndex}
-              phaseIndex={phase.phaseIndex}
-              phaseTitle={phaseTitles[phase.phaseIndex]}
-              isActive={activePhase === phase.phaseIndex}
-              onHover={() => setActivePhase(phase.phaseIndex)}
-            />
-          ))}
-        </div>
+        {/* Our Implementation Card */}
+        <div className="impl-container">
+          {/* Our Implementation Header */}
+          <div className="solution-header">
+            <motion.div 
+              className="story-impl-badge"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <Sparkles className="h-4 w-4" />
+              <span>{t("implementation_label")}</span>
+            </motion.div>
+          </div>
+
+          {/* Phase Tabs */}
+          <div className="story-tabs">
+            {phaseMapping.map((phase) => (
+              <PhaseTabButton
+                key={phase.phaseIndex}
+                phaseIndex={phase.phaseIndex}
+                phaseTitle={phaseTitles[phase.phaseIndex]}
+                icon={phaseIcons[phase.phaseIndex]}
+                isActive={activePhase === phase.phaseIndex}
+                onHover={() => setActivePhase(phase.phaseIndex)}
+              />
+            ))}
+          </div>
 
         {/* Content Area */}
         <div className="story-content-wrapper">
@@ -231,6 +290,8 @@ export function VisualStorySection() {
               </div>
             </motion.div>
           </AnimatePresence>
+        </div>
+        
         </div>
       </div>
     </section>

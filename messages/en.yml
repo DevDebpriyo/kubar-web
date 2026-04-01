@@ -157,7 +157,11 @@ visual_story:
     3: "Underwriting Assistance"
     4: "Disbursal & Growth"
   old_way_label: "Old Way"
-  old_way_path: "Bank branch → Paperwork → 2 weeks of waiting → Order lost"
+  old_way_steps:
+    1: "Bank branch"
+    2: "Paperwork"
+    3: "2 weeks of waiting"
+    4: "Order lost"
 
   steps:
     1: "Sheetal is a Textile merchant, who receives a ₹10L bulk order on ONDC"
@@ -234,7 +238,8 @@ built_for_trust:
 # ── Built by Kubar Labs section ────────────────────────────────
 built_by:
   aria_label: "Built by Kubar Labs products"
-  title: "Built by Kubar Labs"
+  title_prefix: "Built by"
+  title_suffix: "Kubar Labs"
   description: "Kubar Labs is a TechFin Research & Development company building the foundational infrastructure for next-gen credit assets and systems. We are bringing 10M Indian MSMEs into the formal credit economy with NavDhan, paving the way for our global cross-border trade solution - Kubar Protocol."
   
   tagline: "New <bharat>Bharat</bharat>. New <methods>Methods</methods>. New <money>Money</money>."
