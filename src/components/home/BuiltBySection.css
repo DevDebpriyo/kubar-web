@@ -6,7 +6,7 @@
 .built-section {
   position: relative;
   overflow: hidden;
-  padding: 5rem 1.25rem 4rem;
+  padding: 5rem 1.25rem 2rem;
   background: linear-gradient(
     180deg,
     rgba(4, 4, 12, 0.98) 0%,
@@ -17,19 +17,19 @@
 
 @media (min-width: 640px) {
   .built-section {
-    padding: 6rem 2rem 5rem;
+    padding: 6rem 2rem 2.5rem;
   }
 }
 
 @media (min-width: 768px) {
   .built-section {
-    padding: 7.5rem 2.5rem 6rem;
+    padding: 7.5rem 2.5rem 3rem;
   }
 }
 
 @media (min-width: 1024px) {
   .built-section {
-    padding: 8.5rem 2.5rem 7rem;
+    padding: 8.5rem 2.5rem 3.5rem;
   }
 }
 
@@ -65,11 +65,13 @@
 .built-header {
   text-align: center;
   margin-bottom: 3.5rem;
+  margin-top: -1rem;
 }
 
 @media (min-width: 1024px) {
   .built-header {
     margin-bottom: 4.5rem;
+    margin-top: -5rem;
   }
 }
 
@@ -587,13 +589,16 @@
   letter-spacing: -0.015em;
   color: rgba(255, 255, 255, 0.95);
   margin: 0.5rem 0 0 0;
-  max-width: 500px;
+  max-width: 100%;
+  text-align: center;
+  width: 100%;
 }
 
 @media (min-width: 640px) {
   .built-tagline {
     font-size: 2rem;
     margin-top: 0;
+    white-space: nowrap;
   }
 }
 

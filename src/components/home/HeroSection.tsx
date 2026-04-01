@@ -52,7 +52,7 @@ function HeroHeadline() {
           className="block text-[46px] sm:text-[58px] lg:text-[68px] xl:text-[78px]"
           style={{
             background:
-              "linear-gradient(135deg, #ff9933 0%, #d4920c 32%, #1a4fa3 68%, #138808 100%)",
+              "linear-gradient(135deg, #ff9933 0%, #ff9933 32%, #ff9933 68%, #ff9933 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",

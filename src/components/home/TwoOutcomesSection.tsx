@@ -333,15 +333,6 @@ export function TwoOutcomesSection() {
           </div>
         </div>
 
-        {/* Bottom decorative line */}
-        <motion.div
-          className="outcomes-bottom-line"
-          initial={{ opacity: 0, scaleX: 0 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-          aria-hidden="true"
-        />
       </div>
     </section>
   );

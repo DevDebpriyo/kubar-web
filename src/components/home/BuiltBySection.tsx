@@ -74,38 +74,13 @@ function ProductCard({
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 + index * 0.15 }}
+          animate={isLive ? { boxShadow: ["0 0 12px rgba(74, 132, 255, 0.3)", "0 0 24px rgba(74, 132, 255, 0.6)", "0 0 12px rgba(74, 132, 255, 0.3)"] } : {}}
+          transition={isLive ? { delay: 0.2 + index * 0.15, boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" } } : { delay: 0.2 + index * 0.15 }}
         >
           <div className="built-status-icon">
             <Icon className="h-3.5 w-3.5" />
           </div>
           <span className="built-status-text">{status}</span>
-
-          {/* Animated pulse for live status */}
-          {isLive && (
-            <>
-              <motion.div
-                className="built-status-pulse"
-                animate={{ scale: [1, 1.5, 1], opacity: [1, 0, 1] }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                aria-hidden="true"
-              />
-              <motion.div
-                className="built-status-dot"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                aria-hidden="true"
-              />
-            </>
-          )}
         </motion.div>
       </div>
 
@@ -238,13 +213,7 @@ export function BuiltBySection() {
           <div className="built-tagline-badge">
             <Sparkles className="h-3.5 w-3.5" />
           </div>
-          <h3 className="built-tagline">
-            {t.rich("tagline", {
-              bharat: (chunks) => <span style={{ color: "#FF9933" }}>{chunks}</span>,
-              methods: (chunks) => <span style={{ color: "#1A4FA3" }}>{chunks}</span>,
-              money: (chunks) => <span style={{ color: "#138808" }}>{chunks}</span>,
-            })}
-          </h3>
+          <h3 className="built-tagline">{t.rich("tagline", { bharat: (chunks) => <span style={{ color: "#FF9933" }}>{chunks}</span>, methods: (chunks) => <span style={{ color: "#1A4FA3" }}>{chunks}</span>, money: (chunks) => <span style={{ color: "#138808" }}>{chunks}</span> })}</h3>
         </motion.div>
       </div>
     </section>

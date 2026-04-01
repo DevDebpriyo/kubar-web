@@ -209,30 +209,30 @@
 .footer-btn-secondary {
   background: linear-gradient(
     135deg,
-    rgba(19, 136, 8, 0.18) 0%,
-    rgba(19, 136, 8, 0.1) 100%
+    rgba(212, 146, 12, 0.18) 0%,
+    rgba(212, 146, 12, 0.1) 100%
   );
   color: #ffffff;
-  border: 1.5px solid rgba(19, 136, 8, 0.75);
+  border: 1.5px solid rgba(212, 146, 12, 0.75);
   backdrop-filter: blur(8px);
   box-shadow: 
-    0 8px 24px rgba(19, 136, 8, 0.16),
-    inset 0 1px 1px rgba(19, 136, 8, 0.28);
+    0 8px 24px rgba(212, 146, 12, 0.16),
+    inset 0 1px 1px rgba(212, 146, 12, 0.28);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
 }
 
 @media (hover: hover) {
   .footer-btn-secondary:hover {
-    border-color: rgba(19, 136, 8, 0.95);
+    border-color: rgba(212, 146, 12, 0.95);
     background: linear-gradient(
       135deg,
-      rgba(19, 136, 8, 0.28) 0%,
-      rgba(19, 136, 8, 0.16) 100%
+      rgba(212, 146, 12, 0.28) 0%,
+      rgba(212, 146, 12, 0.16) 100%
     );
     box-shadow: 
-      0 12px 32px rgba(19, 136, 8, 0.28),
-      inset 0 1px 1px rgba(19, 136, 8, 0.35);
+      0 12px 32px rgba(212, 146, 12, 0.28),
+      inset 0 1px 1px rgba(212, 146, 12, 0.35);
     transform: translateY(-2px);
   }
 }
