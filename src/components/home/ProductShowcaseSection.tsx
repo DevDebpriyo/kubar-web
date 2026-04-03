@@ -124,10 +124,9 @@ export function ProductShowcaseSection() {
 
   const platforms = [
     t("platforms.ondc"),
-    t("platforms.indiamart"),
-    t("platforms.gem"),
-    t("platforms.tally"),
-    t("platforms.sap"),
+    t("platforms.agrigrader"),
+    t("platforms.eximple"),
+    t("platforms.procure_yard"),
   ];
 
   const metrics = [

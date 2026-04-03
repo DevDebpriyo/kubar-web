@@ -97,7 +97,7 @@ marquee:
     finvision: "Winner of FinVision 2026 at NIBM Pune (RBI Think-Tank)"
     genesis: "Awarded GENESIS grant by GOI"
     startup_mahakumbh: "Popular Choice Award at Startup Mahakumbh 2025"
-    perplexity: "Perplexity AI Fellowship Company"
+    perplexity: "Perplexity AI Business Fellowship Company"
     elevenlabs: "ElevenLabs Grants Recipient"
     f6s: "F6S #6 FinTech"
 
@@ -127,19 +127,18 @@ product_showcase:
   aria_label: "Our first product"
   eyebrow: "OUR FIRST PRODUCT"
   title: "NavDhan"
-  subtitle: "A sector-specialized embedded business credit platform that sits directly inside B2B platforms and ERPs where MSMEs already work."
+  subtitle: "A sector-specialized embedded business credit platform that sits directly inside B2B platforms and marketplaces where MSMEs already work."
 
   platforms:
     ondc: "ONDC"
-    indiamart: "IndiaMart"
-    gem: "GeM"
-    tally: "Tally"
-    sap: "SAP"
+    agrigrader: "AgriGrader"
+    eximple: "Eximple"
+    procure_yard: "Procure Yard"
 
   metrics:
     approval_time:
       value: "5 min"
-      label: "Need to approval"
+      label: "From Request to approval"
     cash_time:
       value: "1 hour"
       label: "Approval to cash in hand"

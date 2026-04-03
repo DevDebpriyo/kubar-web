@@ -10,7 +10,7 @@ export function PartnerMarquee() {
     itemMap.finvision ?? "Winner of FinVision 2026 at NIBM Pune (RBI Think-Tank)",
     itemMap.genesis ?? "Awarded GENESIS grant by GOI",
     itemMap.startup_mahakumbh ?? "Popular Choice Award at Startup Mahakumbh 2025",
-    itemMap.perplexity ?? "Perplexity AI Fellowship Company",
+    itemMap.perplexity ?? "Perplexity AI Business Fellowship Company",
     itemMap.elevenlabs ?? "ElevenLabs Grants Recipient",
     itemMap.f6s ?? "F6S #6 FinTech",
   ];
