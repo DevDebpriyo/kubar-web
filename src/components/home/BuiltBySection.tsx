@@ -128,7 +128,6 @@ export function BuiltBySection() {
         >
           <div className="built-header-with-logo">
             <h2 className="built-title-container">
-              <span className="built-title-text">{t("title_prefix")}</span>
               <Image 
                 src="/logo.png" 
                 alt="Kubar Logo" 
@@ -136,6 +135,7 @@ export function BuiltBySection() {
                 height={84}
                 className="built-header-logo"
               />
+              <span className="built-title-text">{t("title_prefix")}</span>
               <span className="built-title-text">{t("title_suffix")}</span>
             </h2>
           </div>

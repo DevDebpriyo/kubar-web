@@ -247,18 +247,29 @@ two_outcomes:
 built_for_trust:
   aria_label: "Built for trust and compliance"
   title: "Built for Trust"
-  
-  compliance:
-    1: "RBI Digital Lending Guidelines"
-    2: "DPDP Act Compliant"
-    3: "Account Aggregator Framework"
-  
-  integrations:
-    1: "ONDC"
-    2: "IndiaMart"
-    3: "GeM"
-    4: "Tally"
-    5: "SAP"
+  subtitle: "Compliance isn't a checkbox. It's our architecture."
+
+  cards:
+    1:
+      title: "RBI Digital Lending Guidelines"
+      tagline: "RBI-Aligned by Design"
+      context: "Kubar's infrastructure is built in full compliance with the RBI's Digital Lending Directions (2022), covering fund flow transparency, DSA obligations, grievance redressal, and customer data usage. Lenders deploy through us without worrying about regulatory gaps."
+    2:
+      title: "DPDP Act Compliant"
+      tagline: "Your Borrowers' Data, Protected by Law"
+      context: "We comply with India's Digital Personal Data Protection Act (2023) - every piece of borrower data collected through Kubar is purpose-bound, consent-driven, and never shared without authorization. Privacy is not a feature. It's the foundation."
+    3:
+      title: "FACE SRO Member"
+      tagline: "Industry-Governed. Borrower-First."
+      context: "Kubar is an active member of FACE (Fintech Association for Consumer Empowerment), the RBI-recognized Self-Regulatory Organization for digital lending. Membership means adherence to the industry's highest standards for fair lending, transparency, and consumer protection."
+    4:
+      title: "STPI FinGlobe Incubatee"
+      tagline: "Incubated by India's Government Fintech Program"
+      context: "Kubar is incubated under STPI FinGlobe, a MeitY-backed program under Software Technology Parks of India that selects high-potential fintech startups building credible, innovation-led and global infrastructure for India's financial ecosystem."
+    5:
+      title: "FinVision Award Winner"
+      tagline: "Recognized at India's Premier Fintech Forum"
+      context: "Kubar won the FinVision Award at the FinTech Edge Summit 2026, organized by NIBM Pune - a banking think-tank established by the Reserve Bank of India. One of the most credible recognitions in Indian fintech, awarded for breakthrough work in embedded credit infrastructure for MSMEs."
 
 # ── Built by Kubar Labs section ────────────────────────────────
 built_by:
