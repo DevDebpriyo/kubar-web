@@ -93,15 +93,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/sreyanmchowdhury/",
     accentColor: "pink",
   },
-  {
-    id: "member-6",
-    name: "Debjit Ghosh",
-    role: "Founding Engineer",
-    description: "Full-Stack .NET Developer | 6 YOE | Enterprise Systems → Data Science",
-    image: "/team/debjit.png",
-    linkedin: "https://www.linkedin.com/in/debjit-ghosh-914776170/",
-    accentColor: "cyan",
-  },
+
   {
     id: "member-7",
     name: "Divyesh Reddy",
@@ -123,7 +115,7 @@ const TEAM_MEMBERS: TeamMember[] = [
   {
     id: "member-9",
     name: "Mridul Malani",
-    role: "Fundraising Lead",
+    role: "Resource Development Lead",
     description: "MS at HEC Paris | CUDA and Triton | Ex- RIL, CWC, Earlyseed",
     image: "/team/mridul.png",
     linkedin: "https://www.linkedin.com/in/mridulmalani/",

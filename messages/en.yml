@@ -173,6 +173,31 @@ visual_story:
     7: "Funds hit Sheetal's bank account within 1-3 hours"
     8: "The Order is fulfilled. Sheetal's Business grows."
 
+  timeline_titles:
+    1: "Order Received"
+    2: "Capital Gap Identified"
+    3: "Need Detected"
+    4: "Data Retrieved"
+    5: "AI Scoring"
+    6: "Offer Displayed"
+    7: "Instant Disbursal"
+    8: "Business Growth"
+
+  visual_alts:
+    1: "Advisor profile visual representing guided onboarding"
+    2: "Mentor card visual representing problem analysis"
+    3: "Mentor card visual representing implementation support"
+    4: "Advisor visual representing accelerated decisioning"
+    5: "Team visual representing domain specific scoring"
+    6: "Team visual representing embedded offer delivery"
+    7: "Team visual representing rapid disbursal"
+    8: "Team visual representing long-term business growth"
+
+  cta:
+    title: "Let's go all in with"
+    subtitle: "NavDhan - By Kubar Labs"
+    button: "Request Demo"
+
 # ── Two Outcomes section ────────────────────────────────────────
 two_outcomes:
   aria_label: "One platform, two powerful outcomes"
