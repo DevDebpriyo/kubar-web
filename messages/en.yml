@@ -166,7 +166,7 @@ visual_story:
     1: "Sheetal is a Textile merchant, who receives a ₹10L bulk order on ONDC"
     2: "Sheetal lacks ₹4L for raw materials"
     3: "NavDhan's embedded widget detects the capital need"
-    4: "Sheetal's Financial data is pulled via Account Aggregator in 5 mins"
+    4: "Sheetal's Financial & Marketplace data is pulled via Account Aggregator in 5 mins"
     5: "Sector-specific AI scores Sheetal's creditworthiness"
     6: "Pre-approved loan offer appears in Sheetal's order screen"
     7: "Funds hit Sheetal's bank account within 1-3 hours"

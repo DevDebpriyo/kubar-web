@@ -17,8 +17,8 @@ export default function Home() {
       <PartnerMarquee />
       <ProblemSplitSection />
       <ProductShowcaseSection />
-      <VisualStorySection />
       <TwoOutcomesSection />
+      <VisualStorySection />
       <BuiltBySection />
       <BuiltForTrustSection />
       <FooterSection />
