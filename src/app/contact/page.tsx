@@ -36,11 +36,11 @@ const staggerContainer = {
 function ContactForm() {
   const t = useTranslations("contact");
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    fullName: "",
     email: "",
     phone: "",
-    message: "",
+    companyName: "",
+    category: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
@@ -48,7 +48,7 @@ function ContactForm() {
   >("idle");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -64,11 +64,11 @@ function ContactForm() {
 
       setSubmitStatus("success");
       setFormData({
-        firstName: "",
-        lastName: "",
+        fullName: "",
         email: "",
         phone: "",
-        message: "",
+        companyName: "",
+        category: "",
       });
 
       setTimeout(() => setSubmitStatus("idle"), 5000);
@@ -89,50 +89,27 @@ function ContactForm() {
       onSubmit={handleSubmit}
       className="contact-form"
     >
-      {/* Two-column input row */}
-      <div className="contact-form-row">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="contact-form-group"
-        >
-          <label className="contact-label">
-            {t("form.first_name_label")}
-          </label>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            placeholder={t("form.first_name_placeholder")}
-            className="contact-input"
-            required
-          />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="contact-form-group"
-        >
-          <label className="contact-label">
-            {t("form.last_name_label")}
-          </label>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            placeholder={t("form.last_name_placeholder")}
-            className="contact-input"
-            required
-          />
-        </motion.div>
-      </div>
+      {/* Full Name */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        className="contact-form-group"
+      >
+        <label className="contact-label">
+          {t("form.full_name_label")}
+        </label>
+        <input
+          type="text"
+          name="fullName"
+          value={formData.fullName}
+          onChange={handleChange}
+          placeholder={t("form.full_name_placeholder")}
+          className="contact-input"
+          required
+        />
+      </motion.div>
 
       {/* Email */}
       <motion.div
@@ -177,7 +154,29 @@ function ContactForm() {
         />
       </motion.div>
 
-      {/* Message */}
+      {/* Company Name */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.28 }}
+        className="contact-form-group"
+      >
+        <label className="contact-label">
+          {t("form.company_name_label")}
+        </label>
+        <input
+          type="text"
+          name="companyName"
+          value={formData.companyName}
+          onChange={handleChange}
+          placeholder={t("form.company_name_placeholder")}
+          className="contact-input"
+          required
+        />
+      </motion.div>
+
+      {/* Category */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -186,17 +185,28 @@ function ContactForm() {
         className="contact-form-group"
       >
         <label className="contact-label">
-          {t("form.message_label")}
+          {t("form.category_label")}
         </label>
-        <textarea
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          placeholder={t("form.message_placeholder")}
-          className="contact-textarea"
-          rows={5}
-          required
-        />
+        <div className="contact-select-wrapper">
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            className="contact-input contact-select"
+            required
+          >
+            <option value="" disabled hidden>
+              {t("form.category_placeholder")}
+            </option>
+            <option value="bank">{t("form.category_options.bank")}</option>
+            <option value="fintech">{t("form.category_options.fintech")}</option>
+            <option value="nbfc">{t("form.category_options.nbfc")}</option>
+            <option value="b2b_marketplace">{t("form.category_options.b2b_marketplace")}</option>
+            <option value="b2b_platform">{t("form.category_options.b2b_platform")}</option>
+            <option value="erp">{t("form.category_options.erp")}</option>
+            <option value="other">{t("form.category_options.other")}</option>
+          </select>
+        </div>
       </motion.div>
 
       {/* Status message */}

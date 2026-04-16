@@ -38,18 +38,18 @@ function HeroHeadline() {
 
   return (
     <motion.div variants={itemVariants} className="flex flex-col gap-0">
-      {/* Line 1 */}
+      {/* Line 1 - Supporting Cast */}
       <h1 className="font-extrabold leading-[1.04] tracking-[-0.035em]">
-        <span className="block text-[46px] sm:text-[58px] lg:text-[68px] xl:text-[78px] text-white">
+        <span className="block text-[28px] sm:text-[34px] lg:text-[38px] xl:text-[42px] text-white/45 font-medium mb-1 sm:mb-2 tracking-normal">
           {t("line1")}
         </span>
-        {/* Line 2 — lighter weight for contrast */}
-        <span className="block text-[46px] sm:text-[58px] lg:text-[68px] xl:text-[78px] text-white/48 font-light">
+        {/* Line 2 — Limelight */}
+        <span className="block text-[58px] sm:text-[68px] lg:text-[84px] xl:text-[98px] text-white">
           {t("line2")}
         </span>
-        {/* Line 3 — gold gradient highlight */}
+        {/* Line 3 — Limelight / Gold Focus */}
         <span
-          className="block text-[46px] sm:text-[58px] lg:text-[68px] xl:text-[78px]"
+          className="block text-[58px] sm:text-[68px] lg:text-[84px] xl:text-[98px]"
           style={{
             background:
               "linear-gradient(135deg, #ff9933 0%, #ff9933 32%, #ff9933 68%, #ff9933 100%)",

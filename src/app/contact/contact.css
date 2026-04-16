@@ -190,6 +190,43 @@
   font-family: inherit;
 }
 
+.contact-select-wrapper {
+  position: relative;
+  display: flex;
+}
+
+.contact-select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid rgba(160, 160, 160, 0.8);
+  pointer-events: none;
+}
+
+.contact-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.contact-select option {
+  background: #1e1e28;
+  color: #f0f0f0;
+}
+
+.contact-select:invalid {
+  color: rgba(160, 160, 160, 0.6);
+}
+
 /* Status messages */
 .contact-status-success {
   padding: 12px 16px;

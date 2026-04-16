@@ -387,6 +387,10 @@
   max-width: 33ch;
 }
 
+.timeline-item--text-left .timeline-step-desc {
+  margin-left: auto;
+}
+
 .timeline-item--text-right .timeline-step-desc {
   max-width: 36ch;
 }
@@ -619,8 +623,10 @@
   }
 
   .timeline-step-desc,
+  .timeline-item--text-left .timeline-step-desc,
   .timeline-item--text-right .timeline-step-desc {
     max-width: none;
+    margin-left: 0;
   }
 
   .timeline-number-box {
