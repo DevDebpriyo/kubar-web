@@ -130,15 +130,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     linkedin: "https://linkedin.com",
     accentColor: "cyan",
   },
-  {
-    id: "member-11",
-    name: "Adhithya Sriram",
-    role: "Product Research Intern",
-    description: "IIM-Bangalore BBA-DBE | 0→1 Product Builder",
-    image: "/team/adhithya.png",
-    linkedin: "https://www.linkedin.com/in/thisisadhithyasriram/",
-    accentColor: "purple",
-  },
+  
 ];
 
 const ADVISORS: TeamMember[] = [
