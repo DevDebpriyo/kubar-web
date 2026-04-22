@@ -37,8 +37,7 @@ export function PartnerMarquee() {
       aria-label={t("aria_label")}
       className="relative z-10 overflow-hidden border-y border-white/8"
       style={{
-        background:
-          "linear-gradient(180deg, rgba(7,7,20,0.96) 0%, rgba(5,5,16,0.92) 100%)",
+        background: "rgba(4, 4, 12, 0.98)",
       }}
     >
       <div
@@ -48,8 +47,8 @@ export function PartnerMarquee() {
             "linear-gradient(90deg, transparent 0%, rgba(212,146,12,0.45) 28%, rgba(26,79,163,0.4) 52%, rgba(19,136,8,0.45) 74%, transparent 100%)",
         }}
       />
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-26 bg-linear-to-r from-[#050510] to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-26 bg-linear-to-l from-[#050510] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-26 bg-gradient-to-r from-[rgba(4,4,12,0.98)] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-26 bg-gradient-to-l from-[rgba(4,4,12,0.98)] to-transparent" />
 
       <div className="overflow-hidden py-4 sm:py-5">
         <div className="marquee-track flex w-max items-center gap-8 sm:gap-10">

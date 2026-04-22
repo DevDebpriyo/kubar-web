@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import Image from "next/image";
 import {
   Box,
   BadgeIndianRupee,
@@ -227,7 +228,7 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
         item={item}
         tone={tone}
         footer={
-          <p className="text-[0.7rem] text-white/70">Account Aggregator fetch completed in under 5 minutes.</p>
+          <p className="text-[0.7rem] text-white/70">Data Manager Service fetch completed in under 5 minutes.</p>
         }
       >
         <div className="space-y-2">
@@ -485,14 +486,21 @@ export function VisualStorySection() {
         <div className="impl-container">
           <div className="solution-header">
             <motion.div 
-              className="story-impl-badge"
+              className="story-impl-badge flex items-center gap-1.5 sm:gap-2"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Sparkles className="h-4 w-4" />
-              <span>{t("implementation_label")}</span>
+              <Sparkles className="h-4 w-4 shrink-0 text-[#d4920c]" />
+              <Image 
+                src="/nd_logo.png" 
+                alt="NavDhan" 
+                width={120} 
+                height={36} 
+                className="h-4 sm:h-[18px] w-auto object-contain drop-shadow-sm" 
+              />
+              <span className="mt-[1px]">IMPLEMENTATION</span>
             </motion.div>
           </div>
 

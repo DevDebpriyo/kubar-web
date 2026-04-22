@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -207,10 +208,16 @@ export function ProductShowcaseSection() {
             </p>
           </div>
 
-          <h2 className="mt-5 text-[46px] sm:text-[58px] leading-[0.98] tracking-[-0.03em] font-black text-white">
-            {t("title")}
-          </h2>
-          <p className="mx-auto mt-5 max-w-3xl text-[18px] leading-[1.65] text-white/64 text-pretty">
+          <div className="mt-0 flex justify-center">
+            <Image
+              src="/nd_logo.png"
+              alt="NavDhan"
+              width={800}
+              height={260}
+              className="h-[120px] sm:h-[180px] md:h-[220px] w-auto object-contain drop-shadow-2xl"
+            />
+          </div>
+          <p className="mx-auto mt-2 max-w-3xl text-[18px] leading-[1.65] text-white/64 text-pretty">
             {t("subtitle")}
           </p>
         </motion.div>

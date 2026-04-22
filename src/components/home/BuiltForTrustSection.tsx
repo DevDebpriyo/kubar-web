@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   Building2,
   Fingerprint,
@@ -36,6 +37,14 @@ const trustCardIcons: Record<TrustCardId, LucideIcon> = {
   "3": Scale,
   "4": Building2,
   "5": Trophy,
+};
+
+const trustCardLogos: Record<TrustCardId, string> = {
+  "1": "/bft_logos/rbi.png",
+  "2": "/bft_logos/dpdp.png",
+  "3": "/bft_logos/face.png",
+  "4": "/bft_logos/finglobe.png",
+  "5": "/bft_logos/finvision.png",
 };
 
 const trustCardStyles: Record<TrustCardId, TrustCardStyle> = {
@@ -117,6 +126,62 @@ function FlippingTrustCard({
                 {item}
               </Badge>
             ))}
+          </div>
+
+          <div className="trust-front-graphic" aria-hidden="true">
+            <div className="trust-graphic-glow" />
+            <Image
+              src={trustCardLogos[card.id]}
+              alt={`${card.title} signature logo`}
+              width={140}
+              height={56}
+              className="trust-graphic-logo"
+            />
+            <svg
+              className="trust-graphic-waves"
+              viewBox="0 0 200 60"
+              preserveAspectRatio="none"
+            >
+              <motion.path
+                d="M0,45 C50,45 60,15 100,15 C140,15 150,45 200,45"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                vectorEffect="non-scaling-stroke"
+                initial={{ strokeDasharray: "200 200", strokeDashoffset: 200 }}
+                animate={{ strokeDashoffset: 0 }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              />
+              <motion.path
+                d="M0,30 C40,30 50,5 100,5 C150,5 160,30 200,30"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                opacity="0.5"
+                vectorEffect="non-scaling-stroke"
+              />
+              <motion.path
+                d="M0,55 C40,55 70,35 100,35 C130,35 160,55 200,55"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                opacity="0.3"
+                vectorEffect="non-scaling-stroke"
+                initial={{ strokeDasharray: "10 5", strokeDashoffset: 0 }}
+                animate={{ strokeDashoffset: -30 }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              />
+            </svg>
+            <Icon className="trust-graphic-icon" strokeWidth={1} />
+            <div className="trust-graphic-scanline" />
           </div>
 
           <div className="trust-front-meter" aria-hidden="true">

@@ -6,6 +6,7 @@ import { ProductShowcaseSection } from "@/components/home/ProductShowcaseSection
 import { VisualStorySection } from "@/components/home/VisualStorySection";
 import { TwoOutcomesSection } from "@/components/home/TwoOutcomesSection";
 import { BuiltBySection } from "@/components/home/BuiltBySection";
+import { EcosystemPartners } from "@/components/home/EcosystemPartners";
 import { BuiltForTrustSection } from "@/components/home/BuiltForTrustSection";
 import { FooterSection } from "@/components/home/FooterSection";
 
@@ -20,6 +21,7 @@ export default function Home() {
       <TwoOutcomesSection />
       <VisualStorySection />
       <BuiltBySection />
+      <EcosystemPartners />
       <BuiltForTrustSection />
       <FooterSection />
     </main>
