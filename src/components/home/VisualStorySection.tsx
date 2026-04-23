@@ -492,7 +492,6 @@ export function VisualStorySection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Sparkles className="h-4 w-4 shrink-0 text-[#d4920c]" />
               <Image 
                 src="/nd_logo.png" 
                 alt="NavDhan" 

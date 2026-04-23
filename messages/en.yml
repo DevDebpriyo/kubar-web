@@ -8,7 +8,7 @@
 site:
   name: "Kubar Labs"
   title: "Kubar Labs — Credit Infrastructure for India's MSMEs"
-  description: "India's first embedded, plug-and-play MSME credit marketplace. Helping NBFCs lend faster, smarter, and at scale — while making credit access seamless for millions of MSMEs."
+  description: "India's first embedded, plug-and-play MSME credit marketplace. Helping NBFCs lend faster, smarter, and at scale while making credit access seamless for millions of MSMEs."
   og_title: "Kubar Labs — Credit Infrastructure for India's MSMEs"
   og_description: "India's first embedded, plug-and-play MSME credit marketplace. Helping NBFCs lend faster, smarter, and at scale."
   twitter_description: "India's first embedded, plug-and-play MSME credit marketplace."
@@ -53,7 +53,7 @@ hero:
     line3: "Business Credit"
 
   # Rich-text: tags <nbfc> and <msme> are replaced with styled spans
-  subtitle: "India's first embedded, plug-and-play business credit marketplace. We help <nbfc>NBFCs lend faster</nbfc>, smarter, and at scale — while making credit access <msme>seamless for millions of MSMEs</msme>."
+  subtitle: "India's first embedded, plug-and-play business credit marketplace. We help <nbfc>NBFCs lend faster</nbfc>, smarter, and at scale while making credit access <msme>seamless for millions of MSMEs</msme>."
 
   cta_primary: "Request Demo"
   cta_primary_aria: "Request a demo of Kubar Labs"
