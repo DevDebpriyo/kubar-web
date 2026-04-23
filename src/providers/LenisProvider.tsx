@@ -2,6 +2,10 @@
 
 import Lenis from "lenis";
 import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface LenisProviderProps {
   children: React.ReactNode;
@@ -22,7 +26,8 @@ export function LenisProvider({ children }: LenisProviderProps) {
 
     lenisRef.current = lenis;
 
-    lenis.on("scroll", (event: { progress: number; scroll: number }) => {
+    // Dispatch custom scroll event for Navbar and other listeners
+    const onScroll = (event: { progress: number; scroll: number }) => {
       window.dispatchEvent(
         new CustomEvent("lenis-scroll", {
           detail: {
@@ -31,19 +36,26 @@ export function LenisProvider({ children }: LenisProviderProps) {
           },
         }),
       );
-    });
+    };
+    lenis.on("scroll", onScroll);
 
-    let rafId: number;
+    // Keep GSAP ScrollTrigger in sync with Lenis scroll position
+    lenis.on("scroll", ScrollTrigger.update);
 
-    function raf(time: number) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
+    // Drive Lenis through GSAP's ticker instead of a manual rAF loop.
+    // This ensures Lenis and ScrollTrigger share the same animation frame,
+    // which prevents the 1-frame lag that causes scrub jitter.
+    const tickerFn = (time: number) => {
+      // GSAP passes time in seconds; Lenis.raf expects milliseconds.
+      lenis.raf(time * 1000);
+    };
 
-    rafId = requestAnimationFrame(raf);
+    gsap.ticker.add(tickerFn);
+    // Disable lag smoothing so GSAP never skips frames on slow machines.
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      gsap.ticker.remove(tickerFn);
       lenis.destroy();
       lenisRef.current = null;
     };

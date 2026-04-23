@@ -423,30 +423,95 @@ common:
 
 # ── About page ────────────────────────────────────────────────
 about:
-  page_title: "About Us"
-  page_description: "Meet the team building credit infrastructure for India's future"
+  page_title: "About Us — Kubar Labs"
+  page_description: "Redefining how legitimate businesses access capital"
   
-  mission_section:
-    subtitle: "Our Mission"
-    intro: "Kubar Labs was born out of a simple truth. Small businesses move India forward, but the system that should support them often holds them back."
-    message: "We're here to change that."
-    description: "At Kubar Labs, we're building the digital foundation that connects lenders and small businesses through trust, data, and understanding. We want every business owner, no matter where they are or what they make, to have fair access to credit when they need it most."
-  
-  story_section:
-    badge: "01"
-    title: "How It All Started"
-    subtitle: "It started with one question."
-    question: "Why is getting a loan still so hard for India's small businesses?"
-    description: "We met entrepreneurs with real orders and clean records, still waiting months for approval. We met lenders who wanted to lend, but couldn't see the full picture. Data was scattered. Trust was missing."
-    insight: "That gap became our mission."
-    closing: "We built NavDhan to bridge MSMEs and lenders using verified data and intelligent systems. Kubar Labs was born to bring empathy back into finance."
-  
-  vision_section:
-    badge: "02"
-    title: "Our Vision"
-    subtitle: "We want credit to move where business happens."
-    description: "Kubar Labs builds systems that help lenders understand MSMEs better, and help MSMEs access credit without friction. We remove complexity, delay, and guesswork from lending."
-    goal: "Our goal is a fairer financial system where small businesses are judged by their strength, not their size."
+  hero:
+    badge: "About Us"
+    title: "Kubar Labs"
+    subtitle: "Redefining how legitimate businesses access capital"
+    intro: "Kubar Labs is a TechFin R&D company building the embedded credit infrastructure that connects underserved businesses to the capital they need, inside the platforms they already use."
+    
+  mission_vision:
+    mission_label: "Mission"
+    mission_text: "To architect the intelligent, embedded financial rails that deliver instant, data-driven capital to every legitimate business, exactly when and where they need it."
+    vision_label: "Vision"
+    vision_text: "An APAC economy where a business's growth is limited only by its ambition, never by legacy credit infrastructure."
+    
+  why_we_exist:
+    title: "Why we exist"
+    p1: "For decades, credit infrastructure was designed around large corporations with pristine paperwork. Everyone else was an afterthought."
+    p2: "India has 63 million MSMEs that generate 30% of GDP and employ over 110 million people. Only 14% can access formal credit. The rest pay a heavy premium to informal lenders because the system was never built for them."
+    p3: "We spent months on the ground in Uttar Pradesh, Bihar, and West Bengal before writing a single line of code. We watched business owners navigate a system that turned them away not for lack of ambition, but because the system could not understand their data."
+    p4: "We started Kubar Labs to change that."
+
+  how_we_work:
+    title: "How we work"
+    subtitle: "We are an R&D-focused TechFin company solving credit friction at its root. Our approach rests on three pillars:"
+    pillars:
+      1:
+        title: "Vertical Intelligence"
+        desc: "Generic credit scoring fails both lenders and borrowers. Lenders already have scoring models, but they lack rich, sector-specific alternative data to train them on. We capture operational reality at the point of transaction: inventory velocity, purchase patterns, payment behaviour, and sector-specific signals. The result is approval rates of 40–45% for our lender partners, compared to the industry standard of 15–20%."
+      2:
+        title: "Embedded Philosophy"
+        desc: "Credit works best when it is invisible. We build infrastructure that embeds directly into existing B2B ecosystems, marketplaces, and ERPs. Borrowers never leave the platform they already use. Our lender partners receive BRE-qualified leads with near-zero acquisition cost. This is not a lending app. It is the layer underneath."
+      3:
+        title: "Autonomous Economics"
+        desc: "We automate the end-to-end loan lifecycle, from origination and data verification to disbursement tracking and recovery. Manual underwriting is replaced by programmable pipelines. The outcome is faster decisions, sub-INR 500 processing costs, and a loan journey that actually fits how small businesses operate."
+
+  horizons:
+    title: "One mission, two horizons"
+    items:
+      1:
+        label: "Horizon 1"
+        title: "NavDhan"
+        desc: "India's first sector-specialised embedded credit hub for MSMEs. NavDhan embeds directly into B2B platforms and marketplaces, using data from multiple sources to connect their borrowers to the most appropriate lenders in under 5 minutes. Since we deliver BRE-qualified leads, our lender partners see approval rates of 40–45%, well above the 15–20% industry standard. We earn a 1.25% fee on disbursals. We do not compete with lenders. We expand their addressable market by unlocking borrowers they could never reach through traditional channels."
+      2:
+        label: "Horizon 2"
+        title: "Kubar Protocol"
+        desc: "Programmable trust for cross-border trade. The global trade finance gap sits at $2.5 trillion. Kubar Protocol is our next-generation infrastructure layer that tokenises traditional trade finance assets into MLETR-compliant digital representations, enabling faster and more transparent cross-border settlement. Targeted for launch in 2027–2028, it extends our embedded-credit intelligence into global trade corridors."
+
+  traction:
+    title: "The path so far"
+    desc: "We proved our thesis with zero institutional capital and a field-first research culture. Along the way, we secured over $2 million USD in technical grants and credits from partners including NVIDIA, Google, Perplexity AI, OpenAI, Cloudflare, Zoho, Microsoft for Startups, Salesforce, MongoDB, and the Polkadot Blockchain Academy."
+    recognitions_title: "Recognitions"
+    recognitions:
+      1: 'FinVision Award for Most Innovative Startup (RBI think-tank - NIBM, Pune)'
+      2: 'Startup Mahakumbh "Popular Choice Award"'
+      3: 'Top 25 in Google X Campus Fund'
+      4: 'Top 25 WTFund'
+    partnerships_title: "Active Partnerships & Pilots"
+    partnerships:
+      1: 'AgriGrader — active partnership; supplier consent and lead-packet generation live'
+      2: 'Clix Capital — pilot being deployed and evaluated'
+      3: 'IDFC First Bank — in active discussion'
+      4: 'Punjab National Bank — design partnership proposal submitted'
+      5: 'SBI / Maruti — strategic connections established'
+
+  roadmap:
+    title: "Roadmap"
+    p1: "India's MSME credit segment is severely under-penetrated. DSAs were meant to bridge the gap between financial institutions and MSMEs, but their processes are manual and their reach stays local."
+    p2: "Through NavDhan, we aim to become India's largest DSA with the most widespread and diversified borrower network pan-India, leveraging horizontal AI to achieve our goals. We are replacing manual DSA outreach with our Agentic DSA, manual data collection through India Stack APIs and marketplace integrations, and branch-based file delivery with API-driven LOS integration. This lets us deliver a consistent, high-volume, diversified portfolio of BRE-qualified borrowers to our lender partners at a much lower cost than traditional origination."
+    p3: "In the next phase, we will explore deeper lender partnerships: workflow automation (credit decisioning always explicitly stays with the lender), customised loan offerings based on our platform analytics, and tailored co-lending products. We are also building two SaaS offerings: sector-specific credit insights and complete loan lifecycle management."
+    p4: "On the cross-border front, we are actively pursuing R&D on Kubar Protocol, which aims to tokenise traditional trade finance assets such as LoCs, eBLs, and SBLs into globally compliant digital assets for efficient cross-border trade financing. We are incubated at GIFT City and actively pursuing our solutions within the GIFT ecosystem."
+
+  work_with_us:
+    title: "Work with us"
+    subtitle: "Building anything of deep significance almost always demands team-work. The rails of the new economy are being built right now. Come, help us build it."
+    items:
+      1:
+        title: "Financial Institutions (Banks / NBFCs)"
+        desc: "Get access to our network of MSME borrowers with rich alternative data to profitably scale your MSME loan book without adding branch infrastructure."
+        button: "Request a Sandbox Demo"
+      2:
+        title: "Marketplaces & B2B Platforms"
+        desc: "Your sellers have the demand but lack the capital to fulfil it. Embed NavDhan to unlock GMV, increase seller retention, and earn a new revenue stream."
+        button: "Explore API Integration"
+      3:
+        title: "Investors & Enablers"
+        desc: "We are raising capital to scale our domestic operations and finalise our global regulatory infrastructure."
+        button: "Request our Data Room / Schedule a Call"
+
   
   team_section:
     badge: "03"
