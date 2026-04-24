@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import {
   ArrowRight,
   Target,
@@ -489,11 +490,18 @@ export default function AboutPage() {
                         01
                       </div>
                     </div>
-
-                    <h3 className="text-4xl sm:text-5xl font-extrabold text-white mb-8 group-hover:text-[#138808] transition-colors duration-500 relative z-10">
-                      {t(`horizons.items.1.title`)}
-                    </h3>
-
+                    <div className="flex items-start gap-4">
+                      <Image
+                        src="/nd_logo.png"
+                        alt="NavDhan"
+                        width={120}
+                        height={36}
+                        className="h-22 sm:h-22 w-auto object-contain drop-shadow-sm -translate-y-5"
+                      />
+                      <h3 className="text-4xl sm:text-5xl font-extrabold text-white mb-8 group-hover:text-[#138808] transition-colors duration-500 relative z-10">
+                        {t(`horizons.items.1.title`)}
+                      </h3>
+                    </div>
                     <p className="text-white/70 text-lg leading-loose text-pretty relative z-10 group-hover:text-white/90 transition-colors duration-500">
                       {t(`horizons.items.1.desc`)}
                     </p>

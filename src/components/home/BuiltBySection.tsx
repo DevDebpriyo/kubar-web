@@ -21,6 +21,7 @@ function ProductCard({
 }) {
   const Icon = statusType === "live" ? Zap : Lock;
   const isLive = statusType === "live";
+  const showNavdhanLogo = name === "NavDhan";
 
   return (
     <motion.div
@@ -46,15 +47,26 @@ function ProductCard({
         {/* Left content area */}
         <div className="built-card-content">
           {/* Product name */}
-          <motion.h3
-            className="built-product-name"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 + index * 0.15 }}
-          >
-            {name}
-          </motion.h3>
+          <div className="flex items-start gap-4">
+            {showNavdhanLogo && (
+              <Image
+                src="/nd_logo.png"
+                alt="NavDhan"
+                width={120}
+                height={36}
+                className="h-14 sm:h-14 w-auto object-contain drop-shadow-sm -translate-y-3"
+              />
+            )}
+            <motion.h3
+              className="built-product-name"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 + index * 0.15 }}
+            >
+              {name}
+            </motion.h3>
+          </div>
 
           {/* Product description */}
           <motion.p
@@ -128,10 +140,10 @@ export function BuiltBySection() {
         >
           <div className="built-header-with-logo">
             <h2 className="built-title-container">
-              <Image 
-                src="/logo.png" 
-                alt="Kubar Logo" 
-                width={84} 
+              <Image
+                src="/logo.png"
+                alt="Kubar Logo"
+                width={84}
                 height={84}
                 className="built-header-logo"
               />

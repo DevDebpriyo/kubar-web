@@ -422,7 +422,7 @@ export function VisualStorySection() {
       accent: accents[index] ?? "orange",
     };
   });
-  
+
   const oldWaySteps = [
     t("old_way_steps.1"),
     t("old_way_steps.2"),
@@ -439,7 +439,7 @@ export function VisualStorySection() {
       <div className="story-gradient-bg" aria-hidden="true" />
 
       <div className="story-container">
-        
+
         {/* Old Way Flow */}
         <div className="old-way-container">
           <h3 className="old-way-title">
@@ -465,7 +465,7 @@ export function VisualStorySection() {
                   </div>
                   <p className="old-way-text">{step.text}</p>
                 </motion.div>
-                
+
                 {idx < arr.length - 1 && (
                   <motion.div
                     className="old-way-connector"
@@ -485,19 +485,19 @@ export function VisualStorySection() {
         {/* Our Implementation Card */}
         <div className="impl-container">
           <div className="solution-header">
-            <motion.div 
+            <motion.div
               className="story-impl-badge flex items-center gap-1.5 sm:gap-2"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Image 
-                src="/nd_logo.png" 
-                alt="NavDhan" 
-                width={120} 
-                height={36} 
-                className="h-4 sm:h-[18px] w-auto object-contain drop-shadow-sm" 
+              <Image
+                src="/nd_logo.png"
+                alt="NavDhan"
+                width={120}
+                height={36}
+                className="h-14 sm:h-14 w-auto object-contain drop-shadow-sm"
               />
               <span className="mt-[1px]">IMPLEMENTATION</span>
             </motion.div>
@@ -523,9 +523,8 @@ export function VisualStorySection() {
                 return (
                   <motion.article
                     key={item.id}
-                    className={`timeline-item ${
-                      isTextLeft ? "timeline-item--text-left" : "timeline-item--text-right"
-                    } timeline-item--accent-${item.accent}`}
+                    className={`timeline-item ${isTextLeft ? "timeline-item--text-left" : "timeline-item--text-right"
+                      } timeline-item--accent-${item.accent}`}
                     initial={{ opacity: 0, y: 28 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-80px" }}
@@ -582,7 +581,7 @@ export function VisualStorySection() {
               </a>
             </motion.div>
           </div>
-        
+
         </div>
       </div>
     </section>
