@@ -149,6 +149,13 @@ export function RoadmapSection() {
           }
         },
       });
+
+      // Refresh ScrollTrigger to account for any layout shifts from Framer Motion
+      const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 800);
+
+      return () => clearTimeout(timer);
     },
     { scope: sectionRef },
   );
@@ -163,7 +170,7 @@ export function RoadmapSection() {
      */
     <section
       ref={sectionRef}
-      className="relative w-full"
+      className="relative w-full bg-[#0a0a0f]"
       style={{ height: "100vh" }}
       aria-label="Roadmap"
     >

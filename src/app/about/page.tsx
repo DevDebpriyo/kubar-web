@@ -12,11 +12,17 @@ import {
   Award,
   Briefcase,
   Plus,
+  Building2,
+  Users,
+  MapPin,
+  Rocket,
+  Lock,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Navbar } from "@/components/layout/Navbar";
 import { RoadmapSection } from "@/components/about/RoadmapSection";
 import "./about.css";
+import "@/components/home/BuiltBySection.css";
 
 /* ── Components ─────────────────────────────────────────────── */
 function FadeInView({
@@ -253,64 +259,101 @@ export default function AboutPage() {
 
         {/* ── Why We Exist ──────────────────────────────────────── */}
         <section className="about-section z-10 bg-[rgba(10,10,15,0.4)] relative overflow-hidden">
-          <div className="about-section-container">
-            <FadeInView className="about-section-header">
+          {/* Animated Background Mesh */}
+          <div className="absolute inset-0 pointer-events-none opacity-40">
+            <motion.div
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.5, 0.8, 0.5],
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-[20%] left-[10%] w-[40vw] h-[40vw] bg-[rgba(212,146,12,0.1)] rounded-full filter blur-[120px]"
+            />
+            <motion.div
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 2,
+              }}
+              className="absolute bottom-[10%] right-[10%] w-[35vw] h-[35vw] bg-[rgba(59,130,246,0.08)] rounded-full filter blur-[100px]"
+            />
+          </div>
+
+          <div className="about-section-container relative z-10">
+            <FadeInView className="about-section-header mb-12">
               <h2 className="about-section-title">{t("why_we_exist.title")}</h2>
             </FadeInView>
 
-            {/* Rotating halo */}
-            <motion.div
-              className="absolute inset-0 pointer-events-none"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
-            >
-              <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-[rgba(212,146,12,0.08)] rounded-full filter blur-3xl -translate-x-1/2 -translate-y-1/2" />
-            </motion.div>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-8 max-w-6xl mx-auto">
+              {/* Card 1 */}
+              <FadeInView delay={0.1} className="md:col-span-5 h-full">
+                <div className="h-full relative group overflow-hidden bg-[rgba(255,255,255,0.02)] p-8 sm:p-10 rounded-3xl border border-[rgba(255,255,255,0.05)] backdrop-blur-md flex flex-col items-start justify-center transition-all duration-500 hover:border-[rgba(212,146,12,0.4)] hover:bg-[rgba(212,146,12,0.02)] hover:-translate-y-1 hover:shadow-[0_10px_40px_-15px_rgba(212,146,12,0.2)]">
+                  <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-20 transition-opacity duration-700 transform group-hover:scale-110 pointer-events-none">
+                    <Building2 className="w-32 h-32 text-[#d4920c]" />
+                  </div>
+                  <div className="w-14 h-14 rounded-2xl bg-[rgba(212,146,12,0.1)] border border-[rgba(212,146,12,0.2)] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10">
+                    <Building2 className="w-7 h-7 text-[#d4920c]" />
+                  </div>
+                  <p className="text-white/80 text-lg leading-relaxed relative z-10 group-hover:text-white transition-colors duration-300">
+                    {t("why_we_exist.p1")}
+                  </p>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#d4920c]/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-center" />
+                </div>
+              </FadeInView>
 
-            <FadeInView
-              delay={0.2}
-              className="about-story-block text-left mt-12 bg-[rgba(255,255,255,0.02)] p-8 sm:p-12 rounded-3xl border border-[rgba(255,255,255,0.05)] backdrop-blur-sm space-y-6"
-            >
-              <motion.p
-                className="text-white/80"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                {t("why_we_exist.p1")}
-              </motion.p>
-              <motion.p
-                className="text-white/80"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                {t("why_we_exist.p2")}
-              </motion.p>
-              <motion.p
-                className="text-white/80"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                {t("why_we_exist.p3")}
-              </motion.p>
-              <motion.p
-                className="text-white/80"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                {t("why_we_exist.p4")}
-              </motion.p>
-              <div className="mt-8 pt-8 flex justify-center border-t border-[rgba(255,255,255,0.05)]">
-                <div className="w-16 h-1 bg-gradient-to-r from-transparent via-[#d4920c] to-transparent rounded-full shadow-[0_0_10px_#d4920c]" />
-              </div>
-            </FadeInView>
+              {/* Card 2 */}
+              <FadeInView delay={0.2} className="md:col-span-7 h-full">
+                <div className="h-full relative group overflow-hidden bg-[rgba(255,255,255,0.02)] p-8 sm:p-10 rounded-3xl border border-[rgba(255,255,255,0.05)] backdrop-blur-md flex flex-col items-start justify-center transition-all duration-500 hover:border-[rgba(59,130,246,0.4)] hover:bg-[rgba(59,130,246,0.02)] hover:-translate-y-1 hover:shadow-[0_10px_40px_-15px_rgba(59,130,246,0.2)]">
+                  <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-20 transition-opacity duration-700 transform group-hover:scale-110 pointer-events-none">
+                    <Users className="w-32 h-32 text-[#3b82f6]" />
+                  </div>
+                  <div className="w-14 h-14 rounded-2xl bg-[rgba(59,130,246,0.1)] border border-[rgba(59,130,246,0.2)] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10">
+                    <Users className="w-7 h-7 text-[#3b82f6]" />
+                  </div>
+                  <p className="text-white/80 text-lg leading-relaxed relative z-10 group-hover:text-white transition-colors duration-300">
+                    {t("why_we_exist.p2")}
+                  </p>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#3b82f6]/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-center" />
+                </div>
+              </FadeInView>
+
+              {/* Card 3 */}
+              <FadeInView delay={0.3} className="md:col-span-7 h-full">
+                <div className="h-full relative group overflow-hidden bg-[rgba(255,255,255,0.02)] p-8 sm:p-10 rounded-3xl border border-[rgba(255,255,255,0.05)] backdrop-blur-md flex flex-col items-start justify-center transition-all duration-500 hover:border-[rgba(34,197,94,0.4)] hover:bg-[rgba(34,197,94,0.02)] hover:-translate-y-1 hover:shadow-[0_10px_40px_-15px_rgba(34,197,94,0.2)]">
+                  <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-20 transition-opacity duration-700 transform group-hover:scale-110 pointer-events-none">
+                    <MapPin className="w-32 h-32 text-[#22c55e]" />
+                  </div>
+                  <div className="w-14 h-14 rounded-2xl bg-[rgba(34,197,94,0.1)] border border-[rgba(34,197,94,0.2)] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10">
+                    <MapPin className="w-7 h-7 text-[#22c55e]" />
+                  </div>
+                  <p className="text-white/80 text-lg leading-relaxed relative z-10 group-hover:text-white transition-colors duration-300">
+                    {t("why_we_exist.p3")}
+                  </p>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#22c55e]/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-center" />
+                </div>
+              </FadeInView>
+
+              {/* Card 4 */}
+              <FadeInView delay={0.4} className="md:col-span-5 h-full">
+                <div className="h-full relative group overflow-hidden bg-gradient-to-br from-[#d4920c]/10 to-[rgba(255,255,255,0.02)] p-8 sm:p-10 rounded-3xl border border-[#d4920c]/30 backdrop-blur-md flex flex-col items-start justify-center transition-all duration-500 hover:shadow-[0_0_30px_rgba(212,146,12,0.15)] hover:-translate-y-1">
+                  <div className="absolute inset-0 bg-[rgba(212,146,12,0.05)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-30 transition-opacity duration-700 transform group-hover:translate-x-4 group-hover:-translate-y-4 pointer-events-none">
+                    <Rocket className="w-40 h-40 text-[#d4920c]" />
+                  </div>
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#d4920c] to-[#f5bc35] shadow-[0_0_20px_rgba(212,146,12,0.4)] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10">
+                    <Rocket className="w-8 h-8 text-[#0a0a0f]" />
+                  </div>
+                  <h3 className="text-white font-bold text-2xl sm:text-3xl leading-snug relative z-10">
+                    {t("why_we_exist.p4")}
+                  </h3>
+                </div>
+              </FadeInView>
+            </div>
           </div>
         </section>
 
@@ -373,51 +416,181 @@ export default function AboutPage() {
         </section>
 
         {/* ── Horizons ──────────────────────────────────────────── */}
-        <section className="about-section z-10 bg-gradient-to-b from-[rgba(10,10,15,0.4)] to-transparent overflow-hidden object-cover relative">
-          {/* Animated Radial lines background */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none select-none">
-            {[...Array(6)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute border border-[rgba(212,146,12,0.6)] rounded-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                style={{
-                  width: `${(i + 1) * 20}vw`,
-                  height: `${(i + 1) * 20}vw`,
-                }}
-              />
-            ))}
+        <section className="relative py-32 z-10 bg-gradient-to-b from-[rgba(10,10,15,0.4)] via-[rgba(15,15,20,0.8)] to-[rgba(10,10,15,0.4)] overflow-hidden">
+          {/* Animated Background Orbs */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <motion.div
+              animate={{
+                x: ["-10%", "10%", "-10%"],
+                y: ["-10%", "10%", "-10%"],
+              }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] bg-[#138808] rounded-full filter blur-[180px] opacity-10"
+            />
+            <motion.div
+              animate={{ x: ["10%", "-10%", "10%"], y: ["10%", "-10%", "10%"] }}
+              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              className="absolute bottom-1/4 right-1/4 w-[40vw] h-[40vw] bg-white rounded-full filter blur-[180px] opacity-5"
+            />
           </div>
 
-          <div className="about-section-container text-center w-full">
-            <FadeInView className="about-section-header mb-16">
-              <h2 className="about-section-title">{t("horizons.title")}</h2>
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <FadeInView className="text-center mb-24">
+              <h2 className="text-5xl sm:text-6xl font-black text-white mb-6 tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                {t("horizons.title")}
+              </h2>
+              <div className="w-32 h-1.5 mx-auto bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full" />
             </FadeInView>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-8 max-w-5xl mx-auto">
-              {[1, 2].map((i) => (
-                <FadeInView
-                  key={i}
-                  delay={0.2 * i}
-                  className="flex flex-col items-center"
-                >
-                  <div className="about-horizon-circle mb-8 shrink-0">
-                    <div className="text-center p-6 relative z-10">
-                      <div className="text-sm font-bold tracking-wider text-[rgba(19,136,8,0.8)] mb-2 uppercase">
-                        {t(`horizons.items.${i}.label`)}
+            <div className="relative">
+              {/* Connecting Beam (Desktop) */}
+              <div className="hidden lg:block absolute top-1/2 left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-[#138808]/20 via-white/20 to-white/10 -translate-y-1/2 z-0">
+                <motion.div
+                  className="absolute top-1/2 left-0 w-32 h-1 bg-gradient-to-r from-transparent via-white to-transparent -translate-y-1/2 shadow-[0_0_15px_white]"
+                  animate={{ left: ["0%", "100%", "0%"] }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              </div>
+
+              {/* Connecting Beam (Mobile/Tablet) */}
+              <div className="lg:hidden absolute left-1/2 top-[10%] bottom-[10%] w-0.5 bg-gradient-to-b from-[#138808]/20 via-white/20 to-white/10 -translate-x-1/2 z-0">
+                <motion.div
+                  className="absolute top-0 left-1/2 w-1 h-32 bg-gradient-to-b from-transparent via-white to-transparent -translate-x-1/2 shadow-[0_0_15px_white]"
+                  animate={{ top: ["0%", "100%", "0%"] }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative z-10">
+                {/* Horizon 1 */}
+                <FadeInView delay={0.2} className="relative group h-full">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#138808]/20 to-transparent rounded-[2.5rem] filter blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="relative h-full bg-[rgba(255,255,255,0.02)] backdrop-blur-xl border border-[rgba(255,255,255,0.05)] rounded-[2.5rem] p-8 sm:p-12 transition-all duration-700 hover:-translate-y-2 hover:border-[#138808]/40 hover:bg-[rgba(19,136,8,0.02)] hover:shadow-[0_20px_80px_-20px_rgba(19,136,8,0.3)] overflow-hidden flex flex-col">
+                    {/* Decor lines */}
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#138808] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                    <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#138808] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-12 gap-6 relative z-10">
+                      <div className="inline-flex items-center gap-3 border border-[#138808]/30 bg-[#138808]/10 px-5 py-2.5 rounded-full backdrop-blur-md w-fit">
+                        <span className="w-2 h-2 rounded-full bg-[#138808] animate-pulse" />
+                        <span className="text-[#138808] font-bold tracking-[0.2em] uppercase text-sm">
+                          {t(`horizons.items.1.label`)}
+                        </span>
                       </div>
-                      <div className="text-4xl font-light text-[rgba(212,146,12,0.8)] mb-3">
-                        0{i}
+                      <div className="text-6xl font-black text-white/5 group-hover:text-[#138808]/20 transition-colors duration-700 select-none">
+                        01
                       </div>
-                      <h3 className="text-xl font-bold text-white">
-                        {t(`horizons.items.${i}.title`)}
-                      </h3>
+                    </div>
+
+                    <h3 className="text-4xl sm:text-5xl font-extrabold text-white mb-8 group-hover:text-[#138808] transition-colors duration-500 relative z-10">
+                      {t(`horizons.items.1.title`)}
+                    </h3>
+
+                    <p className="text-white/70 text-lg leading-loose text-pretty relative z-10 group-hover:text-white/90 transition-colors duration-500">
+                      {t(`horizons.items.1.desc`)}
+                    </p>
+
+                    {/* Status badge (Bottom Right) */}
+                    <div className="mt-auto pt-8 flex justify-end relative z-10">
+                      <motion.div
+                        className="built-status-badge live w-fit"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        animate={{
+                          boxShadow: [
+                            "0 0 12px rgba(74, 132, 255, 0.3)",
+                            "0 0 24px rgba(74, 132, 255, 0.6)",
+                            "0 0 12px rgba(74, 132, 255, 0.3)",
+                          ],
+                        }}
+                        transition={{
+                          delay: 0.3,
+                          boxShadow: {
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          },
+                        }}
+                      >
+                        <div className="built-status-icon">
+                          <Zap className="h-3.5 w-3.5" />
+                        </div>
+                        <span className="built-status-text">Live</span>
+                      </motion.div>
+                    </div>
+
+                    {/* Watermark/Background Icon */}
+                    <div className="absolute -bottom-10 -right-10 text-[#138808]/5 group-hover:text-[#138808]/10 transition-colors duration-700 transform group-hover:scale-110 pointer-events-none">
+                      <Target className="w-64 h-64" />
                     </div>
                   </div>
-                  <p className="about-feature-desc text-center max-w-[400px] text-[17px] leading-relaxed">
-                    {t(`horizons.items.${i}.desc`)}
-                  </p>
                 </FadeInView>
-              ))}
+
+                {/* Horizon 2 */}
+                <FadeInView delay={0.4} className="relative group h-full">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-[2.5rem] filter blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="relative h-full bg-[rgba(255,255,255,0.02)] backdrop-blur-xl border border-[rgba(255,255,255,0.05)] rounded-[2.5rem] p-8 sm:p-12 transition-all duration-700 hover:-translate-y-2 hover:border-white/30 hover:bg-white/5 hover:shadow-[0_20px_80px_-20px_rgba(255,255,255,0.15)] overflow-hidden flex flex-col">
+                    {/* Decor lines */}
+                    <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-l from-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                    <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                    <div className="flex flex-col sm:flex-row-reverse sm:items-center justify-between mb-12 gap-6 relative z-10">
+                      <div className="inline-flex items-center gap-3 border border-white/20 bg-white/5 px-5 py-2.5 rounded-full backdrop-blur-md w-fit sm:self-end group-hover:border-white/40 transition-colors duration-500">
+                        <span className="w-2 h-2 rounded-full bg-white/80 animate-pulse" />
+                        <span className="text-white/90 font-bold tracking-[0.2em] uppercase text-sm">
+                          {t(`horizons.items.2.label`)}
+                        </span>
+                      </div>
+                      <div className="text-6xl font-black text-white/5 group-hover:text-white/20 transition-colors duration-700 select-none">
+                        02
+                      </div>
+                    </div>
+
+                    <h3 className="text-4xl sm:text-5xl font-extrabold text-white mb-8 group-hover:text-white transition-colors duration-500 sm:text-right relative z-10">
+                      {t(`horizons.items.2.title`)}
+                    </h3>
+
+                    <p className="text-white/70 text-lg leading-loose text-pretty relative z-10 group-hover:text-white/90 transition-colors duration-500 sm:text-right">
+                      {t(`horizons.items.2.desc`)}
+                    </p>
+
+                    {/* Status badge (Bottom Right) */}
+                    <div className="mt-auto pt-8 flex justify-end relative z-10">
+                      <motion.div
+                        className="built-status-badge w-fit"
+                        style={{
+                          border: "1.5px solid rgba(255, 255, 255, 0.4)",
+                          background: "rgba(255, 255, 255, 0.1)",
+                          color: "rgba(255, 255, 255, 0.9)",
+                        }}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.5 }}
+                      >
+                        <div className="built-status-icon">
+                          <Lock className="h-3.5 w-3.5" />
+                        </div>
+                        <span className="built-status-text">Coming soon</span>
+                      </motion.div>
+                    </div>
+
+                    {/* Watermark/Background Icon */}
+                    <div className="absolute -bottom-10 -left-10 text-white/5 group-hover:text-white/10 transition-colors duration-700 transform group-hover:scale-110 pointer-events-none">
+                      <Globe className="w-64 h-64" />
+                    </div>
+                  </div>
+                </FadeInView>
+              </div>
             </div>
           </div>
         </section>
@@ -426,60 +599,132 @@ export default function AboutPage() {
         <RoadmapSection />
 
         {/* ── Recognition / Traction ────────────────────────────── */}
-        <section className="py-20 sm:py-32 border-t border-[rgba(255,255,255,0.05)] bg-[rgba(5,5,10,0.8)] relative overflow-hidden">
-          {/* Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-[300px] bg-[rgba(212,146,12,0.05)] blur-[100px] pointer-events-none rounded-[100%]" />
+        <section className="py-24 sm:py-32 relative overflow-hidden bg-[#05050a] border-t border-white/[0.02]">
+          {/* Animated Background Gradients */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#d4920c]/5 rounded-full filter blur-[120px] mix-blend-screen" />
+            <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[#138808]/5 rounded-full filter blur-[120px] mix-blend-screen" />
+          </div>
 
-          <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
-            <FadeInView className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
+            {/* Header Section */}
+            <FadeInView className="flex flex-col items-center text-center mb-20 sm:mb-28">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] mb-6">
+                <span className="w-2 h-2 rounded-full bg-[#d4920c] animate-pulse" />
+                <span className="text-xs font-bold uppercase tracking-widest text-white/70">
+                  Milestones
+                </span>
+              </div>
+              <h2 className="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/60 mb-8 tracking-tight">
                 {t("traction.title")}
               </h2>
-              <p className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed">
-                {t("traction.desc")}
-              </p>
+              <div className="relative p-8 sm:p-10 rounded-[2rem] bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.05] max-w-4xl mx-auto shadow-2xl">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-[#d4920c]/50 to-transparent" />
+                <p className="text-white/80 text-lg sm:text-xl leading-relaxed text-pretty font-light">
+                  {t("traction.desc")}
+                </p>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-[#138808]/50 to-transparent" />
+              </div>
             </FadeInView>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
-              <FadeInView
-                delay={0.2}
-                className="bg-[rgba(255,255,255,0.02)] p-8 sm:p-12 rounded-3xl border border-[rgba(255,255,255,0.03)] backdrop-blur-xl"
-              >
-                <h3 className="text-2xl font-bold text-[#d4920c] mb-8">
-                  {t("traction.recognitions_title")}
-                </h3>
-                <ul className="space-y-6">
-                  {[1, 2, 3, 4].map((i) => (
-                    <li
-                      key={i}
-                      className="flex items-start text-white/80 text-lg"
-                    >
-                      <Award className="w-6 h-6 text-[#138808] mr-4 mt-0.5 shrink-0" />
-                      <span>{t(`traction.recognitions.${i}`)}</span>
-                    </li>
-                  ))}
-                </ul>
-              </FadeInView>
+            {/* Single Path Layout for Items */}
+            <div className="flex flex-col gap-20">
+              {/* Recognitions Section */}
+              <div>
+                <FadeInView
+                  delay={0.2}
+                  className="flex items-center gap-6 mb-12"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#d4920c]/20 to-[#d4920c]/5 border border-[#d4920c]/20 flex items-center justify-center shrink-0 shadow-[0_0_30px_rgba(212,146,12,0.15)]">
+                    <Award className="w-8 h-8 text-[#d4920c]" />
+                  </div>
+                  <h3 className="text-4xl sm:text-5xl font-black text-white tracking-tight">
+                    {t("traction.recognitions_title")}
+                  </h3>
+                </FadeInView>
 
-              <FadeInView
-                delay={0.4}
-                className="bg-[rgba(255,255,255,0.02)] p-8 sm:p-12 rounded-3xl border border-[rgba(255,255,255,0.03)] backdrop-blur-xl"
-              >
-                <h3 className="text-2xl font-bold text-[#d4920c] mb-8">
-                  {t("traction.partnerships_title")}
-                </h3>
-                <ul className="space-y-6">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <li
-                      key={i}
-                      className="flex items-start text-white/80 text-lg"
-                    >
-                      <Briefcase className="w-6 h-6 text-[#138808] mr-4 mt-0.5 shrink-0" />
-                      <span>{t(`traction.partnerships.${i}`)}</span>
-                    </li>
+                <div className="space-y-4">
+                  {[
+                    { id: 1, year: "2026" },
+                    { id: 2, year: "2025" },
+                    { id: 3, year: "2024" },
+                    { id: 4, year: "2024" },
+                  ].map((item, index) => (
+                    <FadeInView key={item.id} delay={0.3 + index * 0.1}>
+                      <div className="group relative p-6 sm:p-8 rounded-3xl bg-white/[0.02] border border-white/[0.05] hover:border-[#d4920c]/40 hover:bg-gradient-to-br hover:from-[#d4920c]/[0.08] hover:to-transparent transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_10px_40px_-10px_rgba(212,146,12,0.2)] hover:-translate-y-1 cursor-default">
+                        {/* Hover Gradient Sweep */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#d4920c]/10 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
+
+                        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-10 relative z-10">
+                          {/* Column 1: Serial Number */}
+                          <div className="text-[#d4920c]/30 group-hover:text-[#d4920c] font-black text-xl sm:text-3xl font-mono transition-colors duration-300">
+                            {String(index + 1).padStart(2, "0")}
+                          </div>
+
+                          {/* Column 2: Name */}
+                          <p className="text-white/70 group-hover:text-white/95 text-base sm:text-xl font-medium leading-relaxed transition-colors duration-300">
+                            {t(`traction.recognitions.${item.id}`)}
+                          </p>
+
+                          {/* Column 3: Year */}
+                          <div className="text-white/30 group-hover:text-white/60 font-mono text-base sm:text-xl transition-colors duration-300">
+                            {item.year}
+                          </div>
+                        </div>
+                      </div>
+                    </FadeInView>
                   ))}
-                </ul>
-              </FadeInView>
+                </div>
+              </div>
+
+              {/* Partnerships Section */}
+              <div>
+                <FadeInView
+                  delay={0.4}
+                  className="flex items-center gap-6 mb-12"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#138808]/20 to-[#138808]/5 border border-[#138808]/20 flex items-center justify-center shrink-0 shadow-[0_0_30px_rgba(19,136,8,0.15)]">
+                    <Briefcase className="w-8 h-8 text-[#138808]" />
+                  </div>
+                  <h3 className="text-4xl sm:text-5xl font-black text-white tracking-tight">
+                    {t("traction.partnerships_title")}
+                  </h3>
+                </FadeInView>
+
+                <div className="space-y-4">
+                  {[
+                    { id: 1, year: "2025" },
+                    { id: 2, year: "2025" },
+                    { id: 3, year: "2025" },
+                    { id: 4, year: "2025" },
+                    { id: 5, year: "2024" },
+                  ].map((item, index) => (
+                    <FadeInView key={item.id} delay={0.5 + index * 0.1}>
+                      <div className="group relative p-6 sm:p-8 rounded-3xl bg-white/[0.02] border border-white/[0.05] hover:border-[#138808]/40 hover:bg-gradient-to-br hover:from-[#138808]/[0.08] hover:to-transparent transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_10px_40px_-10px_rgba(19,136,8,0.2)] hover:-translate-y-1 cursor-default">
+                        {/* Hover Gradient Sweep */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#138808]/10 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
+
+                        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-10 relative z-10">
+                          {/* Column 1: Serial Number */}
+                          <div className="text-[#138808]/30 group-hover:text-[#138808] font-black text-xl sm:text-3xl font-mono transition-colors duration-300">
+                            {String(index + 1).padStart(2, "0")}
+                          </div>
+
+                          {/* Column 2: Name */}
+                          <p className="text-white/70 group-hover:text-white/95 text-base sm:text-xl font-medium leading-relaxed transition-colors duration-300">
+                            {t(`traction.partnerships.${item.id}`)}
+                          </p>
+
+                          {/* Column 3: Year */}
+                          <div className="text-white/30 group-hover:text-white/60 font-mono text-base sm:text-xl transition-colors duration-300">
+                            {item.year}
+                          </div>
+                        </div>
+                      </div>
+                    </FadeInView>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
