@@ -749,7 +749,7 @@ export default function AboutPage() {
                         {/* Hover Gradient Sweep */}
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#138808]/10 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
 
-                        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-10 relative z-10">
+                        <div className="grid grid-cols-[auto_1fr] items-center gap-4 sm:gap-10 relative z-10">
                           {/* Column 1: Serial Number */}
                           <div className="text-[#138808]/30 group-hover:text-[#138808] font-black text-xl sm:text-3xl font-mono transition-colors duration-300">
                             {String(index + 1).padStart(2, "0")}
@@ -759,11 +759,6 @@ export default function AboutPage() {
                           <p className="text-white/70 group-hover:text-white/95 text-base sm:text-xl font-medium leading-relaxed transition-colors duration-300">
                             {t(`traction.partnerships.${item.id}`)}
                           </p>
-
-                          {/* Column 3: Year */}
-                          <div className="text-white/30 group-hover:text-white/60 font-mono text-base sm:text-xl transition-colors duration-300">
-                            {item.year}
-                          </div>
                         </div>
                       </div>
                     </FadeInView>
