@@ -434,7 +434,7 @@ export function VisualStorySection() {
     <section
       id="story"
       aria-label={t("aria_label")}
-      className="story-section"
+      className="story-section -mb-20"
     >
       <div className="story-gradient-bg" aria-hidden="true" />
 

@@ -612,6 +612,11 @@
   border-radius: 1.3rem;
 }
 
+.trust-mobile-controls,
+.trust-mobile-details {
+  display: none;
+}
+
 @media (max-width: 420px) {
   .trust-flip-card,
   .trust-flip-card-inner {
@@ -619,14 +624,16 @@
   }
 }
 
-@media (hover: none) {
+@media (max-width: 767px) {
   .trust-flip-card {
     perspective: none;
     min-height: auto;
+    cursor: default;
   }
 
   .trust-flip-card-inner {
     min-height: auto;
+    height: auto;
     transform: none !important;
     transition: none;
   }
@@ -638,11 +645,68 @@
   }
 
   .trust-flip-front {
-    margin-bottom: 0.85rem;
+    margin-bottom: 0;
   }
 
   .trust-flip-back {
-    transform: none;
+    display: none;
+  }
+
+  .trust-mobile-controls {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.85rem;
+  }
+
+  .trust-mobile-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 1.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(var(--tone-soft-rgb), 0.34);
+    background: rgba(15, 23, 42, 0.56);
+    color: rgba(241, 245, 249, 0.9);
+    padding: 0.2rem 0.55rem 0.2rem 0.65rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .trust-mobile-toggle-icon {
+    width: 0.9rem;
+    height: 0.9rem;
+    transition: transform 0.25s ease;
+  }
+
+  .trust-mobile-toggle-icon[data-expanded="true"] {
+    transform: rotate(180deg);
+  }
+
+  .trust-mobile-details {
+    position: relative;
+    z-index: 2;
+    display: block;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-top: 0;
+    transition:
+      max-height 0.35s ease,
+      opacity 0.25s ease,
+      margin-top 0.25s ease,
+      padding-top 0.25s ease;
+  }
+
+  .trust-mobile-details[data-expanded="true"] {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: 0.95rem;
+    padding-top: 0.95rem;
+    border-top: 1px solid rgba(var(--tone-soft-rgb), 0.2);
   }
 }
 
@@ -675,5 +739,19 @@
 
   .trust-flip-back {
     transform: none;
+  }
+
+  .trust-mobile-details {
+    transition: none;
+  }
+
+  .trust-mobile-toggle-icon {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width: 767px) {
+  .trust-flip-front {
+    margin-bottom: 0;
   }
 }

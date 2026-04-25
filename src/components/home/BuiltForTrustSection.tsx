@@ -4,12 +4,14 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import {
   Building2,
+  ChevronDown,
   Fingerprint,
   Landmark,
   Scale,
   Trophy,
   type LucideIcon,
 } from "lucide-react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -85,6 +87,8 @@ function FlippingTrustCard({
   const Icon = trustCardIcons[card.id];
   const style = trustCardStyles[card.id];
   const delay = index * 0.08;
+  const [isExpanded, setIsExpanded] = useState(false);
+  const mobileContentId = `trust-mobile-details-${card.id}`;
 
   return (
     <motion.article
@@ -189,6 +193,47 @@ function FlippingTrustCard({
             <span className="trust-meter-segment" />
             <span className="trust-meter-segment" />
           </div>
+
+          <div className="trust-mobile-controls">
+            <button
+              type="button"
+              className="trust-mobile-toggle"
+              aria-expanded={isExpanded}
+              aria-controls={mobileContentId}
+              onClick={() => setIsExpanded((prev) => !prev)}
+            >
+              <span className="trust-mobile-toggle-text">
+                {isExpanded ? "Hide Details" : "View Details"}
+              </span>
+              <ChevronDown
+                className="trust-mobile-toggle-icon"
+                aria-hidden="true"
+                data-expanded={isExpanded}
+              />
+            </button>
+          </div>
+
+          <div
+            id={mobileContentId}
+            className="trust-mobile-details"
+            data-expanded={isExpanded}
+          >
+            <div className="trust-back-meta">
+              <Badge variant="outline" className="trust-back-badge">
+                Description
+              </Badge>
+              <span className="trust-back-layer">Layer {card.id}</span>
+            </div>
+            <h3 className="trust-back-title">{card.title}</h3>
+            <Separator className="trust-back-separator" />
+            <p className="trust-back-context">{card.context}</p>
+
+            <div className="trust-back-footer">
+              <Badge variant="secondary" className="trust-back-assurance">
+                {style.assurance}
+              </Badge>
+            </div>
+          </div>
         </div>
 
         <div className="trust-flip-face trust-flip-back">
@@ -198,7 +243,7 @@ function FlippingTrustCard({
               Description
             </Badge>
             <span className="trust-back-layer">Layer {card.id}</span>
-        </div>
+          </div>
           <h3 className="trust-back-title">{card.title}</h3>
           <Separator className="trust-back-separator" />
           <p className="trust-back-context">{card.context}</p>

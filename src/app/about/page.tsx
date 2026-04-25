@@ -510,11 +510,11 @@ export default function AboutPage() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative z-10">
                 {/* Horizon 1 */}
                 <FadeInView delay={0.2} className="relative group h-full">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#138808]/20 to-transparent rounded-[2.5rem] filter blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                  <div className="relative h-full bg-[rgba(255,255,255,0.02)] backdrop-blur-xl border border-[rgba(255,255,255,0.05)] rounded-[2.5rem] p-8 sm:p-12 transition-all duration-700 hover:-translate-y-2 hover:border-[#138808]/40 hover:bg-[rgba(19,136,8,0.02)] hover:shadow-[0_20px_80px_-20px_rgba(19,136,8,0.3)] overflow-hidden flex flex-col">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#138808]/20 to-transparent rounded-[2.5rem] filter blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-700" />
+                  <div className="relative h-full bg-[rgba(255,255,255,0.02)] backdrop-blur-xl border border-[rgba(255,255,255,0.05)] rounded-[2.5rem] p-8 sm:p-12 transition-all duration-700 hover:-translate-y-1 hover:border-[#138808]/20 hover:bg-[rgba(19,136,8,0.02)] hover:shadow-[0_10px_40px_-15px_rgba(19,136,8,0.15)] overflow-hidden flex flex-col">
                     {/* Decor lines */}
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#138808] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#138808] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#138808] to-transparent opacity-0 group-hover:opacity-40 transition-opacity duration-700" />
+                    <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#138808] to-transparent opacity-0 group-hover:opacity-40 transition-opacity duration-700" />
 
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-12 gap-6 relative z-10">
                       <div className="inline-flex items-center gap-3 border border-[#138808]/30 bg-[#138808]/10 px-5 py-2.5 rounded-full backdrop-blur-md w-fit">
@@ -533,7 +533,7 @@ export default function AboutPage() {
                         alt="NavDhan"
                         width={120}
                         height={36}
-                        className="h-22 sm:h-22 w-auto object-contain drop-shadow-sm -translate-y-5"
+                        className="h-16 sm:h-22 w-auto object-contain drop-shadow-sm -translate-y-3.5 sm:-translate-y-5"
                       />
                       <h3 className="text-4xl sm:text-5xl font-extrabold text-white mb-8 group-hover:text-[#138808] transition-colors duration-500 relative z-10">
                         {t(`horizons.items.1.title`)}
@@ -574,7 +574,7 @@ export default function AboutPage() {
                     </div>
 
                     {/* Watermark/Background Icon */}
-                    <div className="absolute -bottom-10 -right-10 text-[#138808]/5 group-hover:text-[#138808]/10 transition-colors duration-700 transform group-hover:scale-110 pointer-events-none">
+                    <div className="absolute -bottom-10 -right-10 text-[#138808]/5 group-hover:text-[#138808]/10 transition-colors duration-700 transform group-hover:scale-105 pointer-events-none">
                       <Target className="w-64 h-64" />
                     </div>
                   </div>
@@ -582,11 +582,11 @@ export default function AboutPage() {
 
                 {/* Horizon 2 */}
                 <FadeInView delay={0.4} className="relative group h-full">
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-[2.5rem] filter blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                  <div className="relative h-full bg-[rgba(255,255,255,0.02)] backdrop-blur-xl border border-[rgba(255,255,255,0.05)] rounded-[2.5rem] p-8 sm:p-12 transition-all duration-700 hover:-translate-y-2 hover:border-white/30 hover:bg-white/5 hover:shadow-[0_20px_80px_-20px_rgba(255,255,255,0.15)] overflow-hidden flex flex-col">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-[2.5rem] filter blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-700" />
+                  <div className="relative h-full bg-[rgba(255,255,255,0.02)] backdrop-blur-xl border border-[rgba(255,255,255,0.05)] rounded-[2.5rem] p-8 sm:p-12 transition-all duration-700 hover:-translate-y-1 hover:border-white/20 hover:bg-white/5 hover:shadow-[0_10px_40px_-15px_rgba(255,255,255,0.08)] overflow-hidden flex flex-col">
                     {/* Decor lines */}
-                    <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-l from-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                    <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-l from-white/50 to-transparent opacity-0 group-hover:opacity-50 transition-opacity duration-700" />
+                    <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-white/50 to-transparent opacity-0 group-hover:opacity-50 transition-opacity duration-700" />
 
                     <div className="flex flex-col sm:flex-row-reverse sm:items-center justify-between mb-12 gap-6 relative z-10">
                       <div className="inline-flex items-center gap-3 border border-white/20 bg-white/5 px-5 py-2.5 rounded-full backdrop-blur-md w-fit sm:self-end group-hover:border-white/40 transition-colors duration-500">
@@ -630,7 +630,7 @@ export default function AboutPage() {
                     </div>
 
                     {/* Watermark/Background Icon */}
-                    <div className="absolute -bottom-10 -left-10 text-white/5 group-hover:text-white/10 transition-colors duration-700 transform group-hover:scale-110 pointer-events-none">
+                    <div className="absolute -bottom-10 -left-10 text-white/5 group-hover:text-white/10 transition-colors duration-700 transform group-hover:scale-105 pointer-events-none">
                       <Globe className="w-64 h-64" />
                     </div>
                   </div>
