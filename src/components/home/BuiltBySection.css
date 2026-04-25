@@ -345,6 +345,35 @@
   transition: color 0.3s ease;
 }
 
+/* Mobile: give description more width and place badge bottom-right. */
+@media (max-width: 639px) {
+  .built-product-card {
+    min-height: auto;
+  }
+
+  .built-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .built-status-badge {
+    align-self: flex-end;
+    margin-top: auto;
+  }
+
+  .built-card-content {
+    padding-right: 0;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .built-product-description {
+    max-width: 100%;
+  }
+}
+
 @media (min-width: 768px) {
   .built-product-description {
     font-size: 0.9375rem;

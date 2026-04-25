@@ -54,7 +54,7 @@ function ProductCard({
                 alt="NavDhan"
                 width={120}
                 height={36}
-                className="h-14 sm:h-14 w-auto object-contain drop-shadow-sm -translate-y-3"
+                className="h-10 sm:h-14 w-auto object-contain drop-shadow-sm -translate-y-2 sm:-translate-y-3"
               />
             )}
             <motion.h3

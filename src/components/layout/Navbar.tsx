@@ -564,12 +564,12 @@ export function Navbar() {
             </motion.div>
 
             {/* Desktop nav (centered) */}
-            <div className="flex-1 flex justify-center">
+            <div className="hidden lg:flex flex-1 justify-center">
               <DesktopNav navLinks={navLinks} />
             </div>
 
             {/* Right side: CTA + mobile trigger */}
-            <div className="flex items-center gap-3">
+            <div className="flex shrink-0 items-center gap-3">
               <CTAButton ctaLabel={t("cta")} />
 
               {/* Mobile menu button */}
@@ -578,11 +578,11 @@ export function Navbar() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
                 onClick={() => setIsMobileMenuOpen(true)}
-                className="lg:hidden w-9 h-9 rounded-xl border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all duration-200"
+                className="inline-flex lg:hidden w-9 h-9 shrink-0 rounded-xl border border-white/10 items-center justify-center text-white/85 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all duration-200"
                 aria-label={t("open_menu_aria")}
                 aria-expanded={isMobileMenuOpen}
               >
-                <Menu className="w-4.5 h-4.5" />
+                <Menu className="w-5 h-5" />
               </motion.button>
             </div>
           </div>
