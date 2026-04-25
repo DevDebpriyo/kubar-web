@@ -101,88 +101,90 @@ export default function AboutPage() {
         <div className="fixed inset-0 pointer-events-none hex-bg-dark opacity-15 z-0 delay-[50ms]"></div>
 
         {/* ── Hero Section ──────────────────────────────────────── */}
-        <section ref={heroRef} className="about-hero">
-          <div className="about-hero-bg"></div>
+        <div ref={heroRef} className="h-[110vh] relative z-0">
+          <section className="about-hero sticky top-0 h-screen w-full">
+            <div className="about-hero-bg"></div>
 
-          <motion.div
-            className="about-section-container px-6 sm:px-10 lg:px-12"
-            style={{ y: heroY, opacity: heroOpacity }}
-          >
-            <div className="flex flex-col items-start gap-5 max-w-4xl pt-8 sm:pt-10 lg:pt-12">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6 }}
-                className="about-badge"
-              >
-                <Compass className="w-4 h-4" />
-                {t("hero.badge")}
-              </motion.div>
+            <motion.div
+              className="about-section-container px-6 sm:px-10 lg:px-12"
+              style={{ y: heroY, opacity: heroOpacity }}
+            >
+              <div className="flex flex-col items-start gap-5 max-w-4xl pt-8 sm:pt-10 lg:pt-12">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className="about-badge"
+                >
+                  <Compass className="w-4 h-4" />
+                  {t("hero.badge")}
+                </motion.div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.15,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="text-[46px] sm:text-[62px] lg:text-[78px] font-extrabold leading-[1.05] tracking-tight text-white mb-2 flex items-center gap-4"
-              >
-                <img
-                  src="/logo.png"
-                  alt="Kubar Labs"
-                  className="h-[60px] sm:h-[80px] lg:h-[100px] w-auto"
-                />
-                {t("hero.title")}
-              </motion.h1>
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.7,
+                    delay: 0.15,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="text-[46px] sm:text-[62px] lg:text-[78px] font-extrabold leading-[1.05] tracking-tight text-white mb-2 flex items-center gap-4"
+                >
+                  <img
+                    src="/logo.png"
+                    alt="Kubar Labs"
+                    className="h-[60px] sm:h-[80px] lg:h-[100px] w-auto"
+                  />
+                  {t("hero.title")}
+                </motion.h1>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.3,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="text-2xl sm:text-3xl lg:text-4xl text-[#d4920c] font-bold leading-snug max-w-3xl mt-2 mb-4 text-pretty"
-              >
-                {t("hero.subtitle")}
-              </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.7,
+                    delay: 0.3,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="text-2xl sm:text-3xl lg:text-4xl text-[#d4920c] font-bold leading-snug max-w-3xl mt-2 mb-4 text-pretty"
+                >
+                  {t("hero.subtitle")}
+                </motion.p>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.45,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="text-lg sm:text-xl lg:text-2xl text-white/70 font-medium leading-relaxed max-w-3xl mt-2 mb-4 text-pretty"
-              >
-                {t("hero.intro")}
-              </motion.p>
-            </div>
-          </motion.div>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.7,
+                    delay: 0.45,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="text-lg sm:text-xl lg:text-2xl text-white/70 font-medium leading-relaxed max-w-3xl mt-2 mb-14 text-pretty"
+                >
+                  {t("hero.intro")}
+                </motion.p>
+              </div>
+            </motion.div>
 
-          {/* Hero glow lines */}
-          <div
-            className="absolute z-0 pointer-events-none select-none left-0 bottom-0 top-[20%] w-px bg-gradient-to-b from-transparent via-[rgba(212,146,12,0.15)] to-transparent"
-            style={{ left: "10%" }}
-          />
-          <div
-            className="absolute z-0 pointer-events-none select-none right-0 bottom-0 top-[15%] w-px bg-gradient-to-b from-transparent via-[rgba(212,146,12,0.15)] to-transparent"
-            style={{ right: "10%" }}
-          />
-        </section>
+            {/* Hero glow lines */}
+            <div
+              className="absolute z-0 pointer-events-none select-none left-0 bottom-0 top-[20%] w-px bg-gradient-to-b from-transparent via-[rgba(212,146,12,0.15)] to-transparent"
+              style={{ left: "10%" }}
+            />
+            <div
+              className="absolute z-0 pointer-events-none select-none right-0 bottom-0 top-[15%] w-px bg-gradient-to-b from-transparent via-[rgba(212,146,12,0.15)] to-transparent"
+              style={{ right: "10%" }}
+            />
+          </section>
+        </div>
 
         {/* ── Mission & Vision ──────────────────────────────────── */}
-        <section className="about-section z-10">
+        <section className="about-section z-10 bg-background relative border-t border-white/10 pt-16 shadow-[0_-20px_50px_-20px_rgba(0,0,0,0.5)]">
           <div className="about-section-container">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
               <FadeInView>
                 <div className="space-y-6 lg:pe-10">
-                  <h2 className="text-3xl sm:text-4xl font-bold text-white leading-tight">
+                  <h2 className="text-3xl mt-12 sm:text-4xl font-bold text-white leading-tight">
                     <span className="gradient-text-gold">
                       {t("mission_vision.mission_label")}
                     </span>
@@ -288,6 +290,18 @@ export default function AboutPage() {
           <div className="about-section-container relative z-10">
             <FadeInView className="about-section-header mb-12">
               <h2 className="about-section-title">{t("why_we_exist.title")}</h2>
+              <motion.div
+                className="trust-divider"
+                initial={{ opacity: 0, scaleX: 0 }}
+                whileInView={{ opacity: 1, scaleX: 1 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.15,
+                  ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+                }}
+                aria-hidden="true"
+              />
             </FadeInView>
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-8 max-w-6xl mx-auto">
@@ -367,6 +381,18 @@ export default function AboutPage() {
               <p className="about-section-subtitle mx-auto max-w-3xl text-balance">
                 {t("how_we_work.subtitle")}
               </p>
+              <motion.div
+                className="trust-divider"
+                initial={{ opacity: 0, scaleX: 0 }}
+                whileInView={{ opacity: 1, scaleX: 1 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.15,
+                  ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+                }}
+                aria-hidden="true"
+              />
             </FadeInView>
 
             <div className="about-feature-grid mt-12">
@@ -417,7 +443,7 @@ export default function AboutPage() {
         </section>
 
         {/* ── Horizons ──────────────────────────────────────────── */}
-        <section className="relative py-32 z-10 bg-gradient-to-b from-[rgba(10,10,15,0.4)] via-[rgba(15,15,20,0.8)] to-[rgba(10,10,15,0.4)] overflow-hidden">
+        <section className="relative pb-32 z-10 bg-gradient-to-b from-[rgba(10,10,15,0.4)] via-[rgba(15,15,20,0.8)] to-[rgba(10,10,15,0.4)] overflow-hidden">
           {/* Animated Background Orbs */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <motion.div
@@ -437,10 +463,21 @@ export default function AboutPage() {
 
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <FadeInView className="text-center mb-24">
-              <h2 className="text-5xl sm:text-6xl font-black text-white mb-6 tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+              <h2 className="horizon-section-title font-black text-white mb-6 tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
                 {t("horizons.title")}
               </h2>
-              <div className="w-32 h-1.5 mx-auto bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full" />
+              <motion.div
+                className="trust-divider"
+                initial={{ opacity: 0, scaleX: 0 }}
+                whileInView={{ opacity: 1, scaleX: 1 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.15,
+                  ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+                }}
+                aria-hidden="true"
+              />
             </FadeInView>
 
             <div className="relative">
@@ -607,7 +644,7 @@ export default function AboutPage() {
         <RoadmapSection />
 
         {/* ── Recognition / Traction ────────────────────────────── */}
-        <section className="py-24 sm:py-32 relative overflow-hidden bg-[#05050a] border-t border-white/[0.02]">
+        <section className="pt-12 sm:pt-20 pb-14 relative overflow-hidden bg-[#05050a] border-t border-white/[0.02]">
           {/* Animated Background Gradients */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#d4920c]/5 rounded-full filter blur-[120px] mix-blend-screen" />
@@ -738,13 +775,25 @@ export default function AboutPage() {
         </section>
 
         {/* ── Work With Us ──────────────────────────────────────── */}
-        <section className="about-section z-10 !pt-0">
+        <section className="about-section z-10 -mt-14 sm:-mt-16">
           <div className="about-section-container max-w-7xl mx-auto w-full">
             <FadeInView className="text-center mb-16">
               <h2 className="about-section-title">{t("work_with_us.title")}</h2>
               <p className="text-white/65 text-lg mx-auto max-w-3xl mt-6 leading-relaxed">
                 {t("work_with_us.subtitle")}
               </p>
+              <motion.div
+                className="trust-divider"
+                initial={{ opacity: 0, scaleX: 0 }}
+                whileInView={{ opacity: 1, scaleX: 1 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.15,
+                  ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+                }}
+                aria-hidden="true"
+              />
             </FadeInView>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

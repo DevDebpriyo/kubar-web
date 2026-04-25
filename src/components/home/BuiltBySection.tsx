@@ -128,7 +128,6 @@ export function BuiltBySection() {
     >
       {/* Animated gradient background */}
       <div className="built-bg-gradient" aria-hidden="true" />
-
       <div className="built-container">
         {/* Header section */}
         <motion.div

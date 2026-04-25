@@ -186,7 +186,7 @@ export function RoadmapSection() {
       {/* ── Inner layout ──────────────────────────────────────── */}
       <div className="relative z-10 h-full flex flex-col max-w-[1400px] mx-auto w-full px-6 sm:px-10 lg:px-16">
         {/* ════════ HEADER ════════════════════════════════════════ */}
-        <div className="flex-shrink-0 pt-[68px] sm:pt-[76px]">
+        <div className="flex-shrink-0 pt-[68px] sm:pt-[76px] flex flex-col items-center text-center">
           <div className="about-badge inline-flex bg-[rgba(19,136,8,0.07)] border-[rgba(19,136,8,0.28)] text-[rgba(19,136,8,0.9)] mb-3">
             <Compass className="w-3 h-3 mr-1.5" />
             ROADMAP
@@ -194,6 +194,18 @@ export function RoadmapSection() {
           <h2 className="text-[36px] sm:text-[48px] lg:text-[56px] font-extrabold text-white tracking-tight leading-none">
             Roadmap
           </h2>
+          <motion.div
+            className="trust-divider"
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{
+              duration: 0.8,
+              delay: 0.15,
+              ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+            }}
+            aria-hidden="true"
+          />
         </div>
 
         {/* ════════ TIMELINE ══════════════════════════════════════ */}
