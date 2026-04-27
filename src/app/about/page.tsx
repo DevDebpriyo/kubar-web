@@ -51,14 +51,6 @@ function FadeInView({
 export default function AboutPage() {
   const t = useTranslations("about");
 
-  const heroRef = useRef(null);
-  const { scrollYProgress: heroScroll } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const heroY = useTransform(heroScroll, [0, 1], ["0%", "25%"]);
-  const heroOpacity = useTransform(heroScroll, [0, 0.75], [1, 0]);
   const cards = [
     {
       icon: Zap,
@@ -101,70 +93,104 @@ export default function AboutPage() {
         <div className="fixed inset-0 pointer-events-none hex-bg-dark opacity-15 z-0 delay-[50ms]"></div>
 
         {/* ── Hero Section ──────────────────────────────────────── */}
-        <div ref={heroRef} className="h-[110vh] relative z-0">
-          <section className="about-hero sticky top-0 h-screen w-full">
+        <div className="relative z-0">
+          <section className="about-hero w-full min-h-screen lg:h-screen">
             <div className="about-hero-bg"></div>
 
-            <motion.div
-              className="about-section-container px-6 sm:px-10 lg:px-12"
-              style={{ y: heroY, opacity: heroOpacity }}
+            <div
+              className="about-section-container px-6 sm:px-10 lg:px-12 w-full min-h-screen lg:h-full flex items-center justify-center lg:pt-20"
             >
-              <div className="flex flex-col items-start gap-5 max-w-4xl pt-8 sm:pt-10 lg:pt-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full pb-10 ">
+                {/* Left Side: Text Content */}
+                <div className="flex flex-col items-start gap-5 max-w-2xl mx-auto lg:mx-0 lg:mt-0">
+                  {/* <motion.div
+                    initial={{ opacity: 0, scale: 0.95, x: -20 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="about-badge mt-20"
+                  >
+                    <Compass className="w-4 h-4" />
+                    {t("hero.badge")}
+                  </motion.div> */}
+
+                  <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.7,
+                      delay: 0.15,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="text-[46px] sm:text-[62px] lg:text-[70px] xl:text-[78px] font-extrabold leading-[1.05] tracking-tight text-white mb-2 flex flex-col items-start gap-2 lg:flex-row lg:flex-nowrap lg:items-center lg:gap-3"
+                  >
+                    <img
+                      src="/logo.png"
+                      alt="Kubar Labs"
+                      className="hidden lg:block h-11 xl:h-[52px] w-auto shrink-0 animate-fadeInUp animation-delay-300"
+                    />
+                    <span>{t("hero.title")}</span>
+                  </motion.h1>
+
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.7,
+                      delay: 0.3,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="text-2xl sm:text-3xl lg:text-3xl xl:text-4xl text-[#d4920c] font-bold leading-snug max-w-xl mt-2 mb-2 text-pretty"
+                  >
+                    {t("hero.subtitle")}
+                  </motion.p>
+
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.7,
+                      delay: 0.45,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-white/70 font-medium leading-relaxed max-w-xl mt-2 mb-4 text-pretty"
+                  >
+                    {t("hero.intro")}
+                  </motion.p>
+                </div>
+
+                {/* Right Side: Image */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6 }}
-                  className="about-badge"
-                >
-                  <Compass className="w-4 h-4" />
-                  {t("hero.badge")}
-                </motion.div>
-
-                <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, scale: 0.9, x: 40 }}
+                  animate={{ opacity: 1, scale: 1, x: 0 }}
                   transition={{
-                    duration: 0.7,
-                    delay: 0.15,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="text-[46px] sm:text-[62px] lg:text-[78px] font-extrabold leading-[1.05] tracking-tight text-white mb-2 flex items-center gap-4"
-                >
-                  <img
-                    src="/logo.png"
-                    alt="Kubar Labs"
-                    className="h-[60px] sm:h-[80px] lg:h-[100px] w-auto"
-                  />
-                  {t("hero.title")}
-                </motion.h1>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.7,
+                    duration: 0.8,
                     delay: 0.3,
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className="text-2xl sm:text-3xl lg:text-4xl text-[#d4920c] font-bold leading-snug max-w-3xl mt-2 mb-4 text-pretty"
+                  className="relative w-full flex justify-center lg:justify-end"
                 >
-                  {t("hero.subtitle")}
-                </motion.p>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: 0.45,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="text-lg sm:text-xl lg:text-2xl text-white/70 font-medium leading-relaxed max-w-3xl mt-2 mb-14 text-pretty"
-                >
-                  {t("hero.intro")}
-                </motion.p>
+                  {/* Decorative Background Blur */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-gradient-to-tr from-[#d4920c]/20 to-[#138808]/20 rounded-full blur-[80px] pointer-events-none" />
+                  
+                  <motion.div
+                    animate={{ y: [-10, 10, -10] }}
+                    transition={{
+                      duration: 6,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    className="relative z-10 w-full max-w-[360px] sm:max-w-[600px] xl:max-w-[700px] rounded-3xl overflow-hidden border border-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform -rotate-2 hover:rotate-0 hover:scale-[1.02] transition-all duration-500"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none z-20 mix-blend-overlay" />
+                    <img
+                      src="/mobileScreen.png"
+                      alt="Mobile App Demo"
+                      className="w-full h-auto object-cover rounded-3xl relative z-10"
+                    />
+                  </motion.div>
+                </motion.div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Hero glow lines */}
             <div
