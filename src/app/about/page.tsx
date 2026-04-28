@@ -18,12 +18,17 @@ import {
   MapPin,
   Rocket,
   Lock,
+  ChevronDown,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Navbar } from "@/components/layout/Navbar";
 import { RoadmapSection } from "@/components/about/RoadmapSection";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import "./about.css";
 import "@/components/home/BuiltBySection.css";
+import "@/components/home/BuiltForTrustSection.css";
+import { FooterSection } from "@/components/home/FooterSection";
 
 /* ── Components ─────────────────────────────────────────────── */
 function FadeInView({
@@ -45,6 +50,192 @@ function FadeInView({
     >
       {children}
     </motion.div>
+  );
+}
+
+type TractionCardItem = {
+  id: number;
+  year: string;
+};
+
+function TractionFlipCard({
+  item,
+  index,
+  type,
+  title,
+}: {
+  item: TractionCardItem;
+  index: number;
+  type: "recognition" | "partnership";
+  title: string;
+}) {
+  const isRecognition = type === "recognition";
+  const Icon = isRecognition ? Award : Briefcase;
+  const tone = isRecognition
+    ? index % 2 === 0
+      ? "amber"
+      : "emerald"
+    : index % 2 === 0
+      ? "sky"
+      : "amber";
+  const delay = index * 0.08;
+  const [isExpanded, setIsExpanded] = React.useState(false);
+  const mobileContentId = `traction-mobile-details-${type}-${item.id}`;
+
+  return (
+    <motion.article
+      className="trust-flip-card group"
+      data-tone={tone}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{
+        duration: 0.6,
+        delay,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+      }}
+      whileHover={{ y: -6 }}
+      tabIndex={0}
+      aria-label={`${title}. ${item.year}`}
+    >
+      <div className="trust-flip-card-inner">
+        <div className="trust-flip-face trust-flip-front">
+          <div className="trust-face-grid" aria-hidden="true" />
+
+          <div className="trust-front-meta">
+            <Badge variant="outline" className="trust-layer-badge">
+              {isRecognition ? "Recognition" : "Partnership"}
+            </Badge>
+            <div className="trust-front-icon-shell">
+              <Icon className="trust-front-icon" aria-hidden="true" />
+            </div>
+          </div>
+
+          <h3 className="trust-front-title line-clamp-3 leading-tight text-white mb-2">
+            {title}
+          </h3>
+          <p className="trust-front-tagline">Year: {item.year}</p>
+
+          <Separator className="trust-front-separator" />
+
+          <div className="trust-front-tags" aria-label="Tags">
+            <Badge variant="secondary" className="trust-tag-badge">
+              {item.year}
+            </Badge>
+            <Badge variant="secondary" className="trust-tag-badge">
+              {isRecognition ? "Award" : "Collaboration"}
+            </Badge>
+          </div>
+
+          <div className="trust-front-graphic" aria-hidden="true">
+            <div className="trust-graphic-glow" />
+
+            <div className="trust-graphic-logo font-mono text-xl sm:text-3xl font-black text-white/40 group-hover:text-white/70 transition-colors">
+              {String(index + 1).padStart(2, "0")}
+            </div>
+
+            <svg
+              className="trust-graphic-waves"
+              viewBox="0 0 200 60"
+              preserveAspectRatio="none"
+            >
+              <motion.path
+                d="M0,45 C50,45 60,15 100,15 C140,15 150,45 200,45"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                vectorEffect="non-scaling-stroke"
+                initial={{ strokeDasharray: "200 200", strokeDashoffset: 200 }}
+                animate={{ strokeDashoffset: 0 }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              />
+              <motion.path
+                d="M0,30 C40,30 50,5 100,5 C150,5 160,30 200,30"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                opacity="0.5"
+                vectorEffect="non-scaling-stroke"
+              />
+            </svg>
+            <Icon className="trust-graphic-icon opacity-50" strokeWidth={1} />
+            <div className="trust-graphic-scanline" />
+          </div>
+
+          <div className="trust-front-meter" aria-hidden="true">
+            <span className="trust-meter-segment" />
+            <span className="trust-meter-segment" />
+            <span className="trust-meter-segment" />
+          </div>
+
+          <div className="trust-mobile-controls">
+            <button
+              type="button"
+              className="trust-mobile-toggle"
+              aria-expanded={isExpanded}
+              aria-controls={mobileContentId}
+              onClick={() => setIsExpanded((prev) => !prev)}
+            >
+              <span className="trust-mobile-toggle-text">
+                {isExpanded ? "Hide Details" : "View Details"}
+              </span>
+              <ChevronDown
+                className="trust-mobile-toggle-icon"
+                aria-hidden="true"
+                data-expanded={isExpanded}
+              />
+            </button>
+          </div>
+
+          <div
+            id={mobileContentId}
+            className="trust-mobile-details"
+            data-expanded={isExpanded}
+          >
+            <div className="trust-back-meta">
+              <Badge variant="outline" className="trust-back-badge">
+                Details
+              </Badge>
+              <span className="trust-back-layer">{item.year}</span>
+            </div>
+            <h3 className="trust-back-title">{title}</h3>
+            <Separator className="trust-back-separator" />
+            <p className="trust-back-context">
+              {isRecognition
+                ? "This recognition validates our commitment to innovation and excellence in the fintech ecosystem."
+                : "This partnership enables us to expand our presence and deliver greater value to the financial market."}
+            </p>
+          </div>
+        </div>
+
+        <div className="trust-flip-face trust-flip-back">
+          <div className="trust-face-grid" aria-hidden="true" />
+          <div className="trust-back-meta">
+            <Badge variant="outline" className="trust-back-badge">
+              Details
+            </Badge>
+            <span className="trust-back-layer">{item.year}</span>
+          </div>
+          <h3 className="trust-back-title">{title}</h3>
+          <Separator className="trust-back-separator" />
+          <p className="trust-back-context">
+            {isRecognition
+              ? "This recognition validates our commitment to innovation and excellence in the fintech ecosystem."
+              : "This partnership enables us to expand our presence and deliver greater value to the financial market."}
+          </p>
+
+          <div className="trust-back-footer">
+            <Badge variant="secondary" className="trust-back-assurance">
+              {isRecognition ? "Industry Validation" : "Strategic Alliance"}
+            </Badge>
+          </div>
+        </div>
+      </div>
+    </motion.article>
   );
 }
 
@@ -97,9 +288,7 @@ export default function AboutPage() {
           <section className="about-hero w-full min-h-screen lg:h-screen">
             <div className="about-hero-bg"></div>
 
-            <div
-              className="about-section-container px-6 sm:px-10 lg:px-12 w-full min-h-screen lg:h-full flex items-center justify-center lg:pt-20"
-            >
+            <div className="about-section-container px-6 sm:px-10 lg:px-12 w-full min-h-screen lg:h-full flex items-center justify-center lg:pt-20">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full pb-10 ">
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col items-start gap-5 max-w-2xl mx-auto lg:mx-0 lg:mt-0">
@@ -171,7 +360,7 @@ export default function AboutPage() {
                 >
                   {/* Decorative Background Blur */}
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-gradient-to-tr from-[#d4920c]/20 to-[#138808]/20 rounded-full blur-[80px] pointer-events-none" />
-                  
+
                   <motion.div
                     animate={{ y: [-10, 10, -10] }}
                     transition={{
@@ -314,7 +503,7 @@ export default function AboutPage() {
           </div>
 
           <div className="about-section-container relative z-10">
-            <FadeInView className="about-section-header mb-12">
+            <FadeInView className="about-section-header !-mt-5 mb-12">
               <h2 className="about-section-title">{t("why_we_exist.title")}</h2>
               <motion.div
                 className="trust-divider"
@@ -469,7 +658,7 @@ export default function AboutPage() {
         </section>
 
         {/* ── Horizons ──────────────────────────────────────────── */}
-        <section className="relative pb-32 z-10 bg-gradient-to-b from-[rgba(10,10,15,0.4)] via-[rgba(15,15,20,0.8)] to-[rgba(10,10,15,0.4)] overflow-hidden">
+        <section className="relative pb-16 z-10 bg-gradient-to-b from-[rgba(10,10,15,0.4)] via-[rgba(15,15,20,0.8)] to-[rgba(10,10,15,0.4)] overflow-hidden">
           {/* Animated Background Orbs */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <motion.div
@@ -508,9 +697,9 @@ export default function AboutPage() {
 
             <div className="relative">
               {/* Connecting Beam (Desktop) */}
-              <div className="hidden lg:block absolute top-1/2 left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-[#138808]/20 via-white/20 to-white/10 -translate-y-1/2 z-0">
+              <div className="hidden lg:block absolute top-1/2 left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-[#3b82f6]/20 via-[#3b82f6]/20 to-[#3b82f6]/10 -translate-y-1/2 z-0">
                 <motion.div
-                  className="absolute top-1/2 left-0 w-32 h-1 bg-gradient-to-r from-transparent via-white to-transparent -translate-y-1/2 shadow-[0_0_15px_white]"
+                  className="absolute top-1/2 left-0 w-32 h-1 bg-gradient-to-r from-transparent via-[#3b82f6] to-transparent -translate-y-1/2 shadow-[0_0_15px_#3b82f6]"
                   animate={{ left: ["0%", "100%", "0%"] }}
                   transition={{
                     duration: 6,
@@ -521,9 +710,9 @@ export default function AboutPage() {
               </div>
 
               {/* Connecting Beam (Mobile/Tablet) */}
-              <div className="lg:hidden absolute left-1/2 top-[10%] bottom-[10%] w-0.5 bg-gradient-to-b from-[#138808]/20 via-white/20 to-white/10 -translate-x-1/2 z-0">
+              <div className="lg:hidden absolute left-1/2 top-[10%] bottom-[10%] w-0.5 bg-gradient-to-b from-[#3b82f6]/20 via-[#3b82f6]/20 to-[#3b82f6]/10 -translate-x-1/2 z-0">
                 <motion.div
-                  className="absolute top-0 left-1/2 w-1 h-32 bg-gradient-to-b from-transparent via-white to-transparent -translate-x-1/2 shadow-[0_0_15px_white]"
+                  className="absolute top-0 left-1/2 w-1 h-32 bg-gradient-to-b from-transparent via-[#3b82f6] to-transparent -translate-x-1/2 shadow-[0_0_15px_#3b82f6]"
                   animate={{ top: ["0%", "100%", "0%"] }}
                   transition={{
                     duration: 6,
@@ -699,51 +888,35 @@ export default function AboutPage() {
             </FadeInView>
 
             {/* Single Path Layout for Items */}
-            <div className="flex flex-col gap-20">
+            <div className="flex flex-col gap-20 -mt-14">
               {/* Recognitions Section */}
               <div>
                 <FadeInView
                   delay={0.2}
-                  className="flex items-center gap-6 mb-12"
+                  className="flex items-center gap-6 mb-12 justify-center text-center"
                 >
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#d4920c]/20 to-[#d4920c]/5 border border-[#d4920c]/20 flex items-center justify-center shrink-0 shadow-[0_0_30px_rgba(212,146,12,0.15)]">
                     <Award className="w-8 h-8 text-[#d4920c]" />
                   </div>
-                  <h3 className="text-4xl sm:text-5xl font-black text-white tracking-tight">
+                  <h3 className="text-4xl sm:text-5xl font-black text-white tracking-tight text-center">
                     {t("traction.recognitions_title")}
                   </h3>
                 </FadeInView>
 
-                <div className="space-y-4">
+                <div className="trust-cards-grid">
                   {[
                     { id: 1, year: "2026" },
                     { id: 2, year: "2025" },
                     { id: 3, year: "2024" },
                     { id: 4, year: "2024" },
                   ].map((item, index) => (
-                    <FadeInView key={item.id} delay={0.3 + index * 0.1}>
-                      <div className="group relative p-6 sm:p-8 rounded-3xl bg-white/[0.02] border border-white/[0.05] hover:border-[#d4920c]/40 hover:bg-gradient-to-br hover:from-[#d4920c]/[0.08] hover:to-transparent transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_10px_40px_-10px_rgba(212,146,12,0.2)] hover:-translate-y-1 cursor-default">
-                        {/* Hover Gradient Sweep */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#d4920c]/10 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
-
-                        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-10 relative z-10">
-                          {/* Column 1: Serial Number */}
-                          <div className="text-[#d4920c]/30 group-hover:text-[#d4920c] font-black text-xl sm:text-3xl font-mono transition-colors duration-300">
-                            {String(index + 1).padStart(2, "0")}
-                          </div>
-
-                          {/* Column 2: Name */}
-                          <p className="text-white/70 group-hover:text-white/95 text-base sm:text-xl font-medium leading-relaxed transition-colors duration-300">
-                            {t(`traction.recognitions.${item.id}`)}
-                          </p>
-
-                          {/* Column 3: Year */}
-                          <div className="text-white/30 group-hover:text-white/60 font-mono text-base sm:text-xl transition-colors duration-300">
-                            {item.year}
-                          </div>
-                        </div>
-                      </div>
-                    </FadeInView>
+                    <TractionFlipCard
+                      key={item.id}
+                      item={item}
+                      index={index}
+                      type="recognition"
+                      title={t(`traction.recognitions.${item.id}`)}
+                    />
                   ))}
                 </div>
               </div>
@@ -752,12 +925,12 @@ export default function AboutPage() {
               <div>
                 <FadeInView
                   delay={0.4}
-                  className="flex items-center gap-6 mb-12"
+                  className="flex items-center gap-6 mb-12 justify-center text-center"
                 >
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#138808]/20 to-[#138808]/5 border border-[#138808]/20 flex items-center justify-center shrink-0 shadow-[0_0_30px_rgba(19,136,8,0.15)]">
                     <Briefcase className="w-8 h-8 text-[#138808]" />
                   </div>
-                  <h3 className="text-4xl sm:text-5xl font-black text-white tracking-tight">
+                  <h3 className="text-4xl sm:text-5xl font-black text-white tracking-tight text-center">
                     {t("traction.partnerships_title")}
                   </h3>
                 </FadeInView>
@@ -849,6 +1022,7 @@ export default function AboutPage() {
           </div>
         </section>
       </div>
+      <FooterSection />
     </main>
   );
 }

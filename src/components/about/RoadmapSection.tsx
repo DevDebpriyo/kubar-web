@@ -186,7 +186,7 @@ export function RoadmapSection() {
       {/* ── Inner layout ──────────────────────────────────────── */}
       <div className="relative z-10 h-full flex flex-col max-w-[1400px] mx-auto w-full px-6 sm:px-10 lg:px-16">
         {/* ════════ HEADER ════════════════════════════════════════ */}
-        <div className="flex-shrink-0 pt-[68px] sm:pt-[76px] flex flex-col items-center text-center">
+        <div className="flex-shrink-0 pt-[68px] sm:pt-[50px] flex flex-col items-center text-center">
           <div className="about-badge inline-flex bg-[rgba(19,136,8,0.07)] border-[rgba(19,136,8,0.28)] text-[rgba(19,136,8,0.9)] mb-3">
             <Compass className="w-3 h-3 mr-1.5" />
             ROADMAP
