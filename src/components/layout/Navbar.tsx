@@ -165,10 +165,95 @@ function ProductsDropdown() {
   );
 }
 
+function SocialsDropdown() {
+  const t = useTranslations("nav");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const socials = [
+    { name: "Substack", href: "https://kubarlabs.substack.com/" },
+    { name: "LinkedIn", href: "https://www.linkedin.com/company/kubarlabs/" },
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.35,
+        delay: 0.12,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+      }}
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+      className="relative"
+    >
+      <button
+        className="relative px-3.5 py-2 text-[13.5px] font-medium text-white/55 hover:text-white rounded-lg transition-colors duration-200 group flex items-center gap-1.5"
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+      >
+        <span className="relative z-10">Socials</span>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="relative z-10"
+        >
+          <ChevronDown className="w-3.5 h-3.5" />
+        </motion.div>
+        <span className="absolute inset-0 rounded-lg bg-white/0 group-hover:bg-white/5 transition-colors duration-200" />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.95 }}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+            className="absolute top-full left-0 mt-2 w-56 rounded-xl border border-white/10 bg-[rgba(10,10,22,0.95)] backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.6)] overflow-hidden z-50"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(10,10,22,0.95) 0%, rgba(15,15,30,0.95) 100%)",
+            }}
+          >
+            <div className="p-2">
+              {socials.map((s, idx) => (
+                <motion.a
+                  key={s.name}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 px-4 py-3.5 rounded-lg transition-all duration-200 hover:bg-white/6"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <div className="w-4 h-4 text-white/50 group-hover:text-[#f5bc35] transition-colors shrink-0">
+                    {s.name === "LinkedIn" ? (
+                      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.85-3.037-1.851 0-2.133 1.445-2.133 2.939v5.667H9.353V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.606 0 4.264 2.372 4.264 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.924 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      </svg>
+                    ) : (
+                      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+                      </svg>
+                    )}
+                  </div>
+                  <div className="font-medium text-[14px] text-white group-hover:text-[#f5bc35]">
+                    {s.name}
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
 function DesktopNav({ navLinks }: { navLinks: NavLink[] }) {
   const t = useTranslations("nav");
-  // Filter out 'products' from navLinks as we handle it separately
-  const filteredLinks = navLinks.filter((link) => link.href !== "#products");
+  // Filter out 'products' and 'socials' from navLinks as we handle them separately
+  const filteredLinks = navLinks.filter((link) => link.href !== "#products" && link.href !== "#socials");
 
   return (
     <nav
@@ -200,6 +285,9 @@ function DesktopNav({ navLinks }: { navLinks: NavLink[] }) {
           </Link>
         </motion.div>
       ))}
+
+      {/* Socials Dropdown */}
+      <SocialsDropdown />
     </nav>
   );
 }
@@ -240,6 +328,7 @@ function MobileMenu({
 }) {
   const t = useTranslations("nav");
   const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [isSocialsOpen, setIsSocialsOpen] = useState(false);
 
   const products = [
     {
@@ -259,7 +348,12 @@ function MobileMenu({
     },
   ];
 
-  const filteredLinks = navLinks.filter((link) => link.href !== "#products");
+  const socials = [
+    { name: "Substack", href: "https://kubarlabs.substack.com/" },
+    { name: "LinkedIn", href: "https://www.linkedin.com/company/kubarlabs/" },
+  ];
+
+  const filteredLinks = navLinks.filter((link) => link.href !== "#products" && link.href !== "#socials");
 
   return (
     <AnimatePresence>
@@ -409,6 +503,76 @@ function MobileMenu({
                   </Link>
                 </motion.div>
               ))}
+
+              {/* Socials section */}
+              <motion.div
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  delay: 0.08,
+                  duration: 0.3,
+                  ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+                }}
+              >
+                <button
+                  onClick={() => setIsSocialsOpen(!isSocialsOpen)}
+                  className="flex items-center justify-between w-full px-3 py-3 text-[15px] font-medium text-white/65 hover:text-white rounded-xl hover:bg-white/5 transition-all duration-200"
+                >
+                  <span>Socials</span>
+                  <motion.div
+                    animate={{ rotate: isSocialsOpen ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ChevronDown className="w-4 h-4" />
+                  </motion.div>
+                </button>
+
+                <AnimatePresence>
+                  {isSocialsOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.18 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pl-4 py-2 space-y-1">
+                        {socials.map((s, idx) => (
+                          <motion.div
+                            key={s.name}
+                            initial={{ opacity: 0, x: -12 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: idx * 0.05, duration: 0.18 }}
+                          >
+                            <a
+                              href={s.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={onClose}
+                              className="flex items-center gap-3 px-3 py-2.5 text-[14px] text-white/60 hover:text-white rounded-lg hover:bg-white/5 transition-all duration-200 group"
+                            >
+                              <div className="w-4 h-4 text-white/50 group-hover:text-[#f5bc35] transition-colors">
+                                {s.name === "LinkedIn" ? (
+                                  <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.85-3.037-1.851 0-2.133 1.445-2.133 2.939v5.667H9.353V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.606 0 4.264 2.372 4.264 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.924 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                  </svg>
+                                ) : (
+                                  <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+                                  </svg>
+                                )}
+                              </div>
+                              <span className="font-medium text-white/75 group-hover:text-white">
+                                {s.name}
+                              </span>
+                            </a>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             </nav>
 
             {/* CTA */}
@@ -436,6 +600,7 @@ export function Navbar() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const navLinks: NavLink[] = [
     { label: t("products"), href: "#products" },
+    { label: "Socials", href: "#socials" },
     { label: t("about"), href: "/about" },
     { label: t("contact"), href: "/contact" },
     { label: t("team"), href: "/team" },

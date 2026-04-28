@@ -18,6 +18,7 @@ export function FooterSection() {
     { label: t("links.navdhan"), href: "/products/navdhan" },
     { label: t("links.contact"), href: "/contact" },
     { label: t("links.privacy"), href: "#privacy" },
+    { label: "Substack", href: "https://kubarlabs.substack.com/" },
   ];
 
   return (

@@ -23,6 +23,7 @@ import {
 import { useTranslations } from "next-intl";
 import { Navbar } from "@/components/layout/Navbar";
 import { RoadmapSection } from "@/components/about/RoadmapSection";
+import { AboutHeroIllustration } from "@/components/about/AboutHeroIllustration";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import "./about.css";
@@ -347,7 +348,7 @@ export default function AboutPage() {
                   </motion.p>
                 </div>
 
-                {/* Right Side: Image */}
+                {/* Right Side: Infrastructure Illustration */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9, x: 40 }}
                   animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -359,24 +360,11 @@ export default function AboutPage() {
                   className="relative w-full flex justify-center lg:justify-end"
                 >
                   {/* Decorative Background Blur */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-gradient-to-tr from-[#d4920c]/20 to-[#138808]/20 rounded-full blur-[80px] pointer-events-none" />
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-gradient-to-tr from-[#d4920c]/15 to-[#3b82f6]/10 rounded-full blur-[100px] pointer-events-none" />
 
-                  <motion.div
-                    animate={{ y: [-10, 10, -10] }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    className="relative z-10 w-full max-w-[360px] sm:max-w-[600px] xl:max-w-[700px] rounded-3xl overflow-hidden border border-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform -rotate-2 hover:rotate-0 hover:scale-[1.02] transition-all duration-500"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none z-20 mix-blend-overlay" />
-                    <img
-                      src="/mobileScreen.png"
-                      alt="Mobile App Demo"
-                      className="w-full h-auto object-cover rounded-3xl relative z-10"
-                    />
-                  </motion.div>
+                  <div className="relative z-10 w-full max-w-[420px] sm:max-w-[550px] xl:max-w-[620px]">
+                    <AboutHeroIllustration />
+                  </div>
                 </motion.div>
               </div>
             </div>
