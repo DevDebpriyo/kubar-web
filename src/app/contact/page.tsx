@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Mail, ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Navbar } from "@/components/layout/Navbar";
+import { ContactSuccessModal } from "@/components/contact/ContactSuccessModal";
 import "./contact.css";
 
 /* ─── Animation Variants ─────────────────────────────────── */
@@ -46,6 +47,8 @@ function ContactForm() {
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [submittedName, setSubmittedName] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -54,15 +57,32 @@ function ContactForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleCloseModal = useCallback(() => {
+    setShowSuccessModal(false);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus("idle");
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send message");
+      }
+
+      // Store the name for the modal before clearing the form
+      setSubmittedName(formData.fullName.split(" ")[0]);
       setSubmitStatus("success");
+      setShowSuccessModal(true);
       setFormData({
         fullName: "",
         email: "",
@@ -70,8 +90,6 @@ function ContactForm() {
         companyName: "",
         category: "",
       });
-
-      setTimeout(() => setSubmitStatus("idle"), 5000);
     } catch {
       setSubmitStatus("error");
       setTimeout(() => setSubmitStatus("idle"), 5000);
@@ -81,173 +99,171 @@ function ContactForm() {
   };
 
   return (
-    <motion.form
-      initial={{ opacity: 0, x: -24 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-      onSubmit={handleSubmit}
-      className="contact-form"
-    >
-      {/* Full Name */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
+    <>
+      <motion.form
+        initial={{ opacity: 0, x: -24 }}
+        whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="contact-form-group"
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+        onSubmit={handleSubmit}
+        className="contact-form"
       >
-        <label className="contact-label">
-          {t("form.full_name_label")}
-        </label>
-        <input
-          type="text"
-          name="fullName"
-          value={formData.fullName}
-          onChange={handleChange}
-          placeholder={t("form.full_name_placeholder")}
-          className="contact-input"
-          required
-        />
-      </motion.div>
-
-      {/* Email */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="contact-form-group"
-      >
-        <label className="contact-label">
-          {t("form.email_label")}
-        </label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder={t("form.email_placeholder")}
-          className="contact-input"
-          required
-        />
-      </motion.div>
-
-      {/* Phone */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.25 }}
-        className="contact-form-group"
-      >
-        <label className="contact-label">
-          {t("form.phone_label")}
-        </label>
-        <input
-          type="tel"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          placeholder={t("form.phone_placeholder")}
-          className="contact-input"
-        />
-      </motion.div>
-
-      {/* Company Name */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.28 }}
-        className="contact-form-group"
-      >
-        <label className="contact-label">
-          {t("form.company_name_label")}
-        </label>
-        <input
-          type="text"
-          name="companyName"
-          value={formData.companyName}
-          onChange={handleChange}
-          placeholder={t("form.company_name_placeholder")}
-          className="contact-input"
-          required
-        />
-      </motion.div>
-
-      {/* Category */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="contact-form-group"
-      >
-        <label className="contact-label">
-          {t("form.category_label")}
-        </label>
-        <div className="contact-select-wrapper">
-          <select
-            name="category"
-            value={formData.category}
+        {/* Full Name */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="contact-form-group"
+        >
+          <label className="contact-label">
+            {t("form.full_name_label")}
+          </label>
+          <input
+            type="text"
+            name="fullName"
+            value={formData.fullName}
             onChange={handleChange}
-            className="contact-input contact-select"
+            placeholder={t("form.full_name_placeholder")}
+            className="contact-input"
             required
+          />
+        </motion.div>
+
+        {/* Email */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="contact-form-group"
+        >
+          <label className="contact-label">
+            {t("form.email_label")}
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder={t("form.email_placeholder")}
+            className="contact-input"
+            required
+          />
+        </motion.div>
+
+        {/* Phone */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="contact-form-group"
+        >
+          <label className="contact-label">
+            {t("form.phone_label")}
+          </label>
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder={t("form.phone_placeholder")}
+            className="contact-input"
+          />
+        </motion.div>
+
+        {/* Company Name */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.28 }}
+          className="contact-form-group"
+        >
+          <label className="contact-label">
+            {t("form.company_name_label")}
+          </label>
+          <input
+            type="text"
+            name="companyName"
+            value={formData.companyName}
+            onChange={handleChange}
+            placeholder={t("form.company_name_placeholder")}
+            className="contact-input"
+            required
+          />
+        </motion.div>
+
+        {/* Category */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="contact-form-group"
+        >
+          <label className="contact-label">
+            {t("form.category_label")}
+          </label>
+          <div className="contact-select-wrapper">
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className="contact-input contact-select"
+              required
+            >
+              <option value="" disabled hidden>
+                {t("form.category_placeholder")}
+              </option>
+              <option value="bank">{t("form.category_options.bank")}</option>
+              <option value="fintech">{t("form.category_options.fintech")}</option>
+              <option value="nbfc">{t("form.category_options.nbfc")}</option>
+              <option value="b2b_marketplace">{t("form.category_options.b2b_marketplace")}</option>
+              <option value="b2b_platform">{t("form.category_options.b2b_platform")}</option>
+              <option value="erp">{t("form.category_options.erp")}</option>
+              <option value="other">{t("form.category_options.other")}</option>
+            </select>
+          </div>
+        </motion.div>
+
+        {/* Error message (inline) */}
+        {submitStatus === "error" && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            className="contact-status-error"
           >
-            <option value="" disabled hidden>
-              {t("form.category_placeholder")}
-            </option>
-            <option value="bank">{t("form.category_options.bank")}</option>
-            <option value="fintech">{t("form.category_options.fintech")}</option>
-            <option value="nbfc">{t("form.category_options.nbfc")}</option>
-            <option value="b2b_marketplace">{t("form.category_options.b2b_marketplace")}</option>
-            <option value="b2b_platform">{t("form.category_options.b2b_platform")}</option>
-            <option value="erp">{t("form.category_options.erp")}</option>
-            <option value="other">{t("form.category_options.other")}</option>
-          </select>
-        </div>
-      </motion.div>
+            ✕ {t("form.error")}
+          </motion.div>
+        )}
 
-      {/* Status message */}
-      {submitStatus === "success" && (
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          className="contact-status-success"
+        {/* Submit button */}
+        <motion.button
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          whileHover={{ scale: 1.02, y: -2 }}
+          whileTap={{ scale: 0.98 }}
+          type="submit"
+          disabled={isSubmitting}
+          className="contact-submit-btn"
         >
-          ✓ {t("form.success")}
-        </motion.div>
-      )}
+          {isSubmitting ? t("form.submitting") : t("form.submit")}
+          {!isSubmitting && <ArrowRight className="h-4 w-4" />}
+        </motion.button>
+      </motion.form>
 
-      {submitStatus === "error" && (
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          className="contact-status-error"
-        >
-          ✕ {t("form.error")}
-        </motion.div>
-      )}
-
-      {/* Submit button */}
-      <motion.button
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.35 }}
-        whileHover={{ scale: 1.02, y: -2 }}
-        whileTap={{ scale: 0.98 }}
-        type="submit"
-        disabled={isSubmitting}
-        className="contact-submit-btn"
-      >
-        {isSubmitting ? t("form.submitting") : t("form.submit")}
-        {!isSubmitting && <ArrowRight className="h-4 w-4" />}
-      </motion.button>
-    </motion.form>
+      {/* Success Modal */}
+      <ContactSuccessModal
+        isOpen={showSuccessModal}
+        onClose={handleCloseModal}
+        senderName={submittedName}
+      />
+    </>
   );
 }
 
