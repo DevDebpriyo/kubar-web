@@ -1,18 +1,19 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { CheckCircle, X, Sparkles } from "lucide-react";
 import { useEffect } from "react";
 
 /* ─── Overlay backdrop variants ─────────────────────────────── */
-const overlayVariants = {
+const overlayVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
   exit: { opacity: 0 },
 };
 
 /* ─── Modal container variants ──────────────────────────────── */
-const modalVariants = {
+const modalVariants: Variants = {
   hidden: { opacity: 0, scale: 0.85, y: 40 },
   visible: {
     opacity: 1,
@@ -35,7 +36,7 @@ const modalVariants = {
 };
 
 /* ─── Child items ───────────────────────────────────────────── */
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
