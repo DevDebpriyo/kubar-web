@@ -925,25 +925,39 @@ export default function AboutPage() {
 
                 <div className="space-y-4">
                   {[
-                    { id: 1, year: "2025" },
-                    { id: 2, year: "2025" },
-                    { id: 3, year: "2025" },
-                    { id: 4, year: "2025" },
-                    { id: 5, year: "2024" },
+                    { id: 1, year: "2025", logo: "/partners/agrigrader.png" },
+                    { id: 2, year: "2025", logo: "/partners/clix.png" },
+                    { id: 3, year: "2025", logo: "/partners/idfc.png" },
+                    { id: 4, year: "2025", logo: "/partners/pnb.png" },
+                    { id: 5, year: "2024", logo: "/partners/sbi.png" },
                   ].map((item, index) => (
                     <FadeInView key={item.id} delay={0.5 + index * 0.1}>
                       <div className="group relative p-6 sm:p-8 rounded-3xl bg-white/[0.02] border border-white/[0.05] hover:border-[#138808]/40 hover:bg-gradient-to-br hover:from-[#138808]/[0.08] hover:to-transparent transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_10px_40px_-10px_rgba(19,136,8,0.2)] hover:-translate-y-1 cursor-default">
                         {/* Hover Gradient Sweep */}
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#138808]/10 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
 
-                        <div className="grid grid-cols-[auto_1fr] items-center gap-4 sm:gap-10 relative z-10">
-                          {/* Column 1: Serial Number */}
-                          <div className="text-[#138808]/30 group-hover:text-[#138808] font-black text-xl sm:text-3xl font-mono transition-colors duration-300">
-                            {String(index + 1).padStart(2, "0")}
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-10 relative z-10">
+                          {/* Inner wrapper for Number + Logo to stay inline on mobile */}
+                          <div className="flex items-center gap-4 sm:gap-8 shrink-0">
+                            {/* Column 1: Serial Number */}
+                            <div className="text-[#138808]/30 group-hover:text-[#138808] font-black text-2xl sm:text-3xl font-mono transition-colors duration-300">
+                              {String(index + 1).padStart(2, "0")}
+                            </div>
+
+                            {/* Column 2: Logo */}
+                            <div className="shrink-0 flex items-center justify-center bg-[#0a0a0a]/50 border border-white/10 rounded-lg p-2.5 w-[80px] h-[40px] sm:w-[120px] sm:h-[52px] group-hover:border-white/20 transition-all duration-300">
+                              <Image 
+                                src={item.logo} 
+                                alt={`Partner logo`} 
+                                width={120} 
+                                height={40} 
+                                className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                              />
+                            </div>
                           </div>
 
-                          {/* Column 2: Name */}
-                          <p className="text-white/70 group-hover:text-white/95 text-base sm:text-xl font-medium leading-relaxed transition-colors duration-300">
+                          {/* Column 3: Name */}
+                          <p className="text-white/70 group-hover:text-white/95 text-[15px] sm:text-xl font-medium leading-snug sm:leading-relaxed transition-colors duration-300 flex-1">
                             {t(`traction.partnerships.${item.id}`)}
                           </p>
                         </div>
