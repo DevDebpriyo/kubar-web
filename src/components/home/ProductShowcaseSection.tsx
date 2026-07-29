@@ -123,12 +123,12 @@ function PlatformChip({ platform, index }: { platform: string; index: number }) 
 export function ProductShowcaseSection() {
   const t = useTranslations("product_showcase");
 
-  const platforms = [
-    t("platforms.ondc"),
-    t("platforms.agrigrader"),
-    t("platforms.eximple"),
-    t("platforms.procure_yard"),
-  ];
+  // const platforms = [
+  //   t("platforms.ondc"),
+  //   t("platforms.agrigrader"),
+  //   t("platforms.eximple"),
+  //   t("platforms.procure_yard"),
+  // ];
 
   const metrics = [
     { value: t("metrics.approval_time.value"), label: t("metrics.approval_time.label") },
