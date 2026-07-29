@@ -129,12 +129,6 @@ product_showcase:
   title: "NavDhan"
   subtitle: "A sector-specialized embedded business credit platform that sits directly inside B2B platforms and marketplaces where MSMEs already work."
 
-  platforms:
-    ondc: "ONDC"
-    agrigrader: "AgriGrader"
-    eximple: "Eximple"
-    procure_yard: "Procure Yard"
-
   metrics:
     approval_time:
       value: "5 min"
