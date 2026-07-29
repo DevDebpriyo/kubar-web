@@ -78,47 +78,47 @@ function MetricCard({ value, label, index }: MetricCardProps) {
   );
 }
 
-function PlatformChip({ platform, index }: { platform: string; index: number }) {
-  const accents = [
-    {
-      dot: "rgba(212,146,12,0.78)",
-      glow: "rgba(212,146,12,0.45)",
-    },
-    {
-      dot: "rgba(26,79,163,0.78)",
-      glow: "rgba(26,79,163,0.45)",
-    },
-    {
-      dot: "rgba(19,136,8,0.78)",
-      glow: "rgba(19,136,8,0.45)",
-    },
-  ] as const;
+// function PlatformChip({ platform, index }: { platform: string; index: number }) {
+//   const accents = [
+//     {
+//       dot: "rgba(212,146,12,0.78)",
+//       glow: "rgba(212,146,12,0.45)",
+//     },
+//     {
+//       dot: "rgba(26,79,163,0.78)",
+//       glow: "rgba(26,79,163,0.45)",
+//     },
+//     {
+//       dot: "rgba(19,136,8,0.78)",
+//       glow: "rgba(19,136,8,0.45)",
+//     },
+//   ] as const;
 
-  const accent = accents[index % accents.length];
+//   const accent = accents[index % accents.length];
 
-  return (
-    <motion.span
-      whileHover={{ y: -3, scale: 1.02 }}
-      className="group relative inline-flex items-center gap-2.5 rounded-xl border border-white/12 bg-[rgba(255,255,255,0.02)] px-4 py-2.5 text-[12px] sm:text-[12.5px] font-semibold tracking-[0.02em] text-white/62"
-    >
-      <motion.span
-        aria-hidden="true"
-        className="h-1.5 w-1.5 rounded-full"
-        animate={{ opacity: [0.35, 0.95, 0.35] }}
-        transition={{ duration: 2.3, delay: index * 0.14, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          backgroundColor: accent.dot,
-          boxShadow: `0 0 10px ${accent.glow}`,
-        }}
-      />
-      <span className="transition-colors duration-250 group-hover:text-white">{platform}</span>
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 rounded-xl border border-transparent group-hover:border-white/20"
-      />
-    </motion.span>
-  );
-}
+//   return (
+//     <motion.span
+//       whileHover={{ y: -3, scale: 1.02 }}
+//       className="group relative inline-flex items-center gap-2.5 rounded-xl border border-white/12 bg-[rgba(255,255,255,0.02)] px-4 py-2.5 text-[12px] sm:text-[12.5px] font-semibold tracking-[0.02em] text-white/62"
+//     >
+//       <motion.span
+//         aria-hidden="true"
+//         className="h-1.5 w-1.5 rounded-full"
+//         animate={{ opacity: [0.35, 0.95, 0.35] }}
+//         transition={{ duration: 2.3, delay: index * 0.14, repeat: Infinity, ease: "easeInOut" }}
+//         style={{
+//           backgroundColor: accent.dot,
+//           boxShadow: `0 0 10px ${accent.glow}`,
+//         }}
+//       />
+//       <span className="transition-colors duration-250 group-hover:text-white">{platform}</span>
+//       <span
+//         aria-hidden="true"
+//         className="pointer-events-none absolute inset-0 rounded-xl border border-transparent group-hover:border-white/20"
+//       />
+//     </motion.span>
+//   );
+// }
 
 export function ProductShowcaseSection() {
   const t = useTranslations("product_showcase");
@@ -222,7 +222,7 @@ export function ProductShowcaseSection() {
           </p>
         </motion.div>
 
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
@@ -236,7 +236,7 @@ export function ProductShowcaseSection() {
               index={index}
             />
           ))}
-        </motion.div>
+        </motion.div> */}
 
         <div className="pointer-events-none relative mx-auto mt-8 hidden h-10 max-w-5xl items-center sm:flex">
           <div className="h-px w-full bg-linear-to-r from-transparent via-white/16 to-transparent" />
