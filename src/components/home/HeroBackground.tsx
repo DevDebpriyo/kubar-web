@@ -9,25 +9,16 @@ export function HeroBackground() {
       aria-hidden="true"
     >
       {/* ── Base fill ── */}
-      <div className="absolute inset-0 bg-[#04040c]" />
+      <div className="absolute inset-0 bg-background transition-colors duration-300" />
 
       {/* ── Dot-grid texture ── */}
       <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.052) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
+        className="absolute inset-0 dot-grid opacity-60 dark:opacity-100"
       />
 
       {/* ── Radial vignette — fades dot-grid at edges ── */}
       <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 40%, transparent 40%, #04040c 85%)",
-        }}
+        className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,transparent_40%,var(--background)_85%)]"
       />
 
       {/* ── Orb 1: warm gold — top-right ── */}
@@ -144,31 +135,23 @@ export function HeroBackground() {
           bottom: "18%",
           height: 1,
           background:
-            "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.035) 20%, rgba(212,146,12,0.12) 46%, rgba(19,136,8,0.12) 64%, rgba(255,255,255,0.035) 80%, transparent 100%)",
+            "linear-gradient(90deg, transparent 0%, rgba(212,146,12,0.12) 46%, rgba(19,136,8,0.12) 64%, transparent 100%)",
         }}
       />
 
       {/* ── Top gradient edge — blends with navbar ── */}
       <div
-        className="absolute top-0 left-0 right-0"
-        style={{
-          height: 140,
-          background: "linear-gradient(to bottom, #04040c 0%, transparent 100%)",
-        }}
+        className="absolute top-0 left-0 right-0 h-35 bg-gradient-to-b from-background to-transparent"
       />
 
       {/* ── Bottom gradient edge — blends into next section ── */}
       <div
-        className="absolute bottom-0 left-0 right-0"
-        style={{
-          height: 160,
-          background: "linear-gradient(to top, #04040c 0%, transparent 100%)",
-        }}
+        className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent"
       />
 
       {/* ── Subtle noise texture overlay ── */}
       <div
-        className="absolute inset-0 opacity-[0.022]"
+        className="absolute inset-0 opacity-[0.025]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           backgroundRepeat: "repeat",

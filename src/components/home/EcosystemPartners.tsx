@@ -21,13 +21,10 @@ export function EcosystemPartners() {
   return (
     <section
       aria-label="Ecosystem Partners"
-      className="relative z-10 overflow-hidden pt-4 pb-16 sm:pt-8 sm:pb-24"
-      style={{
-        background: "rgba(4, 4, 12, 0.98)",
-      }}
+      className="relative z-10 overflow-hidden pt-4 pb-16 sm:pt-8 sm:pb-24 bg-background transition-colors duration-300"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8 text-center">
-        <h2 className="text-xl font-medium tracking-wide text-white/50 uppercase">
+        <h2 className="text-xl font-medium tracking-wide text-foreground/50 dark:text-white/50 uppercase">
           Our Ecosystem Partners
         </h2>
       </div>
@@ -46,33 +43,47 @@ export function EcosystemPartners() {
           }}
         />
         
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-[rgba(4,4,12,0.98)] to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-[rgba(4,4,12,0.98)] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-background to-transparent" />
 
         <div className="overflow-hidden py-10 sm:py-12">
           <div className="marquee-track flex w-max items-center gap-16 sm:gap-24">
-            {loopedPartners.map((partner, index) => (
-              <div
-                key={`${partner.name}-${index}`}
-                className={`group relative flex items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 opacity-60 hover:opacity-100 ${
-                  partner.name === "Microsoft" ? "-ml-6 -mr-2" : ""
-                } ${partner.name === "OpenAI" ? "invert opacity-80" : ""}`}
-              >
-                <Image
-                  src={partner.src}
-                  alt={partner.name}
-                  width={140}
-                  height={60}
-                  className={`w-auto object-contain ${
-                    partner.name === "Microsoft"
-                      ? "max-h-12 scale-[1.6]"
-                      : partner.name === "OpenAI" || partner.name === "Nvidia"
-                      ? "max-h-12 scale-[1.5]"
-                      : "max-h-12"
+            {loopedPartners.map((partner, index) => {
+              const isWhiteAsset = [
+                "Nvidia",
+                "OpenAI",
+                "Eleven Labs",
+                "Perplexity",
+                "Polkadot Blockchain Academy",
+              ].includes(partner.name);
+
+              return (
+                <div
+                  key={`${partner.name}-${index}`}
+                  className={`group relative flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100 ${
+                    partner.name === "Microsoft" ? "-ml-6 -mr-2" : ""
+                  } ${
+                    isWhiteAsset
+                      ? "brightness-0 dark:brightness-100 dark:invert-0"
+                      : ""
                   }`}
-                />
-              </div>
-            ))}
+                >
+                  <Image
+                    src={partner.src}
+                    alt={partner.name}
+                    width={140}
+                    height={60}
+                    className={`w-auto object-contain ${
+                      partner.name === "Microsoft"
+                        ? "max-h-12 scale-[1.6]"
+                        : partner.name === "OpenAI" || partner.name === "Nvidia"
+                        ? "max-h-12 scale-[1.5]"
+                        : "max-h-12"
+                    }`}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

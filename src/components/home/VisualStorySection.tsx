@@ -63,22 +63,22 @@ const accentUi: Record<AccentTone, {
   progress: string;
 }> = {
   orange: {
-    outline: "border-amber-300/40",
-    mutedBg: "bg-amber-400/10",
-    text: "text-amber-200",
-    progress: "from-amber-300 to-amber-500",
+    outline: "border-amber-500/40 dark:border-amber-300/40",
+    mutedBg: "bg-amber-500/10 dark:bg-amber-400/10",
+    text: "text-amber-600 dark:text-amber-200",
+    progress: "from-amber-400 to-amber-600 dark:from-amber-300 dark:to-amber-500",
   },
   blue: {
-    outline: "border-blue-300/40",
-    mutedBg: "bg-blue-400/10",
-    text: "text-blue-200",
-    progress: "from-blue-300 to-blue-500",
+    outline: "border-blue-500/40 dark:border-blue-300/40",
+    mutedBg: "bg-blue-500/10 dark:bg-blue-400/10",
+    text: "text-blue-600 dark:text-blue-200",
+    progress: "from-blue-400 to-blue-600 dark:from-blue-300 dark:to-blue-500",
   },
   green: {
-    outline: "border-emerald-300/40",
-    mutedBg: "bg-emerald-400/10",
-    text: "text-emerald-200",
-    progress: "from-emerald-300 to-emerald-500",
+    outline: "border-emerald-500/40 dark:border-emerald-300/40",
+    mutedBg: "bg-emerald-500/10 dark:bg-emerald-400/10",
+    text: "text-emerald-600 dark:text-emerald-200",
+    progress: "from-emerald-400 to-emerald-600 dark:from-emerald-300 dark:to-emerald-500",
   },
 };
 
@@ -105,7 +105,7 @@ function TimelineVisualShell({
         <Badge
           variant="outline"
           className={cn(
-            "h-6 rounded-md border-white/20 bg-black/35 px-2 text-[0.62rem] font-semibold uppercase tracking-[0.12em]",
+            "h-6 rounded-md border-border dark:border-white/20 bg-secondary/80 dark:bg-black/35 px-2 text-[0.62rem] font-semibold uppercase tracking-[0.12em]",
             tone.outline,
             tone.text
           )}
@@ -114,13 +114,13 @@ function TimelineVisualShell({
         </Badge>
         <Badge
           variant="secondary"
-          className="h-5 bg-white/8 text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-white/80"
+          className="h-5 bg-secondary dark:bg-white/8 text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-foreground/80 dark:text-white/80 border border-border dark:border-transparent"
         >
           Live
         </Badge>
       </div>
 
-      <Separator className="bg-white/12" />
+      <Separator className="bg-border dark:bg-white/12" />
 
       <div className="flex-1">{children}</div>
 
@@ -138,24 +138,24 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
         item={item}
         tone={tone}
         footer={
-          <p className="text-[0.7rem] text-white/70">Bulk order signal captured from ONDC.</p>
+          <p className="text-[0.7rem] text-muted-foreground dark:text-white/70 font-medium">Bulk order signal captured from ONDC.</p>
         }
       >
         <div className="space-y-2">
-          <div className="rounded-lg border border-white/14 bg-black/30 p-2">
+          <div className="rounded-lg border border-border dark:border-white/14 bg-secondary/80 dark:bg-black/30 p-2">
             <div className="mb-1 flex items-center justify-between">
-              <p className="text-[0.62rem] uppercase tracking-[0.12em] text-white/55">Order Window</p>
-              <span className={cn("text-[0.65rem] font-semibold", tone.text)}>₹10L</span>
+              <p className="text-[0.62rem] uppercase tracking-[0.12em] text-muted-foreground dark:text-white/55 font-semibold">Order Window</p>
+              <span className={cn("text-[0.65rem] font-bold", tone.text)}>₹10L</span>
             </div>
             <div className="grid grid-cols-3 gap-1.5">
-              <div className={cn("rounded px-2 py-1 text-[0.63rem] font-medium text-white/85", tone.mutedBg)}>
+              <div className={cn("rounded px-2 py-1 text-[0.63rem] font-semibold text-foreground dark:text-white/85", tone.mutedBg)}>
                 Textile
               </div>
-              <div className="rounded bg-white/10 px-2 py-1 text-[0.63rem] font-medium text-white/80">ONDC</div>
-              <div className="rounded bg-white/10 px-2 py-1 text-[0.63rem] font-medium text-white/80">B2B</div>
+              <div className="rounded bg-secondary dark:bg-white/10 border border-border/50 dark:border-transparent px-2 py-1 text-[0.63rem] font-medium text-foreground/80 dark:text-white/80">ONDC</div>
+              <div className="rounded bg-secondary dark:bg-white/10 border border-border/50 dark:border-transparent px-2 py-1 text-[0.63rem] font-medium text-foreground/80 dark:text-white/80">B2B</div>
             </div>
           </div>
-          <div className="rounded-lg border border-white/10 bg-white/3 p-2 text-[0.68rem] text-white/70">
+          <div className="rounded-lg border border-border dark:border-white/10 bg-secondary/50 dark:bg-white/3 p-2 text-[0.68rem] text-foreground/80 dark:text-white/70 font-medium">
             Purchase order matched with merchant profile.
           </div>
         </div>
@@ -169,27 +169,27 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
         item={item}
         tone={tone}
         footer={
-          <p className="text-[0.7rem] text-white/70">Gap calculated instantly from requirement vs liquidity.</p>
+          <p className="text-[0.7rem] text-muted-foreground dark:text-white/70 font-medium">Gap calculated instantly from requirement vs liquidity.</p>
         }
       >
         <div className="space-y-3">
           <div className="grid grid-cols-2 gap-2">
-            <div className="rounded-lg border border-white/12 bg-black/30 p-2">
-              <p className="text-[0.6rem] uppercase tracking-[0.12em] text-white/55">Required</p>
-              <p className="text-sm font-semibold text-white">₹10L</p>
+            <div className="rounded-lg border border-border dark:border-white/12 bg-secondary/80 dark:bg-black/30 p-2">
+              <p className="text-[0.6rem] uppercase tracking-[0.12em] text-muted-foreground dark:text-white/55 font-semibold">Required</p>
+              <p className="text-sm font-bold text-foreground dark:text-white">₹10L</p>
             </div>
-            <div className="rounded-lg border border-white/12 bg-black/30 p-2">
-              <p className="text-[0.6rem] uppercase tracking-[0.12em] text-white/55">Available</p>
-              <p className="text-sm font-semibold text-white">₹6L</p>
+            <div className="rounded-lg border border-border dark:border-white/12 bg-secondary/80 dark:bg-black/30 p-2">
+              <p className="text-[0.6rem] uppercase tracking-[0.12em] text-muted-foreground dark:text-white/55 font-semibold">Available</p>
+              <p className="text-sm font-bold text-foreground dark:text-white">₹6L</p>
             </div>
           </div>
           <div>
-            <div className="mb-1 flex items-center justify-between text-[0.64rem] uppercase tracking-[0.12em] text-white/60">
+            <div className="mb-1 flex items-center justify-between text-[0.64rem] uppercase tracking-[0.12em] text-muted-foreground dark:text-white/60 font-semibold">
               <span>Capital Gap</span>
-              <span className={tone.text}>₹4L</span>
+              <span className={cn("font-bold", tone.text)}>₹4L</span>
             </div>
-            <div className="h-2 rounded-full bg-white/12">
-              <div className={cn("h-full w-2/5 rounded-full bg-linear-to-r", tone.progress)} />
+            <div className="h-2 rounded-full bg-secondary dark:bg-white/12 border border-border/50 dark:border-transparent">
+              <div className={cn("h-full w-2/5 rounded-full bg-gradient-to-r", tone.progress)} />
             </div>
           </div>
         </div>
@@ -203,7 +203,7 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
         item={item}
         tone={tone}
         footer={
-          <p className="text-[0.7rem] text-white/70">Embedded widget flags intent with confidence markers.</p>
+          <p className="text-[0.7rem] text-muted-foreground dark:text-white/70 font-medium">Embedded widget flags intent with confidence markers.</p>
         }
       >
         <div className="space-y-2">
@@ -212,9 +212,9 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
             ["Inventory Cycle", "Detected"],
             ["Cashflow Stress", "Detected"],
           ].map(([label, status]) => (
-            <div key={label} className="flex items-center justify-between rounded-md border border-white/12 bg-black/25 px-2.5 py-1.5">
-              <span className="text-[0.7rem] text-white/80">{label}</span>
-              <span className={cn("text-[0.65rem] font-semibold", tone.text)}>{status}</span>
+            <div key={label} className="flex items-center justify-between rounded-md border border-border dark:border-white/12 bg-secondary/80 dark:bg-black/25 px-2.5 py-1.5">
+              <span className="text-[0.7rem] font-medium text-foreground/80 dark:text-white/80">{label}</span>
+              <span className={cn("text-[0.65rem] font-bold", tone.text)}>{status}</span>
             </div>
           ))}
         </div>
@@ -228,7 +228,7 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
         item={item}
         tone={tone}
         footer={
-          <p className="text-[0.7rem] text-white/70">Data Manager Service fetch completed in under 5 minutes.</p>
+          <p className="text-[0.7rem] text-muted-foreground dark:text-white/70 font-medium">Data Manager Service fetch completed in under 5 minutes.</p>
         }
       >
         <div className="space-y-2">
@@ -237,9 +237,9 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
             ["GST Data", "Synced"],
             ["Order History", "Synced"],
           ].map(([source, status]) => (
-            <div key={source} className="flex items-center justify-between rounded-md border border-white/12 bg-black/25 px-2.5 py-1.5">
-              <span className="text-[0.7rem] text-white/80">{source}</span>
-              <span className={cn("inline-flex items-center gap-1 text-[0.65rem] font-semibold", tone.text)}>
+            <div key={source} className="flex items-center justify-between rounded-md border border-border dark:border-white/12 bg-secondary/80 dark:bg-black/25 px-2.5 py-1.5">
+              <span className="text-[0.7rem] font-medium text-foreground/80 dark:text-white/80">{source}</span>
+              <span className={cn("inline-flex items-center gap-1 text-[0.65rem] font-bold", tone.text)}>
                 <CheckCircle2 className="h-3.5 w-3.5" />
                 {status}
               </span>
@@ -256,13 +256,13 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
         item={item}
         tone={tone}
         footer={
-          <p className="text-[0.7rem] text-white/70">Sector model computes composite creditworthiness score.</p>
+          <p className="text-[0.7rem] text-muted-foreground dark:text-white/70 font-medium">Sector model computes composite creditworthiness score.</p>
         }
       >
         <div className="grid grid-cols-[auto_1fr] items-center gap-3">
           <div className={cn("rounded-lg border px-3 py-2", tone.outline, tone.mutedBg)}>
-            <p className="text-[0.62rem] uppercase tracking-[0.12em] text-white/55">Score</p>
-            <p className={cn("text-xl font-bold", tone.text)}>742</p>
+            <p className="text-[0.62rem] uppercase tracking-[0.12em] text-muted-foreground dark:text-white/55 font-semibold">Score</p>
+            <p className={cn("text-xl font-black", tone.text)}>742</p>
           </div>
           <div className="space-y-2">
             {[
@@ -271,13 +271,13 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
               ["Sector Risk", "68%"],
             ].map(([factor, value], idx) => (
               <div key={factor}>
-                <div className="mb-1 flex items-center justify-between text-[0.64rem] text-white/70">
+                <div className="mb-1 flex items-center justify-between text-[0.64rem] font-medium text-muted-foreground dark:text-white/70">
                   <span>{factor}</span>
-                  <span>{value}</span>
+                  <span className="font-semibold text-foreground dark:text-white">{value}</span>
                 </div>
-                <div className="h-1.5 rounded-full bg-white/12">
+                <div className="h-1.5 rounded-full bg-secondary dark:bg-white/12 border border-border/50 dark:border-transparent">
                   <div
-                    className={cn("h-full rounded-full bg-linear-to-r", tone.progress)}
+                    className={cn("h-full rounded-full bg-gradient-to-r", tone.progress)}
                     style={{ width: idx === 0 ? "82%" : idx === 1 ? "76%" : "68%" }}
                   />
                 </div>
@@ -295,28 +295,28 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
         item={item}
         tone={tone}
         footer={
-          <p className="text-[0.7rem] text-white/70">Pre-approved offer rendered directly in checkout flow.</p>
+          <p className="text-[0.7rem] text-muted-foreground dark:text-white/70 font-medium">Pre-approved offer rendered directly in checkout flow.</p>
         }
       >
-        <div className="rounded-lg border border-white/12 bg-black/30 p-3">
+        <div className="rounded-lg border border-border dark:border-white/12 bg-secondary/80 dark:bg-black/30 p-3">
           <div className="mb-2 flex items-center justify-between">
-            <p className="text-[0.62rem] uppercase tracking-[0.12em] text-white/55">Offer Sheet</p>
-            <Badge variant="outline" className={cn("h-5 rounded-md text-[0.58rem]", tone.outline, tone.text)}>
+            <p className="text-[0.62rem] uppercase tracking-[0.12em] text-muted-foreground dark:text-white/55 font-semibold">Offer Sheet</p>
+            <Badge variant="outline" className={cn("h-5 rounded-md text-[0.58rem] font-bold", tone.outline, tone.text)}>
               Pre-approved
             </Badge>
           </div>
           <div className="grid grid-cols-3 gap-2 text-center">
-            <div className="rounded bg-white/8 px-1.5 py-1.5">
-              <p className="text-[0.58rem] text-white/55">Amount</p>
-              <p className="text-[0.73rem] font-semibold text-white">₹4L</p>
+            <div className="rounded bg-secondary dark:bg-white/8 border border-border/50 dark:border-transparent px-1.5 py-1.5">
+              <p className="text-[0.58rem] text-muted-foreground dark:text-white/55 font-medium">Amount</p>
+              <p className="text-[0.73rem] font-bold text-foreground dark:text-white">₹4L</p>
             </div>
-            <div className="rounded bg-white/8 px-1.5 py-1.5">
-              <p className="text-[0.58rem] text-white/55">Rate</p>
-              <p className="text-[0.73rem] font-semibold text-white">12.4%</p>
+            <div className="rounded bg-secondary dark:bg-white/8 border border-border/50 dark:border-transparent px-1.5 py-1.5">
+              <p className="text-[0.58rem] text-muted-foreground dark:text-white/55 font-medium">Rate</p>
+              <p className="text-[0.73rem] font-bold text-foreground dark:text-white">12.4%</p>
             </div>
-            <div className="rounded bg-white/8 px-1.5 py-1.5">
-              <p className="text-[0.58rem] text-white/55">Tenure</p>
-              <p className="text-[0.73rem] font-semibold text-white">90 days</p>
+            <div className="rounded bg-secondary dark:bg-white/8 border border-border/50 dark:border-transparent px-1.5 py-1.5">
+              <p className="text-[0.58rem] text-muted-foreground dark:text-white/55 font-medium">Tenure</p>
+              <p className="text-[0.73rem] font-bold text-foreground dark:text-white">90 days</p>
             </div>
           </div>
         </div>
@@ -330,22 +330,22 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
         item={item}
         tone={tone}
         footer={
-          <p className="text-[0.7rem] text-white/70">Funds routed lender to merchant account in 1-3 hours.</p>
+          <p className="text-[0.7rem] text-muted-foreground dark:text-white/70 font-medium">Funds routed lender to merchant account in 1-3 hours.</p>
         }
       >
         <div className="space-y-3">
           <div className="grid grid-cols-3 items-center gap-2 text-center">
-            <div className="rounded-md border border-white/12 bg-black/25 px-2 py-2 text-[0.68rem] text-white/80">NBFC</div>
+            <div className="rounded-md border border-border dark:border-white/12 bg-secondary/80 dark:bg-black/25 px-2 py-2 text-[0.68rem] font-semibold text-foreground/90 dark:text-white/80">NBFC</div>
             <ArrowRight className={cn("mx-auto h-4 w-4", tone.text)} />
-            <div className="rounded-md border border-white/12 bg-black/25 px-2 py-2 text-[0.68rem] text-white/80">Sheetal A/C</div>
+            <div className="rounded-md border border-border dark:border-white/12 bg-secondary/80 dark:bg-black/25 px-2 py-2 text-[0.68rem] font-semibold text-foreground/90 dark:text-white/80">Sheetal A/C</div>
           </div>
           <div>
-            <div className="mb-1 flex items-center justify-between text-[0.64rem] uppercase tracking-[0.12em] text-white/60">
+            <div className="mb-1 flex items-center justify-between text-[0.64rem] uppercase tracking-[0.12em] text-muted-foreground dark:text-white/60 font-semibold">
               <span>Transfer Progress</span>
-              <span className={tone.text}>Completed</span>
+              <span className={cn("font-bold", tone.text)}>Completed</span>
             </div>
-            <div className="h-2 rounded-full bg-white/12">
-              <div className={cn("h-full w-full rounded-full bg-linear-to-r", tone.progress)} />
+            <div className="h-2 rounded-full bg-secondary dark:bg-white/12 border border-border/50 dark:border-transparent">
+              <div className={cn("h-full w-full rounded-full bg-gradient-to-r", tone.progress)} />
             </div>
           </div>
         </div>
@@ -358,26 +358,26 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
       item={item}
       tone={tone}
       footer={
-        <p className="text-[0.7rem] text-white/70">Order fulfilled and growth metrics improved post-disbursal.</p>
+        <p className="text-[0.7rem] text-muted-foreground dark:text-white/70 font-medium">Order fulfilled and growth metrics improved post-disbursal.</p>
       }
     >
       <div className="space-y-2">
         <div className="grid grid-cols-4 items-end gap-1.5">
           {[38, 52, 68, 86].map((h, idx) => (
             <div key={h} className="space-y-1">
-              <div className="h-14 rounded-sm bg-white/6" style={{ position: "relative" }}>
+              <div className="h-14 rounded-sm bg-secondary dark:bg-white/6 border border-border/50 dark:border-transparent" style={{ position: "relative" }}>
                 <div
-                  className={cn("absolute bottom-0 left-0 right-0 rounded-sm bg-linear-to-t", tone.progress)}
+                  className={cn("absolute bottom-0 left-0 right-0 rounded-sm bg-gradient-to-t", tone.progress)}
                   style={{ height: `${h}%` }}
                 />
               </div>
-              <p className="text-center text-[0.55rem] text-white/45">Q{idx + 1}</p>
+              <p className="text-center text-[0.55rem] font-semibold text-muted-foreground dark:text-white/45">Q{idx + 1}</p>
             </div>
           ))}
         </div>
         <div className="grid grid-cols-2 gap-2 text-[0.66rem]">
-          <div className="rounded-md border border-white/10 bg-black/25 px-2 py-1.5 text-white/75">Fulfilment: 100%</div>
-          <div className="rounded-md border border-white/10 bg-black/25 px-2 py-1.5 text-white/75">Revenue: +18%</div>
+          <div className="rounded-md border border-border dark:border-white/10 bg-secondary/80 dark:bg-black/25 px-2 py-1.5 font-medium text-foreground/90 dark:text-white/75">Fulfilment: 100%</div>
+          <div className="rounded-md border border-border dark:border-white/10 bg-secondary/80 dark:bg-black/25 px-2 py-1.5 font-medium text-foreground/90 dark:text-white/75">Revenue: +18%</div>
         </div>
       </div>
     </TimelineVisualShell>

@@ -96,7 +96,7 @@ function DataFlowPath({
         fill="none"
         stroke={color}
         strokeWidth={1}
-        opacity={0.12}
+        opacity={0.25}
         strokeDasharray="4 8"
       />
       {/* Animated flow */}
@@ -104,12 +104,12 @@ function DataFlowPath({
         d={d}
         fill="none"
         stroke={color}
-        strokeWidth={1.5}
+        strokeWidth={1.75}
         strokeLinecap="round"
         initial={{ pathLength: 0, opacity: 0 }}
         animate={{
           pathLength: [0, 1, 0],
-          opacity: [0, 0.6, 0],
+          opacity: [0, 0.85, 0],
         }}
         transition={{
           duration,
@@ -144,10 +144,7 @@ function CentralHub() {
         animate={{ rotate: 360 }}
         transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
       >
-        <div
-          className="w-full h-full rounded-full border border-dashed"
-          style={{ borderColor: "rgba(212, 146, 12, 0.2)" }}
-        />
+        <div className="w-full h-full rounded-full border border-dashed border-[#d4920c]/40 dark:border-[#d4920c]/20" />
       </motion.div>
 
       {/* Counter-rotating ring */}
@@ -156,33 +153,21 @@ function CentralHub() {
         animate={{ rotate: -360 }}
         transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
       >
-        <div
-          className="w-full h-full rounded-full border"
-          style={{ borderColor: "rgba(255, 255, 255, 0.04)" }}
-        />
+        <div className="w-full h-full rounded-full border border-border dark:border-white/5" />
       </motion.div>
 
       {/* Hub body */}
-      <div
-        className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center relative"
-        style={{
-          background:
-            "linear-gradient(135deg, rgba(212,146,12,0.2) 0%, rgba(212,146,12,0.05) 100%)",
-          border: "1px solid rgba(212,146,12,0.3)",
-          backdropFilter: "blur(12px)",
-          boxShadow: "0 0 40px rgba(212,146,12,0.15)",
-        }}
-      >
-        <Link2 className="w-7 h-7 sm:w-8 sm:h-8 text-[#f0b429]" />
+      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center relative bg-card/90 dark:bg-[rgba(20,20,30,0.8)] border border-[#d4920c]/50 dark:border-[#d4920c]/30 backdrop-blur-xl shadow-lg dark:shadow-[0_0_40px_rgba(212,146,12,0.15)]">
+        <Link2 className="w-7 h-7 sm:w-8 sm:h-8 text-[#d4920c]" />
 
         {/* Breathing glow */}
         <motion.div
           className="absolute inset-0 rounded-2xl"
           animate={{
             boxShadow: [
-              "0 0 20px rgba(212,146,12,0.1)",
-              "0 0 40px rgba(212,146,12,0.25)",
-              "0 0 20px rgba(212,146,12,0.1)",
+              "0 0 20px rgba(212,146,12,0.15)",
+              "0 0 40px rgba(212,146,12,0.35)",
+              "0 0 20px rgba(212,146,12,0.15)",
             ],
           }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -241,29 +226,19 @@ function PlatformCard({
             transition: { type: "spring", stiffness: 400, damping: 22 },
           }}
         >
-          <div
-            className="px-4 py-3.5 sm:px-5 sm:py-4 rounded-2xl backdrop-blur-xl"
-            style={{
-              background: "rgba(255,255,255,0.03)",
-              border: `1px solid ${color}25`,
-              boxShadow: `0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)`,
-            }}
-          >
+          <div className="px-4 py-3.5 sm:px-5 sm:py-4 rounded-2xl backdrop-blur-xl bg-card/95 dark:bg-[rgba(15,15,25,0.75)] border border-border dark:border-white/10 shadow-lg dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-300">
             {/* Top row */}
             <div className="flex items-center gap-2.5 mb-2">
               <div
                 className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
                 style={{
-                  background: `${color}14`,
-                  border: `1px solid ${color}30`,
+                  background: `${color}20`,
+                  border: `1px solid ${color}40`,
                 }}
               >
-                <Icon
-                  className="w-3.5 h-3.5"
-                  style={{ color }}
-                />
+                <Icon className="w-3.5 h-3.5" style={{ color }} />
               </div>
-              <span className="text-[10px] sm:text-[10.5px] text-white/40 font-medium uppercase tracking-[0.08em]">
+              <span className="text-[10px] sm:text-[10.5px] text-muted-foreground dark:text-white/50 font-semibold uppercase tracking-[0.08em]">
                 {label}
               </span>
             </div>
@@ -288,7 +263,7 @@ function PlatformCard({
                   ease: "easeInOut",
                 }}
               />
-              <span className="text-[9px] sm:text-[10px] text-white/30 font-medium">
+              <span className="text-[9px] sm:text-[10px] text-muted-foreground dark:text-white/40 font-medium">
                 Active
               </span>
             </div>
@@ -345,23 +320,15 @@ function StatsMiniCard({
             transition: { type: "spring", stiffness: 400, damping: 22 },
           }}
         >
-          <div
-            className="px-3.5 py-3 sm:px-4 sm:py-3.5 rounded-xl backdrop-blur-xl"
-            style={{
-              background: "rgba(255,255,255,0.025)",
-              border: "1px solid rgba(255,255,255,0.06)",
-              boxShadow:
-                "0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.03)",
-            }}
-          >
-            <div className="text-[9px] sm:text-[10px] text-white/35 font-medium uppercase tracking-[0.08em] mb-1.5">
+          <div className="px-3.5 py-3 sm:px-4 sm:py-3.5 rounded-xl backdrop-blur-xl bg-card/95 dark:bg-[rgba(15,15,25,0.75)] border border-border dark:border-white/10 shadow-md dark:shadow-[0_8px_32px_rgba(0,0,0,0.25)] transition-all duration-300">
+            <div className="text-[9px] sm:text-[10px] text-muted-foreground dark:text-white/40 font-semibold uppercase tracking-[0.08em] mb-1.5">
               {label}
             </div>
             <div className="flex items-end gap-2">
-              <span className="text-white font-bold text-sm sm:text-base tracking-tight leading-none">
+              <span className="text-foreground dark:text-white font-bold text-sm sm:text-base tracking-tight leading-none">
                 {value}
               </span>
-              <span className="text-green-400 text-[10px] sm:text-[11px] font-semibold flex items-center gap-0.5 pb-px">
+              <span className="text-emerald-600 dark:text-green-400 text-[10px] sm:text-[11px] font-semibold flex items-center gap-0.5 pb-px">
                 <ArrowUpRight className="w-2.5 h-2.5" />
                 {change}
               </span>
@@ -379,11 +346,10 @@ function StatsMiniCard({
 function HexGridBg() {
   return (
     <div
-      className="absolute inset-0 rounded-3xl"
+      className="absolute inset-0 rounded-3xl opacity-20 dark:opacity-40 text-foreground dark:text-white"
       style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='48' viewBox='0 0 56 48'%3E%3Cpath d='M0 24L14 0h28L56 24L42 48H14Z' fill='none' stroke='rgba(255,255,255,0.025)' stroke-width='0.7'/%3E%3C/svg%3E")`,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='48' viewBox='0 0 56 48'%3E%3Cpath d='M0 24L14 0h28L56 24L42 48H14Z' fill='none' stroke='currentColor' stroke-width='0.7'/%3E%3C/svg%3E")`,
         backgroundSize: "56px 48px",
-        opacity: 0.5,
       }}
     />
   );
@@ -419,14 +385,6 @@ function NetworkLayer() {
           <stop offset="50%" stopColor="#22c55e" stopOpacity="0.35" />
           <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
         </linearGradient>
-        {/* Glow filter */}
-        <filter id="nodeGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="3" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
       </defs>
 
       {/* ── Flow paths connecting the cards ── */}
@@ -467,18 +425,12 @@ function NetworkLayer() {
       />
 
       {/* ── Junction nodes ── */}
-      <PulsingNode cx={300} cy={250} color="#f0b429" size={5} delay={0} />
+      <PulsingNode cx={300} cy={250} color="#d4920c" size={5} delay={0} />
       <PulsingNode cx={120} cy={120} color="#d4920c" size={3} delay={0.5} />
       <PulsingNode cx={480} cy={100} color="#3b82f6" size={3} delay={1} />
       <PulsingNode cx={100} cy={400} color="#22c55e" size={3} delay={1.5} />
       <PulsingNode cx={500} cy={380} color="#d4920c" size={3} delay={2} />
       <PulsingNode cx={500} cy={200} color="#3b82f6" size={3} delay={2.5} />
-
-      {/* Small decorative nodes */}
-      <PulsingNode cx={200} cy={180} color="rgba(255,255,255,0.3)" size={1.5} delay={3} />
-      <PulsingNode cx={400} cy={300} color="rgba(255,255,255,0.3)" size={1.5} delay={3.5} />
-      <PulsingNode cx={250} cy={350} color="rgba(212,146,12,0.4)" size={1.5} delay={4} />
-      <PulsingNode cx={380} cy={150} color="rgba(59,130,246,0.4)" size={1.5} delay={4.5} />
     </svg>
   );
 }
@@ -544,7 +496,7 @@ export function AboutHeroIllustration() {
         label="Trust Engine"
         value="Real-Time"
         icon={Shield}
-        color="#3b82f6"
+        color="#2563eb"
         position={{ top: "2%", right: "4%" }}
         delay={0.9}
         floatDuration={7}
@@ -567,7 +519,7 @@ export function AboutHeroIllustration() {
         label="API Latency"
         value="< 200ms"
         icon={Zap}
-        color="#22c55e"
+        color="#16a34a"
         position={{ bottom: "6%", right: "0%" }}
         delay={1.0}
         floatDuration={6.5}
@@ -584,40 +536,6 @@ export function AboutHeroIllustration() {
         floatDuration={5}
         floatOffset={-6}
       />
-
-      {/* ── Decorative particle ring ── */}
-      <motion.div
-        className="absolute pointer-events-none"
-        style={{
-          top: "50%",
-          left: "50%",
-          width: 280,
-          height: 280,
-          marginTop: -140,
-          marginLeft: -140,
-        }}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
-      >
-        {[0, 60, 120, 180, 240, 300].map((angle) => (
-          <motion.div
-            key={angle}
-            className="absolute w-1 h-1 rounded-full bg-white/20"
-            style={{
-              top: "50%",
-              left: "50%",
-              transform: `rotate(${angle}deg) translateX(140px) translateY(-50%)`,
-            }}
-            animate={{ opacity: [0.15, 0.5, 0.15] }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: angle / 120,
-            }}
-          />
-        ))}
-      </motion.div>
     </div>
   );
 }

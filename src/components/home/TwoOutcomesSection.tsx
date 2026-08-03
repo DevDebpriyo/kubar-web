@@ -138,7 +138,7 @@ function TabButton({
       <motion.div
         className="outcomes-tab-content"
         animate={{
-          color: active ? activeColor : "rgba(255, 255, 255, 0.48)",
+          color: active ? activeColor : undefined,
         }}
         transition={{ duration: 0.3 }}
       >

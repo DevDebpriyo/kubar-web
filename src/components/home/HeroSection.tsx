@@ -40,11 +40,11 @@ function HeroHeadline() {
     <motion.div variants={itemVariants} className="flex flex-col gap-0">
       {/* Line 1 - Supporting Cast */}
       <h1 className="font-extrabold leading-[1.04] tracking-[-0.035em]">
-        <span className="block text-[28px] sm:text-[34px] lg:text-[38px] xl:text-[42px] text-white/45 font-medium mb-1 sm:mb-2 tracking-normal">
+        <span className="block text-[28px] sm:text-[34px] lg:text-[38px] xl:text-[42px] text-foreground/55 dark:text-white/45 font-medium mb-1 sm:mb-2 tracking-normal">
           {t("line1")}
         </span>
         {/* Line 2 — Limelight */}
-        <span className="block text-[58px] sm:text-[68px] lg:text-[84px] xl:text-[98px] text-white">
+        <span className="block text-[58px] sm:text-[68px] lg:text-[84px] xl:text-[98px] text-foreground dark:text-white">
           {t("line2")}
         </span>
         {/* Line 3 — Limelight / Gold Focus */}
@@ -52,7 +52,7 @@ function HeroHeadline() {
           className="block text-[58px] sm:text-[68px] lg:text-[84px] xl:text-[98px]"
           style={{
             background:
-              "linear-gradient(135deg, #ff9933 0%, #ff9933 32%, #ff9933 68%, #ff9933 100%)",
+              "linear-gradient(135deg, #d4920c 0%, #f5bc35 50%, #d4920c 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -71,14 +71,14 @@ function HeroSubcopy() {
   return (
     <motion.p
       variants={itemVariants}
-      className="text-[16.5px] sm:text-[17.5px] lg:text-[18px] leading-[1.75] text-white/52 max-w-130 text-pretty"
+      className="text-[16.5px] sm:text-[17.5px] lg:text-[18px] leading-[1.75] text-muted-foreground dark:text-white/52 max-w-130 text-pretty"
     >
       {t.rich("subtitle", {
         nbfc: (chunks) => (
-          <span className="text-[#8eb8ff] font-medium">{chunks}</span>
+          <span className="text-[#2563eb] dark:text-[#8eb8ff] font-semibold">{chunks}</span>
         ),
         msme: (chunks) => (
-          <span className="text-[#4ed56f] font-semibold">{chunks}</span>
+          <span className="text-[#16a34a] dark:text-[#4ed56f] font-semibold">{chunks}</span>
         ),
       })}
     </motion.p>
@@ -113,7 +113,7 @@ function HeroCTAs() {
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           style={{
             background:
-              "linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.22) 50%, transparent 70%)",
+              "linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%)",
             backgroundSize: "200% 100%",
           }}
           animate={{ backgroundPosition: ["-200% center", "200% center"] }}
@@ -131,7 +131,7 @@ function HeroCTAs() {
       {/* Secondary CTA */}
       <motion.a
         href="#demo"
-        className="group flex items-center gap-2.5 px-6 py-3.25 rounded-full border border-white/12 text-white/65 font-medium text-[15px] transition-all duration-300 hover:border-white/22 hover:text-white hover:bg-white/4 cursor-pointer select-none"
+        className="group flex items-center gap-2.5 px-6 py-3.25 rounded-full border border-border dark:border-white/12 text-foreground/80 dark:text-white/65 font-medium text-[15px] transition-all duration-300 hover:border-border-strong dark:hover:border-white/22 hover:text-foreground dark:hover:text-white hover:bg-secondary dark:hover:bg-white/4 cursor-pointer select-none"
         aria-label={t("cta_secondary_aria")}
         whileHover={{
           y: -2,
@@ -140,8 +140,8 @@ function HeroCTAs() {
         whileTap={{ scale: 0.97 }}
       >
         {/* Play icon circle */}
-        <div className="w-6.5 h-6.5 rounded-full border border-white/16 flex items-center justify-center group-hover:border-white/30 transition-colors duration-200 shrink-0">
-          <Play className="w-2.25 h-2.25 fill-white/65 text-white/65 group-hover:fill-white group-hover:text-white transition-colors duration-200 ml-px" />
+        <div className="w-6.5 h-6.5 rounded-full border border-border dark:border-white/16 flex items-center justify-center group-hover:border-border-strong dark:group-hover:border-white/30 transition-colors duration-200 shrink-0">
+          <Play className="w-2.25 h-2.25 fill-foreground/70 text-foreground/70 dark:fill-white/65 dark:text-white/65 group-hover:fill-foreground dark:group-hover:fill-white group-hover:text-foreground dark:group-hover:text-white transition-colors duration-200 ml-px" />
         </div>
         {t("cta_secondary")}
       </motion.a>
@@ -162,7 +162,7 @@ function HeroGlowLines() {
         width: "1px",
         height: "62%",
         background:
-          "linear-gradient(to bottom, transparent 0%, rgba(212,146,12,0.14) 25%, rgba(19,136,8,0.12) 62%, transparent 100%)",
+          "linear-gradient(to bottom, transparent 0%, rgba(212,146,12,0.18) 25%, rgba(19,136,8,0.14) 62%, transparent 100%)",
       }}
     />
   );
@@ -177,7 +177,6 @@ export function HeroSection() {
     offset: ["start start", "end start"],
   });
 
-  // Subtle parallax on hero content
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
 
@@ -187,20 +186,15 @@ export function HeroSection() {
       className="relative min-h-dvh flex flex-col overflow-hidden"
       aria-label={t("aria_label")}
     >
-      {/* Layered background */}
       <HeroBackground />
-
-      {/* Decorative vertical glow line */}
       <HeroGlowLines />
 
-      {/* ── Main content area ── */}
       <motion.div
         className="relative z-10 mb-10 flex-1 flex items-center"
         style={{ y: contentY, opacity: contentOpacity }}
       >
         <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-28 sm:pt-32 pb-10 sm:pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.82fr] items-center gap-10 lg:gap-4 xl:gap-0">
-            {/* ── Left column: copy ── */}
             <motion.div
               variants={containerVariants}
               initial="hidden"
@@ -212,7 +206,6 @@ export function HeroSection() {
               <HeroCTAs />
             </motion.div>
 
-            {/* ── Right column: floating cards ── */}
             <motion.div
               initial={{ opacity: 0, x: 36 }}
               animate={{ opacity: 1, x: 0 }}

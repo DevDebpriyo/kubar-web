@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { HeroSection } from "@/components/home/HeroSection";
-import { PartnerMarquee } from "@/components/home/PartnerMarquee";
 import { ProblemSplitSection } from "@/components/home/ProblemSplitSection";
 import { ProductShowcaseSection } from "@/components/home/ProductShowcaseSection";
 import { VisualStorySection } from "@/components/home/VisualStorySection";
@@ -15,7 +14,6 @@ export default function Home() {
     <main className="relative">
       <Navbar />
       <HeroSection />
-      <PartnerMarquee />
       <ProblemSplitSection />
       <ProductShowcaseSection />
       <TwoOutcomesSection />

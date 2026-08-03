@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ArrowUpRight, ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
 type NavLink = {
   label: string;
@@ -23,7 +24,7 @@ function KubarLogo() {
         width={144}
         height={42}
         priority
-        className="h-9 w-auto transition-opacity duration-300 group-hover:opacity-90"
+        className="h-9 w-auto transition-all duration-300 group-hover:opacity-90 brightness-0 dark:brightness-100"
       />
     </Link>
   );
@@ -65,7 +66,7 @@ function ProductsDropdown() {
       className="relative"
     >
       <button
-        className="relative px-3.5 py-2 text-[13.5px] font-medium text-white/55 hover:text-white rounded-lg transition-colors duration-200 group flex items-center gap-1.5"
+        className="relative px-3.5 py-2 text-[13.5px] font-medium text-foreground/70 hover:text-foreground dark:text-white/55 dark:hover:text-white rounded-lg transition-colors duration-200 group flex items-center gap-1.5 cursor-pointer"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
@@ -78,7 +79,7 @@ function ProductsDropdown() {
           <ChevronDown className="w-3.5 h-3.5" />
         </motion.div>
         {/* Hover background */}
-        <span className="absolute inset-0 rounded-lg bg-white/0 group-hover:bg-white/5 transition-colors duration-200" />
+        <span className="absolute inset-0 rounded-lg bg-foreground/5 dark:bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
       </button>
 
       {/* Dropdown Menu */}
@@ -89,11 +90,7 @@ function ProductsDropdown() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.95 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-            className="absolute top-full left-0 mt-2 w-80 rounded-xl border border-white/10 bg-[rgba(10,10,22,0.95)] backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.6)] overflow-hidden z-50"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(10,10,22,0.95) 0%, rgba(15,15,30,0.95) 100%)",
-            }}
+            className="absolute top-full left-0 mt-2 w-80 rounded-xl border border-border dark:border-white/10 bg-card/95 dark:bg-[rgba(10,10,22,0.95)] backdrop-blur-xl shadow-xl dark:shadow-[0_10px_40px_rgba(0,0,0,0.6)] overflow-hidden z-50"
           >
             <div className="p-2">
               {products.map((product, idx) => (
@@ -110,7 +107,7 @@ function ProductsDropdown() {
                   {product.href ? (
                     <Link
                       href={product.href}
-                      className="group relative block px-4 py-3.5 rounded-lg transition-all duration-200 hover:bg-white/6 active:bg-white/8"
+                      className="group relative block px-4 py-3.5 rounded-lg transition-all duration-200 hover:bg-accent dark:hover:bg-white/6 active:bg-accent/80"
                       onClick={() => setIsOpen(false)}
                     >
                       <div className="flex items-start gap-3">
@@ -118,10 +115,10 @@ function ProductsDropdown() {
                         <div className="mt-0.5 w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#d4920c] to-[#f5bc35] shrink-0" />
                         {/* Content */}
                         <div className="flex-1 min-w-0">
-                          <div className="font-medium text-[14px] text-white group-hover:text-[#f5bc35] transition-colors duration-200">
+                          <div className="font-medium text-[14px] text-foreground group-hover:text-[#d4920c] dark:text-white dark:group-hover:text-[#f5bc35] transition-colors duration-200">
                             {product.name}
                           </div>
-                          <div className="text-[12.5px] text-white/45 group-hover:text-white/60 transition-colors duration-200 line-clamp-2">
+                          <div className="text-[12.5px] text-muted-foreground dark:text-white/45 group-hover:text-foreground/80 dark:group-hover:text-white/60 transition-colors duration-200 line-clamp-2">
                             {product.description}
                           </div>
                         </div>
@@ -130,25 +127,25 @@ function ProductsDropdown() {
                   ) : (
                     <button
                       disabled
-                      className="group relative block w-full text-left px-4 py-3.5 rounded-lg transition-all duration-200 cursor-not-allowed opacity-70 hover:bg-white/3"
+                      className="group relative block w-full text-left px-4 py-3.5 rounded-lg transition-all duration-200 cursor-not-allowed opacity-70 hover:bg-accent/50"
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex items-start gap-3">
                           {/* Icon */}
-                          <div className="mt-0.5 w-1.5 h-1.5 rounded-full bg-white/20 shrink-0" />
+                          <div className="mt-0.5 w-1.5 h-1.5 rounded-full bg-muted-foreground/30 shrink-0" />
                           {/* Content */}
                           <div className="flex-1 min-w-0">
-                            <div className="font-medium text-[14px] text-white/60">
+                            <div className="font-medium text-[14px] text-muted-foreground dark:text-white/60">
                               {product.name}
                             </div>
-                            <div className="text-[12.5px] text-white/35 line-clamp-2">
+                            <div className="text-[12.5px] text-muted-foreground/60 dark:text-white/35 line-clamp-2">
                               {product.description}
                             </div>
                           </div>
                         </div>
                         {/* Status Badge */}
                         {product.status && (
-                          <div className="shrink-0 px-2 py-1 rounded-full bg-white/8 border border-white/15 text-[11px] font-medium text-white/50 whitespace-nowrap">
+                          <div className="shrink-0 px-2 py-1 rounded-full bg-muted border border-border text-[11px] font-medium text-muted-foreground dark:bg-white/8 dark:border-white/15 dark:text-white/50 whitespace-nowrap">
                             {product.status}
                           </div>
                         )}
@@ -188,7 +185,7 @@ function SocialsDropdown() {
       className="relative"
     >
       <button
-        className="relative px-3.5 py-2 text-[13.5px] font-medium text-white/55 hover:text-white rounded-lg transition-colors duration-200 group flex items-center gap-1.5"
+        className="relative px-3.5 py-2 text-[13.5px] font-medium text-foreground/70 hover:text-foreground dark:text-white/55 dark:hover:text-white rounded-lg transition-colors duration-200 group flex items-center gap-1.5 cursor-pointer"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
@@ -200,7 +197,7 @@ function SocialsDropdown() {
         >
           <ChevronDown className="w-3.5 h-3.5" />
         </motion.div>
-        <span className="absolute inset-0 rounded-lg bg-white/0 group-hover:bg-white/5 transition-colors duration-200" />
+        <span className="absolute inset-0 rounded-lg bg-foreground/5 dark:bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
       </button>
 
       <AnimatePresence>
@@ -210,23 +207,19 @@ function SocialsDropdown() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.95 }}
             transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-            className="absolute top-full left-0 mt-2 w-56 rounded-xl border border-white/10 bg-[rgba(10,10,22,0.95)] backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.6)] overflow-hidden z-50"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(10,10,22,0.95) 0%, rgba(15,15,30,0.95) 100%)",
-            }}
+            className="absolute top-full left-0 mt-2 w-56 rounded-xl border border-border dark:border-white/10 bg-card/95 dark:bg-[rgba(10,10,22,0.95)] backdrop-blur-xl shadow-xl dark:shadow-[0_10px_40px_rgba(0,0,0,0.6)] overflow-hidden z-50"
           >
             <div className="p-2">
-              {socials.map((s, idx) => (
+              {socials.map((s) => (
                 <motion.a
                   key={s.name}
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-3 px-4 py-3.5 rounded-lg transition-all duration-200 hover:bg-white/6"
+                  className="group flex items-center gap-3 px-4 py-3.5 rounded-lg transition-all duration-200 hover:bg-accent dark:hover:bg-white/6"
                   onClick={() => setIsOpen(false)}
                 >
-                  <div className="w-4 h-4 text-white/50 group-hover:text-[#f5bc35] transition-colors shrink-0">
+                  <div className="w-4 h-4 text-muted-foreground group-hover:text-[#d4920c] dark:text-white/50 dark:group-hover:text-[#f5bc35] transition-colors shrink-0">
                     {s.name === "LinkedIn" ? (
                       <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.85-3.037-1.851 0-2.133 1.445-2.133 2.939v5.667H9.353V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.606 0 4.264 2.372 4.264 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.924 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -237,7 +230,7 @@ function SocialsDropdown() {
                       </svg>
                     )}
                   </div>
-                  <div className="font-medium text-[14px] text-white group-hover:text-[#f5bc35]">
+                  <div className="font-medium text-[14px] text-foreground group-hover:text-[#d4920c] dark:text-white dark:group-hover:text-[#f5bc35]">
                     {s.name}
                   </div>
                 </motion.a>
@@ -252,7 +245,6 @@ function SocialsDropdown() {
 
 function DesktopNav({ navLinks }: { navLinks: NavLink[] }) {
   const t = useTranslations("nav");
-  // Filter out 'products' and 'socials' from navLinks as we handle them separately
   const filteredLinks = navLinks.filter((link) => link.href !== "#products" && link.href !== "#socials");
 
   return (
@@ -260,10 +252,8 @@ function DesktopNav({ navLinks }: { navLinks: NavLink[] }) {
       className="hidden lg:flex items-center gap-0.5"
       aria-label={t("main_nav_aria")}
     >
-      {/* Products Dropdown */}
       <ProductsDropdown />
 
-      {/* Other nav links */}
       {filteredLinks.map((link, i) => (
         <motion.div
           key={link.href}
@@ -277,16 +267,14 @@ function DesktopNav({ navLinks }: { navLinks: NavLink[] }) {
         >
           <Link
             href={link.href}
-            className="relative px-3.5 py-2 text-[13.5px] font-medium text-white/55 hover:text-white rounded-lg transition-colors duration-200 group"
+            className="relative px-3.5 py-2 text-[13.5px] font-medium text-foreground/70 hover:text-foreground dark:text-white/55 dark:hover:text-white rounded-lg transition-colors duration-200 group"
           >
             <span className="relative z-10">{link.label}</span>
-            {/* Hover background */}
-            <span className="absolute inset-0 rounded-lg bg-white/0 group-hover:bg-white/5 transition-colors duration-200" />
+            <span className="absolute inset-0 rounded-lg bg-foreground/5 dark:bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
           </Link>
         </motion.div>
       ))}
 
-      {/* Socials Dropdown */}
       <SocialsDropdown />
     </nav>
   );
@@ -302,7 +290,7 @@ function CTAButton({ ctaLabel }: { ctaLabel: string }) {
     >
       <Link
         href="/contact"
-        className="group flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold text-[#080602] bg-linear-to-r from-[#f5bc35] to-[#d4920c] hover:from-[#f8c94a] hover:to-[#e09d12] transition-all duration-300 hover:shadow-[0_4px_20px_rgba(212,146,12,0.35)] hover:scale-103 active:scale-97"
+        className="group flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold text-[#080602] bg-linear-to-r from-[#f5bc35] to-[#d4920c] hover:from-[#f8c94a] hover:to-[#e09d12] transition-all duration-300 hover:shadow-[0_4px_20px_rgba(212,146,12,0.35)] hover:scale-103 active:scale-97 cursor-pointer select-none"
       >
         {ctaLabel}
         <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -366,7 +354,7 @@ function MobileMenu({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-[#04040c]/60 backdrop-blur-sm"
+            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm dark:bg-[#04040c]/60"
             onClick={onClose}
           />
 
@@ -377,25 +365,25 @@ function MobileMenu({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.98 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-            className="fixed top-4 left-4 right-4 z-50 rounded-2xl border border-white/9 overflow-hidden"
-            style={{
-              background: "rgba(8, 8, 20, 0.96)",
-              backdropFilter: "blur(32px)",
-              WebkitBackdropFilter: "blur(32px)",
-              boxShadow:
-                "0 16px 60px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.06) inset",
-            }}
+            className="fixed top-4 left-4 right-4 z-50 rounded-2xl border border-border dark:border-white/9 overflow-hidden bg-card/95 dark:bg-[rgba(8,8,20,0.96)] backdrop-blur-2xl shadow-2xl"
           >
             {/* Header row */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-white/7">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-border dark:border-white/7">
               <KubarLogo />
-              <button
-                onClick={onClose}
-                className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-white/20 transition-all duration-200"
-                aria-label={closeMenuAria}
-              >
-                <X className="w-4 h-4" />
-              </button>
+              <div className="flex items-center gap-2">
+                <AnimatedThemeToggler
+                  className="w-8 h-8 flex items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-all duration-200 cursor-pointer"
+                  duration={400}
+                  variant="circle"
+                />
+                <button
+                  onClick={onClose}
+                  className="w-8 h-8 rounded-full border border-border dark:border-white/10 flex items-center justify-center text-foreground/70 hover:text-foreground dark:text-white/60 dark:hover:text-white transition-all duration-200"
+                  aria-label={closeMenuAria}
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
             {/* Nav links */}
@@ -412,7 +400,7 @@ function MobileMenu({
               >
                 <button
                   onClick={() => setIsProductsOpen(!isProductsOpen)}
-                  className="flex items-center justify-between w-full px-3 py-3 text-[15px] font-medium text-white/65 hover:text-white rounded-xl hover:bg-white/5 transition-all duration-200"
+                  className="flex items-center justify-between w-full px-3 py-3 text-[15px] font-medium text-foreground/80 dark:text-white/65 hover:text-foreground dark:hover:text-white rounded-xl hover:bg-accent dark:hover:bg-white/5 transition-all duration-200"
                 >
                   <span>{t("products")}</span>
                   <motion.div
@@ -448,27 +436,27 @@ function MobileMenu({
                               <Link
                                 href={product.href}
                                 onClick={onClose}
-                                className="flex flex-col px-3 py-2.5 text-[14px] text-white/60 hover:text-white rounded-lg hover:bg-white/5 transition-all duration-200 group"
+                                className="flex flex-col px-3 py-2.5 text-[14px] text-muted-foreground hover:text-foreground rounded-lg hover:bg-accent dark:hover:bg-white/5 transition-all duration-200 group"
                               >
-                                <span className="font-medium text-white/75 group-hover:text-white">
+                                <span className="font-medium text-foreground/85 dark:text-white/75 group-hover:text-foreground dark:group-hover:text-white">
                                   {product.name}
                                 </span>
-                                <span className="text-[12px] text-white/40 group-hover:text-white/50">
+                                <span className="text-[12px] text-muted-foreground/80 dark:text-white/40 group-hover:text-muted-foreground">
                                   {product.description}
                                 </span>
                               </Link>
                             ) : (
                               <div className="flex items-start justify-between gap-2 px-3 py-2.5 text-[14px] opacity-60">
                                 <div>
-                                  <div className="font-medium text-white/60">
+                                  <div className="font-medium text-muted-foreground dark:text-white/60">
                                     {product.name}
                                   </div>
-                                  <div className="text-[12px] text-white/40">
+                                  <div className="text-[12px] text-muted-foreground/60 dark:text-white/40">
                                     {product.description}
                                   </div>
                                 </div>
                                 {product.status && (
-                                  <div className="shrink-0 px-2 py-1 rounded-full bg-white/8 border border-white/15 text-[10px] font-medium text-white/50 whitespace-nowrap">
+                                  <div className="shrink-0 px-2 py-1 rounded-full bg-muted border border-border text-[10px] font-medium text-muted-foreground whitespace-nowrap">
                                     {product.status}
                                   </div>
                                 )}
@@ -497,7 +485,7 @@ function MobileMenu({
                   <Link
                     href={link.href}
                     onClick={onClose}
-                    className="flex items-center px-3 py-3 text-[15px] font-medium text-white/65 hover:text-white rounded-xl hover:bg-white/5 transition-all duration-200"
+                    className="flex items-center px-3 py-3 text-[15px] font-medium text-foreground/80 dark:text-white/65 hover:text-foreground dark:hover:text-white rounded-xl hover:bg-accent dark:hover:bg-white/5 transition-all duration-200"
                   >
                     {link.label}
                   </Link>
@@ -516,7 +504,7 @@ function MobileMenu({
               >
                 <button
                   onClick={() => setIsSocialsOpen(!isSocialsOpen)}
-                  className="flex items-center justify-between w-full px-3 py-3 text-[15px] font-medium text-white/65 hover:text-white rounded-xl hover:bg-white/5 transition-all duration-200"
+                  className="flex items-center justify-between w-full px-3 py-3 text-[15px] font-medium text-foreground/80 dark:text-white/65 hover:text-foreground dark:hover:text-white rounded-xl hover:bg-accent dark:hover:bg-white/5 transition-all duration-200"
                 >
                   <span>Socials</span>
                   <motion.div
@@ -549,9 +537,9 @@ function MobileMenu({
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={onClose}
-                              className="flex items-center gap-3 px-3 py-2.5 text-[14px] text-white/60 hover:text-white rounded-lg hover:bg-white/5 transition-all duration-200 group"
+                              className="flex items-center gap-3 px-3 py-2.5 text-[14px] text-muted-foreground hover:text-foreground rounded-lg hover:bg-accent dark:hover:bg-white/5 transition-all duration-200 group"
                             >
-                              <div className="w-4 h-4 text-white/50 group-hover:text-[#f5bc35] transition-colors">
+                              <div className="w-4 h-4 text-muted-foreground group-hover:text-[#d4920c] dark:text-white/50 dark:group-hover:text-[#f5bc35] transition-colors">
                                 {s.name === "LinkedIn" ? (
                                   <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.85-3.037-1.851 0-2.133 1.445-2.133 2.939v5.667H9.353V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.606 0 4.264 2.372 4.264 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.924 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -562,7 +550,7 @@ function MobileMenu({
                                   </svg>
                                 )}
                               </div>
-                              <span className="font-medium text-white/75 group-hover:text-white">
+                              <span className="font-medium text-foreground/85 dark:text-white/75 group-hover:text-foreground dark:group-hover:text-white">
                                 {s.name}
                               </span>
                             </a>
@@ -633,7 +621,6 @@ export function Navbar() {
           );
 
           setIsScrolled(scrollY > 24);
-          // Progress for the thin top border line (0 → 1 over the full page scroll)
           const progress = scrollableHeight > 0 ? scrollY / scrollableHeight : 0;
           setScrollProgress(Math.min(Math.max(progress, 0), 1));
           ticking = false;
@@ -667,7 +654,6 @@ export function Navbar() {
     };
   }, []);
 
-  // Close mobile menu on resize to desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
@@ -678,7 +664,6 @@ export function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -696,24 +681,18 @@ export function Navbar() {
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-        style={{
-          background: isScrolled ? "rgba(4, 4, 12, 0.82)" : "transparent",
-          backdropFilter: isScrolled ? "blur(24px) saturate(1.6)" : "none",
-          WebkitBackdropFilter: isScrolled
-            ? "blur(24px) saturate(1.6)"
-            : "none",
-          borderBottom: isScrolled
-            ? "1px solid rgba(255,255,255,0.065)"
-            : "1px solid transparent",
-        }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled
+            ? "bg-background/80 dark:bg-[#04040c]/82 backdrop-blur-xl border-b border-border dark:border-white/7 shadow-sm dark:shadow-none"
+            : "bg-transparent border-b border-transparent"
+        }`}
       >
-        {/* Scroll-progress line at very top */}
+        {/* Scroll-progress line at top */}
         <div
           className="absolute top-0 left-0 h-0.5 bg-gradient-to-r from-[#d4920c] via-[#f5bc35] to-[#d4920c] transition-opacity duration-500"
           style={{
             width: `${scrollProgress * 100}%`,
-            opacity: scrollProgress > 0.02 ? 0.7 : 0,
+            opacity: scrollProgress > 0.02 ? 0.85 : 0,
           }}
         />
 
@@ -733,8 +712,14 @@ export function Navbar() {
               <DesktopNav navLinks={navLinks} />
             </div>
 
-            {/* Right side: CTA + mobile trigger */}
+            {/* Right side: Theme Toggler + CTA + mobile trigger */}
             <div className="flex shrink-0 items-center gap-3">
+              <AnimatedThemeToggler
+                className="w-9 h-9 flex items-center justify-center rounded-full border border-border dark:border-white/12 bg-card/80 dark:bg-white/5 text-foreground dark:text-white hover:bg-secondary dark:hover:bg-white/10 transition-all duration-200 cursor-pointer shadow-xs"
+                duration={450}
+                variant="circle"
+              />
+
               <CTAButton ctaLabel={t("cta")} />
 
               {/* Mobile menu button */}
@@ -743,7 +728,7 @@ export function Navbar() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
                 onClick={() => setIsMobileMenuOpen(true)}
-                className="inline-flex lg:hidden w-9 h-9 shrink-0 rounded-xl border border-white/10 items-center justify-center text-white/85 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all duration-200"
+                className="inline-flex lg:hidden w-9 h-9 shrink-0 rounded-xl border border-border dark:border-white/10 items-center justify-center text-foreground/85 dark:text-white/85 hover:text-foreground dark:hover:text-white hover:bg-accent dark:hover:bg-white/5 transition-all duration-200 cursor-pointer"
                 aria-label={t("open_menu_aria")}
                 aria-expanded={isMobileMenuOpen}
               >
