@@ -49,24 +49,6 @@ const FOUNDER: TeamMember = {
 
 const TEAM_MEMBERS: TeamMember[] = [
   {
-    id: "member-1",
-    name: "Agniva Ray",
-    role: "Co-Founder & COO",
-    description: "People and Internal Systems | 7 YOE | Ex- Govt. Of Goa",
-    image: "/team/agniva.png",
-    linkedin: "https://www.linkedin.com/in/agnivaray/",
-    accentColor: "orange",
-  },
-  {
-    id: "member-2",
-    name: "Ayan Gangopadhyay",
-    role: "Data Science Lead",
-    description: "NLP & Deep Learning Expert | 6 YOE | CUDA and Triton",
-    image: "/team/ayan.png",
-    linkedin: "https://www.linkedin.com/in/ayan-gangopadhyay-426012157/",
-    accentColor: "green",
-  },
-  {
     id: "member-3",
     name: "Rayansh Srivastava",
     role: "Founding Engineer",
@@ -74,15 +56,6 @@ const TEAM_MEMBERS: TeamMember[] = [
     image: "/team/rayansh.png",
     linkedin: "https://www.linkedin.com/in/rayansh-srivastava-419951219/",
     accentColor: "blue",
-  },
-  {
-    id: "member-4",
-    name: "Manchit Sanan",
-    role: "Product & Program Lead",
-    description: "API & Automation Expert | 13 YOE | US Healthcare → Fintech",
-    image: "/team/manchit.png",
-    linkedin: "https://www.linkedin.com/in/manchit-sanan-6b9705158/",
-    accentColor: "purple",
   },
   {
     id: "member-5",
