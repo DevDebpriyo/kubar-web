@@ -76,6 +76,7 @@ export function RoadmapSection() {
 
         onUpdate(self) {
           const p = self.progress;
+          const isDark = document.documentElement.classList.contains("dark");
 
           /* ── Progress fill (direct DOM — zero React cost) ─── */
           if (progressFillRef.current) {
@@ -104,8 +105,12 @@ export function RoadmapSection() {
             } else {
               dot.style.width = "10px";
               dot.style.height = "10px";
-              dot.style.background = "rgba(255,255,255,0.1)";
-              dot.style.border = "1px solid rgba(255,255,255,0.22)";
+              dot.style.background = isDark
+                ? "rgba(255,255,255,0.1)"
+                : "rgba(0,0,0,0.08)";
+              dot.style.border = isDark
+                ? "1px solid rgba(255,255,255,0.22)"
+                : "1px solid rgba(0,0,0,0.2)";
               dot.style.boxShadow = "none";
             }
           });
@@ -116,9 +121,11 @@ export function RoadmapSection() {
             if (i === next) {
               label.style.color = "#d4920c";
             } else if (i < next) {
-              label.style.color = "rgba(19,136,8,0.85)";
+              label.style.color = "#138808";
             } else {
-              label.style.color = "rgba(255,255,255,0.22)";
+              label.style.color = isDark
+                ? "rgba(255,255,255,0.3)"
+                : "rgba(0,0,0,0.4)";
             }
           });
 
@@ -130,10 +137,12 @@ export function RoadmapSection() {
               pill.style.background = "#d4920c";
             } else if (i < next) {
               pill.style.width = "0.4rem";
-              pill.style.background = "rgba(19,136,8,0.65)";
+              pill.style.background = "#138808";
             } else {
               pill.style.width = "0.4rem";
-              pill.style.background = "rgba(255,255,255,0.15)";
+              pill.style.background = isDark
+                ? "rgba(255,255,255,0.2)"
+                : "rgba(0,0,0,0.15)";
             }
           });
 
@@ -150,7 +159,7 @@ export function RoadmapSection() {
         },
       });
 
-      // Refresh ScrollTrigger to account for any layout shifts from Framer Motion
+      // Refresh ScrollTrigger to account for layout shifts
       const timer = setTimeout(() => {
         ScrollTrigger.refresh();
       }, 800);
@@ -170,28 +179,28 @@ export function RoadmapSection() {
      */
     <section
       ref={sectionRef}
-      className="relative w-full bg-[#0a0a0f]"
+      className="relative w-full bg-background transition-colors duration-300"
       style={{ height: "100vh" }}
       aria-label="Roadmap"
     >
       {/* ── Subtle background accents ─────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.22)] via-transparent to-[rgba(0,0,0,0.12)]" />
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.07)] to-transparent" />
-        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.07)] to-transparent" />
+        <div className="absolute inset-0 dark:bg-gradient-to-b dark:from-[rgba(0,0,0,0.22)] dark:via-transparent dark:to-[rgba(0,0,0,0.12)]" />
+        <div className="absolute top-0 inset-x-0 h-px bg-border dark:bg-gradient-to-r dark:from-transparent dark:via-[rgba(255,255,255,0.07)] dark:to-transparent" />
+        <div className="absolute bottom-0 inset-x-0 h-px bg-border dark:bg-gradient-to-r dark:from-transparent dark:via-[rgba(255,255,255,0.07)] dark:to-transparent" />
         {/* Soft ambient glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[rgba(212,146,12,0.03)] rounded-full blur-[80px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#d4920c]/10 dark:bg-[rgba(212,146,12,0.03)] rounded-full blur-[100px]" />
       </div>
 
       {/* ── Inner layout ──────────────────────────────────────── */}
       <div className="relative z-10 h-full flex flex-col max-w-[1400px] mx-auto w-full px-6 sm:px-10 lg:px-16">
         {/* ════════ HEADER ════════════════════════════════════════ */}
         <div className="flex-shrink-0 pt-[68px] sm:pt-[50px] flex flex-col items-center text-center">
-          <div className="about-badge inline-flex bg-[rgba(19,136,8,0.07)] border-[rgba(19,136,8,0.28)] text-[rgba(19,136,8,0.9)] mb-3">
-            <Compass className="w-3 h-3 mr-1.5" />
+          <div className="about-badge inline-flex bg-[#138808]/10 border-[#138808]/30 text-[#138808] font-bold mb-3">
+            <Compass className="w-3.5 h-3.5 mr-1.5" />
             ROADMAP
           </div>
-          <h2 className="text-[36px] sm:text-[48px] lg:text-[56px] font-extrabold text-white tracking-tight leading-none">
+          <h2 className="text-[36px] sm:text-[48px] lg:text-[56px] font-extrabold text-foreground dark:text-white tracking-tight leading-none">
             Roadmap
           </h2>
           <motion.div
@@ -224,7 +233,10 @@ export function RoadmapSection() {
                   }}
                   className="text-[10px] font-bold tracking-[0.16em] uppercase transition-colors duration-300 whitespace-nowrap"
                   style={{
-                    color: i === 0 ? "#d4920c" : "rgba(255,255,255,0.22)",
+                    color:
+                      i === 0
+                        ? "#d4920c"
+                        : "var(--muted-foreground)",
                   }}
                 >
                   {roadItem.label}
@@ -234,7 +246,7 @@ export function RoadmapSection() {
           </div>
 
           {/* Track */}
-          <div className="relative h-[2px] rounded-full bg-[rgba(255,255,255,0.07)]">
+          <div className="relative h-[2px] rounded-full bg-border dark:bg-[rgba(255,255,255,0.07)]">
             {/* Animated progress fill */}
             <div
               ref={progressFillRef}
@@ -243,7 +255,7 @@ export function RoadmapSection() {
                 width: "0%",
                 background:
                   "linear-gradient(to right, #138808 0%, #d4920c 100%)",
-                boxShadow: "0 0 8px rgba(212,146,12,0.28)",
+                boxShadow: "0 0 12px rgba(212,146,12,0.35)",
                 transition: "none",
               }}
             />
@@ -274,8 +286,8 @@ export function RoadmapSection() {
                       : {
                           width: "10px",
                           height: "10px",
-                          background: "rgba(255,255,255,0.1)",
-                          border: "1px solid rgba(255,255,255,0.22)",
+                          background: "var(--muted)",
+                          border: "1px solid var(--border)",
                           transition:
                             "width 0.4s ease, height 0.4s ease, background 0.4s ease, box-shadow 0.4s ease",
                         }
@@ -298,12 +310,7 @@ export function RoadmapSection() {
                   animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, x: 40, filter: "blur(10px)" }}
                   transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                  className="font-extrabold leading-[0.85] tracking-tight whitespace-pre-line select-none"
-                  style={{
-                    fontSize: "clamp(58px, 6vw, 92px)",
-                    color: "transparent",
-                    WebkitTextStroke: "1px rgba(255,255,255,0.08)",
-                  }}
+                  className="roadmap-category-watermark font-extrabold leading-[0.85] tracking-tight whitespace-pre-line select-none"
                 >
                   {item.category}
                 </motion.p>
@@ -311,7 +318,7 @@ export function RoadmapSection() {
             </div>
 
             {/* ── Vertical divider (desktop) ───────────────────── */}
-            <div className="hidden lg:block w-px self-stretch my-6 bg-gradient-to-b from-transparent via-[rgba(255,255,255,0.09)] to-transparent" />
+            <div className="hidden lg:block w-px self-stretch my-6 bg-border dark:bg-gradient-to-b dark:from-transparent dark:via-[rgba(255,255,255,0.09)] dark:to-transparent" />
 
             {/* ── Right: info panel ────────────────────────────── */}
             <div>
@@ -325,29 +332,27 @@ export function RoadmapSection() {
                   className="space-y-3 sm:space-y-4"
                 >
                   {/* Mobile-only phase label */}
-                  <p className="lg:hidden text-[9px] font-bold tracking-[0.18em] uppercase text-[rgba(19,136,8,0.85)]">
+                  <p className="lg:hidden text-[9px] font-bold tracking-[0.18em] uppercase text-[#138808]">
                     {item.category.replace("\n", " ")}
                   </p>
 
                   {/* Counter + title */}
                   <div className="flex items-baseline gap-3 sm:gap-5">
                     <span
-                      className="font-black leading-none tabular-nums flex-shrink-0"
+                      className="font-black leading-none tabular-nums flex-shrink-0 text-[#d4920c]/30 dark:text-[rgba(212,146,12,0.17)]"
                       style={{
-                        /* Smaller on mobile so it doesn't push the title off-screen */
                         fontSize: "clamp(38px, 5.5vw, 76px)",
-                        color: "rgba(212,146,12,0.17)",
                       }}
                     >
                       {pad(activeIndex + 1)}
                     </span>
-                    <h3 className="text-[18px] sm:text-[24px] lg:text-[30px] font-bold text-white leading-tight">
+                    <h3 className="text-[18px] sm:text-[24px] lg:text-[30px] font-bold text-foreground dark:text-white leading-tight">
                       {item.title}
                     </h3>
                   </div>
 
-                  {/* Description — limit lines on mobile so it doesn't overflow 100 vh */}
-                  <p className="text-[rgba(255,255,255,0.6)] text-[13px] sm:text-[16px] lg:text-[17px] leading-relaxed max-w-[540px] line-clamp-4 sm:line-clamp-none">
+                  {/* Description */}
+                  <p className="text-muted-foreground dark:text-[rgba(255,255,255,0.6)] text-[13px] sm:text-[16px] lg:text-[17px] leading-relaxed max-w-[540px] line-clamp-4 sm:line-clamp-none">
                     {item.description}
                   </p>
                 </motion.div>
@@ -359,14 +364,11 @@ export function RoadmapSection() {
         {/* ════════ COUNTER FOOTER ════════════════════════════════ */}
         <div className="flex-shrink-0 pb-4 sm:pb-8 flex items-center gap-4">
           {/* "01 of 04" label */}
-          <span
-            className="text-sm font-medium tracking-wider tabular-nums"
-            style={{ color: "rgba(255,255,255,0.32)" }}
-          >
+          <span className="text-muted-foreground dark:text-white/40 text-sm font-medium tracking-wider tabular-nums">
             <span
               ref={counterRef}
-              className="font-bold"
-              style={{ fontSize: "15px", color: "#d4920c" }}
+              className="font-bold text-[#d4920c]"
+              style={{ fontSize: "15px" }}
             >
               01
             </span>{" "}
@@ -384,7 +386,7 @@ export function RoadmapSection() {
                 className="h-[3px] rounded-full"
                 style={{
                   width: i === 0 ? "1.5rem" : "0.4rem",
-                  background: i === 0 ? "#d4920c" : "rgba(255,255,255,0.15)",
+                  background: i === 0 ? "#d4920c" : "var(--border)",
                   transition: "width 0.4s ease, background 0.4s ease",
                 }}
               />

@@ -57,10 +57,31 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${geistMono.variable} dark`}
+      className={`${plusJakartaSans.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-dvh overflow-x-hidden bg-[#04040c] text-[#f0f0f0] antialiased">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('theme');
+                  if (saved === 'dark') {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                    if (!saved) {
+                      localStorage.setItem('theme', 'light');
+                    }
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-dvh overflow-x-hidden bg-background text-foreground antialiased transition-colors duration-300">
         <NextIntlClientProvider messages={messages}>
           <LenisProvider>{children}</LenisProvider>
         </NextIntlClientProvider>

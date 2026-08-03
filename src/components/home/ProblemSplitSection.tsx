@@ -17,7 +17,7 @@ function ProblemCard({ title, subtitle, bullets, accent, index }: ProblemCardPro
       ? "from-[#f5bc35]/35 via-[#d4920c]/12 to-transparent"
       : "from-[#4a84ff]/28 via-[#4a84ff]/10 to-transparent";
 
-  const bulletDotClass = accent === "gold" ? "bg-[#d4920c]/80" : "bg-[#4a84ff]/75";
+  const bulletDotClass = accent === "gold" ? "bg-[#d4920c]" : "bg-[#3b82f6]";
 
   return (
     <motion.article
@@ -26,11 +26,7 @@ function ProblemCard({ title, subtitle, bullets, accent, index }: ProblemCardPro
       viewport={{ once: true, amount: 0.35 }}
       transition={{ duration: 0.7, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
       whileHover={{ y: -6, scale: 1.01 }}
-      className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[rgba(10,10,22,0.88)] px-6 py-7 sm:px-8 sm:py-8 lg:px-9 lg:py-9 backdrop-blur-xl"
-      style={{
-        boxShadow:
-          "0 10px 40px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.05) inset",
-      }}
+      className="group relative overflow-hidden rounded-3xl border border-border dark:border-white/10 bg-card/90 dark:bg-[rgba(10,10,22,0.88)] px-6 py-7 sm:px-8 sm:py-8 lg:px-9 lg:py-9 backdrop-blur-xl shadow-lg dark:shadow-[0_10px_40px_rgba(0,0,0,0.45)]"
     >
       <div
         className={`pointer-events-none absolute inset-x-0 top-0 h-22 bg-linear-to-b ${accentClass}`}
@@ -38,11 +34,11 @@ function ProblemCard({ title, subtitle, bullets, accent, index }: ProblemCardPro
       />
 
       <div className="relative z-10">
-        <h3 className="text-[28px] sm:text-[32px] font-bold tracking-[-0.02em] text-white leading-[1.08]">
+        <h3 className="text-[28px] sm:text-[32px] font-bold tracking-[-0.02em] text-foreground dark:text-white leading-[1.08]">
           {title}
         </h3>
 
-        <p className="mt-4 text-[17px] leading-[1.65] text-white/66 max-w-[60ch] text-pretty">
+        <p className="mt-4 text-[17px] leading-[1.65] text-muted-foreground dark:text-white/66 max-w-[60ch] text-pretty">
           {subtitle}
         </p>
 
@@ -64,7 +60,7 @@ function ProblemCard({ title, subtitle, bullets, accent, index }: ProblemCardPro
                 className={`mt-2.25 h-1.5 w-1.5 shrink-0 rounded-full ${bulletDotClass}`}
                 aria-hidden="true"
               />
-              <span className="text-[15px] sm:text-[16px] leading-[1.58] text-white/58">
+              <span className="text-[15px] sm:text-[16px] leading-[1.58] text-foreground/80 dark:text-white/58">
                 {bullet}
               </span>
             </motion.li>
@@ -131,7 +127,7 @@ export function ProblemSplitSection() {
         className="relative z-10 mx-auto mt-12 w-full max-w-4xl sm:mt-14"
       >
         <div className="relative mb-6 h-4 sm:mb-7">
-          <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-linear-to-r from-transparent via-white/24 to-transparent" />
+          <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-linear-to-r from-transparent via-border dark:via-white/24 to-transparent" />
           <motion.span
             aria-hidden="true"
             className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
@@ -144,7 +140,7 @@ export function ProblemSplitSection() {
           />
         </div>
 
-        <h4 className="text-center text-[32px] leading-[1.15] font-bold tracking-[-0.02em] text-white sm:text-[42px]">
+        <h4 className="text-center text-[32px] leading-[1.15] font-bold tracking-[-0.02em] text-foreground dark:text-white sm:text-[42px]">
           {t("conclusion")}
         </h4>
       </motion.div>

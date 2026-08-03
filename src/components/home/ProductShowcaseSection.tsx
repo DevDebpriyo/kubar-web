@@ -42,11 +42,7 @@ function MetricCard({ value, label, index }: MetricCardProps) {
       viewport={{ once: true, amount: 0.35 }}
       transition={{ duration: 0.65, delay: 0.12 + index * 0.1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
       whileHover={{ y: -6, scale: 1.015 }}
-      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[rgba(10,10,22,0.86)] px-6 py-7 sm:px-8 sm:py-8"
-      style={{
-        boxShadow:
-          "0 10px 36px rgba(0,0,0,0.42), 0 1px 0 rgba(255,255,255,0.06) inset",
-      }}
+      className="group relative overflow-hidden rounded-2xl border border-border dark:border-white/10 bg-card/90 dark:bg-[rgba(10,10,22,0.86)] px-6 py-7 sm:px-8 sm:py-8 shadow-md dark:shadow-[0_10px_36px_rgba(0,0,0,0.42)]"
     >
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-16 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -56,7 +52,7 @@ function MetricCard({ value, label, index }: MetricCardProps) {
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute right-0 top-0 h-14 w-14 rounded-bl-2xl border-b border-l border-white/10 opacity-65"
+        className="pointer-events-none absolute right-0 top-0 h-14 w-14 rounded-bl-2xl border-b border-l border-border dark:border-white/10 opacity-65"
         aria-hidden="true"
       />
       <motion.div
@@ -67,10 +63,10 @@ function MetricCard({ value, label, index }: MetricCardProps) {
         style={{ backgroundColor: accent.solid, boxShadow: `0 0 12px ${accent.glow}` }}
       />
       <div className="relative z-10">
-        <p className="text-[42px] sm:text-[48px] leading-none font-black tracking-[-0.035em] text-white stat-value">
+        <p className="text-[42px] sm:text-[48px] leading-none font-black tracking-[-0.035em] text-foreground dark:text-white stat-value">
           {value}
         </p>
-        <p className="mt-3.5 text-[14px] sm:text-[15px] leading-[1.55] text-white/58">
+        <p className="mt-3.5 text-[14px] sm:text-[15px] leading-[1.55] text-muted-foreground dark:text-white/58">
           {label}
         </p>
       </div>
@@ -94,13 +90,7 @@ export function ProductShowcaseSection() {
       className="relative overflow-hidden px-5 pb-18 pt-8 sm:px-8 sm:pb-22 sm:pt-10 lg:px-10 lg:pb-26"
     >
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.16]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.14) 1px, transparent 0)",
-          backgroundSize: "28px 28px",
-          maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.8), transparent 92%)",
-        }}
+        className="pointer-events-none absolute inset-0 opacity-[0.16] dot-grid"
         aria-hidden="true"
       />
       <motion.div
@@ -123,19 +113,8 @@ export function ProductShowcaseSection() {
         }}
         aria-hidden="true"
       />
-      <motion.div
-        className="pointer-events-none absolute h-64 w-64 rounded-full"
-        animate={{ x: [0, 14, 0], y: [0, -12, 0], opacity: [0.1, 0.2, 0.1] }}
-        transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-        style={{
-          right: "24%",
-          top: "24%",
-          background: "radial-gradient(circle, rgba(19,136,8,0.16) 0%, transparent 72%)",
-          filter: "blur(48px)",
-        }}
-        aria-hidden="true"
-      />
-      <div className="relative z-10 mx-auto w-full max-w-7xl rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(11,11,24,0.92)_0%,rgba(8,8,18,0.88)_100%)] px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-11">
+
+      <div className="relative z-10 mx-auto w-full max-w-7xl rounded-[30px] border border-border dark:border-white/8 bg-card/95 dark:bg-[linear-gradient(180deg,rgba(11,11,24,0.92)_0%,rgba(8,8,18,0.88)_100%)] px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-11 shadow-xl">
         <div
           className="pointer-events-none absolute inset-x-8 top-0 h-px"
           style={{
@@ -152,9 +131,9 @@ export function ProductShowcaseSection() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           className="mx-auto max-w-4xl text-center"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/2 px-3 py-1.5">
-            <Sparkles className="h-3.5 w-3.5 text-[#d4920c]/85" />
-            <p className="text-[10.5px] font-semibold tracking-[0.24em] text-white/44 uppercase">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border dark:border-white/12 bg-secondary dark:bg-white/2 px-3 py-1.5">
+            <Sparkles className="h-3.5 w-3.5 text-[#d4920c]" />
+            <p className="text-[10.5px] font-semibold tracking-[0.24em] text-foreground/70 dark:text-white/44 uppercase">
               {t("eyebrow")}
             </p>
           </div>
@@ -165,16 +144,16 @@ export function ProductShowcaseSection() {
               alt="NavDhan"
               width={800}
               height={260}
-              className="h-[120px] sm:h-[180px] md:h-[220px] w-auto object-contain drop-shadow-2xl"
+              className="h-[120px] sm:h-[180px] md:h-[220px] w-auto object-contain drop-shadow-xl"
             />
           </div>
-          <p className="mx-auto mt-2 max-w-3xl text-[18px] leading-[1.65] text-white/64 text-pretty">
+          <p className="mx-auto mt-2 max-w-3xl text-[18px] leading-[1.65] text-muted-foreground dark:text-white/64 text-pretty">
             {t("subtitle")}
           </p>
         </motion.div>
 
         <div className="pointer-events-none relative mx-auto mt-8 hidden h-10 max-w-5xl items-center sm:flex">
-          <div className="h-px w-full bg-linear-to-r from-transparent via-white/16 to-transparent" />
+          <div className="h-px w-full bg-linear-to-r from-transparent via-border dark:via-white/16 to-transparent" />
           <div
             className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
             style={{

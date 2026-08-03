@@ -12,13 +12,11 @@ function LoanApprovalCard() {
 
   return (
     <div className="absolute top-2 right-0 z-20 w-52">
-      {/* Float layer */}
       <motion.div
         animate={{ y: [0, -12, 0] }}
         transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
         style={{ willChange: "transform" }}
       >
-        {/* Entrance + hover layer */}
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.94 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -33,13 +31,13 @@ function LoanApprovalCard() {
           {/* Top row */}
           <div className="flex items-start gap-2.5 mb-3.5">
             <div className="w-7 h-7 rounded-full bg-green-500/12 border border-green-500/25 flex items-center justify-center shrink-0 mt-0.5">
-              <CheckCircle className="w-3.5 h-3.5 text-green-400" />
+              <CheckCircle className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-[10.5px] text-white/45 font-medium uppercase tracking-[0.08em] mb-0.5">
+              <div className="text-[10.5px] text-muted-foreground dark:text-white/45 font-medium uppercase tracking-[0.08em] mb-0.5">
                 {t("label")}
               </div>
-              <div className="text-white font-black text-[18px] tracking-[-0.03em] leading-none stat-value">
+              <div className="text-foreground dark:text-white font-black text-[18px] tracking-[-0.03em] leading-none stat-value">
                 {t("amount")}
               </div>
             </div>
@@ -47,8 +45,8 @@ function LoanApprovalCard() {
 
           {/* Processing time */}
           <div className="flex items-center justify-between text-[11px] mb-2.5">
-            <span className="text-white/40">{t("processing_label")}</span>
-            <span className="text-green-400 font-semibold">
+            <span className="text-muted-foreground dark:text-white/40">{t("processing_label")}</span>
+            <span className="text-green-600 dark:text-green-400 font-semibold">
               {t("processing_time")}
             </span>
           </div>
@@ -56,12 +54,12 @@ function LoanApprovalCard() {
           {/* Match score bar */}
           <div>
             <div className="flex justify-between text-[10.5px] mb-1.5">
-              <span className="text-white/38">{t("match_label")}</span>
-              <span className="font-semibold" style={{ color: "#f0b429" }}>
+              <span className="text-muted-foreground dark:text-white/38">{t("match_label")}</span>
+              <span className="font-semibold text-[#d4920c] dark:text-[#f0b429]">
                 {t("match_value")}
               </span>
             </div>
-            <div className="h-0.75 bg-white/6.5 rounded-full overflow-hidden">
+            <div className="h-0.75 bg-muted dark:bg-white/6.5 rounded-full overflow-hidden">
               <motion.div
                 className="h-full rounded-full"
                 style={{
@@ -92,7 +90,6 @@ function CreditIntelligenceCard() {
 
   return (
     <div className="absolute top-23.5 left-0 z-10 w-67">
-      {/* Float layer */}
       <motion.div
         animate={{ y: [0, -10, 0] }}
         transition={{
@@ -103,7 +100,6 @@ function CreditIntelligenceCard() {
         }}
         style={{ willChange: "transform" }}
       >
-        {/* Entrance + hover layer */}
         <motion.div
           initial={{ opacity: 0, y: 28, scale: 0.94 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -118,22 +114,22 @@ function CreditIntelligenceCard() {
           {/* Header */}
           <div className="flex items-start justify-between mb-4">
             <div>
-              <div className="text-[10.5px] text-white/40 font-medium uppercase tracking-[0.08em] mb-1">
+              <div className="text-[10.5px] text-muted-foreground dark:text-white/40 font-medium uppercase tracking-[0.08em] mb-1">
                 {t("header")}
               </div>
-              <div className="text-white font-semibold text-[13.5px] leading-tight">
+              <div className="text-foreground dark:text-white font-semibold text-[13.5px] leading-tight">
                 {t("msme_name")}
               </div>
             </div>
             <div className="w-8 h-8 rounded-xl bg-[#d4920c]/14 border border-[#d4920c]/28 flex items-center justify-center shrink-0">
-              <TrendingUp className="w-3.5 h-3.5 text-[#f0b429]" />
+              <TrendingUp className="w-3.5 h-3.5 text-[#d4920c] dark:text-[#f0b429]" />
             </div>
           </div>
 
           {/* Score row */}
           <div className="flex items-end gap-2.5 mb-3.5">
             <div>
-              <div className="text-white/38 text-[10.5px] mb-0.5">
+              <div className="text-muted-foreground dark:text-white/38 text-[10.5px] mb-0.5">
                 {t("score_label")}
               </div>
               <motion.div
@@ -144,18 +140,17 @@ function CreditIntelligenceCard() {
                   delay: 1.2,
                   ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
                 }}
-                className="text-[32px] font-black tracking-[-0.04em] leading-none stat-value"
-                style={{ color: "#f0b429" }}
+                className="text-[32px] font-black tracking-[-0.04em] leading-none stat-value text-[#d4920c] dark:text-[#f0b429]"
               >
                 {t("score")}
               </motion.div>
             </div>
             <div className="pb-1">
-              <div className="flex items-center gap-0.5 text-[11px] font-semibold text-green-400">
+              <div className="flex items-center gap-0.5 text-[11px] font-semibold text-green-600 dark:text-green-400">
                 <ArrowUpRight className="w-3 h-3" />
                 <span>{t("change")}</span>
               </div>
-              <div className="text-[10px] text-white/28 mt-0.5">
+              <div className="text-[10px] text-muted-foreground/70 dark:text-white/28 mt-0.5">
                 {t("change_period")}
               </div>
             </div>
@@ -166,13 +161,13 @@ function CreditIntelligenceCard() {
             {bars.map((h, i) => (
               <motion.div
                 key={i}
-                className="flex-1 rounded-0.75 origin-bottom"
+                className="flex-1 rounded-0.75 origin-bottom bg-slate-200 dark:bg-white/10"
                 style={{
                   height: `${(h / 100) * 36}px`,
                   background:
                     i === 5
                       ? "linear-gradient(180deg, #f5bc35 0%, #d4920c 100%)"
-                      : "rgba(255,255,255,0.1)",
+                      : undefined,
                 }}
                 initial={{ scaleY: 0 }}
                 animate={{ scaleY: 1 }}
@@ -186,17 +181,14 @@ function CreditIntelligenceCard() {
           </div>
 
           {/* Divider */}
-          <div className="h-px bg-white/6 mb-3" />
+          <div className="h-px bg-border dark:bg-white/6 mb-3" />
 
           {/* Best rate */}
           <div className="flex items-center justify-between">
-            <span className="text-white/38 text-[11px]">
+            <span className="text-muted-foreground dark:text-white/38 text-[11px]">
               {t("rate_label")}
             </span>
-            <span
-              className="text-[13px] font-bold tracking-[-0.01em]"
-              style={{ color: "#f0b429" }}
-            >
+            <span className="text-[13px] font-bold tracking-[-0.01em] text-[#d4920c] dark:text-[#f0b429]">
               {t("rate")}
             </span>
           </div>
@@ -218,7 +210,6 @@ function NBFCNetworkCard() {
 
   return (
     <div className="absolute bottom-8 right-2 z-15 w-57">
-      {/* Float layer */}
       <motion.div
         animate={{ y: [0, -11, 0] }}
         transition={{
@@ -229,7 +220,6 @@ function NBFCNetworkCard() {
         }}
         style={{ willChange: "transform" }}
       >
-        {/* Entrance + hover layer */}
         <motion.div
           initial={{ opacity: 0, y: 18, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -244,7 +234,6 @@ function NBFCNetworkCard() {
           {/* Status row */}
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              {/* Pulsing dot */}
               <div className="relative w-4 h-4 flex items-center justify-center">
                 <motion.div
                   className="absolute w-4 h-4 rounded-full bg-green-500/20"
@@ -258,13 +247,13 @@ function NBFCNetworkCard() {
                     ease: "easeOut",
                   }}
                 />
-                <div className="w-2 h-2 rounded-full bg-green-400" />
+                <div className="w-2 h-2 rounded-full bg-green-500 dark:bg-green-400" />
               </div>
-              <span className="text-white font-semibold text-[13px]">
+              <span className="text-foreground dark:text-white font-semibold text-[13px]">
                 {t("status")}
               </span>
             </div>
-            <Zap className="w-3.5 h-3.5 text-[#f0b429]" />
+            <Zap className="w-3.5 h-3.5 text-[#d4920c] dark:text-[#f0b429]" />
           </div>
 
           {/* Lender list */}
@@ -286,17 +275,16 @@ function NBFCNetworkCard() {
                     className="w-1.5 h-1.5 rounded-full shrink-0"
                     style={{ background: l.dot }}
                   />
-                  <span className="text-white/55 text-[11.5px]">{l.name}</span>
+                  <span className="text-muted-foreground dark:text-white/55 text-[11.5px]">{l.name}</span>
                 </div>
-                <span className="text-white/80 text-[11.5px] font-medium">
+                <span className="text-foreground/80 dark:text-white/80 text-[11.5px] font-medium">
                   {l.amount}
                 </span>
               </motion.div>
             ))}
-            {/* More hint */}
             <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-white/15 shrink-0" />
-              <span className="text-white/25 text-[11px]">{t("more")}</span>
+              <div className="w-1.5 h-1.5 rounded-full bg-border dark:bg-white/15 shrink-0" />
+              <span className="text-muted-foreground/60 dark:text-white/25 text-[11px]">{t("more")}</span>
             </div>
           </div>
         </motion.div>
@@ -311,16 +299,8 @@ function NBFCNetworkCard() {
 export function FloatingCards() {
   return (
     <div className="relative w-full h-full">
-      {/* Hex-grid decorative background */}
-      <div
-        className="absolute inset-0 rounded-2xl opacity-28"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='48' viewBox='0 0 56 48'%3E%3Cpath d='M0 24L14 0h28L56 24L42 48H14Z' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='0.7'/%3E%3C/svg%3E")`,
-          backgroundSize: "56px 48px",
-        }}
-      />
+      <div className="absolute inset-0 rounded-2xl hex-grid opacity-50 dark:opacity-28" />
 
-      {/* Decorative SVG connector lines */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
         aria-hidden="true"
@@ -339,7 +319,6 @@ export function FloatingCards() {
           </linearGradient>
         </defs>
 
-        {/* Card 1 ↔ Card 2 connector */}
         <line
           x1="62%"
           y1="22%"
@@ -351,7 +330,6 @@ export function FloatingCards() {
           className="line-flow"
           style={{ animationDelay: "0.4s" }}
         />
-        {/* Card 2 ↔ Card 3 connector */}
         <line
           x1="52%"
           y1="60%"
@@ -365,12 +343,10 @@ export function FloatingCards() {
         />
       </svg>
 
-      {/* Cards — render order: back to front */}
       <CreditIntelligenceCard />
       <LoanApprovalCard />
       <NBFCNetworkCard />
 
-      {/* Ambient glow beneath cards */}
       <div
         className="absolute rounded-full pointer-events-none"
         style={{
