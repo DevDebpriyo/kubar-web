@@ -49,24 +49,6 @@ const FOUNDER: TeamMember = {
 
 const TEAM_MEMBERS: TeamMember[] = [
   {
-    id: "member-1",
-    name: "Agniva Ray",
-    role: "Co-Founder & COO",
-    description: "People and Internal Systems | 7 YOE | Ex- Govt. Of Goa",
-    image: "/team/agniva.png",
-    linkedin: "https://www.linkedin.com/in/agnivaray/",
-    accentColor: "orange",
-  },
-  {
-    id: "member-2",
-    name: "Ayan Gangopadhyay",
-    role: "Data Science Lead",
-    description: "NLP & Deep Learning Expert | 6 YOE | CUDA and Triton",
-    image: "/team/ayan.png",
-    linkedin: "https://www.linkedin.com/in/ayan-gangopadhyay-426012157/",
-    accentColor: "green",
-  },
-  {
     id: "member-3",
     name: "Rayansh Srivastava",
     role: "Founding Engineer",
@@ -121,16 +103,6 @@ const TEAM_MEMBERS: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/mridulmalani/",
     accentColor: "pink",
   },
-  {
-    id: "member-10",
-    name: "Parth Ahuja",
-    role: "Junior Engineer/Developer",
-    description: "Ashoka University CS | Full-Stack & Systems Dev",
-    image: "/team/parth.png",
-    linkedin: "https://linkedin.com",
-    accentColor: "cyan",
-  },
-  
 ];
 
 const ADVISORS: TeamMember[] = [
@@ -142,15 +114,6 @@ const ADVISORS: TeamMember[] = [
       "/advisors/debayan.png",
     linkedin: "https://linkedin.com",
     accentColor: "orange",
-  },
-  {
-    id: "advisor-2",
-    name: "Sandeep Juneja",
-    description: "Director, Centre for Data - Ashoka University | Expert in AI & financial mathematics",
-    image:
-      "/advisors/sandeep.png",
-    linkedin: "https://linkedin.com",
-    accentColor: "green",
   },
   {
     id: "advisor-3",

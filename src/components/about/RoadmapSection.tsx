@@ -16,14 +16,14 @@ const ROADMAP_ITEMS = [
     category: "Foundation\nPhase",
     title: "Market Context",
     description:
-      "India's MSME credit segment is severely under-penetrated. DSAs were meant to bridge the gap between financial institutions and MSMEs — but their processes remain manual, and local reach limits their impact at scale.",
+      "India's MSME credit segment is severely under-penetrated. DSAs were meant to bridge the gap between financial institutions and MSMEs, but their processes remain manual, and local reach limits their impact at scale.",
   },
   {
     label: "NavDhan",
     category: "Building\nPhase",
     title: "NavDhan Launch",
     description:
-      "Becoming India's largest Agentic DSA — replacing manual outreach with AI-driven tools, India Stack APIs for frictionless data collection, and API-first LOS integration for consistent, high-volume borrower delivery.",
+      "Becoming India's largest Embedded Credit Origination Platform by replacing manual outreach with AI-driven tools, India Stack APIs for frictionless data collection, and API-first LOS integration for consistent, high-volume borrower delivery.",
   },
   {
     label: "Scale Up",
@@ -37,7 +37,7 @@ const ROADMAP_ITEMS = [
     category: "Innovation\nPhase",
     title: "Kubar Protocol",
     description:
-      "Pursuing R&D on Kubar Protocol — tokenising trade finance assets like LoCs, eBLs, and SBLs into globally compliant digital assets for efficient cross-border financing, incubated within the GIFT City ecosystem.",
+      "Pursuing R&D on Kubar Protocol: tokenising trade finance assets like LoCs, eBLs, and SBLs into globally compliant digital assets for efficient cross-border financing, incubated within the GIFT City ecosystem.",
   },
 ];
 

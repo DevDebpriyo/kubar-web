@@ -7,9 +7,9 @@
 # ── Site-wide metadata ──────────────────────────────────────────
 site:
   name: "Kubar Labs"
-  title: "Kubar Labs — Credit Infrastructure for India's MSMEs"
+  title: "Kubar Labs: Credit Infrastructure for India's MSMEs"
   description: "India's first embedded, plug-and-play MSME credit marketplace. Helping NBFCs lend faster, smarter, and at scale while making credit access seamless for millions of MSMEs."
-  og_title: "Kubar Labs — Credit Infrastructure for India's MSMEs"
+  og_title: "Kubar Labs: Credit Infrastructure for India's MSMEs"
   og_description: "India's first embedded, plug-and-play MSME credit marketplace. Helping NBFCs lend faster, smarter, and at scale."
   twitter_description: "India's first embedded, plug-and-play MSME credit marketplace."
   locale: "en_IN"
@@ -112,7 +112,7 @@ problems:
     bullets:
       1: "Sellers abandon high-value orders due to lack of working capital"
       2: "GMV leaks out of your platform"
-      3: "Seller retention drops — they leave for platforms that offer financing"
+      3: "Seller retention drops because they leave for platforms that offer financing"
 
   lender:
     title: "The Lender Problem"
@@ -211,14 +211,14 @@ two_outcomes:
         description: "Embedded financing becomes a reason sellers choose and stay on your platform."
       3:
         title: "New Revenue Stream"
-        description: "Earn a share on every loan facilitated through your platform — with zero hosting risk."
+        description: "Earn a share on every loan facilitated through your platform, with zero hosting risk."
       4:
         title: "Zero Development Cost"
         description: "Plug-and-play APIs and SDKs. We handle all credit infrastructure and compliance."
   
   institutions:
     tab: "For Financial Institutions"
-    subtitle: "Deploy capital where it matters — profitably, at scale."
+    subtitle: "Deploy capital where it matters: profitably and at scale."
     cta: "Schedule a Discovery Call"
     cta_email: "partnerships@kubar.tech"
     
@@ -234,7 +234,7 @@ two_outcomes:
         description: "We automate your MSME lending workflows, freeing your team for high-value tasks while you retain control over credit decisions."
       4:
         title: "Compliance-First Architecture"
-        description: "RBI Digital Lending Guidelines, DPDP Act, Account Aggregator framework — all built in."
+        description: "RBI Digital Lending Guidelines, DPDP Act, and the Account Aggregator framework, all built in."
 
 # ── Built for Trust section ────────────────────────────────────
 built_for_trust:
@@ -295,11 +295,11 @@ products:
   section_label: "Products section"
   eyebrow: "What We Build"
   title: "One Protocol. Infinite Credit Possibilities."
-  subtitle: "Kubar Labs provides the infrastructure layer that makes embedded MSME credit a reality — for both lenders and borrowers."
+  subtitle: "Kubar Labs provides the infrastructure layer that makes embedded MSME credit a reality for both lenders and borrowers."
 
   embedded_credit:
     title: "Embedded Credit Marketplace"
-    description: "A plug-and-play API suite that lets any platform embed credit products directly into their user journey — no complex integrations required."
+    description: "A plug-and-play API suite that lets any platform embed credit products directly into their user journey, with no complex integrations required."
 
   unified_scoring:
     title: "Unified Multi-Rail Scoring"
@@ -307,7 +307,7 @@ products:
 
   nbfc_infrastructure:
     title: "NBFC Lending Infrastructure"
-    description: "Give your NBFC a complete digital lending stack — from origination and underwriting to disbursement and collections — all via API."
+    description: "Give your NBFC a complete digital lending stack, from origination and underwriting to disbursement and collections, all via API."
 
 # ── For NBFCs section (placeholder for future) ──────────────────
 nbfcs:
@@ -318,7 +318,7 @@ nbfcs:
 
   benefit_1:
     title: "Instant MSME Reach"
-    description: "Tap into a pre-verified network of MSMEs across sectors and geographies — without building distribution from scratch."
+    description: "Tap into a pre-verified network of MSMEs across sectors and geographies without building distribution from scratch."
 
   benefit_2:
     title: "Data-Driven Underwriting"
@@ -333,7 +333,7 @@ msmes:
   section_label: "For MSMEs section"
   eyebrow: "For MSMEs"
   title: "Get the Credit Your Business Deserves."
-  subtitle: "Kubar Labs connects your business to the best credit sources at the best rates — right where you already do business."
+  subtitle: "Kubar Labs connects your business to the best credit sources at the best rates, right where you already do business."
 
   benefit_1:
     title: "Credit at Point of Business"
@@ -417,13 +417,13 @@ common:
 
 # ── About page ────────────────────────────────────────────────
 about:
-  page_title: "About Us — Kubar Labs"
-  page_description: "Redefining how legitimate businesses access capital"
+  page_title: "About Us | Kubar Labs"
+  page_description: "Redefining how growing Indian businesses access capital"
   
   hero:
     badge: "About Us"
     title: "Kubar Labs"
-    subtitle: "Redefining how legitimate businesses access capital"
+    subtitle: "Redefining how growing Indian businesses access capital"
     intro: "Kubar Labs is a TechFin R&D company building the embedded credit infrastructure that connects underserved businesses to the capital they need, inside the platforms they already use."
     
   mission_vision:
@@ -476,11 +476,11 @@ about:
       4: 'Top 25 WTFund'
     partnerships_title: "Active Partnerships & Pilots"
     partnerships:
-      1: 'AgriGrader — active partnership; supplier consent and lead-packet generation live'
-      2: 'Clix Capital — pilot being deployed and evaluated'
-      3: 'IDFC First Bank — in active discussion'
-      4: 'Punjab National Bank — design partnership proposal submitted'
-      5: 'SBI / Maruti — strategic connections established'
+      1: 'AgriGrader: active partnership; supplier consent and lead-packet generation live'
+      2: 'Clix Capital: pilot being deployed and evaluated'
+      3: 'IDFC First Bank: in active discussion'
+      4: 'Punjab National Bank: design partnership proposal submitted'
+      5: 'SBI / Maruti: strategic connections established'
 
   roadmap:
     title: "Roadmap"

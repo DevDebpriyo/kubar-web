@@ -62,6 +62,8 @@ function FloatingParticle({
   size: number;
   color: string;
 }) {
+  const variation = ((x * 31 + y * 17 + size * 13 + delay * 100) % 100) / 100;
+
   return (
     <motion.div
       className="absolute rounded-full pointer-events-none"
@@ -76,14 +78,14 @@ function FloatingParticle({
       animate={{
         opacity: [0, 0.8, 0],
         scale: [0, 1.2, 0],
-        y: [0, -40 - Math.random() * 30],
-        x: [(Math.random() - 0.5) * 40],
+        y: [0, -40 - variation * 30],
+        x: [(variation - 0.5) * 40],
       }}
       transition={{
-        duration: 2 + Math.random(),
+        duration: 2 + variation,
         delay: delay,
         repeat: Infinity,
-        repeatDelay: 1 + Math.random() * 2,
+        repeatDelay: 1 + variation * 2,
         ease: "easeOut",
       }}
     />

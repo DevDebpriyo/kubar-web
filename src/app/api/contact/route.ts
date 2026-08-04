@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 
 /* ─── Configurable recipient email ──────────────────────────── */
 const RECIPIENT_EMAIL =
-  process.env.CONTACT_FORM_RECIPIENT_EMAIL || "ghosalsasti@gmail.com";
+  process.env.CONTACT_FORM_RECIPIENT_EMAIL || "outreach@kubar.tech";
 
 /* ─── Request body shape ────────────────────────────────────── */
 interface ContactFormData {
@@ -12,6 +12,7 @@ interface ContactFormData {
   phone: string;
   companyName: string;
   category: string;
+  website?: string;
 }
 
 /* ─── Category display labels ───────────────────────────────── */
@@ -25,10 +26,29 @@ const categoryLabels: Record<string, string> = {
   other: "Other",
 };
 
+function escapeHTML(value: string): string {
+  return value.replace(/[&<>'"]/g, (character) => {
+    const entities: Record<string, string> = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "'": "&#39;",
+      '"': "&quot;",
+    };
+    return entities[character];
+  });
+}
+
 /* ─── Build a premium HTML email ────────────────────────────── */
 function buildEmailHTML(data: ContactFormData): string {
   const categoryDisplay =
     categoryLabels[data.category] || data.category || "Not specified";
+  const fullName = escapeHTML(data.fullName);
+  const email = escapeHTML(data.email);
+  const phone = escapeHTML(data.phone || "Not provided");
+  const companyName = escapeHTML(data.companyName);
+  const category = escapeHTML(categoryDisplay);
+  const firstName = escapeHTML(data.fullName.split(" ")[0] || data.fullName);
 
   return `
 <!DOCTYPE html>
@@ -65,7 +85,7 @@ function buildEmailHTML(data: ContactFormData): string {
                       Full Name
                     </p>
                     <p style="margin:0;font-size:16px;color:#ffffff;font-weight:600;">
-                      ${data.fullName}
+                      ${fullName}
                     </p>
                   </td>
                 </tr>
@@ -78,8 +98,8 @@ function buildEmailHTML(data: ContactFormData): string {
                     <p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.4);font-weight:600;">
                       Email Address
                     </p>
-                    <a href="mailto:${data.email}" style="font-size:16px;color:#3b82f6;font-weight:500;text-decoration:none;">
-                      ${data.email}
+                    <a href="mailto:${email}" style="font-size:16px;color:#3b82f6;font-weight:500;text-decoration:none;">
+                      ${email}
                     </a>
                   </td>
                 </tr>
@@ -93,7 +113,7 @@ function buildEmailHTML(data: ContactFormData): string {
                       Phone Number
                     </p>
                     <p style="margin:0;font-size:16px;color:#ffffff;font-weight:500;">
-                      ${data.phone || "Not provided"}
+                      ${phone}
                     </p>
                   </td>
                 </tr>
@@ -107,7 +127,7 @@ function buildEmailHTML(data: ContactFormData): string {
                       Company Name
                     </p>
                     <p style="margin:0;font-size:16px;color:#ffffff;font-weight:500;">
-                      ${data.companyName}
+                      ${companyName}
                     </p>
                   </td>
                 </tr>
@@ -121,7 +141,7 @@ function buildEmailHTML(data: ContactFormData): string {
                       Organization Category
                     </p>
                     <p style="margin:0;font-size:16px;color:#f0b429;font-weight:600;">
-                      ${categoryDisplay}
+                      ${category}
                     </p>
                   </td>
                 </tr>
@@ -131,8 +151,8 @@ function buildEmailHTML(data: ContactFormData): string {
               <table role="presentation" width="100%" style="margin-top:28px;">
                 <tr>
                   <td align="center">
-                    <a href="mailto:${data.email}?subject=Re: Your inquiry to Kubar Labs" style="display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#f5bc35 0%,#d4920c 100%);border-radius:8px;color:#080602;font-size:14px;font-weight:600;text-decoration:none;">
-                      Reply to ${data.fullName.split(" ")[0]}
+                    <a href="mailto:${email}?subject=Re: Your inquiry to Kubar Labs" style="display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#f5bc35 0%,#d4920c 100%);border-radius:8px;color:#080602;font-size:14px;font-weight:600;text-decoration:none;">
+                      Reply to ${firstName}
                     </a>
                   </td>
                 </tr>
@@ -159,10 +179,32 @@ function buildEmailHTML(data: ContactFormData): string {
 /* ─── POST handler ──────────────────────────────────────────── */
 export async function POST(request: NextRequest) {
   try {
-    const body = (await request.json()) as ContactFormData;
+    const body = (await request.json()) as Partial<ContactFormData>;
+
+    if (
+      typeof body.fullName !== "string" ||
+      typeof body.email !== "string" ||
+      typeof body.phone !== "string" ||
+      typeof body.companyName !== "string" ||
+      typeof body.category !== "string"
+    ) {
+      return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
+    }
+
+    if (body.website) {
+      return NextResponse.json({ success: true }, { status: 200 });
+    }
+
+    const data: ContactFormData = {
+      fullName: body.fullName.trim(),
+      email: body.email.trim(),
+      phone: body.phone.trim(),
+      companyName: body.companyName.trim(),
+      category: body.category,
+    };
 
     // Basic validation
-    if (!body.fullName || !body.email || !body.companyName || !body.category) {
+    if (!data.fullName || !data.email || !data.companyName || !data.category) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -171,18 +213,29 @@ export async function POST(request: NextRequest) {
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(body.email)) {
+    if (!emailRegex.test(data.email)) {
       return NextResponse.json(
         { error: "Invalid email address" },
         { status: 400 }
       );
     }
 
+    if (
+      data.fullName.length > 100 ||
+      data.email.length > 254 ||
+      data.phone.length > 40 ||
+      data.companyName.length > 160 ||
+      !categoryLabels[data.category]
+    ) {
+      return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
+    }
+
     // Create transporter — uses env vars for SMTP config
+    const smtpPort = Number(process.env.SMTP_PORT) || 587;
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || "smtp.gmail.com",
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: false,
+      port: smtpPort,
+      secure: process.env.SMTP_SECURE === "true" || smtpPort === 465,
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASSWORD,
@@ -191,15 +244,15 @@ export async function POST(request: NextRequest) {
 
     // Build email
     const categoryDisplay =
-      categoryLabels[body.category] || body.category || "Not specified";
+      categoryLabels[data.category] || data.category || "Not specified";
 
     const mailOptions = {
       from: `"Kubar Labs Contact Form" <${process.env.SMTP_USER || "noreply@kubar.tech"}>`,
       to: RECIPIENT_EMAIL,
-      replyTo: body.email,
-      subject: `New Contact: ${body.fullName} from ${body.companyName} [${categoryDisplay}]`,
-      html: buildEmailHTML(body),
-      text: `New Contact Form Submission\n\nFull Name: ${body.fullName}\nEmail: ${body.email}\nPhone: ${body.phone || "Not provided"}\nCompany: ${body.companyName}\nCategory: ${categoryDisplay}\n\nSubmitted via kubar.tech/contact`,
+      replyTo: data.email,
+      subject: `New Contact: ${data.fullName} from ${data.companyName} [${categoryDisplay}]`,
+      html: buildEmailHTML(data),
+      text: `New Contact Form Submission\n\nFull Name: ${data.fullName}\nEmail: ${data.email}\nPhone: ${data.phone || "Not provided"}\nCompany: ${data.companyName}\nCategory: ${categoryDisplay}\n\nSubmitted via kubar.tech/contact`,
     };
 
     // Send email

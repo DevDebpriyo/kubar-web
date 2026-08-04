@@ -576,7 +576,7 @@ export function VisualStorySection() {
             >
               <h3 className="all-in-title">{t("cta.title")}</h3>
               <p className="all-in-subtitle">{t("cta.subtitle")}</p>
-              <a href="#contact" className="all-in-button">
+              <a href="/contact" className="all-in-button">
                 {t("cta.button")}
               </a>
             </motion.div>

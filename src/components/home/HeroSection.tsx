@@ -130,7 +130,7 @@ function HeroCTAs() {
 
       {/* Secondary CTA */}
       <motion.a
-        href="#demo"
+        href="/contact"
         className="group flex items-center gap-2.5 px-6 py-3.25 rounded-full border border-white/12 text-white/65 font-medium text-[15px] transition-all duration-300 hover:border-white/22 hover:text-white hover:bg-white/4 cursor-pointer select-none"
         aria-label={t("cta_secondary_aria")}
         whileHover={{

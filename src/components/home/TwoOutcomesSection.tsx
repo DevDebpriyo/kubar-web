@@ -12,7 +12,6 @@ import {
   BarChart3,
   Shield,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import "./TwoOutcomesSection.css";
@@ -242,11 +241,6 @@ export function TwoOutcomesSection() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
-          <div className="outcomes-badge">
-            <Sparkles className="h-3.5 w-3.5" />
-            <span>ONE PLATFORM</span>
-          </div>
-
           <h2 className="outcomes-title">{t("title")}</h2>
         </motion.div>
 

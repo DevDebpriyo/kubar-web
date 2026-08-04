@@ -42,6 +42,7 @@ function ContactForm() {
     phone: "",
     companyName: "",
     category: "",
+    website: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
@@ -89,6 +90,7 @@ function ContactForm() {
         phone: "",
         companyName: "",
         category: "",
+        website: "",
       });
     } catch {
       setSubmitStatus("error");
@@ -108,6 +110,16 @@ function ContactForm() {
         onSubmit={handleSubmit}
         className="contact-form"
       >
+        <input
+          type="text"
+          name="website"
+          value={formData.website}
+          onChange={handleChange}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="absolute h-px w-px overflow-hidden opacity-0"
+        />
         {/* Full Name */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}

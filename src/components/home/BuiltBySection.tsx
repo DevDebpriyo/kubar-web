@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Sparkles, Zap, Lock } from "lucide-react";
+import { Zap, Lock } from "lucide-react";
 import { useTranslations } from "next-intl";
 import "./BuiltBySection.css";
 
@@ -224,9 +224,6 @@ export function BuiltBySection() {
             ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
           }}
         >
-          <div className="built-tagline-badge">
-            <Sparkles className="h-3.5 w-3.5" />
-          </div>
           <h3 className="built-tagline">{t.rich("tagline", { bharat: (chunks) => <span style={{ color: "#FF9933" }}>{chunks}</span>, methods: (chunks) => <span style={{ color: "#1A4FA3" }}>{chunks}</span>, money: (chunks) => <span style={{ color: "#138808" }}>{chunks}</span> })}</h3>
         </motion.div>
       </div>

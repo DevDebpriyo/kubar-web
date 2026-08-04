@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { LenisProvider } from "@/providers/LenisProvider";
+import { AgentationToolbar } from "@/components/agentation/AgentationToolbar";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -63,6 +64,7 @@ export default async function RootLayout({
       <body className="min-h-dvh overflow-x-hidden bg-[#04040c] text-[#f0f0f0] antialiased">
         <NextIntlClientProvider messages={messages}>
           <LenisProvider>{children}</LenisProvider>
+          <AgentationToolbar />
         </NextIntlClientProvider>
       </body>
     </html>

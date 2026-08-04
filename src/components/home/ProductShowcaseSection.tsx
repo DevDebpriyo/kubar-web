@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 type MetricCardProps = {
@@ -152,13 +151,6 @@ export function ProductShowcaseSection() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           className="mx-auto max-w-4xl text-center"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/2 px-3 py-1.5">
-            <Sparkles className="h-3.5 w-3.5 text-[#d4920c]/85" />
-            <p className="text-[10.5px] font-semibold tracking-[0.24em] text-white/44 uppercase">
-              {t("eyebrow")}
-            </p>
-          </div>
-
           <div className="mt-0 flex justify-center">
             <Image
               src="/nd_logo.png"

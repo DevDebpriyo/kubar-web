@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import {
   Shield,
-  Zap,
   Building2,
   ArrowUpRight,
   Link2,
@@ -560,18 +559,6 @@ export function AboutHeroIllustration() {
         delay={1.2}
         floatDuration={5.5}
         floatOffset={-8}
-      />
-
-      {/* Bottom-right: Platforms */}
-      <PlatformCard
-        label="API Latency"
-        value="< 200ms"
-        icon={Zap}
-        color="#22c55e"
-        position={{ bottom: "6%", right: "0%" }}
-        delay={1.0}
-        floatDuration={6.5}
-        floatOffset={10}
       />
 
       {/* Mid-right: Success Rate */}
