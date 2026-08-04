@@ -13,31 +13,31 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const ROADMAP_ITEMS = [
   {
     label: "Market Gap",
-    category: "Foundation\nPhase",
-    title: "Market Context",
+    category: "Problem\nContext",
+    title: "Underserved Origination",
     description:
-      "India's MSME credit segment is severely under-penetrated. DSAs were meant to bridge the gap between financial institutions and MSMEs, but their processes remain manual, and local reach limits their impact at scale.",
+      "Lenders have scaled decisioning and servicing infrastructure, but origination across fragmented B2B ecosystems remains manual and intermediary-led.",
   },
   {
-    label: "NavDhan",
-    category: "Building\nPhase",
-    title: "NavDhan Launch",
+    label: "Phase 1",
+    category: "Launch\nPhase",
+    title: "Managed Origination",
     description:
-      "Becoming India's largest Embedded Credit Origination Platform by replacing manual outreach with AI-driven tools, India Stack APIs for frictionless data collection, and API-first LOS integration for consistent, high-volume borrower delivery.",
+      "Launch unsecured business-loan origination through initial platform and lender partners, validating application quality, conversion, operating costs and repayment-linked economics.",
   },
   {
-    label: "Scale Up",
-    category: "Growth\nPhase",
-    title: "Deeper Partnerships",
+    label: "Phase 2",
+    category: "Scale\nPhase",
+    title: "Embedded Credit SDK",
     description:
-      "Exploring deeper lender partnerships: workflow automation, customised loan offerings based on platform analytics, tailored co-lending products, and two SaaS verticals purpose-built for the credit ecosystem.",
+      "Scale platform and lender integrations, add recurring lender-platform revenue and support unsecured, secured and checkout-financing use cases through one origination layer.",
   },
   {
-    label: "Kubar Protocol",
-    category: "Innovation\nPhase",
-    title: "Kubar Protocol",
+    label: "Phase 3",
+    category: "Expansion\nPhase",
+    title: "Trade-Finance Extension",
     description:
-      "Pursuing R&D on Kubar Protocol: tokenising trade finance assets like LoCs, eBLs, and SBLs into globally compliant digital assets for efficient cross-border financing, incubated within the GIFT City ecosystem.",
+      "Extend NavDhan into eBL and LC financing workflows, while Kubar Protocol remains a separate longer-term R&D initiative for digital trade assets and cross-border settlement.",
   },
 ];
 

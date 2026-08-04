@@ -116,7 +116,7 @@ function TimelineVisualShell({
           variant="secondary"
           className="h-5 bg-white/8 text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-white/80"
         >
-          Live
+          Illustrative
         </Badge>
       </div>
 
@@ -138,7 +138,7 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
         item={item}
         tone={tone}
         footer={
-          <p className="text-[0.7rem] text-white/70">Bulk order signal captured from ONDC.</p>
+          <p className="text-[0.7rem] text-white/70">Illustrative order signal captured from a B2B platform.</p>
         }
       >
         <div className="space-y-2">
@@ -151,12 +151,12 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
               <div className={cn("rounded px-2 py-1 text-[0.63rem] font-medium text-white/85", tone.mutedBg)}>
                 Textile
               </div>
-              <div className="rounded bg-white/10 px-2 py-1 text-[0.63rem] font-medium text-white/80">ONDC</div>
+              <div className="rounded bg-white/10 px-2 py-1 text-[0.63rem] font-medium text-white/80">B2B Platform</div>
               <div className="rounded bg-white/10 px-2 py-1 text-[0.63rem] font-medium text-white/80">B2B</div>
             </div>
           </div>
           <div className="rounded-lg border border-white/10 bg-white/3 p-2 text-[0.68rem] text-white/70">
-            Purchase order matched with merchant profile.
+            Purchase order linked to the business profile with consent.
           </div>
         </div>
       </TimelineVisualShell>
@@ -169,7 +169,7 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
         item={item}
         tone={tone}
         footer={
-          <p className="text-[0.7rem] text-white/70">Gap calculated instantly from requirement vs liquidity.</p>
+          <p className="text-[0.7rem] text-white/70">Illustrative working-capital gap calculated from order value and available liquidity.</p>
         }
       >
         <div className="space-y-3">
@@ -208,9 +208,9 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
       >
         <div className="space-y-2">
           {[
-            ["Order Size Spike", "Detected"],
-            ["Inventory Cycle", "Detected"],
-            ["Cashflow Stress", "Detected"],
+            ["Order Size Spike", "Available"],
+            ["Inventory Cycle", "Available"],
+            ["Cashflow Stress", "Available"],
           ].map(([label, status]) => (
             <div key={label} className="flex items-center justify-between rounded-md border border-white/12 bg-black/25 px-2.5 py-1.5">
               <span className="text-[0.7rem] text-white/80">{label}</span>
@@ -228,14 +228,14 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
         item={item}
         tone={tone}
         footer={
-          <p className="text-[0.7rem] text-white/70">Data Manager Service fetch completed in under 5 minutes.</p>
+          <p className="text-[0.7rem] text-white/70">Permissioned data is retrieved and structured for the lender application.</p>
         }
       >
         <div className="space-y-2">
           {[
-            ["Bank Statements", "Synced"],
-            ["GST Data", "Synced"],
-            ["Order History", "Synced"],
+            ["Bank Statements", "Retrieved"],
+            ["GST Data", "Retrieved"],
+            ["Order History", "Retrieved"],
           ].map(([source, status]) => (
             <div key={source} className="flex items-center justify-between rounded-md border border-white/12 bg-black/25 px-2.5 py-1.5">
               <span className="text-[0.7rem] text-white/80">{source}</span>
@@ -256,19 +256,19 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
         item={item}
         tone={tone}
         footer={
-          <p className="text-[0.7rem] text-white/70">Sector model computes composite creditworthiness score.</p>
+          <p className="text-[0.7rem] text-white/70">Sector-specific signals support lender-configured pre-qualification.</p>
         }
       >
         <div className="grid grid-cols-[auto_1fr] items-center gap-3">
           <div className={cn("rounded-lg border px-3 py-2", tone.outline, tone.mutedBg)}>
-            <p className="text-[0.62rem] uppercase tracking-[0.12em] text-white/55">Score</p>
-            <p className={cn("text-xl font-bold", tone.text)}>742</p>
+            <p className="text-[0.62rem] uppercase tracking-[0.12em] text-white/55">Status</p>
+            <p className={cn("text-xl font-bold", tone.text)}>Eligible</p>
           </div>
           <div className="space-y-2">
             {[
-              ["Cash Discipline", "82%"],
-              ["Order Stability", "76%"],
-              ["Sector Risk", "68%"],
+              ["Cash-Flow Pattern", "Available"],
+              ["Order History", "Available"],
+              ["Sector Signals", "Available"],
             ].map(([factor, value], idx) => (
               <div key={factor}>
                 <div className="mb-1 flex items-center justify-between text-[0.64rem] text-white/70">
@@ -295,14 +295,14 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
         item={item}
         tone={tone}
         footer={
-          <p className="text-[0.7rem] text-white/70">Pre-approved offer rendered directly in checkout flow.</p>
+          <p className="text-[0.7rem] text-white/70">Lender-ready application routed to eligible lenders.</p>
         }
       >
         <div className="rounded-lg border border-white/12 bg-black/30 p-3">
           <div className="mb-2 flex items-center justify-between">
-            <p className="text-[0.62rem] uppercase tracking-[0.12em] text-white/55">Offer Sheet</p>
+            <p className="text-[0.62rem] uppercase tracking-[0.12em] text-white/55">Illustrative Lender Offer</p>
             <Badge variant="outline" className={cn("h-5 rounded-md text-[0.58rem]", tone.outline, tone.text)}>
-              Pre-approved
+              Subject to Lender Approval
             </Badge>
           </div>
           <div className="grid grid-cols-3 gap-2 text-center">
@@ -312,11 +312,11 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
             </div>
             <div className="rounded bg-white/8 px-1.5 py-1.5">
               <p className="text-[0.58rem] text-white/55">Rate</p>
-              <p className="text-[0.73rem] font-semibold text-white">12.4%</p>
+              <p className="text-[0.73rem] font-semibold text-white">Lender-set</p>
             </div>
             <div className="rounded bg-white/8 px-1.5 py-1.5">
               <p className="text-[0.58rem] text-white/55">Tenure</p>
-              <p className="text-[0.73rem] font-semibold text-white">90 days</p>
+              <p className="text-[0.73rem] font-semibold text-white">Lender-set</p>
             </div>
           </div>
         </div>
@@ -330,19 +330,19 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
         item={item}
         tone={tone}
         footer={
-          <p className="text-[0.7rem] text-white/70">Funds routed lender to merchant account in 1-3 hours.</p>
+          <p className="text-[0.7rem] text-white/70">The regulated lender completes underwriting, documentation and disbursal.</p>
         }
       >
         <div className="space-y-3">
           <div className="grid grid-cols-3 items-center gap-2 text-center">
-            <div className="rounded-md border border-white/12 bg-black/25 px-2 py-2 text-[0.68rem] text-white/80">NBFC</div>
+            <div className="rounded-md border border-white/12 bg-black/25 px-2 py-2 text-[0.68rem] text-white/80">Regulated Lender</div>
             <ArrowRight className={cn("mx-auto h-4 w-4", tone.text)} />
-            <div className="rounded-md border border-white/12 bg-black/25 px-2 py-2 text-[0.68rem] text-white/80">Sheetal A/C</div>
+            <div className="rounded-md border border-white/12 bg-black/25 px-2 py-2 text-[0.68rem] text-white/80">Business Account</div>
           </div>
           <div>
             <div className="mb-1 flex items-center justify-between text-[0.64rem] uppercase tracking-[0.12em] text-white/60">
-              <span>Transfer Progress</span>
-              <span className={tone.text}>Completed</span>
+              <span>Lender Process</span>
+              <span className={tone.text}>Illustrative</span>
             </div>
             <div className="h-2 rounded-full bg-white/12">
               <div className={cn("h-full w-full rounded-full bg-linear-to-r", tone.progress)} />
@@ -358,7 +358,7 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
       item={item}
       tone={tone}
       footer={
-        <p className="text-[0.7rem] text-white/70">Order fulfilled and growth metrics improved post-disbursal.</p>
+        <p className="text-[0.7rem] text-white/70">The business fulfils the order after lender-approved disbursal.</p>
       }
     >
       <div className="space-y-2">
@@ -376,8 +376,8 @@ function TimelineStepVisual({ item }: { item: TimelineItem }) {
           ))}
         </div>
         <div className="grid grid-cols-2 gap-2 text-[0.66rem]">
-          <div className="rounded-md border border-white/10 bg-black/25 px-2 py-1.5 text-white/75">Fulfilment: 100%</div>
-          <div className="rounded-md border border-white/10 bg-black/25 px-2 py-1.5 text-white/75">Revenue: +18%</div>
+          <div className="rounded-md border border-white/10 bg-black/25 px-2 py-1.5 text-white/75">Order: Fulfilled</div>
+          <div className="rounded-md border border-white/10 bg-black/25 px-2 py-1.5 text-white/75">Outcome: Illustrative</div>
         </div>
       </div>
     </TimelineVisualShell>

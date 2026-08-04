@@ -32,15 +32,13 @@ const FOUNDER: TeamMember = {
   id: "founder-1",
   name: "Vaibhav Sharma",
   role: "Founder",
-  description: "Past achievements",
+  description: "Founder and CEO",
   achievements: [
-    "Worked in DeFi security with MIT Labs and IBM Quantum",
-    "Recipient of Perplexity AI Fellowship and NVIDIA Inception Accelerator",
-    "Youngest-ever Polkadot Blockchain Academy Graduate, Hong Kong",
-    "Previously worked with leading DeFi ventures like VaultCraft",
-    "Contributed extensively to leading Open-Source projects like Fedora OS",
-    "ML Researcher for the Director of National Chemical Laboratory and FRS Dr. Sourav Pal Delivered 5+ Blockchain MVPs for enterprise clients",
-    "Won multiple hackathons including Google ATLAS",
+    "Grew up around an MSME family business and saw working-capital constraints first-hand",
+    "Built and led NavDhan's origination and lender-routing infrastructure",
+    "Secured design relationships across B2B platforms and lenders",
+    "Prior work across digital assets, institutional tokenisation and financial infrastructure",
+    "Led Kubar Labs to receive a FinVision 2026 award at NIBM, Pune",
   ],
   image: "/team/vaibhav.jpg",
   linkedin: "https://www.linkedin.com/in/fenestbuc/",
@@ -52,7 +50,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     id: "member-3",
     name: "Rayansh Srivastava",
     role: "Founding Engineer",
-    description: "Multi-Agent AI Systems Builder | LLMs, GANs & MLOps",
+    description: "Multi-Agent AI Systems | LLMs, GANs & MLOps",
     image: "/team/rayansh.png",
     linkedin: "https://www.linkedin.com/in/rayansh-srivastava-419951219/",
     accentColor: "blue",
@@ -60,8 +58,8 @@ const TEAM_MEMBERS: TeamMember[] = [
   {
     id: "member-4",
     name: "Manchit Sanan",
-    role: "Product & Program Lead",
-    description: "API & Automation Expert | 13 YOE | US Healthcare → Fintech",
+    role: "Founding Engineer",
+    description: "API & Compliance | 13 YOE | US Healthcare → FinTech",
     image: "/team/manchit.png",
     linkedin: "https://www.linkedin.com/in/manchit-sanan-6b9705158/",
     accentColor: "purple",
@@ -69,8 +67,8 @@ const TEAM_MEMBERS: TeamMember[] = [
   {
     id: "member-5",
     name: "Sreyan M Chowdhury",
-    role: "Growth & Revenue Lead",
-    description: "GTM & RevOps Operator | 7+ YOE | B2B Distribution",
+    role: "GTM Strategy",
+    description: "GTM & RevOps | 7+ YOE | B2B Distribution",
     image: "/team/sreyan.png",
     linkedin: "https://www.linkedin.com/in/sreyanmchowdhury/",
     accentColor: "pink",
@@ -80,7 +78,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     id: "member-7",
     name: "Divyesh Reddy",
     role: "Marketplace Onboarding",
-    description: "Buyer-Risk Intelligence | MSME Credit Analytics",
+    description: "Buyer-Risk Intelligence | Business Credit Analytics",
     image: "/team/divyesh.png",
     linkedin: "https://www.linkedin.com/in/divyesh-reddy/?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
     accentColor: "amber",
@@ -88,8 +86,8 @@ const TEAM_MEMBERS: TeamMember[] = [
   {
     id: "member-8",
     name: "Debpriyo Ghosal",
-    role: "Engineer/Developer",
-    description: "Full-Stack & AI Developer | Open-Source Contributor",
+    role: "Founding Engineer",
+    description: "Full-Stack & AI Development | Open-Source Contributor",
     image: "/team/debpriyo.png",
     linkedin: "https://www.linkedin.com/in/debpriyo-ghosal-0759a92a6/",
     accentColor: "green",
@@ -97,8 +95,8 @@ const TEAM_MEMBERS: TeamMember[] = [
   {
     id: "member-9",
     name: "Mridul Malani",
-    role: "Resource Development Lead",
-    description: "MS at HEC Paris | CUDA and Triton | Ex- RIL, CWC, Earlyseed",
+    role: "Deal Coverage & Resource Development",
+    description: "Partnerships, deal coverage and resource development",
     image: "/team/mridul.png",
     linkedin: "https://www.linkedin.com/in/mridulmalani/",
     accentColor: "pink",
@@ -109,7 +107,7 @@ const ADVISORS: TeamMember[] = [
   {
     id: "advisor-1",
     name: "Debayan Gupta",
-    description: "Professor, CS - MIT, Ashoka University",
+    description: "Professor of Computer Science, Ashoka University",
     image:
       "/advisors/debayan.png",
     linkedin: "https://linkedin.com",
@@ -118,7 +116,7 @@ const ADVISORS: TeamMember[] = [
   {
     id: "advisor-3",
     name: "Amit Sagar",
-    description: "Lead System Architect at Bank of England | BOE CBDC Architecture Contributor",
+    description: "Lead System Architect, Bank of England | Contributor to BoE CBDC architecture",
     image:
       "/advisors/amit.png",
     linkedin: "https://linkedin.com",
@@ -127,7 +125,7 @@ const ADVISORS: TeamMember[] = [
   {
     id: "advisor-4",
     name: "Shridhar Sethuram",
-    description: "Seasoned finance veteran, 25+ years in Private Equity",
+    description: "Finance professional with 25+ years of private-equity experience",
     image:
       "/advisors/shridhar.png",
     linkedin: "https://linkedin.com",
@@ -136,7 +134,7 @@ const ADVISORS: TeamMember[] = [
   {
     id: "advisor-5",
     name: "Tushar Jaruhar",
-    description: "Ex-Pricing Actuary at Zurich Insurance Co.",
+    description: "Former Pricing Actuary, Zurich Insurance",
     image:
       "/advisors/tushar.png",
     linkedin: "https://linkedin.com",
@@ -353,11 +351,11 @@ export default function TeamPage() {
             className="team-cta-content"
           >
             <h2 className="team-cta-title">
-              Interested in joining our mission?
+              Interested in building business-credit infrastructure?
             </h2>
             <p className="team-cta-description">
-              We&apos;re always looking for talented builders who want to
-              reshape MSME credit.
+              We welcome builders who want to improve how business credit is
+              originated and distributed.
             </p>
 
             <motion.a
@@ -366,7 +364,7 @@ export default function TeamPage() {
               whileTap={{ scale: 0.98 }}
               className="team-cta-button"
             >
-              Check Open Positions
+              Contact the Team
               <ArrowRight className="h-4 w-4" />
             </motion.a>
           </motion.div>

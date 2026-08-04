@@ -20,7 +20,7 @@ export function EcosystemPartners() {
 
   return (
     <section
-      aria-label="Ecosystem Partners"
+      aria-label="Technology programmes, grants and infrastructure support"
       className="relative z-10 overflow-hidden pt-4 pb-16 sm:pt-8 sm:pb-24"
       style={{
         background: "rgba(4, 4, 12, 0.98)",
@@ -28,7 +28,7 @@ export function EcosystemPartners() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8 text-center">
         <h2 className="text-xl font-medium tracking-wide text-white/50 uppercase">
-          Our Ecosystem Partners
+          Technology Programmes, Grants &amp; Infrastructure Support
         </h2>
       </div>
 

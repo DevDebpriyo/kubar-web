@@ -288,7 +288,7 @@ function PlatformCard({
                 }}
               />
               <span className="text-[9px] sm:text-[10px] text-white/30 font-medium">
-                Active
+                Illustrative
               </span>
             </div>
           </div>
@@ -528,8 +528,8 @@ export function AboutHeroIllustration() {
 
       {/* Top-left: NBFC Partners */}
       <PlatformCard
-        label="NBFC Partners"
-        value="12+ Connected"
+        label="Lender Network"
+        value="Multi-Lender"
         icon={Building2}
         color="#d4920c"
         position={{ top: "6%", left: "2%" }}
@@ -540,8 +540,8 @@ export function AboutHeroIllustration() {
 
       {/* Top-right: Trust Score */}
       <PlatformCard
-        label="Trust Engine"
-        value="Real-Time"
+        label="Pre-Qualification"
+        value="Lender-Configured"
         icon={Shield}
         color="#3b82f6"
         position={{ top: "2%", right: "4%" }}
@@ -552,9 +552,9 @@ export function AboutHeroIllustration() {
 
       {/* Bottom-left: Disbursals */}
       <StatsMiniCard
-        label="Disbursals"
-        value="₹2.4 Cr+"
-        change="+18%"
+        label="Initial Launch"
+        value="15–20 Loans"
+        change="Target"
         position={{ bottom: "12%", left: "0%" }}
         delay={1.2}
         floatDuration={5.5}
@@ -563,9 +563,9 @@ export function AboutHeroIllustration() {
 
       {/* Mid-right: Success Rate */}
       <StatsMiniCard
-        label="Match Rate"
-        value="94.2%"
-        change="+5.3%"
+        label="SDK Integrations"
+        value="In Discussion"
+        change="Phase 2"
         position={{ top: "42%", right: "-2%" }}
         delay={1.4}
         floatDuration={5}

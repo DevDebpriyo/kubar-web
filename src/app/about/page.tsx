@@ -105,7 +105,7 @@ function TractionFlipCard({
 
           <div className="trust-front-meta">
             <Badge variant="outline" className="trust-layer-badge">
-              {isRecognition ? "Recognition" : "Partnership"}
+              {isRecognition ? "Recognition" : "Commercial Status"}
             </Badge>
             <div className="trust-front-icon-shell">
               <Icon className="trust-front-icon" aria-hidden="true" />
@@ -207,8 +207,8 @@ function TractionFlipCard({
             <Separator className="trust-back-separator" />
             <p className="trust-back-context">
               {isRecognition
-                ? "This recognition validates our commitment to innovation and excellence in the fintech ecosystem."
-                : "This partnership enables us to expand our presence and deliver greater value to the financial market."}
+                ? "This external recognition reflects progress in building embedded credit infrastructure for business lending."
+                : "The relationship stage must be read from the stated status and does not imply a live commercial deployment unless explicitly noted."}
             </p>
           </div>
         </div>
@@ -225,13 +225,13 @@ function TractionFlipCard({
           <Separator className="trust-back-separator" />
           <p className="trust-back-context">
             {isRecognition
-              ? "This recognition validates our commitment to innovation and excellence in the fintech ecosystem."
-              : "This partnership enables us to expand our presence and deliver greater value to the financial market."}
+              ? "This external recognition reflects progress in building embedded credit infrastructure for business lending."
+              : "The relationship stage must be read from the stated status and does not imply a live commercial deployment unless explicitly noted."}
           </p>
 
           <div className="trust-back-footer">
             <Badge variant="secondary" className="trust-back-assurance">
-              {isRecognition ? "Industry Validation" : "Strategic Alliance"}
+              {isRecognition ? "Industry Validation" : "Stated Relationship"}
             </Badge>
           </div>
         </div>
@@ -772,7 +772,7 @@ export default function AboutPage() {
                         <div className="built-status-icon">
                           <Zap className="h-3.5 w-3.5" />
                         </div>
-                        <span className="built-status-text">Live</span>
+                        <span className="built-status-text">Launching</span>
                       </motion.div>
                     </div>
 
@@ -828,7 +828,7 @@ export default function AboutPage() {
                         <div className="built-status-icon">
                           <Lock className="h-3.5 w-3.5" />
                         </div>
-                        <span className="built-status-text">Coming soon</span>
+                        <span className="built-status-text">Long-term R&amp;D</span>
                       </motion.div>
                     </div>
 
@@ -860,7 +860,7 @@ export default function AboutPage() {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] mb-6">
                 <span className="w-2 h-2 rounded-full bg-[#d4920c] animate-pulse" />
                 <span className="text-xs font-bold uppercase tracking-widest text-white/70">
-                  Milestones
+                  Progress &amp; Recognition
                 </span>
               </div>
               <h2 className="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/60 mb-8 tracking-tight">
