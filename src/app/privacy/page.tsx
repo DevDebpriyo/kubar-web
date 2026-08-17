@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/app/page-metadata";
 import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/home/FooterSection";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Privacy Policy",
   description: "How Kubar Labs collects, uses, and protects personal information.",
-  alternates: { canonical: "/privacy" },
-  robots: { index: true, follow: true },
-};
+  path: "/privacy",
+  socialTitle: "Kubar Labs Privacy Policy",
+});
 
 const sections = [
   {
@@ -56,7 +56,7 @@ export default function PrivacyPage() {
         <p className="mt-5 text-base leading-7 text-white/65 sm:text-lg">
           This policy explains how Kubar Labs handles personal information collected through kubar.tech.
         </p>
-        <p className="mt-4 text-sm text-white/45">Last updated: August 4, 2026</p>
+        <p className="mt-4 text-sm text-white/60">Last updated: August 4, 2026</p>
 
         <div className="mt-14 space-y-10">
           {sections.map((section) => (

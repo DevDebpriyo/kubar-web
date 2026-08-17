@@ -8,9 +8,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 - Dev: `npm run dev`
 - Lint: `npm run lint` (ESLint v9)
+- Typecheck: `npm run typecheck`
+- Test: `npm test` (Vitest)
+- Browser test: build first, then `npm run test:e2e` (Playwright)
 - Build: `npm run build`
 - Prod: `npm run start`
-- No test/typecheck scripts are defined in `package.json`.
 
 ## Project Shape
 
@@ -33,3 +35,4 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## Notable Toolchain Quirks
 
 - React Compiler is enabled (`reactCompiler: true` in `next.config.ts`). Avoid introducing patterns that rely on memoization for correctness.
+- Production builds intentionally use webpack (`next build --webpack`) and local font files so validation does not depend on downloading Google Fonts.

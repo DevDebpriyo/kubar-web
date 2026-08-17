@@ -1,17 +1,12 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/app/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "About",
   description:
     "Learn how Kubar Labs is building lender-neutral infrastructure for embedded business-credit origination in India.",
-  alternates: { canonical: "/about" },
-  openGraph: {
-    title: "About Kubar Labs",
-    description:
-      "Learn how Kubar Labs is building lender-neutral infrastructure for embedded business-credit origination in India.",
-    url: "/about",
-  },
-};
+  path: "/about",
+  socialTitle: "About Kubar Labs",
+});
 
 export default function AboutLayout({ children }: { children: React.ReactNode }) {
   return children;

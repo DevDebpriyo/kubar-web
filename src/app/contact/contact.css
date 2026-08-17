@@ -224,7 +224,7 @@
 }
 
 .contact-select:invalid {
-  color: rgba(160, 160, 160, 0.6);
+  color: #a8a8b3;
 }
 
 /* Status messages */

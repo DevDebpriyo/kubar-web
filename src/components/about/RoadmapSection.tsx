@@ -63,6 +63,12 @@ export function RoadmapSection() {
     () => {
       if (!sectionRef.current) return;
 
+      // Lenis is driven by the native animation frame loop in the root
+      // provider. Keep this route-specific ScrollTrigger in sync without
+      // loading GSAP in the global client bundle.
+      const syncScrollTrigger = () => ScrollTrigger.update();
+      window.addEventListener("lenis-scroll", syncScrollTrigger);
+
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
@@ -154,7 +160,10 @@ export function RoadmapSection() {
         ScrollTrigger.refresh();
       }, 800);
 
-      return () => clearTimeout(timer);
+      return () => {
+        window.removeEventListener("lenis-scroll", syncScrollTrigger);
+        clearTimeout(timer);
+      };
     },
     { scope: sectionRef },
   );

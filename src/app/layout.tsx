@@ -93,6 +93,9 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-dvh overflow-x-hidden bg-[#04040c] text-[#f0f0f0] antialiased">
+        <a className="skip-link" href="#main-content">
+          Skip to main content
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -100,7 +103,11 @@ export default async function RootLayout({
           }}
         />
         <NextIntlClientProvider messages={messages}>
-          <LenisProvider>{children}</LenisProvider>
+          <LenisProvider>
+            <div id="main-content" tabIndex={-1}>
+              {children}
+            </div>
+          </LenisProvider>
           {agentationToolbar}
         </NextIntlClientProvider>
       </body>

@@ -9,18 +9,18 @@ import { FloatingCards } from "./FloatingCards";
 
 /* ─── Animation variants ─────────────────────────────────── */
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.13,
-      delayChildren: 0.25,
+      staggerChildren: 0,
+      delayChildren: 0,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 1, y: 0 },
   visible: {
     opacity: 1,
     y: 0,
@@ -125,14 +125,16 @@ function HeroCTAs() {
           style={{ background: "rgba(212,146,12,0.5)" }}
         />
         <span className="relative z-10">{t("cta_primary")}</span>
-        <ArrowRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+        <ArrowRight
+          className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+          aria-hidden="true"
+        />
       </motion.a>
 
       {/* Secondary CTA */}
       <motion.a
-        href="/contact"
+        href="#story"
         className="group flex items-center gap-2.5 px-6 py-3.25 rounded-full border border-white/12 text-white/65 font-medium text-[15px] transition-all duration-300 hover:border-white/22 hover:text-white hover:bg-white/4 cursor-pointer select-none"
-        aria-label={t("cta_secondary_aria")}
         whileHover={{
           y: -2,
           transition: { type: "spring", stiffness: 420, damping: 20 },
@@ -141,7 +143,10 @@ function HeroCTAs() {
       >
         {/* Play icon circle */}
         <div className="w-6.5 h-6.5 rounded-full border border-white/16 flex items-center justify-center group-hover:border-white/30 transition-colors duration-200 shrink-0">
-          <Play className="w-2.25 h-2.25 fill-white/65 text-white/65 group-hover:fill-white group-hover:text-white transition-colors duration-200 ml-px" />
+          <Play
+            className="w-2.25 h-2.25 fill-white/65 text-white/65 group-hover:fill-white group-hover:text-white transition-colors duration-200 ml-px"
+            aria-hidden="true"
+          />
         </div>
         {t("cta_secondary")}
       </motion.a>

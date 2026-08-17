@@ -1,21 +1,17 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Clock3 } from "lucide-react";
+import { createPageMetadata } from "@/app/page-metadata";
 import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/home/FooterSection";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "For Platforms — Coming Soon",
   description:
     "Kubar Labs is preparing NavDhan's embedded origination experience for B2B platforms.",
-  alternates: { canonical: "/for-platforms" },
-  openGraph: {
-    title: "NavDhan for B2B Platforms",
-    description:
-      "Kubar Labs is preparing NavDhan's embedded origination experience for B2B platforms.",
-    url: "/for-platforms",
-  },
-};
+  path: "/for-platforms",
+  socialTitle: "NavDhan for B2B Platforms",
+  robots: { index: false, follow: true },
+});
 
 export default function ForPlatformsComingSoonPage() {
   return (

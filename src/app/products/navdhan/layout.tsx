@@ -1,17 +1,11 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/app/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "NavDhan Embedded Origination Infrastructure",
   description:
     "NavDhan embeds lender-neutral business-credit origination inside B2B platforms and routes lender-ready applications into existing lender systems.",
-  alternates: { canonical: "/products/navdhan" },
-  openGraph: {
-    title: "NavDhan Embedded Origination Infrastructure",
-    description:
-      "NavDhan embeds lender-neutral business-credit origination inside B2B platforms and routes lender-ready applications into existing lender systems.",
-    url: "/products/navdhan",
-  },
-};
+  path: "/products/navdhan",
+});
 
 export default function NavDhanLayout({ children }: { children: React.ReactNode }) {
   return children;
