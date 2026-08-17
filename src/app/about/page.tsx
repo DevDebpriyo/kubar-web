@@ -1,18 +1,16 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import {
   ArrowRight,
   Target,
-  Compass,
   Zap,
   Shield,
   Globe,
   Award,
   Briefcase,
-  Plus,
   Building2,
   Users,
   MapPin,
@@ -313,9 +311,11 @@ export default function AboutPage() {
                     }}
                     className="text-[46px] sm:text-[62px] lg:text-[70px] xl:text-[78px] font-extrabold leading-[1.05] tracking-tight text-white mb-2 flex flex-col items-start gap-2 lg:flex-row lg:flex-nowrap lg:items-center lg:gap-3"
                   >
-                    <img
+                    <Image
                       src="/logo.png"
                       alt="Kubar Labs"
+                      width={372}
+                      height={217}
                       className="hidden lg:block h-11 xl:h-[52px] w-auto shrink-0 animate-fadeInUp animation-delay-300"
                     />
                     <span>{t("hero.title")}</span>
@@ -857,12 +857,6 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             {/* Header Section */}
             <FadeInView className="flex flex-col items-center text-center mb-20 sm:mb-28">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] mb-6">
-                <span className="w-2 h-2 rounded-full bg-[#d4920c] animate-pulse" />
-                <span className="text-xs font-bold uppercase tracking-widest text-white/70">
-                  Progress &amp; Recognition
-                </span>
-              </div>
               <h2 className="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/60 mb-8 tracking-tight">
                 {t("traction.title")}
               </h2>
@@ -879,18 +873,6 @@ export default function AboutPage() {
             <div className="flex flex-col gap-20 -mt-14">
               {/* Recognitions Section */}
               <div>
-                <FadeInView
-                  delay={0.2}
-                  className="flex items-center gap-6 mb-12 justify-center text-center"
-                >
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#d4920c]/20 to-[#d4920c]/5 border border-[#d4920c]/20 flex items-center justify-center shrink-0 shadow-[0_0_30px_rgba(212,146,12,0.15)]">
-                    <Award className="w-8 h-8 text-[#d4920c]" />
-                  </div>
-                  <h3 className="text-4xl sm:text-5xl font-black text-white tracking-tight text-center">
-                    {t("traction.recognitions_title")}
-                  </h3>
-                </FadeInView>
-
                 <div className="trust-cards-grid">
                   {[
                     { id: 1, year: "2026" },
@@ -950,7 +932,7 @@ export default function AboutPage() {
                   <a
                     href={
                       i === 2
-                        ? "/api"
+                        ? "/for-platforms"
                         : i === 3
                           ? "mailto:partnerships@kubar.tech"
                           : "/contact"

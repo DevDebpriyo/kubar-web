@@ -12,11 +12,11 @@
 
 .team-hero {
   position: relative;
-  min-height: 400px;
+  min-height: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 24px 80px;
+  padding: 100px 24px 48px;
   overflow: hidden;
 }
 
@@ -120,7 +120,7 @@
 /* ─── Team Section ─────────────────────────────────────── */
 
 .team-section {
-  padding: 100px 24px;
+  padding: 48px 24px 72px;
   position: relative;
 }
 
@@ -226,11 +226,34 @@
 }
 
 .team-member-card.team-member-card-advisor .team-member-content {
-  gap: 6px;
+  gap: 4px;
 }
 
 .team-member-card.team-member-card-advisor .team-member-link {
-  margin-top: 8px;
+  gap: 6px;
+  margin-top: 4px;
+  font-size: 0.78rem;
+}
+
+.team-member-card.team-member-card-advisor .team-member-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+.team-member-card.team-member-card-advisor .team-member-name {
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.team-member-card.team-member-card-advisor .team-member-role {
+  font-size: 0.72rem;
+  line-height: 1.25;
+  letter-spacing: 0.3px;
+}
+
+.team-member-card.team-member-card-advisor .team-member-description {
+  font-size: 0.78rem;
+  line-height: 1.35;
 }
 
 .team-member-achievements {
@@ -370,7 +393,7 @@
 /* ─── Advisors Section ─────────────────────────────────– */
 
 .team-advisors-section {
-  padding: 100px 24px;
+  padding: 72px 24px 48px;
   background: linear-gradient(
     180deg,
     transparent 0%,
@@ -381,7 +404,7 @@
 
 .team-advisors-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 32px;
   max-width: 1200px;
   margin: 0 auto;
@@ -453,6 +476,10 @@
   .team-grid,
   .team-advisors-grid {
     gap: 28px;
+  }
+
+  .team-advisors-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

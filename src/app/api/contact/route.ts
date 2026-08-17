@@ -5,6 +5,67 @@ import nodemailer from "nodemailer";
 const RECIPIENT_EMAIL =
   process.env.CONTACT_FORM_RECIPIENT_EMAIL || "outreach@kubar.tech";
 
+const MAX_REQUEST_BYTES = 10_000;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 5;
+
+type RateLimitEntry = {
+  count: number;
+  resetAt: number;
+};
+
+const rateLimitStore = new Map<string, RateLimitEntry>();
+
+function jsonResponse(body: object, status = 200, headers?: HeadersInit) {
+  return NextResponse.json(body, {
+    status,
+    headers: {
+      "Cache-Control": "no-store",
+      ...headers,
+    },
+  });
+}
+
+function getClientIdentifier(request: NextRequest): string {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  return forwardedFor?.split(",")[0]?.trim() || "unknown";
+}
+
+function checkRateLimit(identifier: string, now = Date.now()) {
+  if (rateLimitStore.size > 5_000) {
+    for (const [key, entry] of rateLimitStore) {
+      if (entry.resetAt <= now) rateLimitStore.delete(key);
+    }
+  }
+
+  const current = rateLimitStore.get(identifier);
+
+  if (!current || current.resetAt <= now) {
+    const resetAt = now + RATE_LIMIT_WINDOW_MS;
+    rateLimitStore.set(identifier, { count: 1, resetAt });
+    return { allowed: true, resetAt };
+  }
+
+  current.count += 1;
+
+  if (current.count > RATE_LIMIT_MAX_REQUESTS) {
+    return { allowed: false, resetAt: current.resetAt };
+  }
+
+  return { allowed: true, resetAt: current.resetAt };
+}
+
+function isSameOrigin(request: NextRequest): boolean {
+  const origin = request.headers.get("origin");
+  if (!origin) return false;
+
+  try {
+    return new URL(origin).origin === request.nextUrl.origin;
+  } catch {
+    return false;
+  }
+}
+
 /* ─── Request body shape ────────────────────────────────────── */
 interface ContactFormData {
   fullName: string;
@@ -179,7 +240,44 @@ function buildEmailHTML(data: ContactFormData): string {
 /* ─── POST handler ──────────────────────────────────────────── */
 export async function POST(request: NextRequest) {
   try {
-    const body = (await request.json()) as Partial<ContactFormData>;
+    if (!isSameOrigin(request)) {
+      return jsonResponse({ error: "Invalid request origin" }, 403);
+    }
+
+    if (!request.headers.get("content-type")?.startsWith("application/json")) {
+      return jsonResponse({ error: "Unsupported content type" }, 415);
+    }
+
+    const contentLength = Number(request.headers.get("content-length") || 0);
+    if (contentLength > MAX_REQUEST_BYTES) {
+      return jsonResponse({ error: "Request body is too large" }, 413);
+    }
+
+    const identifier = getClientIdentifier(request);
+    const rateLimit = checkRateLimit(identifier);
+    if (!rateLimit.allowed) {
+      const retryAfter = Math.max(
+        1,
+        Math.ceil((rateLimit.resetAt - Date.now()) / 1000),
+      );
+      return jsonResponse(
+        { error: "Too many requests. Please try again later." },
+        429,
+        { "Retry-After": String(retryAfter) },
+      );
+    }
+
+    const rawBody = await request.text();
+    if (new TextEncoder().encode(rawBody).byteLength > MAX_REQUEST_BYTES) {
+      return jsonResponse({ error: "Request body is too large" }, 413);
+    }
+
+    let body: Partial<ContactFormData>;
+    try {
+      body = JSON.parse(rawBody) as Partial<ContactFormData>;
+    } catch {
+      return jsonResponse({ error: "Invalid JSON" }, 400);
+    }
 
     if (
       typeof body.fullName !== "string" ||
@@ -188,11 +286,11 @@ export async function POST(request: NextRequest) {
       typeof body.companyName !== "string" ||
       typeof body.category !== "string"
     ) {
-      return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
+      return jsonResponse({ error: "Invalid form data" }, 400);
     }
 
     if (body.website) {
-      return NextResponse.json({ success: true }, { status: 200 });
+      return jsonResponse({ success: true });
     }
 
     const data: ContactFormData = {
@@ -205,19 +303,13 @@ export async function POST(request: NextRequest) {
 
     // Basic validation
     if (!data.fullName || !data.email || !data.companyName || !data.category) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
+      return jsonResponse({ error: "Missing required fields" }, 400);
     }
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(data.email)) {
-      return NextResponse.json(
-        { error: "Invalid email address" },
-        { status: 400 }
-      );
+      return jsonResponse({ error: "Invalid email address" }, 400);
     }
 
     if (
@@ -227,7 +319,7 @@ export async function POST(request: NextRequest) {
       data.companyName.length > 160 ||
       !categoryLabels[data.category]
     ) {
-      return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
+      return jsonResponse({ error: "Invalid form data" }, 400);
     }
 
     // Create transporter — uses env vars for SMTP config
@@ -240,6 +332,11 @@ export async function POST(request: NextRequest) {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASSWORD,
       },
+      connectionTimeout: 10_000,
+      greetingTimeout: 10_000,
+      socketTimeout: 15_000,
+      disableFileAccess: true,
+      disableUrlAccess: true,
     });
 
     // Build email
@@ -258,10 +355,7 @@ export async function POST(request: NextRequest) {
     // Send email
     await transporter.sendMail(mailOptions);
 
-    return NextResponse.json(
-      { success: true, message: "Message sent successfully" },
-      { status: 200 }
-    );
+    return jsonResponse({ success: true, message: "Message sent successfully" });
   } catch (error) {
     console.error("Contact form error:", error);
 
@@ -271,19 +365,18 @@ export async function POST(request: NextRequest) {
       console.warn(
         "DEV MODE: Email sending failed (likely missing SMTP credentials). Returning success for UI testing."
       );
-      return NextResponse.json(
+      return jsonResponse(
         {
           success: true,
           message: "Message received (dev mode - email not actually sent)",
           dev: true,
         },
-        { status: 200 }
       );
     }
 
-    return NextResponse.json(
+    return jsonResponse(
       { error: "Failed to send message. Please try again." },
-      { status: 500 }
+      500,
     );
   }
 }

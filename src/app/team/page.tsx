@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Linkedin, ArrowRight } from "lucide-react";
+import { Linkedin } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/home/FooterSection";
 import "./team.css";
@@ -214,6 +214,7 @@ function TeamMemberCard({
           alt={member.name}
           width={300}
           height={300}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
           className="team-member-image"
           quality={95}
         />
@@ -285,17 +286,6 @@ export default function TeamPage() {
       {/* Team Members Section */}
       <section className="team-section">
         <div className="team-container">
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="team-section-header"
-          >
-            <span className="team-eyebrow">{t("team_section.subtitle")}</span>
-            <h2 className="team-section-title">{t("team_section.title")}</h2>
-          </motion.div>
-
           <div className="team-grid">
             <TeamMemberCard member={FOUNDER} delay={0.08} featured />
             {TEAM_MEMBERS.map((member, idx) => (
@@ -337,37 +327,6 @@ export default function TeamPage() {
               />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="team-cta-section">
-        <div className="team-container">
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="team-cta-content"
-          >
-            <h2 className="team-cta-title">
-              Interested in building business-credit infrastructure?
-            </h2>
-            <p className="team-cta-description">
-              We welcome builders who want to improve how business credit is
-              originated and distributed.
-            </p>
-
-            <motion.a
-              href="mailto:careers@kubar.tech"
-              whileHover={{ scale: 1.02, x: 4 }}
-              whileTap={{ scale: 0.98 }}
-              className="team-cta-button"
-            >
-              Contact the Team
-              <ArrowRight className="h-4 w-4" />
-            </motion.a>
-          </motion.div>
         </div>
       </section>
 

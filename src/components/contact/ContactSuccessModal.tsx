@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { CheckCircle, X, Sparkles } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 /* ─── Overlay backdrop variants ─────────────────────────────── */
 const overlayVariants: Variants = {
@@ -102,6 +102,9 @@ export function ContactSuccessModal({
   onClose: () => void;
   senderName?: string;
 }) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
   /* Lock body scroll while modal is open */
   useEffect(() => {
     if (isOpen) {
@@ -114,13 +117,45 @@ export function ContactSuccessModal({
     };
   }, [isOpen]);
 
-  /* Close on Escape key */
+  /* Trap focus, close on Escape, and restore focus when dismissed. */
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+    if (!isOpen) return;
+
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const focusFrame = requestAnimationFrame(() => closeButtonRef.current?.focus());
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (event.key !== "Tab" || !dialogRef.current) return;
+
+      const focusable = Array.from(
+        dialogRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+      const first = focusable[0];
+      const last = focusable.at(-1);
+      if (!first || !last) return;
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
-    if (isOpen) window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      cancelAnimationFrame(focusFrame);
+      window.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused?.focus();
+    };
   }, [isOpen, onClose]);
 
   return (
@@ -147,6 +182,7 @@ export function ContactSuccessModal({
 
           {/* Modal card */}
           <motion.div
+            ref={dialogRef}
             className="relative w-full max-w-md overflow-hidden"
             variants={modalVariants}
             initial="hidden"
@@ -169,6 +205,7 @@ export function ContactSuccessModal({
             >
               {/* Close button */}
               <motion.button
+                ref={closeButtonRef}
                 className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer z-10"
                 style={{
                   background: "rgba(255,255,255,0.05)",

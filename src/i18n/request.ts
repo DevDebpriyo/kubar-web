@@ -1,5 +1,5 @@
 import { getRequestConfig } from "next-intl/server";
-import yaml from "js-yaml";
+import { load as parseYaml } from "js-yaml";
 import { readFileSync } from "fs";
 import { join } from "path";
 
@@ -8,7 +8,7 @@ export default getRequestConfig(async () => {
 
   const filePath = join(process.cwd(), "messages", `${locale}.yml`);
   const raw = readFileSync(filePath, "utf8");
-  const messages = yaml.load(raw) as Record<string, unknown>;
+  const messages = parseYaml(raw) as Record<string, unknown>;
 
   return {
     locale,

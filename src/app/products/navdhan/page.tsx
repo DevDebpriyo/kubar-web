@@ -134,8 +134,8 @@ function CTASection({
   subtitle: string;
   features: string[];
   tagline?: string;
-  ctaText: string;
-  ctaEmail: string;
+  ctaText?: string;
+  ctaEmail?: string;
   alignment?: "left" | "right";
 }) {
   return (
@@ -195,19 +195,21 @@ function CTASection({
           </motion.p>
         )}
 
-        <motion.a
-          href={`mailto:${ctaEmail}`}
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          whileHover={{ scale: 1.02, x: 4 }}
-          whileTap={{ scale: 0.98 }}
-          className="navdhan-cta-button"
-        >
-          {ctaText}
-          <ArrowRight className="h-4 w-4" />
-        </motion.a>
+        {ctaText && ctaEmail && (
+          <motion.a
+            href={`mailto:${ctaEmail}`}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            whileHover={{ scale: 1.02, x: 4 }}
+            whileTap={{ scale: 0.98 }}
+            className="navdhan-cta-button"
+          >
+            {ctaText}
+            <ArrowRight className="h-4 w-4" />
+          </motion.a>
+        )}
       </motion.div>
     </div>
   );
@@ -248,7 +250,7 @@ export default function NavDhanPage() {
 
               <motion.a
                 variants={fadeInUp}
-                href="https://calendly.com/partnerships-kubar"
+                href="https://calendly.com/vaibhav-kubar/partnerships-kubar"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02, y: -2 }}
@@ -319,12 +321,12 @@ export default function NavDhanPage() {
           className="navdhan-image-showcase-container"
         >
           <Image
-            src="/NavDhan.png"
+            src="/NavDhan-August.png"
             alt="NavDhan Architecture Diagram"
-            width={1200}
-            height={800}
-            quality={95}
-            priority
+            width={1920}
+            height={1080}
+            quality={85}
+            sizes="(max-width: 768px) 100vw, 1200px"
             className="navdhan-showcase-image"
           />
         </motion.div>
@@ -485,8 +487,6 @@ export default function NavDhanPage() {
               t("for_msmes.features.1"),
               t("for_msmes.features.2"),
             ]}
-            ctaText={t("for_msmes.cta_primary")}
-            ctaEmail={t("for_msmes.cta_primary")}
             alignment="right"
           />
         </div>
