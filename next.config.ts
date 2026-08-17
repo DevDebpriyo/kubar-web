@@ -20,6 +20,10 @@ const contentSecurityPolicy = [
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  experimental: {
+    useTypeScriptCli: false,
+    webpackBuildWorker: false,
+  },
   turbopack: {
     root: process.cwd(),
   },

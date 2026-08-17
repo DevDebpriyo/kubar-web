@@ -1,20 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { LenisProvider } from "@/providers/LenisProvider";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+const plusJakartaSans = localFont({
+  src: "./fonts/plus-jakarta-sans-latin.woff2",
+  weight: "300 800",
   variable: "--font-plus-jakarta",
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "./fonts/geist-mono-latin.woff2",
+  weight: "100 900",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
   display: "swap",
 });
 
