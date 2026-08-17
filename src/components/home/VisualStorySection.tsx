@@ -13,7 +13,6 @@ import {
   TrendingUp,
   CheckCircle2,
   ArrowRight,
-  Sparkles,
   Landmark,
   FileText,
   Hourglass,

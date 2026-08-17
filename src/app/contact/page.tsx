@@ -128,11 +128,12 @@ function ContactForm() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="contact-form-group"
         >
-          <label className="contact-label">
+          <label htmlFor="contact-full-name" className="contact-label">
             {t("form.full_name_label")}
           </label>
           <input
             type="text"
+            id="contact-full-name"
             name="fullName"
             value={formData.fullName}
             onChange={handleChange}
@@ -150,11 +151,12 @@ function ContactForm() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="contact-form-group"
         >
-          <label className="contact-label">
+          <label htmlFor="contact-email" className="contact-label">
             {t("form.email_label")}
           </label>
           <input
             type="email"
+            id="contact-email"
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -172,11 +174,12 @@ function ContactForm() {
           transition={{ duration: 0.6, delay: 0.25 }}
           className="contact-form-group"
         >
-          <label className="contact-label">
+          <label htmlFor="contact-phone" className="contact-label">
             {t("form.phone_label")}
           </label>
           <input
             type="tel"
+            id="contact-phone"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
@@ -193,11 +196,12 @@ function ContactForm() {
           transition={{ duration: 0.6, delay: 0.28 }}
           className="contact-form-group"
         >
-          <label className="contact-label">
+          <label htmlFor="contact-company" className="contact-label">
             {t("form.company_name_label")}
           </label>
           <input
             type="text"
+            id="contact-company"
             name="companyName"
             value={formData.companyName}
             onChange={handleChange}
@@ -215,11 +219,12 @@ function ContactForm() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="contact-form-group"
         >
-          <label className="contact-label">
+          <label htmlFor="contact-category" className="contact-label">
             {t("form.category_label")}
           </label>
           <div className="contact-select-wrapper">
             <select
+              id="contact-category"
               name="category"
               value={formData.category}
               onChange={handleChange}
@@ -247,6 +252,8 @@ function ContactForm() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             className="contact-status-error"
+            role="alert"
+            aria-live="assertive"
           >
             ✕ {t("form.error")}
           </motion.div>
@@ -265,7 +272,7 @@ function ContactForm() {
           className="contact-submit-btn"
         >
           {isSubmitting ? t("form.submitting") : t("form.submit")}
-          {!isSubmitting && <ArrowRight className="h-4 w-4" />}
+          {!isSubmitting && <ArrowRight aria-hidden="true" className="h-4 w-4" />}
         </motion.button>
       </motion.form>
 

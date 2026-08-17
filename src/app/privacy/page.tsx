@@ -3,8 +3,10 @@ import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/home/FooterSection";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Kubar Labs",
+  title: "Privacy Policy",
   description: "How Kubar Labs collects, uses, and protects personal information.",
+  alternates: { canonical: "/privacy" },
+  robots: { index: true, follow: true },
 };
 
 const sections = [

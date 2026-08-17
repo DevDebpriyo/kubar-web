@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -62,12 +62,22 @@ function ProductsDropdown() {
       }}
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setIsOpen(false);
+        }
+      }}
       className="relative"
     >
       <button
+        onClick={() => setIsOpen((open) => !open)}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") setIsOpen(false);
+        }}
         className="relative px-3.5 py-2 text-[13.5px] font-medium text-white/55 hover:text-white rounded-lg transition-colors duration-200 group flex items-center gap-1.5"
         aria-expanded={isOpen}
         aria-haspopup="true"
+        aria-controls="desktop-products-menu"
       >
         <span className="relative z-10">{t("products")}</span>
         <motion.div
@@ -85,6 +95,7 @@ function ProductsDropdown() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="desktop-products-menu"
             initial={{ opacity: 0, y: -8, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.95 }}
@@ -166,7 +177,6 @@ function ProductsDropdown() {
 }
 
 function SocialsDropdown() {
-  const t = useTranslations("nav");
   const [isOpen, setIsOpen] = useState(false);
 
   const socials = [
@@ -185,12 +195,22 @@ function SocialsDropdown() {
       }}
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setIsOpen(false);
+        }
+      }}
       className="relative"
     >
       <button
+        onClick={() => setIsOpen((open) => !open)}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") setIsOpen(false);
+        }}
         className="relative px-3.5 py-2 text-[13.5px] font-medium text-white/55 hover:text-white rounded-lg transition-colors duration-200 group flex items-center gap-1.5"
         aria-expanded={isOpen}
         aria-haspopup="true"
+        aria-controls="desktop-socials-menu"
       >
         <span className="relative z-10">Socials</span>
         <motion.div
@@ -206,6 +226,7 @@ function SocialsDropdown() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="desktop-socials-menu"
             initial={{ opacity: 0, y: -8, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.95 }}
@@ -217,7 +238,7 @@ function SocialsDropdown() {
             }}
           >
             <div className="p-2">
-              {socials.map((s, idx) => (
+              {socials.map((s) => (
                 <motion.a
                   key={s.name}
                   href={s.href}
@@ -329,6 +350,47 @@ function MobileMenu({
   const t = useTranslations("nav");
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isSocialsOpen, setIsSocialsOpen] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const focusFrame = requestAnimationFrame(() => closeButtonRef.current?.focus());
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (event.key !== "Tab" || !drawerRef.current) return;
+      const focusable = Array.from(
+        drawerRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+      const first = focusable[0];
+      const last = focusable.at(-1);
+      if (!first || !last) return;
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      cancelAnimationFrame(focusFrame);
+      window.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused?.focus();
+    };
+  }, [isOpen, onClose]);
 
   const products = [
     {
@@ -372,12 +434,16 @@ function MobileMenu({
 
           {/* Drawer */}
           <motion.div
+            ref={drawerRef}
             key="drawer"
             initial={{ opacity: 0, y: -16, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.98 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             className="fixed top-4 left-4 right-4 z-50 rounded-2xl border border-white/9 overflow-hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label={mobileNavAria}
             style={{
               background: "rgba(8, 8, 20, 0.96)",
               backdropFilter: "blur(32px)",
@@ -390,6 +456,7 @@ function MobileMenu({
             <div className="flex items-center justify-between px-5 py-4 border-b border-white/7">
               <KubarLogo />
               <button
+                ref={closeButtonRef}
                 onClick={onClose}
                 className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-white/20 transition-all duration-200"
                 aria-label={closeMenuAria}
@@ -412,6 +479,8 @@ function MobileMenu({
               >
                 <button
                   onClick={() => setIsProductsOpen(!isProductsOpen)}
+                  aria-expanded={isProductsOpen}
+                  aria-controls="mobile-products-menu"
                   className="flex items-center justify-between w-full px-3 py-3 text-[15px] font-medium text-white/65 hover:text-white rounded-xl hover:bg-white/5 transition-all duration-200"
                 >
                   <span>{t("products")}</span>
@@ -427,6 +496,7 @@ function MobileMenu({
                 <AnimatePresence>
                   {isProductsOpen && (
                     <motion.div
+                      id="mobile-products-menu"
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
@@ -516,6 +586,8 @@ function MobileMenu({
               >
                 <button
                   onClick={() => setIsSocialsOpen(!isSocialsOpen)}
+                  aria-expanded={isSocialsOpen}
+                  aria-controls="mobile-socials-menu"
                   className="flex items-center justify-between w-full px-3 py-3 text-[15px] font-medium text-white/65 hover:text-white rounded-xl hover:bg-white/5 transition-all duration-200"
                 >
                   <span>Socials</span>
@@ -530,6 +602,7 @@ function MobileMenu({
                 <AnimatePresence>
                   {isSocialsOpen && (
                     <motion.div
+                      id="mobile-socials-menu"
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
@@ -598,6 +671,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), []);
   const navLinks: NavLink[] = [
     { label: t("products"), href: "#products" },
     { label: "Socials", href: "#socials" },
@@ -757,7 +831,7 @@ export function Navbar() {
       {/* Mobile menu */}
       <MobileMenu
         isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
+        onClose={closeMobileMenu}
         navLinks={navLinks}
         ctaLabel={t("cta")}
         closeMenuAria={t("close_menu_aria")}

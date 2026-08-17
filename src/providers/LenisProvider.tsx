@@ -4,6 +4,7 @@ import Lenis from "lenis";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MotionConfig } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,6 +16,10 @@ export function LenisProvider({ children }: LenisProviderProps) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.25,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -61,5 +66,5 @@ export function LenisProvider({ children }: LenisProviderProps) {
     };
   }, []);
 
-  return <>{children}</>;
+  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }
