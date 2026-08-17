@@ -101,7 +101,7 @@ function IntegrationLayer({
       transition={{ duration: 0.6, delay }}
       className="navdhan-integration-layer"
     >
-      <h4 className="navdhan-integration-label">{label}</h4>
+      <h3 className="navdhan-integration-label">{label}</h3>
       <div className="navdhan-integration-items">
         {items.map((item, idx) => (
           <motion.div

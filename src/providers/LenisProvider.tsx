@@ -2,11 +2,7 @@
 
 import Lenis from "lenis";
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionConfig } from "framer-motion";
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface LenisProviderProps {
   children: React.ReactNode;
@@ -16,53 +12,75 @@ export function LenisProvider({ children }: LenisProviderProps) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
+    const motionPreference = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    let animationFrameId: number | null = null;
+    let detachScrollListener: (() => void) | null = null;
 
-    const lenis = new Lenis({
-      duration: 1.25,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      infinite: false,
-    });
+    const stopLenis = () => {
+      if (animationFrameId !== null) {
+        window.cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
 
-    lenisRef.current = lenis;
+      detachScrollListener?.();
+      detachScrollListener = null;
 
-    // Dispatch custom scroll event for Navbar and other listeners
-    const onScroll = (event: { progress: number; scroll: number }) => {
-      window.dispatchEvent(
-        new CustomEvent("lenis-scroll", {
-          detail: {
-            progress: event.progress,
-            scroll: event.scroll,
-          },
-        }),
-      );
-    };
-    lenis.on("scroll", onScroll);
-
-    // Keep GSAP ScrollTrigger in sync with Lenis scroll position
-    lenis.on("scroll", ScrollTrigger.update);
-
-    // Drive Lenis through GSAP's ticker instead of a manual rAF loop.
-    // This ensures Lenis and ScrollTrigger share the same animation frame,
-    // which prevents the 1-frame lag that causes scrub jitter.
-    const tickerFn = (time: number) => {
-      // GSAP passes time in seconds; Lenis.raf expects milliseconds.
-      lenis.raf(time * 1000);
+      lenisRef.current?.destroy();
+      lenisRef.current = null;
     };
 
-    gsap.ticker.add(tickerFn);
-    // Disable lag smoothing so GSAP never skips frames on slow machines.
-    gsap.ticker.lagSmoothing(0);
+    const startLenis = () => {
+      if (motionPreference.matches || lenisRef.current) return;
+
+      const lenis = new Lenis({
+        duration: 1.25,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+        infinite: false,
+        autoRaf: false,
+      });
+
+      lenisRef.current = lenis;
+      detachScrollListener = lenis.on("scroll", (event) => {
+        window.dispatchEvent(
+          new CustomEvent("lenis-scroll", {
+            detail: {
+              progress: event.progress,
+              scroll: event.scroll,
+            },
+          }),
+        );
+      });
+
+      const update = (time: number) => {
+        lenis.raf(time);
+        animationFrameId = window.requestAnimationFrame(update);
+      };
+
+      animationFrameId = window.requestAnimationFrame(update);
+    };
+
+    const handleMotionPreferenceChange = () => {
+      if (motionPreference.matches) {
+        stopLenis();
+      } else {
+        startLenis();
+      }
+    };
+
+    motionPreference.addEventListener("change", handleMotionPreferenceChange);
+    startLenis();
 
     return () => {
-      gsap.ticker.remove(tickerFn);
-      lenis.destroy();
-      lenisRef.current = null;
+      motionPreference.removeEventListener(
+        "change",
+        handleMotionPreferenceChange,
+      );
+      stopLenis();
     };
   }, []);
 

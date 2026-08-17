@@ -63,7 +63,8 @@ export function FooterSection() {
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              <Mail className="footer-btn-icon" />
+              <Mail className="footer-btn-icon" aria-hidden="true" />
+              <span>{t("email_link")}</span>
               <motion.div
                 className="footer-btn-shine"
                 animate={{
@@ -89,7 +90,7 @@ export function FooterSection() {
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              <Calendar className="footer-btn-icon" />
+              <Calendar className="footer-btn-icon" aria-hidden="true" />
               <span>{t("schedule_call")}</span>
               <motion.div
                 className="footer-btn-arrow"
@@ -100,7 +101,7 @@ export function FooterSection() {
                   ease: "easeInOut",
                 }}
               >
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </motion.div>
             </motion.a>
           </motion.div>

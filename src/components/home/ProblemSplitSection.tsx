@@ -84,6 +84,7 @@ export function ProblemSplitSection() {
       aria-label={t("aria_label")}
       className="relative overflow-hidden px-5 py-18 sm:px-8 sm:py-22 lg:px-10 lg:py-26"
     >
+      <h2 className="sr-only">{t("aria_label")}</h2>
       <div
         className="pointer-events-none absolute left-[15%] top-[28%] h-54 w-54 rounded-full"
         style={{
@@ -144,9 +145,9 @@ export function ProblemSplitSection() {
           />
         </div>
 
-        <h4 className="text-center text-[32px] leading-[1.15] font-bold tracking-[-0.02em] text-white sm:text-[42px]">
+        <h3 className="text-center text-[32px] leading-[1.15] font-bold tracking-[-0.02em] text-white sm:text-[42px]">
           {t("conclusion")}
-        </h4>
+        </h3>
       </motion.div>
     </section>
   );

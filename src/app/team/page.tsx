@@ -17,7 +17,7 @@ interface TeamMember {
   description: string;
   achievements?: string[];
   image: string;
-  linkedin: string;
+  linkedin?: string;
   accentColor:
     | "orange"
     | "green"
@@ -110,7 +110,6 @@ const ADVISORS: TeamMember[] = [
     description: "Professor of Computer Science, Ashoka University",
     image:
       "/advisors/debayan.png",
-    linkedin: "https://linkedin.com",
     accentColor: "orange",
   },
   {
@@ -119,7 +118,6 @@ const ADVISORS: TeamMember[] = [
     description: "Lead System Architect, Bank of England | Contributor to BoE CBDC architecture",
     image:
       "/advisors/amit.png",
-    linkedin: "https://linkedin.com",
     accentColor: "blue",
   },
   {
@@ -128,7 +126,6 @@ const ADVISORS: TeamMember[] = [
     description: "Finance professional with 25+ years of private-equity experience",
     image:
       "/advisors/shridhar.png",
-    linkedin: "https://linkedin.com",
     accentColor: "purple",
   },
   {
@@ -137,7 +134,6 @@ const ADVISORS: TeamMember[] = [
     description: "Former Pricing Actuary, Zurich Insurance",
     image:
       "/advisors/tushar.png",
-    linkedin: "https://linkedin.com",
     accentColor: "pink",
   },
 ];
@@ -190,23 +186,12 @@ function TeamMemberCard({
     amber: "#f59e0b",
   };
 
-  return (
-    <motion.a
-      href={member.linkedin}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay }}
-      whileHover={{ y: -8 }}
-      className={`team-member-card ${featured ? "team-member-card-featured" : ""} ${advisor ? "team-member-card-advisor" : ""}`}
-      style={
-        {
-          "--accent-color": accentMap[member.accentColor],
-        } as React.CSSProperties
-      }
-    >
+  const cardClassName = `team-member-card ${featured ? "team-member-card-featured" : ""} ${advisor ? "team-member-card-advisor" : ""} ${member.linkedin ? "" : "team-member-card-static"}`;
+  const cardStyle = {
+    "--accent-color": accentMap[member.accentColor],
+  } as React.CSSProperties;
+  const cardContent = (
+    <>
       {/* Image Container */}
       <div className="team-member-image-wrapper">
         <Image
@@ -238,12 +223,46 @@ function TeamMemberCard({
           <p className="team-member-description">{member.description}</p>
         )}
 
-        {/* LinkedIn Link */}
-        <div className="team-member-link">
-          <Linkedin className="h-4 w-4" />
-          <span>View Profile</span>
-        </div>
+        {member.linkedin && (
+          <div className="team-member-link">
+            <Linkedin className="h-4 w-4" aria-hidden="true" />
+            <span>View Profile</span>
+          </div>
+        )}
       </div>
+    </>
+  );
+
+  const motionProps = {
+    initial: { opacity: 0, y: 24 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.6, delay },
+    whileHover: member.linkedin ? { y: -8 } : undefined,
+  };
+
+  if (!member.linkedin) {
+    return (
+      <motion.article
+        {...motionProps}
+        className={cardClassName}
+        style={cardStyle}
+      >
+        {cardContent}
+      </motion.article>
+    );
+  }
+
+  return (
+    <motion.a
+      {...motionProps}
+      href={member.linkedin}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cardClassName}
+      style={cardStyle}
+    >
+      {cardContent}
     </motion.a>
   );
 }
@@ -286,6 +305,7 @@ export default function TeamPage() {
       {/* Team Members Section */}
       <section className="team-section">
         <div className="team-container">
+          <h2 className="sr-only">{t("team_section.title")}</h2>
           <div className="team-grid">
             <TeamMemberCard member={FOUNDER} delay={0.08} featured />
             {TEAM_MEMBERS.map((member, idx) => (

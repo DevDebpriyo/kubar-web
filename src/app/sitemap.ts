@@ -4,7 +4,6 @@ const routes = [
   "",
   "/about",
   "/products/navdhan",
-  "/for-platforms",
   "/team",
   "/contact",
   "/privacy",

@@ -1,17 +1,12 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/app/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Contact",
   description:
     "Contact Kubar Labs about lending partnerships, B2B platform integrations, support, or media enquiries.",
-  alternates: { canonical: "/contact" },
-  openGraph: {
-    title: "Contact Kubar Labs",
-    description:
-      "Contact Kubar Labs about lending partnerships, B2B platform integrations, support, or media enquiries.",
-    url: "/contact",
-  },
-};
+  path: "/contact",
+  socialTitle: "Contact Kubar Labs",
+});
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {
   return children;
