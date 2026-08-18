@@ -1,15 +1,14 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NextRequest } from "next/server";
 
-const { createTransportMock, sendMailMock } = vi.hoisted(() => ({
-  createTransportMock: vi.fn(),
-  sendMailMock: vi.fn(),
+const { edgeLimitMock, getCloudflareContextMock, sendEmailMock } = vi.hoisted(() => ({
+  edgeLimitMock: vi.fn(),
+  getCloudflareContextMock: vi.fn(),
+  sendEmailMock: vi.fn(),
 }));
 
-vi.mock("nodemailer", () => ({
-  default: {
-    createTransport: createTransportMock,
-  },
+vi.mock("@opennextjs/cloudflare", () => ({
+  getCloudflareContext: getCloudflareContextMock,
 }));
 
 import { POST } from "./route";
@@ -67,10 +66,19 @@ function jsonRequest(body: unknown, options?: RequestOptions) {
 }
 
 beforeEach(() => {
-  createTransportMock.mockReset();
-  sendMailMock.mockReset();
-  sendMailMock.mockResolvedValue({ messageId: "test-message" });
-  createTransportMock.mockReturnValue({ sendMail: sendMailMock });
+  getCloudflareContextMock.mockReset();
+  edgeLimitMock.mockReset();
+  sendEmailMock.mockReset();
+  edgeLimitMock.mockResolvedValue({ success: true });
+  sendEmailMock.mockResolvedValue({ messageId: "test-message" });
+  getCloudflareContextMock.mockResolvedValue({
+    env: {
+      EMAIL: { send: sendEmailMock },
+      CONTACT_RATE_LIMITER: {
+        limit: edgeLimitMock,
+      },
+    },
+  });
 });
 
 describe("contact route hardening", () => {
@@ -84,7 +92,7 @@ describe("contact route hardening", () => {
       error: "Invalid request origin",
     });
     expect(response.headers.get("cache-control")).toBe("no-store");
-    expect(createTransportMock).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("requires a JSON content type", async () => {
@@ -96,7 +104,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Unsupported content type",
     });
-    expect(createTransportMock).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("rejects malformed JSON", async () => {
@@ -104,7 +112,7 @@ describe("contact route hardening", () => {
 
     expect(response.status).toBe(400);
     await expect(response.json()).resolves.toEqual({ error: "Invalid JSON" });
-    expect(createTransportMock).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("rejects an oversized declared request before parsing it", async () => {
@@ -116,7 +124,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Request body is too large",
     });
-    expect(createTransportMock).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("rejects an oversized actual body without trusting content-length", async () => {
@@ -126,7 +134,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Request body is too large",
     });
-    expect(createTransportMock).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("rejects a missing form field", async () => {
@@ -142,7 +150,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Invalid form data",
     });
-    expect(createTransportMock).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("rejects empty required fields", async () => {
@@ -154,7 +162,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Missing required fields",
     });
-    expect(createTransportMock).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("rejects invalid field types", async () => {
@@ -166,7 +174,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Invalid form data",
     });
-    expect(createTransportMock).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("rejects an invalid email address", async () => {
@@ -178,7 +186,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Invalid email address",
     });
-    expect(createTransportMock).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("rejects an unsupported category", async () => {
@@ -190,7 +198,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Invalid form data",
     });
-    expect(createTransportMock).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("accepts a honeypot submission without sending email", async () => {
@@ -203,11 +211,23 @@ describe("contact route hardening", () => {
 
     expect(response.status).toBe(200);
     await expect(response.json()).resolves.toEqual({ success: true });
-    expect(createTransportMock).not.toHaveBeenCalled();
-    expect(sendMailMock).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
-  it("sends a valid submission through the configured SMTP transport", async () => {
+  it("rejects requests blocked by the Cloudflare edge limiter", async () => {
+    edgeLimitMock.mockResolvedValueOnce({ success: false });
+
+    const response = await POST(jsonRequest(validSubmission));
+
+    expect(response.status).toBe(429);
+    await expect(response.json()).resolves.toEqual({
+      error: "Too many requests. Please try again later.",
+    });
+    expect(response.headers.get("retry-after")).toBe("60");
+    expect(sendEmailMock).not.toHaveBeenCalled();
+  });
+
+  it("sends a valid submission through Cloudflare Email Service", async () => {
     const response = await POST(jsonRequest(validSubmission));
 
     expect(response.status).toBe(200);
@@ -215,18 +235,9 @@ describe("contact route hardening", () => {
       success: true,
       message: "Message sent successfully",
     });
-    expect(createTransportMock).toHaveBeenCalledOnce();
-    expect(createTransportMock).toHaveBeenCalledWith(
-      expect.objectContaining({
-        connectionTimeout: 10_000,
-        greetingTimeout: 10_000,
-        socketTimeout: 15_000,
-        disableFileAccess: true,
-        disableUrlAccess: true,
-      }),
-    );
-    expect(sendMailMock).toHaveBeenCalledOnce();
-    expect(sendMailMock).toHaveBeenCalledWith(
+    expect(getCloudflareContextMock).toHaveBeenCalledOnce();
+    expect(sendEmailMock).toHaveBeenCalledOnce();
+    expect(sendEmailMock).toHaveBeenCalledWith(
       expect.objectContaining({
         replyTo: validSubmission.email,
         subject:
@@ -235,11 +246,11 @@ describe("contact route hardening", () => {
     );
   });
 
-  it("returns a generic server error when SMTP delivery fails", async () => {
+  it("returns a generic server error when email delivery fails", async () => {
     const consoleError = vi
       .spyOn(console, "error")
       .mockImplementation(() => undefined);
-    sendMailMock.mockRejectedValueOnce(new Error("SMTP credentials rejected"));
+    sendEmailMock.mockRejectedValueOnce(new Error("Email delivery rejected"));
 
     try {
       const response = await POST(jsonRequest(validSubmission));
@@ -248,7 +259,7 @@ describe("contact route hardening", () => {
       await expect(response.json()).resolves.toEqual({
         error: "Failed to send message. Please try again.",
       });
-      expect(sendMailMock).toHaveBeenCalledOnce();
+      expect(sendEmailMock).toHaveBeenCalledOnce();
       expect(consoleError).toHaveBeenCalledOnce();
     } finally {
       consoleError.mockRestore();
@@ -266,6 +277,6 @@ describe("contact route hardening", () => {
     const blocked = await POST(request("not-json", { ip }));
     expect(blocked.status).toBe(429);
     expect(Number(blocked.headers.get("retry-after"))).toBeGreaterThan(0);
-    expect(createTransportMock).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 });

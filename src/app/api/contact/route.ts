@@ -1,9 +1,11 @@
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 
 /* ─── Configurable recipient email ──────────────────────────── */
 const RECIPIENT_EMAIL =
   process.env.CONTACT_FORM_RECIPIENT_EMAIL || "outreach@kubar.tech";
+const SENDER_EMAIL =
+  process.env.CONTACT_FORM_SENDER_EMAIL || "website@mail.kubar.tech";
 
 const MAX_REQUEST_BYTES = 10_000;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
@@ -254,6 +256,18 @@ export async function POST(request: NextRequest) {
     }
 
     const identifier = getClientIdentifier(request);
+    const { env } = await getCloudflareContext({ async: true });
+    const edgeRateLimit = await env.CONTACT_RATE_LIMITER.limit({
+      key: identifier,
+    });
+    if (!edgeRateLimit.success) {
+      return jsonResponse(
+        { error: "Too many requests. Please try again later." },
+        429,
+        { "Retry-After": "60" },
+      );
+    }
+
     const rateLimit = checkRateLimit(identifier);
     if (!rateLimit.allowed) {
       const retryAfter = Math.max(
@@ -322,29 +336,12 @@ export async function POST(request: NextRequest) {
       return jsonResponse({ error: "Invalid form data" }, 400);
     }
 
-    // Create transporter — uses env vars for SMTP config
-    const smtpPort = Number(process.env.SMTP_PORT) || 587;
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || "smtp.gmail.com",
-      port: smtpPort,
-      secure: process.env.SMTP_SECURE === "true" || smtpPort === 465,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASSWORD,
-      },
-      connectionTimeout: 10_000,
-      greetingTimeout: 10_000,
-      socketTimeout: 15_000,
-      disableFileAccess: true,
-      disableUrlAccess: true,
-    });
-
     // Build email
     const categoryDisplay =
       categoryLabels[data.category] || data.category || "Not specified";
 
     const mailOptions = {
-      from: `"Kubar Labs Contact Form" <${process.env.SMTP_USER || "noreply@kubar.tech"}>`,
+      from: { email: SENDER_EMAIL, name: "Kubar Labs Contact Form" },
       to: RECIPIENT_EMAIL,
       replyTo: data.email,
       subject: `New Contact: ${data.fullName} from ${data.companyName} [${categoryDisplay}]`,
@@ -352,18 +349,17 @@ export async function POST(request: NextRequest) {
       text: `New Contact Form Submission\n\nFull Name: ${data.fullName}\nEmail: ${data.email}\nPhone: ${data.phone || "Not provided"}\nCompany: ${data.companyName}\nCategory: ${categoryDisplay}\n\nSubmitted via kubar.tech/contact`,
     };
 
-    // Send email
-    await transporter.sendMail(mailOptions);
+    await env.EMAIL.send(mailOptions);
 
     return jsonResponse({ success: true, message: "Message sent successfully" });
   } catch (error) {
     console.error("Contact form error:", error);
 
-    // In development, return success anyway so the UI flow works
-    // (SMTP credentials won't be set up yet)
+    // In development, return success anyway so the UI flow works when the
+    // remote Email Service binding is unavailable.
     if (process.env.NODE_ENV === "development") {
       console.warn(
-        "DEV MODE: Email sending failed (likely missing SMTP credentials). Returning success for UI testing."
+        "DEV MODE: Email sending failed. Returning success for UI testing."
       );
       return jsonResponse(
         {

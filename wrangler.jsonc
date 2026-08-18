@@ -1,0 +1,47 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "kubar-web",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-08-18",
+  "workers_dev": true,
+  "preview_urls": true,
+  "routes": [
+    {
+      "pattern": "kubar.tech",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.kubar.tech",
+      "custom_domain": true
+    }
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "remote": true,
+      "allowed_sender_addresses": ["website@mail.kubar.tech"],
+      "allowed_destination_addresses": ["outreach@kubar.tech"]
+    }
+  ],
+  "ratelimits": [
+    {
+      "name": "CONTACT_RATE_LIMITER",
+      "namespace_id": "3897401201",
+      "simple": {
+        "limit": 5,
+        "period": 60
+      }
+    }
+  ],
+  "vars": {
+    "CONTACT_FORM_RECIPIENT_EMAIL": "outreach@kubar.tech",
+    "CONTACT_FORM_SENDER_EMAIL": "website@mail.kubar.tech"
+  }
+}

@@ -30,6 +30,26 @@ const nextConfig: NextConfig = {
   images: {
     qualities: [75, 85, 95],
   },
+  webpack(config) {
+    config.module.rules.push({ test: /\.ya?ml$/, type: "asset/source" });
+    return config;
+  },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        has: [{ type: "host", value: "www.kubar.tech" }],
+        destination: "https://kubar.tech/",
+        permanent: true,
+      },
+      {
+        source: "/:path+",
+        has: [{ type: "host", value: "www.kubar.tech" }],
+        destination: "https://kubar.tech/:path+",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

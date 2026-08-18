@@ -74,7 +74,7 @@ function ContactForm() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const data = (await response.json()) as { error?: string };
 
       if (!response.ok) {
         throw new Error(data.error || "Failed to send message");

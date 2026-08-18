@@ -25,25 +25,16 @@ npm run test:e2e
 
 ## Contact form configuration
 
-Copy `.env.example` to `.env.local` for local delivery testing. The `/api/contact` route uses these server-side environment variables in production:
-
-- `SMTP_HOST`
-- `SMTP_PORT`
-- `SMTP_SECURE`
-- `SMTP_USER`
-- `SMTP_PASSWORD`
-- `CONTACT_FORM_RECIPIENT_EMAIL`
-
-Never commit real credentials. The route enforces same-origin JSON requests, a 10 KB body limit, a honeypot, and best-effort per-instance throttling.
-
-The production Vercel project also has a distributed firewall rule with these parameters:
-
-- Match path `/api/contact` and method `POST`.
-- Allow 5 requests per IP in a 600-second fixed window.
-- Deny requests that exceed the limit.
-
-Keep this external rule in place when recreating or relinking the Vercel project; it is not represented by a supported repository configuration file.
+The `/api/contact` route sends through the Cloudflare Email Service `EMAIL`
+binding. Sender and recipient restrictions are declared in `wrangler.jsonc`;
+no SMTP credentials are required. The route enforces same-origin JSON
+requests, a 10 KB body limit, a honeypot, Cloudflare edge rate limiting, and a
+second best-effort 10-minute per-instance guard. The edge limiter allows five
+requests per IP per minute and is declared in `wrangler.jsonc`.
 
 ## Deployment
 
-The repository is linked to the Vercel project `kubar-web`. Production aliases are `kubar.tech` and `www.kubar.tech`.
+The site deploys to the Cloudflare Worker `kubar-web` through the OpenNext
+adapter. Run `npm run deploy:cf` for a production deployment. Production custom
+domains are `kubar.tech` and `www.kubar.tech`; the `www` host redirects to the
+apex domain.
