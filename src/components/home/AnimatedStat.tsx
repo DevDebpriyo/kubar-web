@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useMotionValue, useTransform, motion, animate, useInView } from "framer-motion";
+import { useMotionValue, useTransform, m, animate, useInView } from "framer-motion";
 
 interface AnimatedStatProps {
   value: number;
@@ -37,11 +37,11 @@ export function AnimatedStat({
   return (
     <div ref={ref} className="flex flex-col gap-1 min-w-0">
       <div className="flex items-baseline gap-0.5">
-        <motion.span
+        <m.span
           className="text-[22px] sm:text-[24px] font-black text-white tracking-[-0.03em] leading-none stat-value"
         >
           {rounded}
-        </motion.span>
+        </m.span>
         <span
           className="text-[20px] sm:text-[22px] font-black leading-none tracking-[-0.02em]"
           style={{ color: "#d4920c" }}

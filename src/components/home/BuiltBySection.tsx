@@ -1,9 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import Image from "next/image";
 import { Zap, Lock } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useRef } from "react";
 import "./BuiltBySection.css";
 
 function ProductCard({
@@ -12,19 +13,21 @@ function ProductCard({
   status,
   statusType,
   index,
+  isActive,
 }: {
   name: string;
   description: string;
   status: string;
   statusType: "live" | "upcoming";
   index: number;
+  isActive: boolean;
 }) {
   const Icon = statusType === "live" ? Zap : Lock;
   const isLive = statusType === "live";
   const showNavdhanLogo = name === "NavDhan";
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
@@ -54,10 +57,11 @@ function ProductCard({
                 alt="NavDhan"
                 width={120}
                 height={36}
+                sizes="120px"
                 className="h-10 sm:h-14 w-auto object-contain drop-shadow-sm -translate-y-2 sm:-translate-y-3"
               />
             )}
-            <motion.h3
+            <m.h3
               className="built-product-name"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -65,11 +69,11 @@ function ProductCard({
               transition={{ delay: 0.1 + index * 0.15 }}
             >
               {name}
-            </motion.h3>
+            </m.h3>
           </div>
 
           {/* Product description */}
-          <motion.p
+          <m.p
             className="built-product-description"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -77,33 +81,35 @@ function ProductCard({
             transition={{ delay: 0.15 + index * 0.15 }}
           >
             {description}
-          </motion.p>
+          </m.p>
         </div>
 
         {/* Status badge */}
-        <motion.div
+        <m.div
           className={`built-status-badge ${statusType}`}
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          animate={isLive ? { boxShadow: ["0 0 12px rgba(74, 132, 255, 0.3)", "0 0 24px rgba(74, 132, 255, 0.6)", "0 0 12px rgba(74, 132, 255, 0.3)"] } : {}}
-          transition={isLive ? { delay: 0.2 + index * 0.15, boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" } } : { delay: 0.2 + index * 0.15 }}
+          animate={isLive && isActive ? { boxShadow: ["0 0 12px rgba(74, 132, 255, 0.3)", "0 0 24px rgba(74, 132, 255, 0.6)", "0 0 12px rgba(74, 132, 255, 0.3)"] } : {}}
+          transition={isLive && isActive ? { delay: 0.2 + index * 0.15, boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" } } : { delay: 0.2 + index * 0.15 }}
         >
           <div className="built-status-icon">
             <Icon className="h-3.5 w-3.5" />
           </div>
           <span className="built-status-text">{status}</span>
-        </motion.div>
+        </m.div>
       </div>
 
       {/* Hover border accent */}
       <div className="built-card-border" aria-hidden="true" />
-    </motion.div>
+    </m.div>
   );
 }
 
 export function BuiltBySection() {
   const t = useTranslations("built_by");
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: "200px" });
 
   const products = [
     {
@@ -122,6 +128,7 @@ export function BuiltBySection() {
 
   return (
     <section
+      ref={sectionRef}
       id="built-by"
       aria-label={t("aria_label")}
       className="built-section"
@@ -130,7 +137,7 @@ export function BuiltBySection() {
       <div className="built-bg-gradient" aria-hidden="true" />
       <div className="built-container">
         {/* Header section */}
-        <motion.div
+        <m.div
           className="built-header"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -144,6 +151,7 @@ export function BuiltBySection() {
                 alt="Kubar Logo"
                 width={84}
                 height={84}
+                sizes="84px"
                 className="built-header-logo"
               />
               <span className="built-title-text">{t("title_prefix")}</span>
@@ -151,10 +159,10 @@ export function BuiltBySection() {
             </h2>
           </div>
           <p className="built-description">{t("description")}</p>
-        </motion.div>
+        </m.div>
 
         {/* Divider line */}
-        <motion.div
+        <m.div
           className="built-divider"
           initial={{ opacity: 0, scaleX: 0 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
@@ -170,12 +178,12 @@ export function BuiltBySection() {
         {/* Products grid */}
         <div className="built-products-grid">
           {products.map((product, index) => (
-            <ProductCard key={product.name} {...product} index={index} />
+            <ProductCard key={product.name} {...product} index={index} isActive={isInView} />
           ))}
         </div>
 
         {/* Hiring CTA section */}
-        <motion.div
+        <m.div
           className="built-hiring-section"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -188,22 +196,20 @@ export function BuiltBySection() {
         >
           <a href={`mailto:${t("hiring_email")}`} className="built-hiring-link">
             <span className="built-hiring-text">{t("hiring_cta")}</span>
-            <motion.span
-              animate={{ x: [0, 4, 0] }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+            <m.span
+              animate={isInView ? { x: [0, 4, 0] } : { x: 0 }}
+              transition={isInView
+                ? { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                : { duration: 0 }}
               className="built-hiring-arrow"
             >
               {t("hiring_link")}
-            </motion.span>
+            </m.span>
           </a>
-        </motion.div>
+        </m.div>
 
         {/* Decorative divider */}
-        <motion.div
+        <m.div
           className="built-separator"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -213,7 +219,7 @@ export function BuiltBySection() {
         />
 
         {/* Tagline section */}
-        <motion.div
+        <m.div
           className="built-tagline-section"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -225,7 +231,7 @@ export function BuiltBySection() {
           }}
         >
           <h3 className="built-tagline">{t.rich("tagline", { bharat: (chunks) => <span style={{ color: "#FF9933" }}>{chunks}</span>, methods: (chunks) => <span style={{ color: "#1A4FA3" }}>{chunks}</span>, money: (chunks) => <span style={{ color: "#138808" }}>{chunks}</span> })}</h3>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

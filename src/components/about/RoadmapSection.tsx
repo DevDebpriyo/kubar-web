@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -198,7 +198,7 @@ export function RoadmapSection() {
           <h2 className="text-[36px] sm:text-[48px] lg:text-[56px] font-extrabold text-white tracking-tight leading-none">
             Roadmap
           </h2>
-          <motion.div
+          <m.div
             className="trust-divider"
             initial={{ opacity: 0, scaleX: 0 }}
             whileInView={{ opacity: 1, scaleX: 1 }}
@@ -296,7 +296,7 @@ export function RoadmapSection() {
             {/* ── Left: large watermark category text ─────────── */}
             <div className="hidden lg:flex items-center overflow-hidden">
               <AnimatePresence mode="wait">
-                <motion.p
+                <m.p
                   key={`cat-${activeIndex}`}
                   initial={{ opacity: 0, x: -40, filter: "blur(10px)" }}
                   animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
@@ -310,7 +310,7 @@ export function RoadmapSection() {
                   }}
                 >
                   {item.category}
-                </motion.p>
+                </m.p>
               </AnimatePresence>
             </div>
 
@@ -320,7 +320,7 @@ export function RoadmapSection() {
             {/* ── Right: info panel ────────────────────────────── */}
             <div>
               <AnimatePresence mode="wait">
-                <motion.div
+                <m.div
                   key={`info-${activeIndex}`}
                   initial={{ opacity: 0, y: 26 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -354,7 +354,7 @@ export function RoadmapSection() {
                   <p className="text-[rgba(255,255,255,0.6)] text-[13px] sm:text-[16px] lg:text-[17px] leading-relaxed max-w-[540px] line-clamp-4 sm:line-clamp-none">
                     {item.description}
                   </p>
-                </motion.div>
+                </m.div>
               </AnimatePresence>
             </div>
           </div>

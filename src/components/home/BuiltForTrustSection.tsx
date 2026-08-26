@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import Image from "next/image";
 import {
   Building2,
@@ -11,7 +11,7 @@ import {
   Trophy,
   type LucideIcon,
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -80,9 +80,11 @@ const trustCardStyles: Record<TrustCardId, TrustCardStyle> = {
 function FlippingTrustCard({
   card,
   index,
+  isActive,
 }: {
   card: TrustCard;
   index: number;
+  isActive: boolean;
 }) {
   const Icon = trustCardIcons[card.id];
   const style = trustCardStyles[card.id];
@@ -91,7 +93,7 @@ function FlippingTrustCard({
   const mobileContentId = `trust-mobile-details-${card.id}`;
 
   return (
-    <motion.article
+    <m.article
       className="trust-flip-card"
       data-tone={style.tone}
       initial={{ opacity: 0, y: 20 }}
@@ -139,6 +141,7 @@ function FlippingTrustCard({
               alt={`${card.title} signature logo`}
               width={140}
               height={56}
+              sizes="140px"
               className="trust-graphic-logo"
             />
             <svg
@@ -146,21 +149,19 @@ function FlippingTrustCard({
               viewBox="0 0 200 60"
               preserveAspectRatio="none"
             >
-              <motion.path
+              <m.path
                 d="M0,45 C50,45 60,15 100,15 C140,15 150,45 200,45"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1"
                 vectorEffect="non-scaling-stroke"
                 initial={{ strokeDasharray: "200 200", strokeDashoffset: 200 }}
-                animate={{ strokeDashoffset: 0 }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
+                animate={isActive ? { strokeDashoffset: 0 } : { strokeDashoffset: 200 }}
+                transition={isActive
+                  ? { duration: 4, repeat: Infinity, ease: "linear" }
+                  : { duration: 0 }}
               />
-              <motion.path
+              <m.path
                 d="M0,30 C40,30 50,5 100,5 C150,5 160,30 200,30"
                 fill="none"
                 stroke="currentColor"
@@ -168,7 +169,7 @@ function FlippingTrustCard({
                 opacity="0.5"
                 vectorEffect="non-scaling-stroke"
               />
-              <motion.path
+              <m.path
                 d="M0,55 C40,55 70,35 100,35 C130,35 160,55 200,55"
                 fill="none"
                 stroke="currentColor"
@@ -176,12 +177,10 @@ function FlippingTrustCard({
                 opacity="0.3"
                 vectorEffect="non-scaling-stroke"
                 initial={{ strokeDasharray: "10 5", strokeDashoffset: 0 }}
-                animate={{ strokeDashoffset: -30 }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
+                animate={isActive ? { strokeDashoffset: -30 } : { strokeDashoffset: 0 }}
+                transition={isActive
+                  ? { duration: 3, repeat: Infinity, ease: "linear" }
+                  : { duration: 0 }}
               />
             </svg>
             <Icon className="trust-graphic-icon" strokeWidth={1} />
@@ -255,12 +254,14 @@ function FlippingTrustCard({
           </div>
         </div>
       </div>
-    </motion.article>
+    </m.article>
   );
 }
 
 export function BuiltForTrustSection() {
   const t = useTranslations("built_for_trust");
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: "200px" });
 
   const cards: TrustCard[] = [
     {
@@ -297,6 +298,7 @@ export function BuiltForTrustSection() {
 
   return (
     <section
+      ref={sectionRef}
       id="built-for-trust"
       aria-label={t("aria_label")}
       className="trust-section"
@@ -305,7 +307,7 @@ export function BuiltForTrustSection() {
       <div className="trust-bg-accent" aria-hidden="true" />
 
       <div className="trust-container">
-        <motion.div
+        <m.div
           className="trust-header"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -317,9 +319,9 @@ export function BuiltForTrustSection() {
         >
           <h2 className="trust-title">{t("title")}</h2>
           <p className="trust-subtitle">{t("subtitle")}</p>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           className="trust-divider"
           initial={{ opacity: 0, scaleX: 0 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
@@ -334,7 +336,12 @@ export function BuiltForTrustSection() {
 
         <div className="trust-cards-grid">
           {cards.map((card, index) => (
-            <FlippingTrustCard key={card.id} card={card} index={index} />
+            <FlippingTrustCard
+              key={card.id}
+              card={card}
+              index={index}
+              isActive={isInView}
+            />
           ))}
         </div>
       </div>

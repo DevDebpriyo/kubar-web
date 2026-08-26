@@ -3,6 +3,7 @@ import { ArrowRight, Clock3 } from "lucide-react";
 import { createPageMetadata } from "@/app/page-metadata";
 import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/home/FooterSection";
+import { RouteIntlProvider } from "@/i18n/RouteIntlProvider";
 
 export const metadata = createPageMetadata({
   title: "For Platforms — Coming Soon",
@@ -15,7 +16,8 @@ export const metadata = createPageMetadata({
 
 export default function ForPlatformsComingSoonPage() {
   return (
-    <main className="min-h-screen bg-[#04040c] text-white">
+    <RouteIntlProvider namespaces={["nav", "footer"]}>
+      <main className="min-h-screen bg-[#04040c] text-white">
       <Navbar />
 
       <section className="relative isolate flex min-h-[82vh] items-center overflow-hidden px-6 pb-20 pt-32 sm:px-10 lg:px-12">
@@ -51,6 +53,7 @@ export default function ForPlatformsComingSoonPage() {
       </section>
 
       <FooterSection />
-    </main>
+      </main>
+    </RouteIntlProvider>
   );
 }

@@ -21,7 +21,7 @@ import {
   ArrowDown,
 } from "lucide-react";
 import {
-  motion,
+  m,
   useReducedMotion,
   useScroll,
   useSpring,
@@ -452,7 +452,7 @@ export function VisualStorySection() {
               { icon: XOctagon, text: oldWaySteps[3], failure: true },
             ].map((step, idx, arr) => (
               <React.Fragment key={idx}>
-                <motion.div
+                <m.div
                   className={`old-way-step ${step.failure ? "failure" : ""}`}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -463,10 +463,10 @@ export function VisualStorySection() {
                     <step.icon className="h-6 w-6" />
                   </div>
                   <p className="old-way-text">{step.text}</p>
-                </motion.div>
+                </m.div>
 
                 {idx < arr.length - 1 && (
-                  <motion.div
+                  <m.div
                     className="old-way-connector"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -474,7 +474,7 @@ export function VisualStorySection() {
                     transition={{ delay: idx * 0.15 + 0.1, duration: 0.3 }}
                   >
                     <ArrowDown className="h-5 w-5" />
-                  </motion.div>
+                  </m.div>
                 )}
               </React.Fragment>
             ))}
@@ -484,7 +484,7 @@ export function VisualStorySection() {
         {/* Our Implementation Card */}
         <div className="impl-container">
           <div className="solution-header">
-            <motion.div
+            <m.div
               className="story-impl-badge flex items-center gap-1.5 sm:gap-2"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -496,20 +496,21 @@ export function VisualStorySection() {
                 alt="NavDhan"
                 width={120}
                 height={36}
+                sizes="120px"
                 className="h-14 sm:h-14 w-auto object-contain drop-shadow-sm"
               />
               <span className="mt-[1px]">IMPLEMENTATION</span>
-            </motion.div>
+            </m.div>
           </div>
 
           <div className="timeline-wrapper">
             <div className="timeline-track" ref={timelineTrackRef}>
               <div className="timeline-center-line" aria-hidden="true">
-                <motion.div
+                <m.div
                   className="timeline-progress-line"
                   style={{ scaleY: timelineProgress }}
                 />
-                <motion.div
+                <m.div
                   className="timeline-progress-dot"
                   style={{ top: progressDotTop }}
                 />
@@ -520,7 +521,7 @@ export function VisualStorySection() {
                 const ItemIcon = item.icon;
 
                 return (
-                  <motion.article
+                  <m.article
                     key={item.id}
                     className={`timeline-item ${isTextLeft ? "timeline-item--text-left" : "timeline-item--text-right"
                       } timeline-item--accent-${item.accent}`}
@@ -544,7 +545,7 @@ export function VisualStorySection() {
                     </div>
 
                     <div className="timeline-content-side timeline-content-side--visual">
-                      <motion.figure
+                      <m.figure
                         className="timeline-visual-card"
                         whileHover={
                           prefersReducedMotion
@@ -559,14 +560,14 @@ export function VisualStorySection() {
                           <ItemIcon className="h-4 w-4" />
                           <span>{item.title}</span>
                         </figcaption>
-                      </motion.figure>
+                      </m.figure>
                     </div>
-                  </motion.article>
+                  </m.article>
                 );
               })}
             </div>
 
-            <motion.div
+            <m.div
               className="all-in-card"
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -578,7 +579,7 @@ export function VisualStorySection() {
               <a href="/contact" className="all-in-button">
                 {t("cta.button")}
               </a>
-            </motion.div>
+            </m.div>
           </div>
 
         </div>

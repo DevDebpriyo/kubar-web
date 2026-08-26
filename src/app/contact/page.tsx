@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Mail, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { Navbar } from "@/components/layout/Navbar";
 import { ContactSuccessModal } from "@/components/contact/ContactSuccessModal";
@@ -102,7 +103,7 @@ function ContactForm() {
 
   return (
     <>
-      <motion.form
+      <m.form
         initial={{ opacity: 0, x: -24 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
@@ -121,7 +122,7 @@ function ContactForm() {
           className="absolute h-px w-px overflow-hidden opacity-0"
         />
         {/* Full Name */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -141,10 +142,10 @@ function ContactForm() {
             className="contact-input"
             required
           />
-        </motion.div>
+        </m.div>
 
         {/* Email */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -164,10 +165,10 @@ function ContactForm() {
             className="contact-input"
             required
           />
-        </motion.div>
+        </m.div>
 
         {/* Phone */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -186,10 +187,10 @@ function ContactForm() {
             placeholder={t("form.phone_placeholder")}
             className="contact-input"
           />
-        </motion.div>
+        </m.div>
 
         {/* Company Name */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -209,10 +210,10 @@ function ContactForm() {
             className="contact-input"
             required
           />
-        </motion.div>
+        </m.div>
 
         {/* Category */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -243,11 +244,11 @@ function ContactForm() {
               <option value="other">{t("form.category_options.other")}</option>
             </select>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Error message (inline) */}
         {submitStatus === "error" && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -256,11 +257,21 @@ function ContactForm() {
             aria-live="assertive"
           >
             ✕ {t("form.error")}
-          </motion.div>
+          </m.div>
         )}
 
+        <p className="text-xs leading-relaxed text-white/50">
+          {t("form.privacy_notice")} {" "}
+          <Link
+            href="/privacy"
+            className="text-white/70 underline underline-offset-4 transition-colors hover:text-white"
+          >
+            {t("form.privacy_link")}
+          </Link>
+        </p>
+
         {/* Submit button */}
-        <motion.button
+        <m.button
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -273,8 +284,8 @@ function ContactForm() {
         >
           {isSubmitting ? t("form.submitting") : t("form.submit")}
           {!isSubmitting && <ArrowRight aria-hidden="true" className="h-4 w-4" />}
-        </motion.button>
-      </motion.form>
+        </m.button>
+      </m.form>
 
       {/* Success Modal */}
       <ContactSuccessModal
@@ -312,14 +323,14 @@ function ContactInfo() {
   ];
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, x: 24 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
       className="contact-info-section"
     >
-      <motion.h2
+      <m.h2
         initial={{ opacity: 0, y: -12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -327,11 +338,11 @@ function ContactInfo() {
         className="contact-info-heading"
       >
         {t("contact_info.heading")}
-      </motion.h2>
+      </m.h2>
 
       <div className="contact-info-list">
         {contactItems.map((item) => (
-          <motion.a
+          <m.a
             key={item.email}
             href={`mailto:${item.email}`}
             initial={{ opacity: 0, y: 16 }}
@@ -347,10 +358,10 @@ function ContactInfo() {
               <p className="contact-info-email">{item.email}</p>
             </div>
             <Mail className="contact-info-arrow" />
-          </motion.a>
+          </m.a>
         ))}
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -365,25 +376,25 @@ export default function ContactPage() {
       {/* Hero Section */}
       <section className="contact-hero">
         <div className="contact-container">
-          <motion.div
+          <m.div
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
             className="contact-hero-content"
           >
-            <motion.h1
+            <m.h1
               variants={fadeInUp}
               className="contact-hero-title"
             >
               {t("main_heading")}
-            </motion.h1>
-            <motion.p
+            </m.h1>
+            <m.p
               variants={fadeInUp}
               className="contact-hero-description"
             >
               {t("main_description")}
-            </motion.p>
-          </motion.div>
+            </m.p>
+          </m.div>
 
           {/* Background elements */}
           <div className="contact-hero-bg" aria-hidden="true">

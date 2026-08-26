@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { CheckCircle, X, Sparkles } from "lucide-react";
 import { useEffect, useRef } from "react";
@@ -65,7 +65,7 @@ function FloatingParticle({
   const variation = ((x * 31 + y * 17 + size * 13 + delay * 100) % 100) / 100;
 
   return (
-    <motion.div
+    <m.div
       className="absolute rounded-full pointer-events-none"
       style={{
         width: size,
@@ -161,7 +161,7 @@ export function ContactSuccessModal({
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
+        <m.div
           className="fixed inset-0 z-[9999] flex items-center justify-center px-4"
           variants={overlayVariants}
           initial="hidden"
@@ -170,7 +170,7 @@ export function ContactSuccessModal({
           transition={{ duration: 0.3 }}
         >
           {/* Backdrop */}
-          <motion.div
+          <m.div
             className="absolute inset-0"
             style={{
               background:
@@ -181,7 +181,7 @@ export function ContactSuccessModal({
           />
 
           {/* Modal card */}
-          <motion.div
+          <m.div
             ref={dialogRef}
             className="relative w-full max-w-md overflow-hidden"
             variants={modalVariants}
@@ -204,7 +204,7 @@ export function ContactSuccessModal({
               }}
             >
               {/* Close button */}
-              <motion.button
+              <m.button
                 ref={closeButtonRef}
                 className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer z-10"
                 style={{
@@ -220,7 +220,7 @@ export function ContactSuccessModal({
                 aria-label="Close dialog"
               >
                 <X className="w-4 h-4 text-white/50" />
-              </motion.button>
+              </m.button>
 
               {/* Floating celebration particles */}
               <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
@@ -235,7 +235,7 @@ export function ContactSuccessModal({
               </div>
 
               {/* Top glow line */}
-              <motion.div
+              <m.div
                 className="absolute top-0 left-0 right-0 h-px"
                 style={{
                   background:
@@ -249,12 +249,12 @@ export function ContactSuccessModal({
               {/* Content */}
               <div className="relative z-10 flex flex-col items-center text-center">
                 {/* Animated check icon */}
-                <motion.div
+                <m.div
                   variants={itemVariants}
                   className="relative mb-6"
                 >
                   {/* Outer ring pulse */}
-                  <motion.div
+                  <m.div
                     className="absolute inset-0 -m-3 rounded-full"
                     style={{
                       border: "2px solid rgba(34,197,94,0.2)",
@@ -270,7 +270,7 @@ export function ContactSuccessModal({
                     }}
                   />
                   {/* Second ring */}
-                  <motion.div
+                  <m.div
                     className="absolute inset-0 -m-6 rounded-full"
                     style={{
                       border: "1px solid rgba(34,197,94,0.1)",
@@ -288,7 +288,7 @@ export function ContactSuccessModal({
                   />
 
                   {/* Icon container */}
-                  <motion.div
+                  <m.div
                     className="w-16 h-16 rounded-2xl flex items-center justify-center"
                     style={{
                       background:
@@ -306,19 +306,19 @@ export function ContactSuccessModal({
                     }}
                   >
                     <CheckCircle className="w-8 h-8 text-green-400" />
-                  </motion.div>
-                </motion.div>
+                  </m.div>
+                </m.div>
 
                 {/* Title */}
-                <motion.h3
+                <m.h3
                   variants={itemVariants}
                   className="text-2xl sm:text-[26px] font-bold text-white mb-3 tracking-tight"
                 >
                   Message Sent!
-                </motion.h3>
+                </m.h3>
 
                 {/* Description */}
-                <motion.p
+                <m.p
                   variants={itemVariants}
                   className="text-[15px] text-white/55 leading-relaxed mb-2 max-w-sm"
                 >
@@ -330,17 +330,17 @@ export function ContactSuccessModal({
                     "Thank you. "
                   )}
                   Your message has been received successfully.
-                </motion.p>
+                </m.p>
 
-                <motion.p
+                <m.p
                   variants={itemVariants}
                   className="text-[13px] text-white/35 leading-relaxed mb-7 max-w-xs"
                 >
                   Our team will review your inquiry and get back to you within 24 hours.
-                </motion.p>
+                </m.p>
 
                 {/* Sparkles badge */}
-                <motion.div
+                <m.div
                   variants={itemVariants}
                   className="flex items-center gap-2 px-4 py-2 rounded-full mb-7"
                   style={{
@@ -352,10 +352,10 @@ export function ContactSuccessModal({
                   <span className="text-[12px] text-[#f0b429] font-medium tracking-wide uppercase">
                     We&apos;ll be in touch soon
                   </span>
-                </motion.div>
+                </m.div>
 
                 {/* Close button */}
-                <motion.button
+                <m.button
                   variants={itemVariants}
                   className="group relative flex items-center justify-center gap-2 px-8 py-3 rounded-xl font-semibold text-[14px] cursor-pointer overflow-hidden"
                   style={{
@@ -374,7 +374,7 @@ export function ContactSuccessModal({
                   whileTap={{ scale: 0.97 }}
                 >
                   {/* Hover shimmer */}
-                  <motion.div
+                  <m.div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
                       background:
@@ -391,7 +391,7 @@ export function ContactSuccessModal({
                     }}
                   />
                   <span className="relative z-10">Got it</span>
-                </motion.button>
+                </m.button>
               </div>
 
               {/* Bottom ambient glow */}
@@ -404,8 +404,8 @@ export function ContactSuccessModal({
                 }}
               />
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

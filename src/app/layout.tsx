@@ -1,21 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { LenisProvider } from "@/providers/LenisProvider";
+import { socialImage } from "@/app/page-metadata";
 import "./globals.css";
 
 const plusJakartaSans = localFont({
   src: "./fonts/plus-jakarta-sans-latin.woff2",
   weight: "300 800",
   variable: "--font-plus-jakarta",
-  display: "swap",
-});
-
-const geistMono = localFont({
-  src: "./fonts/geist-mono-latin.woff2",
-  weight: "100 900",
-  variable: "--font-geist-mono",
   display: "swap",
 });
 
@@ -40,11 +33,13 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: t("locale"),
       url: "/",
       siteName: "Kubar Labs",
+      images: [socialImage],
     },
     twitter: {
       card: "summary_large_image",
       title: t("og_title"),
       description: t("twitter_description"),
+      images: [socialImage],
     },
     robots: {
       index: true,
@@ -64,7 +59,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const messages = await getMessages();
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -89,7 +83,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${geistMono.variable} dark`}
+      className={`${plusJakartaSans.variable} dark`}
       suppressHydrationWarning
     >
       <body className="min-h-dvh overflow-x-hidden bg-[#04040c] text-[#f0f0f0] antialiased">
@@ -102,14 +96,12 @@ export default async function RootLayout({
             __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c"),
           }}
         />
-        <NextIntlClientProvider messages={messages}>
-          <LenisProvider>
-            <div id="main-content" tabIndex={-1}>
-              {children}
-            </div>
-          </LenisProvider>
-          {agentationToolbar}
-        </NextIntlClientProvider>
+        <LenisProvider>
+          <div id="main-content" tabIndex={-1}>
+            {children}
+          </div>
+        </LenisProvider>
+        {agentationToolbar}
       </body>
     </html>
   );

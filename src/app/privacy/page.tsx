@@ -1,6 +1,7 @@
 import { createPageMetadata } from "@/app/page-metadata";
 import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/home/FooterSection";
+import { RouteIntlProvider } from "@/i18n/RouteIntlProvider";
 
 export const metadata = createPageMetadata({
   title: "Privacy Policy",
@@ -44,7 +45,8 @@ const sections = [
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-dvh bg-[#04040c] text-[#f0f0f0]">
+    <RouteIntlProvider namespaces={["nav", "footer"]}>
+      <main className="min-h-dvh bg-[#04040c] text-[#f0f0f0]">
       <Navbar />
       <section className="mx-auto max-w-4xl px-5 pb-20 pt-32 sm:px-8 sm:pt-40">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-[#f0b429]">
@@ -77,6 +79,7 @@ export default function PrivacyPage() {
         </div>
       </section>
       <FooterSection />
-    </main>
+      </main>
+    </RouteIntlProvider>
   );
 }

@@ -1,5 +1,6 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { NextRequest, NextResponse } from "next/server";
+import type { ContactEmailMessage } from "@/lib/contact-queue";
 
 /* ─── Configurable recipient email ──────────────────────────── */
 const RECIPIENT_EMAIL =
@@ -8,15 +9,14 @@ const SENDER_EMAIL =
   process.env.CONTACT_FORM_SENDER_EMAIL || "website@mail.kubar.tech";
 
 const MAX_REQUEST_BYTES = 10_000;
-const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
-const RATE_LIMIT_MAX_REQUESTS = 5;
-
-type RateLimitEntry = {
-  count: number;
-  resetAt: number;
-};
-
-const rateLimitStore = new Map<string, RateLimitEntry>();
+const PRODUCTION_ORIGINS = new Set([
+  "https://kubar.tech",
+  "https://www.kubar.tech",
+]);
+const DEVELOPMENT_ORIGINS = new Set([
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+]);
 
 function jsonResponse(body: object, status = 200, headers?: HeadersInit) {
   return NextResponse.json(body, {
@@ -29,32 +29,7 @@ function jsonResponse(body: object, status = 200, headers?: HeadersInit) {
 }
 
 function getClientIdentifier(request: NextRequest): string {
-  const forwardedFor = request.headers.get("x-forwarded-for");
-  return forwardedFor?.split(",")[0]?.trim() || "unknown";
-}
-
-function checkRateLimit(identifier: string, now = Date.now()) {
-  if (rateLimitStore.size > 5_000) {
-    for (const [key, entry] of rateLimitStore) {
-      if (entry.resetAt <= now) rateLimitStore.delete(key);
-    }
-  }
-
-  const current = rateLimitStore.get(identifier);
-
-  if (!current || current.resetAt <= now) {
-    const resetAt = now + RATE_LIMIT_WINDOW_MS;
-    rateLimitStore.set(identifier, { count: 1, resetAt });
-    return { allowed: true, resetAt };
-  }
-
-  current.count += 1;
-
-  if (current.count > RATE_LIMIT_MAX_REQUESTS) {
-    return { allowed: false, resetAt: current.resetAt };
-  }
-
-  return { allowed: true, resetAt: current.resetAt };
+  return request.headers.get("cf-connecting-ip")?.trim() || "unknown";
 }
 
 function isSameOrigin(request: NextRequest): boolean {
@@ -62,17 +37,45 @@ function isSameOrigin(request: NextRequest): boolean {
   if (!origin) return false;
 
   try {
-    return new URL(origin).origin === request.nextUrl.origin;
+    const normalizedOrigin = new URL(origin).origin;
+    return (
+      PRODUCTION_ORIGINS.has(normalizedOrigin) ||
+      (process.env.NODE_ENV === "development" &&
+        DEVELOPMENT_ORIGINS.has(normalizedOrigin))
+    );
   } catch {
     return false;
   }
+}
+
+async function readBodyWithLimit(request: NextRequest): Promise<string | null> {
+  if (!request.body) return "";
+
+  const reader = request.body.getReader();
+  const decoder = new TextDecoder();
+  let receivedBytes = 0;
+  let body = "";
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    receivedBytes += value.byteLength;
+    if (receivedBytes > MAX_REQUEST_BYTES) {
+      await reader.cancel();
+      return null;
+    }
+    body += decoder.decode(value, { stream: true });
+  }
+
+  return body + decoder.decode();
 }
 
 /* ─── Request body shape ────────────────────────────────────── */
 interface ContactFormData {
   fullName: string;
   email: string;
-  phone: string;
+  phone?: string;
   companyName: string;
   category: string;
   website?: string;
@@ -241,6 +244,8 @@ function buildEmailHTML(data: ContactFormData): string {
 
 /* ─── POST handler ──────────────────────────────────────────── */
 export async function POST(request: NextRequest) {
+  const requestId = crypto.randomUUID();
+
   try {
     if (!isSameOrigin(request)) {
       return jsonResponse({ error: "Invalid request origin" }, 403);
@@ -268,21 +273,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const rateLimit = checkRateLimit(identifier);
-    if (!rateLimit.allowed) {
-      const retryAfter = Math.max(
-        1,
-        Math.ceil((rateLimit.resetAt - Date.now()) / 1000),
-      );
-      return jsonResponse(
-        { error: "Too many requests. Please try again later." },
-        429,
-        { "Retry-After": String(retryAfter) },
-      );
-    }
-
-    const rawBody = await request.text();
-    if (new TextEncoder().encode(rawBody).byteLength > MAX_REQUEST_BYTES) {
+    const rawBody = await readBodyWithLimit(request);
+    if (rawBody === null) {
       return jsonResponse({ error: "Request body is too large" }, 413);
     }
 
@@ -296,7 +288,7 @@ export async function POST(request: NextRequest) {
     if (
       typeof body.fullName !== "string" ||
       typeof body.email !== "string" ||
-      typeof body.phone !== "string" ||
+      (body.phone !== undefined && typeof body.phone !== "string") ||
       typeof body.companyName !== "string" ||
       typeof body.category !== "string"
     ) {
@@ -310,7 +302,7 @@ export async function POST(request: NextRequest) {
     const data: ContactFormData = {
       fullName: body.fullName.trim(),
       email: body.email.trim(),
-      phone: body.phone.trim(),
+      phone: body.phone?.trim(),
       companyName: body.companyName.trim(),
       category: body.category,
     };
@@ -321,16 +313,23 @@ export async function POST(request: NextRequest) {
     }
 
     // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(data.email)) {
+    const emailRegex = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/;
+    if (!emailRegex.test(data.email) || /[\r\n]/.test(data.email)) {
       return jsonResponse({ error: "Invalid email address" }, 400);
     }
 
+    const hasControlCharacters = /[\u0000-\u001f\u007f]/;
+    const hasInvalidPhoneCharacters = /[^\d+().\-\s]/;
     if (
+      data.fullName.length < 2 ||
       data.fullName.length > 100 ||
       data.email.length > 254 ||
-      data.phone.length > 40 ||
+      (data.phone?.length ?? 0) > 40 ||
+      (data.phone ? hasInvalidPhoneCharacters.test(data.phone) : false) ||
+      data.companyName.length < 2 ||
       data.companyName.length > 160 ||
+      hasControlCharacters.test(data.fullName) ||
+      hasControlCharacters.test(data.companyName) ||
       !categoryLabels[data.category]
     ) {
       return jsonResponse({ error: "Invalid form data" }, 400);
@@ -340,7 +339,7 @@ export async function POST(request: NextRequest) {
     const categoryDisplay =
       categoryLabels[data.category] || data.category || "Not specified";
 
-    const mailOptions = {
+    const mailOptions: EmailMessageBuilder = {
       from: { email: SENDER_EMAIL, name: "Kubar Labs Contact Form" },
       to: RECIPIENT_EMAIL,
       replyTo: data.email,
@@ -349,11 +348,27 @@ export async function POST(request: NextRequest) {
       text: `New Contact Form Submission\n\nFull Name: ${data.fullName}\nEmail: ${data.email}\nPhone: ${data.phone || "Not provided"}\nCompany: ${data.companyName}\nCategory: ${categoryDisplay}\n\nSubmitted via kubar.tech/contact`,
     };
 
-    await env.EMAIL.send(mailOptions);
+    const queueMessage: ContactEmailMessage = {
+      version: 1,
+      requestId,
+      submittedAt: new Date().toISOString(),
+      email: mailOptions,
+    };
+
+    await env.CONTACT_EMAIL_QUEUE.send(queueMessage);
+    console.info(
+      JSON.stringify({ event: "contact_submission_queued", requestId }),
+    );
 
     return jsonResponse({ success: true, message: "Message sent successfully" });
   } catch (error) {
-    console.error("Contact form error:", error);
+    console.error(
+      JSON.stringify({
+        event: "contact_submission_failed",
+        requestId,
+        errorType: error instanceof Error ? error.name : "UnknownError",
+      }),
+    );
 
     // In development, return success anyway so the UI flow works when the
     // remote Email Service binding is unavailable.

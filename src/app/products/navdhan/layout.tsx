@@ -1,4 +1,5 @@
 import { createPageMetadata } from "@/app/page-metadata";
+import { RouteIntlProvider } from "@/i18n/RouteIntlProvider";
 
 export const metadata = createPageMetadata({
   title: "NavDhan Embedded Origination Infrastructure",
@@ -8,5 +9,9 @@ export const metadata = createPageMetadata({
 });
 
 export default function NavDhanLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <RouteIntlProvider namespaces={["nav", "navdhan", "footer"]}>
+      {children}
+    </RouteIntlProvider>
+  );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import {
   Mail,
   Calendar,
@@ -8,10 +8,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { useRef } from "react";
 import "./FooterSection.css";
 
 export function FooterSection() {
   const t = useTranslations("footer");
+  const footerRef = useRef<HTMLElement>(null);
+  const isInView = useInView(footerRef, { margin: "200px" });
 
   const footerLinks = [
     { label: t("links.about"), href: "/about" },
@@ -22,14 +25,14 @@ export function FooterSection() {
   ];
 
   return (
-    <footer className="footer-section">
+    <footer ref={footerRef} className="footer-section">
       {/* Animated background gradients */}
       <div className="footer-bg-gradient-1" aria-hidden="true" />
       <div className="footer-bg-gradient-2" aria-hidden="true" />
 
       <div className="footer-container">
         {/* Main CTA Section */}
-        <motion.div
+        <m.div
           className="footer-cta-section"
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -37,7 +40,7 @@ export function FooterSection() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           {/* Main heading */}
-          <motion.h2
+          <m.h2
             className="footer-main-title"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -45,10 +48,10 @@ export function FooterSection() {
             transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           >
             {t("main_cta_title")}
-          </motion.h2>
+          </m.h2>
 
           {/* CTA Buttons */}
-          <motion.div
+          <m.div
             className="footer-cta-buttons"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -56,7 +59,7 @@ export function FooterSection() {
             transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           >
             {/* Email CTA */}
-            <motion.a
+            <m.a
               href={`mailto:${t("email_link")}`}
               className="footer-btn footer-btn-primary"
               whileHover={{ scale: 1.02, y: -2 }}
@@ -65,23 +68,20 @@ export function FooterSection() {
             >
               <Mail className="footer-btn-icon" aria-hidden="true" />
               <span>{t("email_link")}</span>
-              <motion.div
+              <m.div
                 className="footer-btn-shine"
-                animate={{
-                  opacity: [0, 0.3, 0],
-                  x: [-100, 100],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+                animate={isInView
+                  ? { opacity: [0, 0.3, 0], x: [-100, 100] }
+                  : { opacity: 0, x: -100 }}
+                transition={isInView
+                  ? { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                  : { duration: 0 }}
                 aria-hidden="true"
               />
-            </motion.a>
+            </m.a>
 
             {/* Schedule Call CTA */}
-            <motion.a
+            <m.a
               href={t("schedule_link")}
               target="_blank"
               rel="noopener noreferrer"
@@ -92,23 +92,21 @@ export function FooterSection() {
             >
               <Calendar className="footer-btn-icon" aria-hidden="true" />
               <span>{t("schedule_call")}</span>
-              <motion.div
+              <m.div
                 className="footer-btn-arrow"
-                animate={{ x: [0, 4, 0] }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+                animate={isInView ? { x: [0, 4, 0] } : { x: 0 }}
+                transition={isInView
+                  ? { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                  : { duration: 0 }}
               >
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </motion.div>
-            </motion.a>
-          </motion.div>
-        </motion.div>
+              </m.div>
+            </m.a>
+          </m.div>
+        </m.div>
 
         {/* Divider */}
-        <motion.div
+        <m.div
           className="footer-divider"
           initial={{ opacity: 0, scaleX: 0 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
@@ -122,7 +120,7 @@ export function FooterSection() {
         />
 
         {/* Footer Navigation */}
-        <motion.nav
+        <m.nav
           className="footer-nav"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -131,7 +129,7 @@ export function FooterSection() {
         >
           <ul className="footer-nav-list">
             {footerLinks.map((link, index) => (
-              <motion.li
+              <m.li
                 key={link.label}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -144,13 +142,13 @@ export function FooterSection() {
                 <Link href={link.href} className="footer-nav-link">
                   {link.label}
                 </Link>
-              </motion.li>
+              </m.li>
             ))}
           </ul>
-        </motion.nav>
+        </m.nav>
 
         {/* Bottom section with copyright and credits */}
-        <motion.div
+        <m.div
           className="footer-bottom"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -163,7 +161,7 @@ export function FooterSection() {
             {/* Copyright */}
             <p className="footer-copyright">{t("copyright")}</p>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </footer>
   );

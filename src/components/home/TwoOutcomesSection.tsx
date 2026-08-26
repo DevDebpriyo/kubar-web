@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
+import { m, AnimatePresence, useInView } from "framer-motion";
 import {
   TrendingUp,
   Users,
@@ -37,7 +37,7 @@ function FeatureCard({
   accentRgb: string;
 }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 24 }}
       animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
       exit={{ opacity: 0, y: -24 }}
@@ -61,7 +61,7 @@ function FeatureCard({
       {/* Card content */}
       <div className="outcomes-card-content">
         {/* Icon container with animated border */}
-        <motion.div
+        <m.div
           className="outcomes-card-icon-wrapper"
           whileHover={{
             scale: 1.08,
@@ -72,31 +72,31 @@ function FeatureCard({
           </div>
           {/* Animated corner accent */}
           <div className="outcomes-icon-accent" aria-hidden="true" />
-        </motion.div>
+        </m.div>
 
         {/* Text content */}
         <div className="outcomes-card-text">
-          <motion.h3
+          <m.h3
             className="outcomes-card-title"
             initial={{ opacity: 0 }}
             animate={isActive ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.1 + index * 0.08 }}
           >
             {title}
-          </motion.h3>
+          </m.h3>
 
-          <motion.p
+          <m.p
             className="outcomes-card-description"
             initial={{ opacity: 0 }}
             animate={isActive ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.15 + index * 0.08 }}
           >
             {description}
-          </motion.p>
+          </m.p>
         </div>
 
         {/* Hover indicator dot */}
-        <motion.div
+        <m.div
           className="outcomes-card-dot"
           animate={{
             scale: [1, 1.2, 1],
@@ -114,7 +114,7 @@ function FeatureCard({
 
       {/* Border gradient on hover */}
       <div className="outcomes-card-border" aria-hidden="true" />
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -134,7 +134,7 @@ function TabButton({
       onClick={onClick}
       className={`outcomes-tab-button ${active ? "active" : ""}`}
     >
-      <motion.div
+      <m.div
         className="outcomes-tab-content"
         animate={{
           color: active ? activeColor : "rgba(255, 255, 255, 0.48)",
@@ -142,10 +142,10 @@ function TabButton({
         transition={{ duration: 0.3 }}
       >
         {children}
-      </motion.div>
+      </m.div>
 
       {active && (
-        <motion.div
+        <m.div
           className="outcomes-tab-indicator"
           layoutId="outcomes-underline"
           initial={{ width: 0 }}
@@ -164,6 +164,8 @@ function TabButton({
 export function TwoOutcomesSection() {
   const [activeTab, setActiveTab] = useState<TabType>("marketplaces");
   const t = useTranslations("two_outcomes");
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: "200px" });
 
   const marketplaceFeatures = [
     {
@@ -224,6 +226,7 @@ export function TwoOutcomesSection() {
 
   return (
     <section
+      ref={sectionRef}
       id="outcomes"
       aria-label={t("aria_label")}
       className="outcomes-section"
@@ -234,7 +237,7 @@ export function TwoOutcomesSection() {
 
       <div className="outcomes-container">
         {/* Header */}
-        <motion.div
+        <m.div
           className="outcomes-header"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -242,10 +245,10 @@ export function TwoOutcomesSection() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
           <h2 className="outcomes-title">{t("title")}</h2>
-        </motion.div>
+        </m.div>
 
         {/* Tab navigation */}
-        <motion.div
+        <m.div
           className="outcomes-tabs-wrapper"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -268,12 +271,12 @@ export function TwoOutcomesSection() {
               {t("institutions.tab")}
             </TabButton>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Content area */}
         <div className="outcomes-content">
           {/* Subtitle and CTA */}
-          <motion.div
+          <m.div
             className="outcomes-text-area"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -281,16 +284,16 @@ export function TwoOutcomesSection() {
             transition={{ duration: 0.3 }}
             key={`${activeTab}-text`}
           >
-            <motion.p
+            <m.p
               className="outcomes-subtitle"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
             >
               {currentSubtitle}
-            </motion.p>
+            </m.p>
 
-            <motion.a
+            <m.a
               href={`mailto:${currentEmail}`}
               className="outcomes-cta-link"
               initial={{ opacity: 0 }}
@@ -303,8 +306,8 @@ export function TwoOutcomesSection() {
             >
               {currentCta}
               <ArrowRight className="h-4 w-4" />
-            </motion.a>
-          </motion.div>
+            </m.a>
+          </m.div>
 
           {/* Feature cards grid */}
           <div className="outcomes-cards-grid">
@@ -318,7 +321,7 @@ export function TwoOutcomesSection() {
                     title={feature.title}
                     description={feature.description}
                     index={index}
-                    isActive={true}
+                    isActive={isInView}
                     accentRgb={accentRgb}
                   />
                 );

@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useInView } from "framer-motion";
 
 export function PartnerMarquee() {
   const t = useTranslations("marquee");
   const [isPaused, setIsPaused] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: "200px" });
   const itemMap = t.raw("items") as Record<string, string>;
 
   const items = [
@@ -37,6 +40,7 @@ export function PartnerMarquee() {
 
   return (
     <section
+      ref={sectionRef}
       aria-label={t("aria_label")}
       className="relative z-10 overflow-hidden border-y border-white/8"
       style={{
@@ -70,7 +74,9 @@ export function PartnerMarquee() {
       <div className="overflow-hidden py-4 sm:py-5">
         <div
           className="marquee-track flex w-max items-center gap-8 sm:gap-10"
-          style={{ animationPlayState: isPaused ? "paused" : undefined }}
+          style={{
+            animationPlayState: isPaused || !isInView ? "paused" : undefined,
+          }}
         >
           {loopedItems.map((item, index) => {
             const accent = accentPalette[index % accentPalette.length];

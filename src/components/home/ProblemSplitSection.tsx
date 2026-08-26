@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m, useInView } from "framer-motion";
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 
 type ProblemCardProps = {
@@ -20,7 +21,7 @@ function ProblemCard({ title, subtitle, bullets, accent, index }: ProblemCardPro
   const bulletDotClass = accent === "gold" ? "bg-[#d4920c]/80" : "bg-[#4a84ff]/75";
 
   return (
-    <motion.article
+    <m.article
       initial={{ opacity: 0, y: 26 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35 }}
@@ -48,7 +49,7 @@ function ProblemCard({ title, subtitle, bullets, accent, index }: ProblemCardPro
 
         <ul className="mt-6 space-y-3.5">
           {bullets.map((bullet, bulletIndex) => (
-            <motion.li
+            <m.li
               key={bullet}
               initial={{ opacity: 0, x: -10 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -67,19 +68,22 @@ function ProblemCard({ title, subtitle, bullets, accent, index }: ProblemCardPro
               <span className="text-[15px] sm:text-[16px] leading-[1.58] text-white/58">
                 {bullet}
               </span>
-            </motion.li>
+            </m.li>
           ))}
         </ul>
       </div>
-    </motion.article>
+    </m.article>
   );
 }
 
 export function ProblemSplitSection() {
   const t = useTranslations("problems");
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: "200px" });
 
   return (
     <section
+      ref={sectionRef}
       id="problems"
       aria-label={t("aria_label")}
       className="relative overflow-hidden px-5 py-18 sm:px-8 sm:py-22 lg:px-10 lg:py-26"
@@ -124,7 +128,7 @@ export function ProblemSplitSection() {
         />
       </div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.65 }}
@@ -133,11 +137,15 @@ export function ProblemSplitSection() {
       >
         <div className="relative mb-6 h-4 sm:mb-7">
           <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-linear-to-r from-transparent via-white/24 to-transparent" />
-          <motion.span
+          <m.span
             aria-hidden="true"
             className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
-            animate={{ scale: [1, 1.14, 1], opacity: [0.75, 1, 0.75] }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+            animate={isInView
+              ? { scale: [1, 1.14, 1], opacity: [0.75, 1, 0.75] }
+              : { scale: 1, opacity: 0.75 }}
+            transition={isInView
+              ? { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
+              : { duration: 0 }}
             style={{
               background: "rgba(19,136,8,0.82)",
               boxShadow: "0 0 14px rgba(19,136,8,0.55)",
@@ -148,7 +156,7 @@ export function ProblemSplitSection() {
         <h3 className="text-center text-[32px] leading-[1.15] font-bold tracking-[-0.02em] text-white sm:text-[42px]">
           {t("conclusion")}
         </h3>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

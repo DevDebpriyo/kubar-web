@@ -7,6 +7,7 @@ const isDevelopment = process.env.NODE_ENV === "development";
 const contentSecurityPolicy = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ""}`,
+  "script-src-attr 'none'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self' data:",
@@ -19,6 +20,7 @@ const contentSecurityPolicy = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
   reactCompiler: true,
   experimental: {
     useTypeScriptCli: false,
@@ -30,12 +32,25 @@ const nextConfig: NextConfig = {
   images: {
     qualities: [75, 85, 95],
   },
-  webpack(config) {
-    config.module.rules.push({ test: /\.ya?ml$/, type: "asset/source" });
-    return config;
-  },
   async redirects() {
     return [
+      {
+        source: "/opengraph-image",
+        destination: "/media/kubar-labs-og-b2add55b.png",
+        permanent: true,
+      },
+      {
+        source: "/",
+        has: [{ type: "header", key: "x-forwarded-proto", value: "http" }],
+        destination: "https://kubar.tech/",
+        permanent: true,
+      },
+      {
+        source: "/:path+",
+        has: [{ type: "header", key: "x-forwarded-proto", value: "http" }],
+        destination: "https://kubar.tech/:path+",
+        permanent: true,
+      },
       {
         source: "/",
         has: [{ type: "host", value: "www.kubar.tech" }],
@@ -59,10 +74,41 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "DENY" },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=86400",
+          },
           { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
           {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=(), payment=()",
+          },
+        ],
+      },
+      {
+        source: "/:asset(icon\\.png|logo\\.png|nd_logo\\.png)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
+          },
+        ],
+      },
+      {
+        source: "/media/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/:directory(logos|team|advisors|bft_logos)/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
           },
         ],
       },

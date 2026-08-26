@@ -24,11 +24,11 @@ test.describe("public routes", () => {
       );
       await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
         "content",
-        /^https:\/\/kubar\.tech\/opengraph-image(?:\?.*)?$/,
+        /^https:\/\/kubar\.tech\/media\/kubar-labs-og-b2add55b\.png(?:\?.*)?$/,
       );
       await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
         "content",
-        /^https:\/\/kubar\.tech\/opengraph-image(?:\?.*)?$/,
+        /^https:\/\/kubar\.tech\/media\/kubar-labs-og-b2add55b\.png(?:\?.*)?$/,
       );
     });
 

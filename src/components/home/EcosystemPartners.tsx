@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
 import Image from "next/image";
+import { useInView } from "framer-motion";
 
 const partners = [
   { name: "Google", src: "/logos/google.png" },
@@ -19,10 +20,13 @@ const partners = [
 
 export function EcosystemPartners() {
   const [isPaused, setIsPaused] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: "200px" });
   const loopedPartners = [...partners, ...partners];
 
   return (
     <section
+      ref={sectionRef}
       aria-label="Technology programmes, grants and infrastructure support"
       className="relative z-10 overflow-hidden pt-4 pb-16 sm:pt-8 sm:pb-24"
       style={{
@@ -69,7 +73,9 @@ export function EcosystemPartners() {
         <div className="overflow-hidden py-10 sm:py-12">
           <div
             className="marquee-track flex w-max items-center gap-16 sm:gap-24"
-            style={{ animationPlayState: isPaused ? "paused" : undefined }}
+            style={{
+              animationPlayState: isPaused || !isInView ? "paused" : undefined,
+            }}
           >
             {loopedPartners.map((partner, index) => (
               <div
@@ -84,6 +90,7 @@ export function EcosystemPartners() {
                   alt={index < partners.length ? partner.name : ""}
                   width={140}
                   height={60}
+                  sizes="140px"
                   className={`w-auto object-contain ${
                     partner.name === "Microsoft"
                       ? "max-h-12 scale-[1.6]"

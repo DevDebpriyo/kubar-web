@@ -2,11 +2,14 @@
 
 import Lenis from "lenis";
 import { useEffect, useRef } from "react";
-import { MotionConfig } from "framer-motion";
+import { LazyMotion, MotionConfig } from "framer-motion";
 
 interface LenisProviderProps {
   children: React.ReactNode;
 }
+
+const loadMotionFeatures = () =>
+  import("@/lib/motion-features").then((module) => module.default);
 
 export function LenisProvider({ children }: LenisProviderProps) {
   const lenisRef = useRef<Lenis | null>(null);
@@ -17,6 +20,25 @@ export function LenisProvider({ children }: LenisProviderProps) {
     );
     let animationFrameId: number | null = null;
     let detachScrollListener: (() => void) | null = null;
+
+    const startAnimationLoop = () => {
+      if (animationFrameId !== null || document.hidden) return;
+
+      const update = (time: number) => {
+        lenisRef.current?.raf(time);
+        animationFrameId = window.requestAnimationFrame(update);
+      };
+
+      animationFrameId = window.requestAnimationFrame(update);
+    };
+
+    const pauseAnimationLoop = () => {
+      if (animationFrameId !== null) {
+        window.cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+      lenisRef.current?.stop();
+    };
 
     const stopLenis = () => {
       if (animationFrameId !== null) {
@@ -56,12 +78,8 @@ export function LenisProvider({ children }: LenisProviderProps) {
         );
       });
 
-      const update = (time: number) => {
-        lenis.raf(time);
-        animationFrameId = window.requestAnimationFrame(update);
-      };
-
-      animationFrameId = window.requestAnimationFrame(update);
+      lenis.start();
+      startAnimationLoop();
     };
 
     const handleMotionPreferenceChange = () => {
@@ -72,7 +90,18 @@ export function LenisProvider({ children }: LenisProviderProps) {
       }
     };
 
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        pauseAnimationLoop();
+      } else if (!motionPreference.matches) {
+        if (!lenisRef.current) startLenis();
+        lenisRef.current?.start();
+        startAnimationLoop();
+      }
+    };
+
     motionPreference.addEventListener("change", handleMotionPreferenceChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
     startLenis();
 
     return () => {
@@ -80,9 +109,14 @@ export function LenisProvider({ children }: LenisProviderProps) {
         "change",
         handleMotionPreferenceChange,
       );
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       stopLenis();
     };
   }, []);
 
-  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
+  return (
+    <LazyMotion features={loadMotionFeatures} strict>
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
+    </LazyMotion>
+  );
 }

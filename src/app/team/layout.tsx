@@ -1,4 +1,5 @@
 import { createPageMetadata } from "@/app/page-metadata";
+import { RouteIntlProvider } from "@/i18n/RouteIntlProvider";
 
 export const metadata = createPageMetadata({
   title: "Team and Advisors",
@@ -9,5 +10,9 @@ export const metadata = createPageMetadata({
 });
 
 export default function TeamLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <RouteIntlProvider namespaces={["nav", "team", "footer"]}>
+      {children}
+    </RouteIntlProvider>
+  );
 }

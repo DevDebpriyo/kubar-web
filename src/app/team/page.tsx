@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Linkedin } from "lucide-react";
@@ -199,7 +199,8 @@ function TeamMemberCard({
           alt={member.name}
           width={300}
           height={300}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
+          sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) calc(50vw - 40px), 300px"
+          priority={featured}
           className="team-member-image"
           quality={95}
         />
@@ -243,18 +244,18 @@ function TeamMemberCard({
 
   if (!member.linkedin) {
     return (
-      <motion.article
+      <m.article
         {...motionProps}
         className={cardClassName}
         style={cardStyle}
       >
         {cardContent}
-      </motion.article>
+      </m.article>
     );
   }
 
   return (
-    <motion.a
+    <m.a
       {...motionProps}
       href={member.linkedin}
       target="_blank"
@@ -263,7 +264,7 @@ function TeamMemberCard({
       style={cardStyle}
     >
       {cardContent}
-    </motion.a>
+    </m.a>
   );
 }
 
@@ -279,20 +280,20 @@ export default function TeamPage() {
       {/* Hero Section */}
       <section className="team-hero">
         <div className="team-container">
-          <motion.div
+          <m.div
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
             className="team-hero-content"
           >
-            <motion.h1 variants={fadeInUp} className="team-hero-title">
+            <m.h1 variants={fadeInUp} className="team-hero-title">
               {t("hero_section.title")}
-            </motion.h1>
+            </m.h1>
 
-            <motion.p variants={fadeInUp} className="team-hero-description">
+            <m.p variants={fadeInUp} className="team-hero-description">
               {t("hero_section.description")}
-            </motion.p>
-          </motion.div>
+            </m.p>
+          </m.div>
         </div>
 
         {/* Background elements */}
@@ -322,7 +323,7 @@ export default function TeamPage() {
       {/* Advisors Section */}
       <section className="team-advisors-section">
         <div className="team-container">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -335,7 +336,7 @@ export default function TeamPage() {
             <h2 className="team-section-title">
               {t("advisors_section.title")}
             </h2>
-          </motion.div>
+          </m.div>
 
           <div className="team-advisors-grid">
             {ADVISORS.map((advisor, idx) => (

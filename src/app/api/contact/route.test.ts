@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NextRequest } from "next/server";
 
-const { edgeLimitMock, getCloudflareContextMock, sendEmailMock } = vi.hoisted(() => ({
+const { edgeLimitMock, getCloudflareContextMock, queueSendMock } = vi.hoisted(() => ({
   edgeLimitMock: vi.fn(),
   getCloudflareContextMock: vi.fn(),
-  sendEmailMock: vi.fn(),
+  queueSendMock: vi.fn(),
 }));
 
 vi.mock("@opennextjs/cloudflare", () => ({
@@ -43,7 +43,7 @@ function request(
 ) {
   const headers = new Headers({
     origin,
-    "x-forwarded-for": ip,
+    "cf-connecting-ip": ip,
   });
 
   if (contentType !== null) {
@@ -68,12 +68,12 @@ function jsonRequest(body: unknown, options?: RequestOptions) {
 beforeEach(() => {
   getCloudflareContextMock.mockReset();
   edgeLimitMock.mockReset();
-  sendEmailMock.mockReset();
+  queueSendMock.mockReset();
   edgeLimitMock.mockResolvedValue({ success: true });
-  sendEmailMock.mockResolvedValue({ messageId: "test-message" });
+  queueSendMock.mockResolvedValue(undefined);
   getCloudflareContextMock.mockResolvedValue({
     env: {
-      EMAIL: { send: sendEmailMock },
+      CONTACT_EMAIL_QUEUE: { send: queueSendMock },
       CONTACT_RATE_LIMITER: {
         limit: edgeLimitMock,
       },
@@ -92,7 +92,7 @@ describe("contact route hardening", () => {
       error: "Invalid request origin",
     });
     expect(response.headers.get("cache-control")).toBe("no-store");
-    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(queueSendMock).not.toHaveBeenCalled();
   });
 
   it("requires a JSON content type", async () => {
@@ -104,7 +104,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Unsupported content type",
     });
-    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(queueSendMock).not.toHaveBeenCalled();
   });
 
   it("rejects malformed JSON", async () => {
@@ -112,7 +112,7 @@ describe("contact route hardening", () => {
 
     expect(response.status).toBe(400);
     await expect(response.json()).resolves.toEqual({ error: "Invalid JSON" });
-    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(queueSendMock).not.toHaveBeenCalled();
   });
 
   it("rejects an oversized declared request before parsing it", async () => {
@@ -124,7 +124,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Request body is too large",
     });
-    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(queueSendMock).not.toHaveBeenCalled();
   });
 
   it("rejects an oversized actual body without trusting content-length", async () => {
@@ -134,7 +134,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Request body is too large",
     });
-    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(queueSendMock).not.toHaveBeenCalled();
   });
 
   it("rejects a missing form field", async () => {
@@ -150,7 +150,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Invalid form data",
     });
-    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(queueSendMock).not.toHaveBeenCalled();
   });
 
   it("rejects empty required fields", async () => {
@@ -162,7 +162,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Missing required fields",
     });
-    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(queueSendMock).not.toHaveBeenCalled();
   });
 
   it("rejects invalid field types", async () => {
@@ -174,7 +174,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Invalid form data",
     });
-    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(queueSendMock).not.toHaveBeenCalled();
   });
 
   it("rejects an invalid email address", async () => {
@@ -186,7 +186,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Invalid email address",
     });
-    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(queueSendMock).not.toHaveBeenCalled();
   });
 
   it("rejects an unsupported category", async () => {
@@ -198,7 +198,7 @@ describe("contact route hardening", () => {
     await expect(response.json()).resolves.toEqual({
       error: "Invalid form data",
     });
-    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(queueSendMock).not.toHaveBeenCalled();
   });
 
   it("accepts a honeypot submission without sending email", async () => {
@@ -211,7 +211,7 @@ describe("contact route hardening", () => {
 
     expect(response.status).toBe(200);
     await expect(response.json()).resolves.toEqual({ success: true });
-    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(queueSendMock).not.toHaveBeenCalled();
   });
 
   it("rejects requests blocked by the Cloudflare edge limiter", async () => {
@@ -224,10 +224,10 @@ describe("contact route hardening", () => {
       error: "Too many requests. Please try again later.",
     });
     expect(response.headers.get("retry-after")).toBe("60");
-    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(queueSendMock).not.toHaveBeenCalled();
   });
 
-  it("sends a valid submission through Cloudflare Email Service", async () => {
+  it("queues a valid submission for email delivery", async () => {
     const response = await POST(jsonRequest(validSubmission));
 
     expect(response.status).toBe(200);
@@ -236,21 +236,29 @@ describe("contact route hardening", () => {
       message: "Message sent successfully",
     });
     expect(getCloudflareContextMock).toHaveBeenCalledOnce();
-    expect(sendEmailMock).toHaveBeenCalledOnce();
-    expect(sendEmailMock).toHaveBeenCalledWith(
+    expect(edgeLimitMock).toHaveBeenCalledWith({
+      key: expect.stringMatching(/^test-client-/),
+    });
+    expect(queueSendMock).toHaveBeenCalledOnce();
+    expect(queueSendMock).toHaveBeenCalledWith(
       expect.objectContaining({
-        replyTo: validSubmission.email,
-        subject:
-          "New Contact: Ada Lovelace from Analytical Engines [Fintech]",
+        version: 1,
+        requestId: expect.any(String),
+        submittedAt: expect.any(String),
+        email: expect.objectContaining({
+          replyTo: validSubmission.email,
+          subject:
+            "New Contact: Ada Lovelace from Analytical Engines [Fintech]",
+        }),
       }),
     );
   });
 
-  it("returns a generic server error when email delivery fails", async () => {
+  it("returns a generic server error when queueing fails", async () => {
     const consoleError = vi
       .spyOn(console, "error")
       .mockImplementation(() => undefined);
-    sendEmailMock.mockRejectedValueOnce(new Error("Email delivery rejected"));
+    queueSendMock.mockRejectedValueOnce(new Error("Queue unavailable"));
 
     try {
       const response = await POST(jsonRequest(validSubmission));
@@ -259,24 +267,23 @@ describe("contact route hardening", () => {
       await expect(response.json()).resolves.toEqual({
         error: "Failed to send message. Please try again.",
       });
-      expect(sendEmailMock).toHaveBeenCalledOnce();
+      expect(queueSendMock).toHaveBeenCalledOnce();
       expect(consoleError).toHaveBeenCalledOnce();
     } finally {
       consoleError.mockRestore();
     }
   });
 
-  it("throttles repeated submissions from the same client", async () => {
-    const ip = uniqueClient();
+  it("accepts an omitted optional phone number", async () => {
+    const withoutPhone = {
+      fullName: validSubmission.fullName,
+      email: validSubmission.email,
+      companyName: validSubmission.companyName,
+      category: validSubmission.category,
+    };
+    const response = await POST(jsonRequest(withoutPhone));
 
-    for (let attempt = 0; attempt < 5; attempt += 1) {
-      const response = await POST(request("not-json", { ip }));
-      expect(response.status).toBe(400);
-    }
-
-    const blocked = await POST(request("not-json", { ip }));
-    expect(blocked.status).toBe(429);
-    expect(Number(blocked.headers.get("retry-after"))).toBeGreaterThan(0);
-    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(response.status).toBe(200);
+    expect(queueSendMock).toHaveBeenCalledOnce();
   });
 });

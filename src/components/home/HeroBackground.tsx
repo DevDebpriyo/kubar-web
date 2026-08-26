@@ -1,10 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m, useInView } from "framer-motion";
+import { useRef } from "react";
 
 export function HeroBackground() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isActive = useInView(containerRef, { margin: "200px" });
+
   return (
     <div
+      ref={containerRef}
       className="absolute inset-0 overflow-hidden pointer-events-none select-none"
       aria-hidden="true"
     >
@@ -31,7 +36,7 @@ export function HeroBackground() {
       />
 
       {/* ── Orb 1: warm gold — top-right ── */}
-      <motion.div
+      <m.div
         className="absolute rounded-full"
         style={{
           width: 780,
@@ -43,22 +48,18 @@ export function HeroBackground() {
           filter: "blur(48px)",
           willChange: "transform, opacity",
         }}
-        animate={{
-          x: [0, 44, -18, 0],
-          y: [0, -36, 26, 0],
-          scale: [1, 1.08, 0.96, 1],
-          opacity: [0.7, 0.95, 0.6, 0.7],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: "easeInOut",
+        animate={isActive ? {
+          x: [0, 44, -18, 0], y: [0, -36, 26, 0],
+          scale: [1, 1.08, 0.96, 1], opacity: [0.7, 0.95, 0.6, 0.7],
+        } : { x: 0, y: 0, scale: 1, opacity: 0.7 }}
+        transition={isActive ? {
+          duration: 18, repeat: Infinity, ease: "easeInOut",
           times: [0, 0.4, 0.7, 1],
-        }}
+        } : { duration: 0 }}
       />
 
       {/* ── Orb 2: deep indigo — bottom-left ── */}
-      <motion.div
+      <m.div
         className="absolute rounded-full"
         style={{
           width: 680,
@@ -70,23 +71,18 @@ export function HeroBackground() {
           filter: "blur(60px)",
           willChange: "transform, opacity",
         }}
-        animate={{
-          x: [0, -32, 28, 0],
-          y: [0, 28, -22, 0],
-          scale: [1, 0.94, 1.08, 1],
-          opacity: [0.55, 0.8, 0.45, 0.55],
-        }}
-        transition={{
-          duration: 22,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 3,
+        animate={isActive ? {
+          x: [0, -32, 28, 0], y: [0, 28, -22, 0],
+          scale: [1, 0.94, 1.08, 1], opacity: [0.55, 0.8, 0.45, 0.55],
+        } : { x: 0, y: 0, scale: 1, opacity: 0.55 }}
+        transition={isActive ? {
+          duration: 22, repeat: Infinity, ease: "easeInOut", delay: 3,
           times: [0, 0.45, 0.75, 1],
-        }}
+        } : { duration: 0 }}
       />
 
       {/* ── Orb 3: diffuse gold — center breathing pulse ── */}
-      <motion.div
+      <m.div
         className="absolute rounded-full"
         style={{
           width: 560,
@@ -99,21 +95,17 @@ export function HeroBackground() {
           filter: "blur(70px)",
           willChange: "transform, opacity",
         }}
-        animate={{
-          scale: [1, 1.22, 0.88, 1],
-          opacity: [0.45, 0.72, 0.32, 0.45],
-        }}
-        transition={{
-          duration: 14,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 6,
+        animate={isActive ? {
+          scale: [1, 1.22, 0.88, 1], opacity: [0.45, 0.72, 0.32, 0.45],
+        } : { scale: 1, opacity: 0.45 }}
+        transition={isActive ? {
+          duration: 14, repeat: Infinity, ease: "easeInOut", delay: 6,
           times: [0, 0.45, 0.75, 1],
-        }}
+        } : { duration: 0 }}
       />
 
       {/* ── Orb 4: flag-green accent — mid-right ── */}
-      <motion.div
+      <m.div
         className="absolute rounded-full"
         style={{
           width: 420,
@@ -125,16 +117,12 @@ export function HeroBackground() {
           filter: "blur(56px)",
           willChange: "transform",
         }}
-        animate={{
-          y: [0, -24, 20, 0],
-          opacity: [0.35, 0.55, 0.25, 0.35],
-        }}
-        transition={{
-          duration: 16,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 9,
-        }}
+        animate={isActive ? {
+          y: [0, -24, 20, 0], opacity: [0.35, 0.55, 0.25, 0.35],
+        } : { y: 0, opacity: 0.35 }}
+        transition={isActive ? {
+          duration: 16, repeat: Infinity, ease: "easeInOut", delay: 9,
+        } : { duration: 0 }}
       />
 
       {/* ── Horizontal separator gradient line ── */}

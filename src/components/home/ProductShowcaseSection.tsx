@@ -1,16 +1,18 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { useRef } from "react";
 
 type MetricCardProps = {
   value: string;
   label: string;
   index: number;
+  isActive: boolean;
 };
 
-function MetricCard({ value, label, index }: MetricCardProps) {
+function MetricCard({ value, label, index, isActive }: MetricCardProps) {
   const accents = [
     {
       solid: "#d4920c",
@@ -35,7 +37,7 @@ function MetricCard({ value, label, index }: MetricCardProps) {
   const accent = accents[index % accents.length];
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 26 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35 }}
@@ -58,11 +60,15 @@ function MetricCard({ value, label, index }: MetricCardProps) {
         className="pointer-events-none absolute right-0 top-0 h-14 w-14 rounded-bl-2xl border-b border-l border-white/10 opacity-65"
         aria-hidden="true"
       />
-      <motion.div
+      <m.div
         aria-hidden="true"
         className="pointer-events-none absolute bottom-4 right-4 h-2 w-2 rounded-full"
-        animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.18, 1] }}
-        transition={{ duration: 2.4, delay: index * 0.18, repeat: Infinity, ease: "easeInOut" }}
+        animate={isActive
+          ? { opacity: [0.4, 1, 0.4], scale: [1, 1.18, 1] }
+          : { opacity: 0.4, scale: 1 }}
+        transition={isActive
+          ? { duration: 2.4, delay: index * 0.18, repeat: Infinity, ease: "easeInOut" }
+          : { duration: 0 }}
         style={{ backgroundColor: accent.solid, boxShadow: `0 0 12px ${accent.glow}` }}
       />
       <div className="relative z-10">
@@ -73,12 +79,14 @@ function MetricCard({ value, label, index }: MetricCardProps) {
           {label}
         </p>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
 export function ProductShowcaseSection() {
   const t = useTranslations("product_showcase");
+  const sectionRef = useRef<HTMLElement>(null);
+  const isActive = useInView(sectionRef, { margin: "200px" });
 
   const metrics = [
     { value: t("metrics.approval_time.value"), label: t("metrics.approval_time.label") },
@@ -88,6 +96,7 @@ export function ProductShowcaseSection() {
 
   return (
     <section
+      ref={sectionRef}
       id="product"
       aria-label={t("aria_label")}
       className="relative overflow-hidden px-5 pb-18 pt-8 sm:px-8 sm:pb-22 sm:pt-10 lg:px-10 lg:pb-26"
@@ -102,30 +111,42 @@ export function ProductShowcaseSection() {
         }}
         aria-hidden="true"
       />
-      <motion.div
+      <m.div
         className="pointer-events-none absolute -left-20 top-18 h-72 w-72 rounded-full"
-        animate={{ x: [0, 16, 0], y: [0, -18, 0], opacity: [0.18, 0.28, 0.18] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        animate={isActive
+          ? { x: [0, 16, 0], y: [0, -18, 0], opacity: [0.18, 0.28, 0.18] }
+          : { x: 0, y: 0, opacity: 0.18 }}
+        transition={isActive
+          ? { duration: 10, repeat: Infinity, ease: "easeInOut" }
+          : { duration: 0 }}
         style={{
           background: "radial-gradient(circle, rgba(212,146,12,0.2) 0%, transparent 70%)",
           filter: "blur(44px)",
         }}
         aria-hidden="true"
       />
-      <motion.div
+      <m.div
         className="pointer-events-none absolute -right-24 bottom-8 h-80 w-80 rounded-full"
-        animate={{ x: [0, -20, 0], y: [0, 14, 0], opacity: [0.14, 0.24, 0.14] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        animate={isActive
+          ? { x: [0, -20, 0], y: [0, 14, 0], opacity: [0.14, 0.24, 0.14] }
+          : { x: 0, y: 0, opacity: 0.14 }}
+        transition={isActive
+          ? { duration: 12, repeat: Infinity, ease: "easeInOut" }
+          : { duration: 0 }}
         style={{
           background: "radial-gradient(circle, rgba(74,132,255,0.18) 0%, transparent 72%)",
           filter: "blur(52px)",
         }}
         aria-hidden="true"
       />
-      <motion.div
+      <m.div
         className="pointer-events-none absolute h-64 w-64 rounded-full"
-        animate={{ x: [0, 14, 0], y: [0, -12, 0], opacity: [0.1, 0.2, 0.1] }}
-        transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+        animate={isActive
+          ? { x: [0, 14, 0], y: [0, -12, 0], opacity: [0.1, 0.2, 0.1] }
+          : { x: 0, y: 0, opacity: 0.1 }}
+        transition={isActive
+          ? { duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1.5 }
+          : { duration: 0 }}
         style={{
           right: "24%",
           top: "24%",
@@ -144,7 +165,7 @@ export function ProductShowcaseSection() {
           aria-hidden="true"
         />
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.45 }}
@@ -157,13 +178,14 @@ export function ProductShowcaseSection() {
               alt="NavDhan"
               width={800}
               height={260}
+              sizes="(max-width: 640px) 370px, (max-width: 768px) 554px, 677px"
               className="h-[120px] sm:h-[180px] md:h-[220px] w-auto object-contain drop-shadow-2xl"
             />
           </div>
           <p className="mx-auto mt-2 max-w-3xl text-[18px] leading-[1.65] text-white/64 text-pretty">
             {t("subtitle")}
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="pointer-events-none relative mx-auto mt-8 hidden h-10 max-w-5xl items-center sm:flex">
           <div className="h-px w-full bg-linear-to-r from-transparent via-white/16 to-transparent" />
@@ -184,6 +206,7 @@ export function ProductShowcaseSection() {
               value={metric.value}
               label={metric.label}
               index={index}
+              isActive={isActive}
             />
           ))}
         </div>

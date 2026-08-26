@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useInView, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { HeroBackground } from "./HeroBackground";
@@ -37,7 +37,7 @@ function HeroHeadline() {
   const t = useTranslations("hero.title");
 
   return (
-    <motion.div variants={itemVariants} className="flex flex-col gap-0">
+    <m.div variants={itemVariants} className="flex flex-col gap-0">
       {/* Line 1 - Supporting Cast */}
       <h1 className="font-extrabold leading-[1.04] tracking-[-0.035em]">
         <span className="block text-[28px] sm:text-[34px] lg:text-[38px] xl:text-[42px] text-white/45 font-medium mb-1 sm:mb-2 tracking-normal">
@@ -61,7 +61,7 @@ function HeroHeadline() {
           {t("line3")}
         </span>
       </h1>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -69,7 +69,7 @@ function HeroSubcopy() {
   const t = useTranslations("hero");
 
   return (
-    <motion.p
+    <m.p
       variants={itemVariants}
       className="text-[16.5px] sm:text-[17.5px] lg:text-[18px] leading-[1.75] text-white/52 max-w-130 text-pretty"
     >
@@ -81,7 +81,7 @@ function HeroSubcopy() {
           <span className="text-[#4ed56f] font-semibold">{chunks}</span>
         ),
       })}
-    </motion.p>
+    </m.p>
   );
 }
 
@@ -89,12 +89,12 @@ function HeroCTAs() {
   const t = useTranslations("hero");
 
   return (
-    <motion.div
+    <m.div
       variants={itemVariants}
       className="flex flex-col sm:flex-row items-start sm:items-center gap-3.5 pt-1"
     >
       {/* Primary CTA */}
-      <motion.a
+      <m.a
         href="/contact"
         className="group relative flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-[15px] text-[#080602] overflow-hidden select-none cursor-pointer"
         style={{
@@ -109,7 +109,7 @@ function HeroCTAs() {
         whileTap={{ scale: 0.96 }}
       >
         {/* Shimmer layer */}
-        <motion.div
+        <m.div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           style={{
             background:
@@ -120,7 +120,7 @@ function HeroCTAs() {
           transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }}
         />
         {/* Glow beneath */}
-        <motion.div
+        <m.div
           className="absolute inset-0 rounded-full -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"
           style={{ background: "rgba(212,146,12,0.5)" }}
         />
@@ -129,10 +129,10 @@ function HeroCTAs() {
           className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
           aria-hidden="true"
         />
-      </motion.a>
+      </m.a>
 
       {/* Secondary CTA */}
-      <motion.a
+      <m.a
         href="#story"
         className="group flex items-center gap-2.5 px-6 py-3.25 rounded-full border border-white/12 text-white/65 font-medium text-[15px] transition-all duration-300 hover:border-white/22 hover:text-white hover:bg-white/4 cursor-pointer select-none"
         whileHover={{
@@ -149,8 +149,8 @@ function HeroCTAs() {
           />
         </div>
         {t("cta_secondary")}
-      </motion.a>
-    </motion.div>
+      </m.a>
+    </m.div>
   );
 }
 
@@ -177,6 +177,7 @@ function HeroGlowLines() {
 export function HeroSection() {
   const t = useTranslations("hero");
   const sectionRef = useRef<HTMLElement>(null);
+  const isActive = useInView(sectionRef, { margin: "200px" });
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -199,14 +200,14 @@ export function HeroSection() {
       <HeroGlowLines />
 
       {/* ── Main content area ── */}
-      <motion.div
+      <m.div
         className="relative z-10 mb-10 flex-1 flex items-center"
         style={{ y: contentY, opacity: contentOpacity }}
       >
         <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-28 sm:pt-32 pb-10 sm:pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.82fr] items-center gap-10 lg:gap-4 xl:gap-0">
             {/* ── Left column: copy ── */}
-            <motion.div
+            <m.div
               variants={containerVariants}
               initial="hidden"
               animate="visible"
@@ -215,10 +216,10 @@ export function HeroSection() {
               <HeroHeadline />
               <HeroSubcopy />
               <HeroCTAs />
-            </motion.div>
+            </m.div>
 
             {/* ── Right column: floating cards ── */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: 36 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{
@@ -228,11 +229,11 @@ export function HeroSection() {
               }}
               className="hidden lg:block relative h-130 xl:h-140"
             >
-              <FloatingCards />
-            </motion.div>
+              <FloatingCards isActive={isActive} />
+            </m.div>
           </div>
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

@@ -8,8 +8,8 @@ type PageMetadataOptions = {
   robots?: Metadata["robots"];
 };
 
-const socialImage = {
-  url: "/opengraph-image",
+export const socialImage = {
+  url: "/media/kubar-labs-og-b2add55b.png",
   width: 1200,
   height: 630,
   alt: "Kubar Labs — Embedded Origination Infrastructure",

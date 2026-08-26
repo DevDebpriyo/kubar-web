@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { CheckCircle2, ArrowRight, Zap, Shield, TrendingUp } from "lucide-react";
@@ -46,7 +46,7 @@ function UseCaseCard({
   delay: number;
 }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -57,7 +57,7 @@ function UseCaseCard({
       <div className="navdhan-use-case-icon">{icon}</div>
       <h3 className="navdhan-use-case-title">{title}</h3>
       <p className="navdhan-use-case-description">{description}</p>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -70,7 +70,7 @@ function FeatureBullet({
   delay: number;
 }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, x: 16 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
@@ -79,7 +79,7 @@ function FeatureBullet({
     >
       <CheckCircle2 className="navdhan-check-icon" />
       <span>{text}</span>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -94,7 +94,7 @@ function IntegrationLayer({
   delay: number;
 }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -104,7 +104,7 @@ function IntegrationLayer({
       <h3 className="navdhan-integration-label">{label}</h3>
       <div className="navdhan-integration-items">
         {items.map((item, idx) => (
-          <motion.div
+          <m.div
             key={item}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -113,10 +113,10 @@ function IntegrationLayer({
             className="navdhan-integration-item"
           >
             {item}
-          </motion.div>
+          </m.div>
         ))}
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -140,14 +140,14 @@ function CTASection({
 }) {
   return (
     <div className={`navdhan-cta-section navdhan-cta-${alignment}`}>
-      <motion.div
+      <m.div
         initial={{ opacity: 0, x: alignment === "left" ? -32 : 32 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
         className="navdhan-cta-content"
       >
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: -12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -155,9 +155,9 @@ function CTASection({
           className="navdhan-cta-title"
         >
           {title}
-        </motion.h2>
+        </m.h2>
 
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: -8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -165,11 +165,11 @@ function CTASection({
           className="navdhan-cta-subtitle"
         >
           {subtitle}
-        </motion.p>
+        </m.p>
 
         <div className="navdhan-cta-features">
           {features.map((feature, idx) => (
-            <motion.div
+            <m.div
               key={idx}
               initial={{ opacity: 0, x: alignment === "left" ? -16 : 16 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -179,12 +179,12 @@ function CTASection({
             >
               <Zap className="navdhan-cta-feature-icon" />
               <span>{feature}</span>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
         {tagline && (
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -192,11 +192,11 @@ function CTASection({
             className="navdhan-cta-tagline"
           >
             {tagline}
-          </motion.p>
+          </m.p>
         )}
 
         {ctaText && ctaEmail && (
-          <motion.a
+          <m.a
             href={`mailto:${ctaEmail}`}
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -208,9 +208,9 @@ function CTASection({
           >
             {ctaText}
             <ArrowRight className="h-4 w-4" />
-          </motion.a>
+          </m.a>
         )}
-      </motion.div>
+      </m.div>
     </div>
   );
 }
@@ -228,27 +228,27 @@ export default function NavDhanPage() {
         <div className="navdhan-container">
           <div className="navdhan-hero-grid">
             {/* Content */}
-            <motion.div
+            <m.div
               variants={staggerContainer}
               initial="hidden"
               animate="visible"
               className="navdhan-hero-content"
             >
-              <motion.h1
+              <m.h1
                 variants={fadeInUp}
                 className="navdhan-hero-title"
               >
                 {t("hero.title")}
-              </motion.h1>
+              </m.h1>
 
-              <motion.p
+              <m.p
                 variants={fadeInUp}
                 className="navdhan-hero-description"
               >
                 {t("hero.description")}
-              </motion.p>
+              </m.p>
 
-              <motion.a
+              <m.a
                 variants={fadeInUp}
                 href="https://calendly.com/vaibhav-kubar/partnerships-kubar"
                 target="_blank"
@@ -259,8 +259,8 @@ export default function NavDhanPage() {
               >
                 {t("hero.cta_primary")}
                 <ArrowRight className="h-4 w-4" />
-              </motion.a>
-            </motion.div>
+              </m.a>
+            </m.div>
           </div>
         </div>
 
@@ -274,7 +274,7 @@ export default function NavDhanPage() {
       {/* Problem Section */}
       <section className="navdhan-problem-section">
         <div className="navdhan-container">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -285,10 +285,10 @@ export default function NavDhanPage() {
             <h2 className="navdhan-section-title">
               {t("problem_section.subtitle")}
             </h2>
-          </motion.div>
+          </m.div>
 
           <div className="navdhan-problem-grid">
-            <motion.p
+            <m.p
               initial={{ opacity: 0, x: -24 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -296,9 +296,9 @@ export default function NavDhanPage() {
               className="navdhan-problem-text"
             >
               {t("problem_section.problem_text")}
-            </motion.p>
+            </m.p>
 
-            <motion.p
+            <m.p
               initial={{ opacity: 0, x: 24 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -306,14 +306,14 @@ export default function NavDhanPage() {
               className="navdhan-problem-text navdhan-problem-solution"
             >
               {t("problem_section.solution_text")}
-            </motion.p>
+            </m.p>
           </div>
         </div>
       </section>
 
       {/* Image Showcase Section */}
       <section className="navdhan-image-showcase">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -326,16 +326,16 @@ export default function NavDhanPage() {
             width={1920}
             height={1080}
             quality={85}
-            sizes="(max-width: 768px) 100vw, 1200px"
+            sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1280px) calc(100vw - 64px), 1200px"
             className="navdhan-showcase-image"
           />
-        </motion.div>
+        </m.div>
       </section>
 
       {/* Use Cases */}
       <section className="navdhan-use-cases">
         <div className="navdhan-container">
-          <motion.h2
+          <m.h2
             initial={{ opacity: 0, y: -24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -343,7 +343,7 @@ export default function NavDhanPage() {
             className="navdhan-section-title"
           >
             {t("use_cases.title")}
-          </motion.h2>
+          </m.h2>
 
           <div className="navdhan-use-cases-grid">
             <UseCaseCard
@@ -371,7 +371,7 @@ export default function NavDhanPage() {
       {/* Why NavDhan Works */}
       <section className="navdhan-why-works">
         <div className="navdhan-container">
-          <motion.h2
+          <m.h2
             initial={{ opacity: 0, y: -24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -379,10 +379,10 @@ export default function NavDhanPage() {
             className="navdhan-section-title"
           >
             {t("why_works.title")}
-          </motion.h2>
+          </m.h2>
 
           <div className="navdhan-why-works-grid">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -395,7 +395,7 @@ export default function NavDhanPage() {
               <p className="navdhan-why-works-message">
                 {t("why_works.message")}
               </p>
-            </motion.div>
+            </m.div>
 
             <div className="navdhan-why-works-features">
               <FeatureBullet text={t("why_works.features.1")} delay={0.15} />
@@ -410,7 +410,7 @@ export default function NavDhanPage() {
       {/* Integrations */}
       <section className="navdhan-integrations">
         <div className="navdhan-container">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -423,7 +423,7 @@ export default function NavDhanPage() {
             <p className="navdhan-integrations-subtitle">
               {t("integrations.subtitle")}
             </p>
-          </motion.div>
+          </m.div>
 
           <div className="navdhan-integrations-grid">
             <IntegrationLayer

@@ -1,8 +1,20 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  type ComponentProps,
+} from "react";
+import {
+  m,
+  AnimatePresence,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Menu, X, ArrowUpRight, ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -12,20 +24,51 @@ type NavLink = {
   href: string;
 };
 
+function IntentLink({
+  href,
+  onPointerEnter,
+  onFocus,
+  ...props
+}: ComponentProps<typeof Link>) {
+  const router = useRouter();
+  const prefetch = () => {
+    if (typeof href === "string" && href.startsWith("/")) {
+      router.prefetch(href);
+    }
+  };
+
+  return (
+    <Link
+      {...props}
+      href={href}
+      prefetch={false}
+      onPointerEnter={(event) => {
+        prefetch();
+        onPointerEnter?.(event);
+      }}
+      onFocus={(event) => {
+        prefetch();
+        onFocus?.(event);
+      }}
+    />
+  );
+}
+
 function KubarLogo() {
   const t = useTranslations("nav");
 
   return (
-    <Link href="/" className="group shrink-0" aria-label={t("logo_alt")}>
+    <IntentLink href="/" className="group shrink-0" aria-label={t("logo_alt")}>
       <Image
         src="/logo.png"
         alt={t("logo_alt")}
         width={144}
         height={42}
+        sizes="144px"
         priority
         className="h-9 w-auto transition-opacity duration-300 group-hover:opacity-90"
       />
-    </Link>
+    </IntentLink>
   );
 }
 
@@ -52,7 +95,7 @@ function ProductsDropdown() {
   ];
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
@@ -80,13 +123,13 @@ function ProductsDropdown() {
         aria-controls="desktop-products-menu"
       >
         <span className="relative z-10">{t("products")}</span>
-        <motion.div
+        <m.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.2 }}
           className="relative z-10"
         >
           <ChevronDown className="w-3.5 h-3.5" />
-        </motion.div>
+        </m.div>
         {/* Hover background */}
         <span className="absolute inset-0 rounded-lg bg-white/0 group-hover:bg-white/5 transition-colors duration-200" />
       </button>
@@ -94,7 +137,7 @@ function ProductsDropdown() {
       {/* Dropdown Menu */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             id="desktop-products-menu"
             initial={{ opacity: 0, y: -8, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -108,7 +151,7 @@ function ProductsDropdown() {
           >
             <div className="p-2">
               {products.map((product, idx) => (
-                <motion.div
+                <m.div
                   key={product.name}
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -119,7 +162,7 @@ function ProductsDropdown() {
                   }}
                 >
                   {product.href ? (
-                    <Link
+                    <IntentLink
                       href={product.href}
                       className="group relative block px-4 py-3.5 rounded-lg transition-all duration-200 hover:bg-white/6 active:bg-white/8"
                       onClick={() => setIsOpen(false)}
@@ -137,7 +180,7 @@ function ProductsDropdown() {
                           </div>
                         </div>
                       </div>
-                    </Link>
+                    </IntentLink>
                   ) : (
                     <button
                       disabled
@@ -166,13 +209,13 @@ function ProductsDropdown() {
                       </div>
                     </button>
                   )}
-                </motion.div>
+                </m.div>
               ))}
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -185,7 +228,7 @@ function SocialsDropdown() {
   ];
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
@@ -213,19 +256,19 @@ function SocialsDropdown() {
         aria-controls="desktop-socials-menu"
       >
         <span className="relative z-10">Socials</span>
-        <motion.div
+        <m.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.2 }}
           className="relative z-10"
         >
           <ChevronDown className="w-3.5 h-3.5" />
-        </motion.div>
+        </m.div>
         <span className="absolute inset-0 rounded-lg bg-white/0 group-hover:bg-white/5 transition-colors duration-200" />
       </button>
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             id="desktop-socials-menu"
             initial={{ opacity: 0, y: -8, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -239,7 +282,7 @@ function SocialsDropdown() {
           >
             <div className="p-2">
               {socials.map((s) => (
-                <motion.a
+                <m.a
                   key={s.name}
                   href={s.href}
                   target="_blank"
@@ -261,13 +304,13 @@ function SocialsDropdown() {
                   <div className="font-medium text-[14px] text-white group-hover:text-[#f5bc35]">
                     {s.name}
                   </div>
-                </motion.a>
+                </m.a>
               ))}
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -286,7 +329,7 @@ function DesktopNav({ navLinks }: { navLinks: NavLink[] }) {
 
       {/* Other nav links */}
       {filteredLinks.map((link, i) => (
-        <motion.div
+        <m.div
           key={link.href}
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -296,15 +339,15 @@ function DesktopNav({ navLinks }: { navLinks: NavLink[] }) {
             ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
           }}
         >
-          <Link
+          <IntentLink
             href={link.href}
             className="relative px-3.5 py-2 text-[13.5px] font-medium text-white/55 hover:text-white rounded-lg transition-colors duration-200 group"
           >
             <span className="relative z-10">{link.label}</span>
             {/* Hover background */}
             <span className="absolute inset-0 rounded-lg bg-white/0 group-hover:bg-white/5 transition-colors duration-200" />
-          </Link>
-        </motion.div>
+          </IntentLink>
+        </m.div>
       ))}
 
       {/* Socials Dropdown */}
@@ -315,20 +358,20 @@ function DesktopNav({ navLinks }: { navLinks: NavLink[] }) {
 
 function CTAButton({ ctaLabel }: { ctaLabel: string }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: 0.45, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
       className="hidden lg:flex items-center"
     >
-      <Link
+      <IntentLink
         href="/contact"
         className="group flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold text-[#080602] bg-linear-to-r from-[#f5bc35] to-[#d4920c] hover:from-[#f8c94a] hover:to-[#e09d12] transition-all duration-300 hover:shadow-[0_4px_20px_rgba(212,146,12,0.35)] hover:scale-103 active:scale-97"
       >
         {ctaLabel}
         <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-      </Link>
-    </motion.div>
+      </IntentLink>
+    </m.div>
   );
 }
 
@@ -422,7 +465,7 @@ function MobileMenu({
       {isOpen && (
         <>
           {/* Backdrop */}
-          <motion.div
+          <m.div
             key="backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -433,7 +476,7 @@ function MobileMenu({
           />
 
           {/* Drawer */}
-          <motion.div
+          <m.div
             ref={drawerRef}
             key="drawer"
             initial={{ opacity: 0, y: -16, scale: 0.98 }}
@@ -468,7 +511,7 @@ function MobileMenu({
             {/* Nav links */}
             <nav className="px-3 py-3" aria-label={mobileNavAria}>
               {/* Products section */}
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, x: -12 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{
@@ -484,18 +527,18 @@ function MobileMenu({
                   className="flex items-center justify-between w-full px-3 py-3 text-[15px] font-medium text-white/65 hover:text-white rounded-xl hover:bg-white/5 transition-all duration-200"
                 >
                   <span>{t("products")}</span>
-                  <motion.div
+                  <m.div
                     animate={{ rotate: isProductsOpen ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
                   >
                     <ChevronDown className="w-4 h-4" />
-                  </motion.div>
+                  </m.div>
                 </button>
 
                 {/* Product items */}
                 <AnimatePresence>
                   {isProductsOpen && (
-                    <motion.div
+                    <m.div
                       id="mobile-products-menu"
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
@@ -505,7 +548,7 @@ function MobileMenu({
                     >
                       <div className="pl-4 py-2 space-y-1">
                         {products.map((product, idx) => (
-                          <motion.div
+                          <m.div
                             key={product.name}
                             initial={{ opacity: 0, x: -12 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -515,7 +558,7 @@ function MobileMenu({
                             }}
                           >
                             {product.href ? (
-                              <Link
+                              <IntentLink
                                 href={product.href}
                                 onClick={onClose}
                                 className="flex flex-col px-3 py-2.5 text-[14px] text-white/60 hover:text-white rounded-lg hover:bg-white/5 transition-all duration-200 group"
@@ -526,7 +569,7 @@ function MobileMenu({
                                 <span className="text-[12px] text-white/40 group-hover:text-white/50">
                                   {product.description}
                                 </span>
-                              </Link>
+                              </IntentLink>
                             ) : (
                               <div className="flex items-start justify-between gap-2 px-3 py-2.5 text-[14px] opacity-60">
                                 <div>
@@ -544,17 +587,17 @@ function MobileMenu({
                                 )}
                               </div>
                             )}
-                          </motion.div>
+                          </m.div>
                         ))}
                       </div>
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </m.div>
 
               {/* Other nav links */}
               {filteredLinks.map((link, i) => (
-                <motion.div
+                <m.div
                   key={link.href}
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -564,18 +607,18 @@ function MobileMenu({
                     ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
                   }}
                 >
-                  <Link
+                  <IntentLink
                     href={link.href}
                     onClick={onClose}
                     className="flex items-center px-3 py-3 text-[15px] font-medium text-white/65 hover:text-white rounded-xl hover:bg-white/5 transition-all duration-200"
                   >
                     {link.label}
-                  </Link>
-                </motion.div>
+                  </IntentLink>
+                </m.div>
               ))}
 
               {/* Socials section */}
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, x: -12 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{
@@ -591,17 +634,17 @@ function MobileMenu({
                   className="flex items-center justify-between w-full px-3 py-3 text-[15px] font-medium text-white/65 hover:text-white rounded-xl hover:bg-white/5 transition-all duration-200"
                 >
                   <span>Socials</span>
-                  <motion.div
+                  <m.div
                     animate={{ rotate: isSocialsOpen ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
                   >
                     <ChevronDown className="w-4 h-4" />
-                  </motion.div>
+                  </m.div>
                 </button>
 
                 <AnimatePresence>
                   {isSocialsOpen && (
-                    <motion.div
+                    <m.div
                       id="mobile-socials-menu"
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
@@ -611,7 +654,7 @@ function MobileMenu({
                     >
                       <div className="pl-4 py-2 space-y-1">
                         {socials.map((s, idx) => (
-                          <motion.div
+                          <m.div
                             key={s.name}
                             initial={{ opacity: 0, x: -12 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -639,27 +682,27 @@ function MobileMenu({
                                 {s.name}
                               </span>
                             </a>
-                          </motion.div>
+                          </m.div>
                         ))}
                       </div>
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </m.div>
             </nav>
 
             {/* CTA */}
             <div className="px-5 pb-5 pt-2">
-              <Link
+              <IntentLink
                 href="/contact"
                 onClick={onClose}
                 className="flex items-center justify-center gap-2 w-full py-3 rounded-full font-semibold text-[14px] text-[#080602] bg-linear-to-r from-[#f5bc35] to-[#d4920c] hover:from-[#f8c94a] hover:to-[#e09d12] transition-all duration-200"
               >
                 {ctaLabel}
                 <ArrowUpRight className="w-4 h-4" />
-              </Link>
+              </IntentLink>
             </div>
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>
@@ -670,7 +713,13 @@ export function Navbar() {
   const t = useTranslations("nav");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const scrollProgress = useMotionValue(0);
+  const scrollProgressOpacity = useTransform(
+    scrollProgress,
+    [0, 0.02],
+    [0, 0.7],
+  );
+  const isScrolledRef = useRef(false);
   const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), []);
   const navLinks: NavLink[] = [
     { label: t("products"), href: "#products" },
@@ -706,10 +755,14 @@ export function Navbar() {
             documentHeight - window.innerHeight,
           );
 
-          setIsScrolled(scrollY > 24);
+          const nextIsScrolled = scrollY > 24;
+          if (nextIsScrolled !== isScrolledRef.current) {
+            isScrolledRef.current = nextIsScrolled;
+            setIsScrolled(nextIsScrolled);
+          }
           // Progress for the thin top border line (0 → 1 over the full page scroll)
           const progress = scrollableHeight > 0 ? scrollY / scrollableHeight : 0;
-          setScrollProgress(Math.min(Math.max(progress, 0), 1));
+          scrollProgress.set(Math.min(Math.max(progress, 0), 1));
           ticking = false;
         });
         ticking = true;
@@ -727,8 +780,12 @@ export function Navbar() {
       const lenisProgress = customEvent.detail?.progress ?? 0;
       const lenisScroll = customEvent.detail?.scroll ?? 0;
 
-      setIsScrolled(lenisScroll > 24);
-      setScrollProgress(Math.min(Math.max(lenisProgress, 0), 1));
+      const nextIsScrolled = lenisScroll > 24;
+      if (nextIsScrolled !== isScrolledRef.current) {
+        isScrolledRef.current = nextIsScrolled;
+        setIsScrolled(nextIsScrolled);
+      }
+      scrollProgress.set(Math.min(Math.max(lenisProgress, 0), 1));
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -739,7 +796,7 @@ export function Navbar() {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("lenis-scroll", handleLenisScroll as EventListener);
     };
-  }, []);
+  }, [scrollProgress]);
 
   // Close mobile menu on resize to desktop
   useEffect(() => {
@@ -766,7 +823,7 @@ export function Navbar() {
 
   return (
     <>
-      <motion.header
+      <m.header
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
@@ -783,24 +840,26 @@ export function Navbar() {
         }}
       >
         {/* Scroll-progress line at very top */}
-        <div
+        <m.div
           className="absolute top-0 left-0 h-0.5 bg-gradient-to-r from-[#d4920c] via-[#f5bc35] to-[#d4920c] transition-opacity duration-500"
           style={{
-            width: `${scrollProgress * 100}%`,
-            opacity: scrollProgress > 0.02 ? 0.7 : 0,
+            width: "100%",
+            scaleX: scrollProgress,
+            transformOrigin: "left",
+            opacity: scrollProgressOpacity,
           }}
         />
 
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
           <div className="flex items-center justify-between h-16 lg:h-17">
             {/* Logo */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             >
               <KubarLogo />
-            </motion.div>
+            </m.div>
 
             {/* Desktop nav (centered) */}
             <div className="hidden lg:flex flex-1 justify-center">
@@ -812,7 +871,7 @@ export function Navbar() {
               <CTAButton ctaLabel={t("cta")} />
 
               {/* Mobile menu button */}
-              <motion.button
+              <m.button
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
@@ -822,11 +881,11 @@ export function Navbar() {
                 aria-expanded={isMobileMenuOpen}
               >
                 <Menu className="w-5 h-5" />
-              </motion.button>
+              </m.button>
             </div>
           </div>
         </div>
-      </motion.header>
+      </m.header>
 
       {/* Mobile menu */}
       <MobileMenu

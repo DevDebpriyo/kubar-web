@@ -1,25 +1,27 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { CheckCircle, TrendingUp, Zap, ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 /* ─────────────────────────────────────────────────
    Card 1 · Loan Approval notification
 ───────────────────────────────────────────────── */
-function LoanApprovalCard() {
+function LoanApprovalCard({ isActive }: { isActive: boolean }) {
   const t = useTranslations("cards.loan_approval");
 
   return (
     <div className="absolute top-2 right-0 z-20 w-52">
       {/* Float layer */}
-      <motion.div
-        animate={{ y: [0, -12, 0] }}
-        transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
+      <m.div
+        animate={isActive ? { y: [0, -12, 0] } : { y: 0 }}
+        transition={isActive
+          ? { duration: 5.2, repeat: Infinity, ease: "easeInOut" }
+          : { duration: 0 }}
         style={{ willChange: "transform" }}
       >
         {/* Entrance + hover layer */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20, scale: 0.94 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.75, delay: 0.9, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
@@ -62,7 +64,7 @@ function LoanApprovalCard() {
               </span>
             </div>
             <div className="h-0.75 bg-white/6.5 rounded-full overflow-hidden">
-              <motion.div
+              <m.div
                 className="h-full rounded-full"
                 style={{
                   background: "linear-gradient(90deg, #f5bc35, #d4920c)",
@@ -77,8 +79,8 @@ function LoanApprovalCard() {
               />
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </div>
   );
 }
@@ -86,25 +88,22 @@ function LoanApprovalCard() {
 /* ─────────────────────────────────────────────────
    Card 2 · Credit Intelligence  (featured / gold)
 ───────────────────────────────────────────────── */
-function CreditIntelligenceCard() {
+function CreditIntelligenceCard({ isActive }: { isActive: boolean }) {
   const t = useTranslations("cards.credit");
   const bars = [42, 68, 52, 84, 63, 92, 71];
 
   return (
     <div className="absolute top-23.5 left-0 z-10 w-67">
       {/* Float layer */}
-      <motion.div
-        animate={{ y: [0, -10, 0] }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1.2,
-        }}
+      <m.div
+        animate={isActive ? { y: [0, -10, 0] } : { y: 0 }}
+        transition={isActive ? {
+          duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1.2,
+        } : { duration: 0 }}
         style={{ willChange: "transform" }}
       >
         {/* Entrance + hover layer */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 28, scale: 0.94 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.85, delay: 0.65, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
@@ -136,7 +135,7 @@ function CreditIntelligenceCard() {
               <div className="text-white/38 text-[10.5px] mb-0.5">
                 {t("score_label")}
               </div>
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, scale: 0.75 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{
@@ -148,7 +147,7 @@ function CreditIntelligenceCard() {
                 style={{ color: "#f0b429" }}
               >
                 {t("score")}
-              </motion.div>
+              </m.div>
             </div>
             <div className="pb-1">
               <div className="flex items-center gap-0.5 text-[11px] font-semibold text-green-400">
@@ -164,7 +163,7 @@ function CreditIntelligenceCard() {
           {/* Animated bar chart */}
           <div className="flex items-end gap-0.75 h-9 mb-3.5">
             {bars.map((h, i) => (
-              <motion.div
+              <m.div
                 key={i}
                 className="flex-1 rounded-0.75 origin-bottom"
                 style={{
@@ -200,8 +199,8 @@ function CreditIntelligenceCard() {
               {t("rate")}
             </span>
           </div>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </div>
   );
 }
@@ -209,7 +208,7 @@ function CreditIntelligenceCard() {
 /* ─────────────────────────────────────────────────
    Card 3 · NBFC Network status
 ───────────────────────────────────────────────── */
-function NBFCNetworkCard() {
+function NBFCNetworkCard({ isActive }: { isActive: boolean }) {
   const t = useTranslations("cards.nbfc");
   const lenders = [
     { name: t("lender_1_name"), amount: t("lender_1_amount"), dot: "#d4920c" },
@@ -219,18 +218,15 @@ function NBFCNetworkCard() {
   return (
     <div className="absolute bottom-8 right-2 z-15 w-57">
       {/* Float layer */}
-      <motion.div
-        animate={{ y: [0, -11, 0] }}
-        transition={{
-          duration: 6.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 3.2,
-        }}
+      <m.div
+        animate={isActive ? { y: [0, -11, 0] } : { y: 0 }}
+        transition={isActive ? {
+          duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 3.2,
+        } : { duration: 0 }}
         style={{ willChange: "transform" }}
       >
         {/* Entrance + hover layer */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 18, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.7, delay: 1.15, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
@@ -246,17 +242,14 @@ function NBFCNetworkCard() {
             <div className="flex items-center gap-2">
               {/* Pulsing dot */}
               <div className="relative w-4 h-4 flex items-center justify-center">
-                <motion.div
+                <m.div
                   className="absolute w-4 h-4 rounded-full bg-green-500/20"
-                  animate={{
-                    scale: [1, 1.9, 1],
-                    opacity: [0.6, 0, 0.6],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeOut",
-                  }}
+                  animate={isActive ? {
+                    scale: [1, 1.9, 1], opacity: [0.6, 0, 0.6],
+                  } : { scale: 1, opacity: 0.6 }}
+                  transition={isActive ? {
+                    duration: 2, repeat: Infinity, ease: "easeOut",
+                  } : { duration: 0 }}
                 />
                 <div className="w-2 h-2 rounded-full bg-green-400" />
               </div>
@@ -270,7 +263,7 @@ function NBFCNetworkCard() {
           {/* Lender list */}
           <div className="flex flex-col gap-2">
             {lenders.map((l, i) => (
-              <motion.div
+              <m.div
                 key={l.name}
                 className="flex items-center justify-between"
                 initial={{ opacity: 0, x: -10 }}
@@ -291,7 +284,7 @@ function NBFCNetworkCard() {
                 <span className="text-white/80 text-[11.5px] font-medium">
                   {l.amount}
                 </span>
-              </motion.div>
+              </m.div>
             ))}
             {/* More hint */}
             <div className="flex items-center gap-2">
@@ -299,8 +292,8 @@ function NBFCNetworkCard() {
               <span className="text-white/25 text-[11px]">{t("more")}</span>
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </div>
   );
 }
@@ -308,7 +301,7 @@ function NBFCNetworkCard() {
 /* ─────────────────────────────────────────────────
    Main export
 ───────────────────────────────────────────────── */
-export function FloatingCards() {
+export function FloatingCards({ isActive }: { isActive: boolean }) {
   return (
     <div className="relative w-full h-full">
       {/* Hex-grid decorative background */}
@@ -366,9 +359,9 @@ export function FloatingCards() {
       </svg>
 
       {/* Cards — render order: back to front */}
-      <CreditIntelligenceCard />
-      <LoanApprovalCard />
-      <NBFCNetworkCard />
+      <CreditIntelligenceCard isActive={isActive} />
+      <LoanApprovalCard isActive={isActive} />
+      <NBFCNetworkCard isActive={isActive} />
 
       {/* Ambient glow beneath cards */}
       <div

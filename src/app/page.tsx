@@ -9,21 +9,38 @@ import { BuiltBySection } from "@/components/home/BuiltBySection";
 import { EcosystemPartners } from "@/components/home/EcosystemPartners";
 import { BuiltForTrustSection } from "@/components/home/BuiltForTrustSection";
 import { FooterSection } from "@/components/home/FooterSection";
+import { RouteIntlProvider } from "@/i18n/RouteIntlProvider";
 
 export default function Home() {
   return (
-    <main className="relative">
-      <Navbar />
-      <HeroSection />
-      <PartnerMarquee />
-      <ProblemSplitSection />
-      <ProductShowcaseSection />
-      <TwoOutcomesSection />
-      <VisualStorySection />
-      <BuiltBySection />
-      <EcosystemPartners />
-      <BuiltForTrustSection />
-      <FooterSection />
-    </main>
+    <RouteIntlProvider
+      namespaces={[
+        "nav",
+        "hero",
+        "cards",
+        "marquee",
+        "problems",
+        "product_showcase",
+        "two_outcomes",
+        "visual_story",
+        "built_by",
+        "built_for_trust",
+        "footer",
+      ]}
+    >
+      <main className="relative">
+        <Navbar />
+        <HeroSection />
+        <PartnerMarquee />
+        <ProblemSplitSection />
+        <ProductShowcaseSection />
+        <TwoOutcomesSection />
+        <VisualStorySection />
+        <BuiltBySection />
+        <EcosystemPartners />
+        <BuiltForTrustSection />
+        <FooterSection />
+      </main>
+    </RouteIntlProvider>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import {
   Shield,
   Building2,
@@ -32,7 +32,7 @@ function PulsingNode({
   return (
     <g>
       {/* Outer ring pulse */}
-      <motion.circle
+      <m.circle
         cx={cx}
         cy={cy}
         r={size * 2.5}
@@ -53,7 +53,7 @@ function PulsingNode({
         style={{ transformOrigin: `${cx}px ${cy}px` }}
       />
       {/* Core dot */}
-      <motion.circle
+      <m.circle
         cx={cx}
         cy={cy}
         r={size}
@@ -99,7 +99,7 @@ function DataFlowPath({
         strokeDasharray="4 8"
       />
       {/* Animated flow */}
-      <motion.path
+      <m.path
         d={d}
         fill="none"
         stroke={color}
@@ -126,7 +126,7 @@ function DataFlowPath({
 ───────────────────────────────────────────────── */
 function CentralHub() {
   return (
-    <motion.div
+    <m.div
       className="absolute z-20"
       style={{
         top: "50%",
@@ -138,7 +138,7 @@ function CentralHub() {
       transition={{ duration: 0.9, delay: 0.4, ease: smoothEase }}
     >
       {/* Rotating ring */}
-      <motion.div
+      <m.div
         className="absolute inset-0 -m-6"
         animate={{ rotate: 360 }}
         transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
@@ -147,10 +147,10 @@ function CentralHub() {
           className="w-full h-full rounded-full border border-dashed"
           style={{ borderColor: "rgba(212, 146, 12, 0.2)" }}
         />
-      </motion.div>
+      </m.div>
 
       {/* Counter-rotating ring */}
-      <motion.div
+      <m.div
         className="absolute inset-0 -m-12"
         animate={{ rotate: -360 }}
         transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
@@ -159,7 +159,7 @@ function CentralHub() {
           className="w-full h-full rounded-full border"
           style={{ borderColor: "rgba(255, 255, 255, 0.04)" }}
         />
-      </motion.div>
+      </m.div>
 
       {/* Hub body */}
       <div
@@ -175,7 +175,7 @@ function CentralHub() {
         <Link2 className="w-7 h-7 sm:w-8 sm:h-8 text-[#f0b429]" />
 
         {/* Breathing glow */}
-        <motion.div
+        <m.div
           className="absolute inset-0 rounded-2xl"
           animate={{
             boxShadow: [
@@ -187,7 +187,7 @@ function CentralHub() {
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -220,7 +220,7 @@ function PlatformCard({
 }) {
   return (
     <div className="absolute z-30" style={position}>
-      <motion.div
+      <m.div
         animate={{ y: [0, floatOffset, 0] }}
         transition={{
           duration: floatDuration,
@@ -229,7 +229,7 @@ function PlatformCard({
         }}
         style={{ willChange: "transform" }}
       >
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20, scale: 0.92 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay, ease: smoothEase }}
@@ -277,7 +277,7 @@ function PlatformCard({
 
             {/* Status dot */}
             <div className="flex items-center gap-1.5 mt-2.5">
-              <motion.div
+              <m.div
                 className="w-1.5 h-1.5 rounded-full"
                 style={{ background: "#22c55e" }}
                 animate={{ opacity: [0.5, 1, 0.5] }}
@@ -292,8 +292,8 @@ function PlatformCard({
               </span>
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </div>
   );
 }
@@ -325,7 +325,7 @@ function StatsMiniCard({
 }) {
   return (
     <div className="absolute z-30" style={position}>
-      <motion.div
+      <m.div
         animate={{ y: [0, floatOffset, 0] }}
         transition={{
           duration: floatDuration,
@@ -334,7 +334,7 @@ function StatsMiniCard({
         }}
         style={{ willChange: "transform" }}
       >
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay, ease: smoothEase }}
@@ -366,8 +366,8 @@ function StatsMiniCard({
               </span>
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </div>
   );
 }
@@ -573,7 +573,7 @@ export function AboutHeroIllustration() {
       />
 
       {/* ── Decorative particle ring ── */}
-      <motion.div
+      <m.div
         className="absolute pointer-events-none"
         style={{
           top: "50%",
@@ -587,7 +587,7 @@ export function AboutHeroIllustration() {
         transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
       >
         {[0, 60, 120, 180, 240, 300].map((angle) => (
-          <motion.div
+          <m.div
             key={angle}
             className="absolute w-1 h-1 rounded-full bg-white/20"
             style={{
@@ -604,7 +604,7 @@ export function AboutHeroIllustration() {
             }}
           />
         ))}
-      </motion.div>
+      </m.div>
     </div>
   );
 }

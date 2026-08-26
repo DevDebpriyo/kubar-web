@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -40,7 +40,7 @@ function FadeInView({
   className?: string;
 }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -48,7 +48,7 @@ function FadeInView({
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -82,7 +82,7 @@ function TractionFlipCard({
   const mobileContentId = `traction-mobile-details-${type}-${item.id}`;
 
   return (
-    <motion.article
+    <m.article
       className="trust-flip-card group"
       data-tone={tone}
       initial={{ opacity: 0, y: 20 }}
@@ -138,7 +138,7 @@ function TractionFlipCard({
               viewBox="0 0 200 60"
               preserveAspectRatio="none"
             >
-              <motion.path
+              <m.path
                 d="M0,45 C50,45 60,15 100,15 C140,15 150,45 200,45"
                 fill="none"
                 stroke="currentColor"
@@ -152,7 +152,7 @@ function TractionFlipCard({
                   ease: "linear",
                 }}
               />
-              <motion.path
+              <m.path
                 d="M0,30 C40,30 50,5 100,5 C150,5 160,30 200,30"
                 fill="none"
                 stroke="currentColor"
@@ -234,7 +234,7 @@ function TractionFlipCard({
           </div>
         </div>
       </div>
-    </motion.article>
+    </m.article>
   );
 }
 
@@ -291,7 +291,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full pb-10 ">
                 {/* Left Side: Text Content */}
                 <div className="flex flex-col items-start gap-5 max-w-2xl mx-auto lg:mx-0 lg:mt-0">
-                  {/* <motion.div
+                  {/* <m.div
                     initial={{ opacity: 0, scale: 0.95, x: -20 }}
                     animate={{ opacity: 1, scale: 1, x: 0 }}
                     transition={{ duration: 0.6 }}
@@ -299,9 +299,9 @@ export default function AboutPage() {
                   >
                     <Compass className="w-4 h-4" />
                     {t("hero.badge")}
-                  </motion.div> */}
+                  </m.div> */}
 
-                  <motion.h1
+                  <m.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
@@ -316,12 +316,13 @@ export default function AboutPage() {
                       alt="Kubar Labs"
                       width={372}
                       height={217}
+                      sizes="(min-width: 1280px) 89px, (min-width: 1024px) 75px, 1px"
                       className="hidden lg:block h-11 xl:h-[52px] w-auto shrink-0 animate-fadeInUp animation-delay-300"
                     />
                     <span>{t("hero.title")}</span>
-                  </motion.h1>
+                  </m.h1>
 
-                  <motion.p
+                  <m.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
@@ -332,9 +333,9 @@ export default function AboutPage() {
                     className="text-2xl sm:text-3xl lg:text-3xl xl:text-4xl text-[#d4920c] font-bold leading-snug max-w-xl mt-2 mb-2 text-pretty"
                   >
                     {t("hero.subtitle")}
-                  </motion.p>
+                  </m.p>
 
-                  <motion.p
+                  <m.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
@@ -345,11 +346,11 @@ export default function AboutPage() {
                     className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-white/70 font-medium leading-relaxed max-w-xl mt-2 mb-4 text-pretty"
                   >
                     {t("hero.intro")}
-                  </motion.p>
+                  </m.p>
                 </div>
 
                 {/* Right Side: Infrastructure Illustration */}
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, scale: 0.9, x: 40 }}
                   animate={{ opacity: 1, scale: 1, x: 0 }}
                   transition={{
@@ -365,7 +366,7 @@ export default function AboutPage() {
                   <div className="relative z-10 w-full max-w-[420px] sm:max-w-[550px] xl:max-w-[620px]">
                     <AboutHeroIllustration />
                   </div>
-                </motion.div>
+                </m.div>
               </div>
             </div>
 
@@ -415,7 +416,7 @@ export default function AboutPage() {
                 className="relative hidden lg:flex items-center justify-center h-[500px]"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-[rgba(212,146,12,0.15)] to-transparent rounded-full filter blur-[80px]"></div>
-                <motion.div
+                <m.div
                   animate={{ rotate: 360 }}
                   transition={{
                     duration: 60,
@@ -427,10 +428,10 @@ export default function AboutPage() {
                   <div className="w-full h-full rounded-full border border-dashed border-[rgba(255,255,255,0.15)] flex items-center justify-center">
                     <Target className="w-16 h-16 text-[rgba(212,146,12,0.8)]" />
                   </div>
-                </motion.div>
+                </m.div>
 
                 {/* Orbital elements */}
-                <motion.div
+                <m.div
                   animate={{ rotate: -360 }}
                   transition={{
                     duration: 40,
@@ -440,13 +441,13 @@ export default function AboutPage() {
                   className="absolute inset-0 rounded-full"
                 >
                   <div className="absolute top-0 left-1/2 w-4 h-4 bg-[#d4920c] rounded-full shadow-[0_0_15px_#d4920c] transform -translate-x-1/2 -translate-y-1/2" />
-                </motion.div>
+                </m.div>
               </FadeInView>
             </div>
           </div>
           <div className="relative mt-6 h-4 sm:mt-7 -mb-16">
             <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-linear-to-r from-transparent via-white/24 to-transparent" />
-            <motion.span
+            <m.span
               aria-hidden="true"
               className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
               animate={{ scale: [1, 1.14, 1], opacity: [0.75, 1, 0.75] }}
@@ -467,7 +468,7 @@ export default function AboutPage() {
         <section className="about-section z-10 bg-[rgba(10,10,15,0.4)] relative overflow-hidden">
           {/* Animated Background Mesh */}
           <div className="absolute inset-0 pointer-events-none opacity-40">
-            <motion.div
+            <m.div
               animate={{
                 scale: [1, 1.2, 1],
                 opacity: [0.5, 0.8, 0.5],
@@ -475,7 +476,7 @@ export default function AboutPage() {
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
               className="absolute top-[20%] left-[10%] w-[40vw] h-[40vw] bg-[rgba(212,146,12,0.1)] rounded-full filter blur-[120px]"
             />
-            <motion.div
+            <m.div
               animate={{
                 scale: [1, 1.5, 1],
                 opacity: [0.3, 0.6, 0.3],
@@ -493,7 +494,7 @@ export default function AboutPage() {
           <div className="about-section-container relative z-10">
             <FadeInView className="about-section-header !-mt-5 mb-12">
               <h2 className="about-section-title">{t("why_we_exist.title")}</h2>
-              <motion.div
+              <m.div
                 className="trust-divider"
                 initial={{ opacity: 0, scaleX: 0 }}
                 whileInView={{ opacity: 1, scaleX: 1 }}
@@ -584,7 +585,7 @@ export default function AboutPage() {
               <p className="about-section-subtitle mx-auto max-w-3xl text-balance">
                 {t("how_we_work.subtitle")}
               </p>
-              <motion.div
+              <m.div
                 className="trust-divider"
                 initial={{ opacity: 0, scaleX: 0 }}
                 whileInView={{ opacity: 1, scaleX: 1 }}
@@ -649,7 +650,7 @@ export default function AboutPage() {
         <section className="relative pb-16 z-10 bg-gradient-to-b from-[rgba(10,10,15,0.4)] via-[rgba(15,15,20,0.8)] to-[rgba(10,10,15,0.4)] overflow-hidden">
           {/* Animated Background Orbs */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <motion.div
+            <m.div
               animate={{
                 x: ["-10%", "10%", "-10%"],
                 y: ["-10%", "10%", "-10%"],
@@ -657,7 +658,7 @@ export default function AboutPage() {
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] bg-[#138808] rounded-full filter blur-[180px] opacity-10"
             />
-            <motion.div
+            <m.div
               animate={{ x: ["10%", "-10%", "10%"], y: ["10%", "-10%", "10%"] }}
               transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
               className="absolute bottom-1/4 right-1/4 w-[40vw] h-[40vw] bg-white rounded-full filter blur-[180px] opacity-5"
@@ -669,7 +670,7 @@ export default function AboutPage() {
               <h2 className="horizon-section-title font-black text-white mb-6 tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
                 {t("horizons.title")}
               </h2>
-              <motion.div
+              <m.div
                 className="trust-divider"
                 initial={{ opacity: 0, scaleX: 0 }}
                 whileInView={{ opacity: 1, scaleX: 1 }}
@@ -686,7 +687,7 @@ export default function AboutPage() {
             <div className="relative">
               {/* Connecting Beam (Desktop) */}
               <div className="hidden lg:block absolute top-1/2 left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-[#3b82f6]/20 via-[#3b82f6]/20 to-[#3b82f6]/10 -translate-y-1/2 z-0">
-                <motion.div
+                <m.div
                   className="absolute top-1/2 left-0 w-32 h-1 bg-gradient-to-r from-transparent via-[#3b82f6] to-transparent -translate-y-1/2 shadow-[0_0_15px_#3b82f6]"
                   animate={{ left: ["0%", "100%", "0%"] }}
                   transition={{
@@ -699,7 +700,7 @@ export default function AboutPage() {
 
               {/* Connecting Beam (Mobile/Tablet) */}
               <div className="lg:hidden absolute left-1/2 top-[10%] bottom-[10%] w-0.5 bg-gradient-to-b from-[#3b82f6]/20 via-[#3b82f6]/20 to-[#3b82f6]/10 -translate-x-1/2 z-0">
-                <motion.div
+                <m.div
                   className="absolute top-0 left-1/2 w-1 h-32 bg-gradient-to-b from-transparent via-[#3b82f6] to-transparent -translate-x-1/2 shadow-[0_0_15px_#3b82f6]"
                   animate={{ top: ["0%", "100%", "0%"] }}
                   transition={{
@@ -736,6 +737,7 @@ export default function AboutPage() {
                         alt="NavDhan"
                         width={120}
                         height={36}
+                        sizes="120px"
                         className="h-16 sm:h-22 w-auto object-contain drop-shadow-sm -translate-y-3.5 sm:-translate-y-5"
                       />
                       <h3 className="text-4xl sm:text-5xl font-extrabold text-white mb-8 group-hover:text-[#138808] transition-colors duration-500 relative z-10">
@@ -748,7 +750,7 @@ export default function AboutPage() {
 
                     {/* Status badge (Bottom Right) */}
                     <div className="mt-auto pt-8 flex justify-end relative z-10">
-                      <motion.div
+                      <m.div
                         className="built-status-badge live w-fit"
                         initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -773,7 +775,7 @@ export default function AboutPage() {
                           <Zap className="h-3.5 w-3.5" />
                         </div>
                         <span className="built-status-text">Launching</span>
-                      </motion.div>
+                      </m.div>
                     </div>
 
                     {/* Watermark/Background Icon */}
@@ -813,7 +815,7 @@ export default function AboutPage() {
 
                     {/* Status badge (Bottom Right) */}
                     <div className="mt-auto pt-8 flex justify-end relative z-10">
-                      <motion.div
+                      <m.div
                         className="built-status-badge w-fit"
                         style={{
                           border: "1.5px solid rgba(255, 255, 255, 0.4)",
@@ -829,7 +831,7 @@ export default function AboutPage() {
                           <Lock className="h-3.5 w-3.5" />
                         </div>
                         <span className="built-status-text">Long-term R&amp;D</span>
-                      </motion.div>
+                      </m.div>
                     </div>
 
                     {/* Watermark/Background Icon */}
@@ -902,7 +904,7 @@ export default function AboutPage() {
               <p className="text-white/65 text-lg mx-auto max-w-3xl mt-6 leading-relaxed">
                 {t("work_with_us.subtitle")}
               </p>
-              <motion.div
+              <m.div
                 className="trust-divider"
                 initial={{ opacity: 0, scaleX: 0 }}
                 whileInView={{ opacity: 1, scaleX: 1 }}
