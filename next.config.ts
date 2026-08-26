@@ -41,13 +41,13 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/",
-        has: [{ type: "header", key: "x-forwarded-proto", value: "http" }],
+        has: [{ type: "header", key: "cf-visitor", value: ".*http.*" }],
         destination: "https://kubar.tech/",
         permanent: true,
       },
       {
         source: "/:path+",
-        has: [{ type: "header", key: "x-forwarded-proto", value: "http" }],
+        has: [{ type: "header", key: "cf-visitor", value: ".*http.*" }],
         destination: "https://kubar.tech/:path+",
         permanent: true,
       },
