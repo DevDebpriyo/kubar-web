@@ -41,18 +41,6 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/",
-        has: [{ type: "header", key: "cf-visitor", value: ".*http.*" }],
-        destination: "https://kubar.tech/",
-        permanent: true,
-      },
-      {
-        source: "/:path+",
-        has: [{ type: "header", key: "cf-visitor", value: ".*http.*" }],
-        destination: "https://kubar.tech/:path+",
-        permanent: true,
-      },
-      {
-        source: "/",
         has: [{ type: "host", value: "www.kubar.tech" }],
         destination: "https://kubar.tech/",
         permanent: true,
