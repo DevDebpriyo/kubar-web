@@ -14,7 +14,8 @@ const protectedFileHashes: Record<string, string> = {
   "src/components/home/VisualStorySection.css": "1ff5acb152b30992311168deff0a53d5e429bef7b8fe63ee2d047ac127928bd3",
   // User-authorized exception: revise marquee items and remove its pause control.
   "src/components/home/PartnerMarquee.tsx": "ddfff892932312fc87a9c939d4e0cef8f4057d86e576ee4f39112748cf06aa66",
-  "src/components/home/EcosystemPartners.tsx": "60f5f97370fd7c21a90195e59f26f8d6e49f032b918fe3cf5f7194bfcf42dddd",
+  // User-authorized exception: add Sarvam and Cloudflare and remove the pause control.
+  "src/components/home/EcosystemPartners.tsx": "72d8f37c5e993532d868840ceb4101596e3e9bc324b829559999796d4cea9489",
   "src/components/home/BuiltForTrustSection.tsx": "c8e00b7eb3a8f801450ac4ab50b22918247144d4d5c970776886c6f2fe5b9d5b",
   "src/components/home/BuiltForTrustSection.css": "bf5626209f685c9b6a4dd79b6bad7721972f9fab9a1bdfbcf91ecd0867ce6ad3",
   // User-authorized Agentation exception: remove About's Recognition/Traction section.
@@ -41,6 +42,7 @@ const protectedFileHashes: Record<string, string> = {
   "public/bft_logos/rbi.png": "262a9fdfe3288ade193077399782336c8fab461b713da126d69c57d8a2deb6b1",
   "public/logo.png": "43331820d8efb9e73195af6b034a336f70bfdc82598c5a6a6e70e64a50bb3b5b",
   "public/logos/amplitude.png": "ddb95b4fe60da39df92d8096c11085bef215ec237ec02f88efb01630f44def51",
+  "public/logos/cloudflare.svg": "c9ec1d5d5e4b0924666756a70179395c26b010372f8d7eec3539575281cebf1b",
   "public/logos/eleven.png": "0c9a10a561d241f03fc10403d89aa14c354a27fd35ca560e2bbcf41f66a8db93",
   "public/logos/google.png": "ea62323dd811a2ad1e5281b6e856bb24a9826fcfa9995ec5ed1e0ed5c20bf32c",
   "public/logos/intel.png": "b3c04e11ddf60b34474b975dfe65ddcf19efef6a72fdfa4dc192400c1d2debc2",
@@ -49,6 +51,7 @@ const protectedFileHashes: Record<string, string> = {
   "public/logos/openai.png": "44fb1d54db00a32e064266f5a9ce46e6a08b4d0d5bba2c174db40b617b543530",
   "public/logos/pba.png": "08cbd97ec9cb3c3baa9a24c7127c2a132ff97d9ee42374388c2ef8ef36f7c11c",
   "public/logos/perplexity.png": "786b32ae798a6f4d37842ae88d225e5eb5c536d5138a0799b2c2496ecaff845a",
+  "public/logos/sarvam.svg": "93aacfbd08114a111f0508a2507518be8deaac7b7cd4071b1c0fcd751a97e80a",
   "public/logos/uniswap.png": "355fa67b4ffdcdd7ab165b1b070313f88d645a6fc7cf1b9e0bee9b98d74b5326",
   "public/nd_logo.png": "41407e29eb5fa1478a75052ac3d561557a9ee2d5d6544d605f1a1532b23b75ee",
   "public/team/divyesh.png": "2e9863552140e7c94a45858c3277eaa0b739740afc27c5b5b80ee8a4c01e56f7",

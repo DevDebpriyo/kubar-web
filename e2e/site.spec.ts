@@ -102,7 +102,13 @@ test("contact form enforces required fields before making a request", async ({ p
 test("Home preserves its source hero and credibility sections", async ({ page }) => {
   await page.goto("/");
 
+  await expect(page).toHaveTitle("Commerce to Capital | Kubar Labs");
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+    "content",
+    "Commerce to Capital | Kubar Labs",
+  );
   await expect(page.getByRole("heading", { name: "Connect commerce to capital.", exact: true })).toBeVisible();
+  await expect(page.getByText("We build financial infrastructure that connects business activity to regulated capital, through NavDhan for embedded business credit and Kubar Protocol for cross-border trade finance", { exact: true })).toBeVisible();
   await expect(page.locator(".glass-card, .glass-card-gold")).toHaveCount(3);
   await expect(page.getByRole("region", { name: "Awards, programmes and recognitions" })).toBeAttached();
   await expect(page.getByRole("region", { name: "Technology programmes, grants and infrastructure support" })).toBeAttached();
@@ -276,10 +282,12 @@ test("marquees and mobile trust details keep their interaction contracts", async
   ]) {
     await expect(awards.getByText(removedItem, { exact: true })).toHaveCount(0);
   }
-  const logosPause = page.getByRole("button", { name: "Pause partner logo carousel" });
-  await logosPause.click();
-  await expect(page.getByRole("button", { name: "Resume partner logo carousel" })).toHaveAttribute("aria-pressed", "true");
-  await expect(page.locator('[aria-label="Technology programmes, grants and infrastructure support"] .marquee-track > [aria-hidden="true"]')).toHaveCount(10);
+  const logos = page.getByRole("region", { name: "Technology programmes, grants and infrastructure support" });
+  await expect(logos.getByRole("button")).toHaveCount(0);
+  await expect(logos.locator(".ecosystem-marquee__item")).toHaveCount(12);
+  await expect(logos.locator('[aria-hidden="true"]')).toHaveCount(0);
+  await expect(logos.getByRole("img", { name: "Sarvam", exact: true })).toHaveCount(1);
+  await expect(logos.getByRole("img", { name: "Cloudflare", exact: true })).toHaveCount(1);
 
   const firstDetails = page.locator('button[aria-controls="trust-mobile-details-1"]');
   await firstDetails.scrollIntoViewIfNeeded();

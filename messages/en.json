@@ -1,9 +1,9 @@
 {
   "site": {
     "name": "Kubar Labs",
-    "title": "Kubar Labs — Commerce to Capital",
+    "title": "Commerce to Capital | Kubar Labs",
     "description": "Kubar Labs builds financial infrastructure through NavDhan for embedded business credit and Kubar Protocol for cross-border trade finance.",
-    "og_title": "Kubar Labs — Commerce to Capital",
+    "og_title": "Commerce to Capital | Kubar Labs",
     "og_description": "Kubar Labs connects business activity and commerce workflows to regulated capital through NavDhan and Kubar Protocol.",
     "twitter_description": "Financial infrastructure connecting commerce to regulated capital.",
     "locale": "en_IN",
@@ -44,7 +44,7 @@
       "line1": "Connect commerce",
       "line2": "to capital."
     },
-    "subtitle": "We build financial infrastructure that connects business activity to regulated capital—through NavDhan for embedded business credit and Kubar Protocol for cross-border trade finance.",
+    "subtitle": "We build financial infrastructure that connects business activity to regulated capital, through NavDhan for embedded business credit and Kubar Protocol for cross-border trade finance",
     "cta_primary": "Explore products",
     "cta_primary_aria": "Explore Kubar Labs products",
     "cta_secondary": "Meet Kubar Labs",
