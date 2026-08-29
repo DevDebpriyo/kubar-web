@@ -169,7 +169,7 @@
 
     @keyframes ecosystem-partner-loop {
         from {
-            transform: translateX(calc(100vw + 12rem));
+            transform: translateX(calc(100vw + 10rem));
         }
         to {
             transform: translateX(-1800px);
@@ -539,7 +539,7 @@
 
     .ecosystem-marquee {
         position: relative;
-        height: 3rem;
+        height: 2.5rem;
         overflow: hidden;
     }
 
@@ -547,8 +547,8 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 11rem;
-        height: 3rem;
+        width: 10rem;
+        height: 2.5rem;
         animation: ecosystem-partner-loop 36s linear infinite;
         will-change: transform;
     }
@@ -575,14 +575,14 @@
     .ecosystem-marquee {
         display: flex;
         height: auto;
-        gap: 2rem;
+        gap: 1.5rem;
         overflow-x: auto;
         padding-bottom: 0.5rem;
     }
 
     .ecosystem-marquee__item {
         position: static;
-        flex: 0 0 11rem;
+        flex: 0 0 10rem;
         animation: none !important;
         transform: none;
     }

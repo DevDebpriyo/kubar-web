@@ -5,18 +5,18 @@ import Image from "next/image";
 import { useInView } from "framer-motion";
 
 const partners = [
-  { name: "Google", src: "/logos/google.png" },
-  { name: "Nvidia", src: "/logos/nvidia.png" },
-  { name: "Perplexity", src: "/logos/perplexity.png" },
-  { name: "OpenAI", src: "/logos/openai.png" },
-  { name: "Microsoft", src: "/logos/microsoft.png" },
-  { name: "Intel", src: "/logos/intel.png" },
-  { name: "Eleven Labs", src: "/logos/eleven.png" },
-  { name: "Amplitude", src: "/logos/amplitude.png" },
-  { name: "Polkadot Blockchain Academy", src: "/logos/pba.png" },
-  { name: "Uniswap", src: "/logos/uniswap.png" },
-  { name: "Sarvam", src: "/logos/sarvam.svg" },
-  { name: "Cloudflare", src: "/logos/cloudflare.svg" },
+  { name: "Google", src: "/logos/google.png", visualScale: 0.8 },
+  { name: "Nvidia", src: "/logos/nvidia.png", visualScale: 2.6 },
+  { name: "Perplexity", src: "/logos/perplexity.png", visualScale: 1.08 },
+  { name: "OpenAI", src: "/logos/openai.png", visualScale: 2.3 },
+  { name: "Microsoft", src: "/logos/microsoft.png", visualScale: 1.6 },
+  { name: "Intel", src: "/logos/intel.png", visualScale: 0.88 },
+  { name: "Eleven Labs", src: "/logos/eleven.png", visualScale: 1.25 },
+  { name: "Amplitude", src: "/logos/amplitude.png", visualScale: 1.05 },
+  { name: "Polkadot Blockchain Academy", src: "/logos/pba.png", visualScale: 0.8 },
+  { name: "Uniswap", src: "/logos/uniswap.png", visualScale: 1 },
+  { name: "Sarvam", src: "/logos/sarvam.svg", visualScale: 1.2 },
+  { name: "Cloudflare", src: "/logos/cloudflare.svg", visualScale: 0.8 },
 ];
 const partnerLoopDurationSeconds = 36;
 
@@ -28,13 +28,13 @@ export function EcosystemPartners() {
     <section
       ref={sectionRef}
       aria-label="Technology programmes, grants and infrastructure support"
-      className="relative z-10 overflow-hidden pt-4 pb-16 sm:pt-8 sm:pb-24"
+      className="relative z-10 overflow-hidden pt-3 pb-7 sm:pt-5 sm:pb-10"
       style={{
         background: "rgba(4, 4, 12, 0.98)",
       }}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8 text-center">
-        <h2 className="text-xl font-medium tracking-wide text-white/50 uppercase">
+      <div className="mx-auto mb-4 max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+        <h2 className="text-base font-medium uppercase tracking-wide text-white/50 sm:text-lg">
           Technology Programmes, Grants &amp; Infrastructure Support
         </h2>
       </div>
@@ -56,7 +56,7 @@ export function EcosystemPartners() {
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-[rgba(4,4,12,0.98)] to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-[rgba(4,4,12,0.98)] to-transparent" />
 
-        <div className="overflow-hidden py-10 sm:py-12">
+        <div className="overflow-hidden py-4 sm:py-5">
           <div
             className="ecosystem-marquee focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d4920c]"
             aria-label="Programme and infrastructure partner logos"
@@ -65,9 +65,9 @@ export function EcosystemPartners() {
             {partners.map((partner, index) => (
               <div
                 key={partner.name}
-                className={`ecosystem-marquee__item group flex items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 opacity-60 hover:opacity-100 ${
-                  partner.name === "Microsoft" ? "-ml-6 -mr-2" : ""
-                } ${partner.name === "OpenAI" ? "invert opacity-80" : ""}`}
+                className={`ecosystem-marquee__item group flex items-center justify-center grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100 ${
+                  partner.name === "OpenAI" ? "invert opacity-80" : ""
+                }`}
                 style={{
                   animationDelay: `${-(partnerLoopDurationSeconds / partners.length) * index}s`,
                   animationPlayState: !isInView ? "paused" : undefined,
@@ -76,18 +76,11 @@ export function EcosystemPartners() {
                 <Image
                   src={partner.src}
                   alt={partner.name}
-                  width={140}
-                  height={60}
-                  sizes="140px"
-                  className={`w-auto max-w-44 object-contain ${
-                    partner.name === "Microsoft"
-                      ? "max-h-12 scale-[1.6]"
-                      : partner.name === "OpenAI" || partner.name === "Nvidia"
-                      ? "max-h-12 scale-[1.5]"
-                      : partner.name === "Cloudflare"
-                      ? "h-12"
-                      : "max-h-12"
-                  }`}
+                  width={144}
+                  height={40}
+                  sizes="144px"
+                  className="h-10 w-36 object-contain"
+                  style={{ transform: `scale(${partner.visualScale})` }}
                 />
               </div>
             ))}

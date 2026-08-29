@@ -286,6 +286,14 @@ test("marquees and mobile trust details keep their interaction contracts", async
   await expect(logos.getByRole("button")).toHaveCount(0);
   await expect(logos.locator(".ecosystem-marquee__item")).toHaveCount(12);
   await expect(logos.locator('[aria-hidden="true"]')).toHaveCount(0);
+  expect(
+    await logos.getByRole("img").evaluateAll((images) =>
+      [...new Set(images.map((image) => {
+        const style = getComputedStyle(image);
+        return `${style.width} by ${style.height}`;
+      }))],
+    ),
+  ).toEqual(["144px by 40px"]);
   await expect(logos.getByRole("img", { name: "Sarvam", exact: true })).toHaveCount(1);
   await expect(logos.getByRole("img", { name: "Cloudflare", exact: true })).toHaveCount(1);
 

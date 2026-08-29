@@ -15,7 +15,7 @@ const protectedFileHashes: Record<string, string> = {
   // User-authorized exception: revise marquee items and remove its pause control.
   "src/components/home/PartnerMarquee.tsx": "ddfff892932312fc87a9c939d4e0cef8f4057d86e576ee4f39112748cf06aa66",
   // User-authorized exception: add Sarvam and Cloudflare and remove the pause control.
-  "src/components/home/EcosystemPartners.tsx": "72d8f37c5e993532d868840ceb4101596e3e9bc324b829559999796d4cea9489",
+  "src/components/home/EcosystemPartners.tsx": "db03573495dcf9892168384333d32c85018fe194b2bca886854e7d33408714ab",
   "src/components/home/BuiltForTrustSection.tsx": "c8e00b7eb3a8f801450ac4ab50b22918247144d4d5c970776886c6f2fe5b9d5b",
   "src/components/home/BuiltForTrustSection.css": "bf5626209f685c9b6a4dd79b6bad7721972f9fab9a1bdfbcf91ecd0867ce6ad3",
   // User-authorized Agentation exception: remove About's Recognition/Traction section.
