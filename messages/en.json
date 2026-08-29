@@ -110,11 +110,9 @@
     "aria_label": "Awards, programmes and recognitions",
     "items": {
       "finvision": "FinVision 2026 Award at NIBM, Pune",
-      "genesis": "GENESIS grant recipient",
-      "startup_mahakumbh": "Popular Choice Award at Startup Mahakumbh 2025",
-      "perplexity": "Perplexity AI Business Fellowship participant",
-      "elevenlabs": "ElevenLabs Grants recipient",
-      "f6s": "Recognised in F6S FinTech rankings"
+      "startup_mahakumbh": "Popular Choice Award at Startup MahaKumbh",
+      "f6s": "Recognised in F6S FinTech rankings",
+      "ifsca": "IFSCA Fintech Sandbox"
     }
   },
   "problems": {

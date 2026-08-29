@@ -12,7 +12,8 @@ const protectedFileHashes: Record<string, string> = {
   "src/components/home/HeroBackground.tsx": "9d43ba8bdc464ecfd14029886fb74a79c2fe43dc70dde23aaa905c6584d6ee07",
   "src/components/home/VisualStorySection.tsx": "b98e7165fe81c50931bc97449a1d1228ae690b27e53a657f682aeaeb1b467e33",
   "src/components/home/VisualStorySection.css": "1ff5acb152b30992311168deff0a53d5e429bef7b8fe63ee2d047ac127928bd3",
-  "src/components/home/PartnerMarquee.tsx": "456055372a65c81e02101f0cdf70be4d0589af669fae3d0fa83570634d76ea25",
+  // User-authorized exception: revise marquee items and remove its pause control.
+  "src/components/home/PartnerMarquee.tsx": "ddfff892932312fc87a9c939d4e0cef8f4057d86e576ee4f39112748cf06aa66",
   "src/components/home/EcosystemPartners.tsx": "60f5f97370fd7c21a90195e59f26f8d6e49f032b918fe3cf5f7194bfcf42dddd",
   "src/components/home/BuiltForTrustSection.tsx": "c8e00b7eb3a8f801450ac4ab50b22918247144d4d5c970776886c6f2fe5b9d5b",
   "src/components/home/BuiltForTrustSection.css": "bf5626209f685c9b6a4dd79b6bad7721972f9fab9a1bdfbcf91ecd0867ce6ad3",
@@ -61,7 +62,8 @@ const protectedFileHashes: Record<string, string> = {
 const protectedTranslationHashes: Record<string, string> = {
   cards: "ba9ffeb1c1de8460a87f11c0f829c65a5bef918a66adf7cebca297e237d741e1",
   visual_story: "bdaed167dbdd40958942bf0b91ab2dad753418d901c6660ce9bdb89ef74b337f",
-  marquee: "70be3ac068d1cfe1759da5d8fd06e72ac6a902fb61fca2581115c4069450b6ec",
+  // User-authorized exception: revise the awards marquee copy.
+  marquee: "c084e45fbc54a9e169b6a235c7a87c6de951cc76af2053772e04b57ead9349ba",
   built_for_trust: "80d3b12686e0df6989f1079d9680047b143968d40ddcab723d7c07816433635b",
   "built_by.tagline": "09dd389197be718e641e83f710210f9f05f47d51cd2fbda839dfcf222139d8f4",
   about: "c21583bb0a90d9580c24fa76d41fdb11322bd54035df039d75496494350b6655",

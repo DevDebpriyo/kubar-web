@@ -253,13 +253,29 @@ test("approved desktop and mobile product menus link both sibling products", asy
   }
 });
 
-test("source marquees and mobile trust details keep their interaction contracts", async ({ page }) => {
+test("marquees and mobile trust details keep their interaction contracts", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
 
-  const awardsPause = page.getByRole("button", { name: "Pause Awards, programmes and recognitions" });
-  await awardsPause.click();
-  await expect(page.getByRole("button", { name: "Resume Awards, programmes and recognitions" })).toHaveAttribute("aria-pressed", "true");
+  const awards = page.getByRole("region", { name: "Awards, programmes and recognitions" });
+  await expect(awards.getByRole("button")).toHaveCount(0);
+  await expect(awards.locator(".marquee-track > span")).toHaveCount(8);
+  await expect(awards.locator('.marquee-track > [aria-hidden="true"]')).toHaveCount(4);
+  for (const item of [
+    "FinVision 2026 Award at NIBM, Pune",
+    "Popular Choice Award at Startup MahaKumbh",
+    "Recognised in F6S FinTech rankings",
+    "IFSCA Fintech Sandbox",
+  ]) {
+    await expect(awards.getByText(item, { exact: true })).toHaveCount(2);
+  }
+  for (const removedItem of [
+    "GENESIS grant recipient",
+    "Perplexity AI Business Fellowship participant",
+    "ElevenLabs Grants recipient",
+  ]) {
+    await expect(awards.getByText(removedItem, { exact: true })).toHaveCount(0);
+  }
   const logosPause = page.getByRole("button", { name: "Pause partner logo carousel" });
   await logosPause.click();
   await expect(page.getByRole("button", { name: "Resume partner logo carousel" })).toHaveAttribute("aria-pressed", "true");
