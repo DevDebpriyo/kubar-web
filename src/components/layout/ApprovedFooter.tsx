@@ -33,9 +33,6 @@ export function ApprovedFooter({
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
       >
-        <p className="approved-footer__eyebrow">
-          FOR PLATFORMS AND FINANCIAL INSTITUTIONS
-        </p>
         <h2>{title}</h2>
         <p className="approved-footer__description">{description}</p>
 

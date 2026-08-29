@@ -751,7 +751,7 @@ function MobileMenu({
   );
 }
 
-export function Navbar({ variant = "source" }: { variant?: NavbarVariant }) {
+export function Navbar({ variant = "approved" }: { variant?: NavbarVariant }) {
   const t = useTranslations("nav");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

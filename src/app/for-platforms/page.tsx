@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Clock3 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { createPageMetadata } from "@/app/page-metadata";
 import { Navbar } from "@/components/layout/Navbar";
 import { FooterSection } from "@/components/home/FooterSection";
@@ -26,11 +26,6 @@ export default function ForPlatformsComingSoonPage() {
           className="absolute left-1/2 top-1/2 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#d4920c]/10 blur-[120px]"
         />
         <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
-          <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#d4920c]/30 bg-[#d4920c]/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#e5ad3c]">
-            <Clock3 className="h-4 w-4" />
-            Coming soon
-          </div>
-
           <p className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-white/50">
             NavDhan for B2B platforms
           </p>

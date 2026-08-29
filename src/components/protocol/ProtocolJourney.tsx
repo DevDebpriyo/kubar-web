@@ -125,7 +125,6 @@ export function ProtocolJourney() {
     <section id="workflow" className="protocol-journey">
       <div className="protocol-journey__shell">
         <div className="protocol-journey__context">
-          <p>{t("eyebrow")}</p>
           <h2>{t("title")}</h2>
           <span>{t("description")}</span>
         </div>

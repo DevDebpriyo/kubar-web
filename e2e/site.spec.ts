@@ -47,13 +47,21 @@ test.describe("public routes", () => {
   }
 });
 
-test("the coming-soon platform page is excluded from indexing", async ({ page }) => {
+test("the platform page omits the visual coming-soon badge and remains excluded from indexing", async ({ page }) => {
   await page.goto("/for-platforms");
 
+  await expect(page.getByText("Coming soon", { exact: true })).toHaveCount(0);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     "content",
     /noindex/,
   );
+});
+
+test("the privacy page omits the Legal overline", async ({ page }) => {
+  await page.goto("/privacy");
+
+  await expect(page.getByText("Legal", { exact: true })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Privacy Policy", exact: true })).toBeVisible();
 });
 
 test("skip link moves keyboard focus to the primary content", async ({ page }) => {
@@ -101,6 +109,9 @@ test("Home preserves its source hero and credibility sections", async ({ page })
   await expect(page.getByRole("region", { name: "Responsible lending, data protection and institutional recognition" })).toBeAttached();
   await expect(page.locator(".trust-flip-card")).toHaveCount(5);
   await expect(page.getByText("New Bharat. New Credit Rails. New Possibilities.", { exact: true })).toBeAttached();
+  await expect(page.getByText("KUBAR LABS · COMMERCE TO CAPITAL", { exact: true })).toHaveCount(0);
+  await expect(page.locator(".approved-eyebrow, .approved-product-card__eyebrow, .approved-architecture__parent > span, .approved-footer__eyebrow")).toHaveCount(0);
+  await expect(page.locator('main > #built-for-trust + .approved-tagline-wrap + section[aria-label="Technology programmes, grants and infrastructure support"]')).toHaveCount(1);
   await expect(page.locator("#story")).toHaveCount(0);
   await expect(page.getByText("One business context. Two financing paths", { exact: false })).toHaveCount(0);
 });
@@ -124,6 +135,7 @@ test("NavDhan renders the exact eight-stage source journey once", async ({ page 
   ];
 
   await page.goto("/products/navdhan");
+  await expect(page.locator(".navdhan-hero__copy > .navdhan-kicker, .navdhan-roles__copy > .navdhan-kicker, .navdhan-responsibility-card > .navdhan-kicker, .navdhan-direct-card > .navdhan-kicker, .approved-footer__eyebrow")).toHaveCount(0);
   await expect(page.locator("#story")).toHaveCount(1);
   await expect(page.locator(".old-way-step")).toHaveCount(4);
   await expect(page.locator(".timeline-item")).toHaveCount(8);
@@ -148,6 +160,7 @@ test("Protocol exposes the six approved stages and explicit maturity boundary", 
   ];
 
   await page.goto("/products/kubar-protocol");
+  await expect(page.locator(".protocol-hero__copy > .protocol-kicker, .protocol-progress__intro > .protocol-kicker, .protocol-journey__context > p, .protocol-authority-card > .protocol-kicker, .approved-footer__eyebrow")).toHaveCount(0);
   await expect(page.locator(".protocol-stage")).toHaveCount(6);
   for (const title of stageTitles) {
     await expect(page.getByText(title, { exact: true })).toHaveCount(1);
@@ -161,14 +174,21 @@ test("Protocol exposes the six approved stages and explicit maturity boundary", 
   expect(await sitemap.text()).toContain("https://kubar.tech/products/kubar-protocol");
 });
 
-test("the frozen About route retains its source narrative and source navigation", async ({ page }) => {
+test("About retains its source narrative and navigation outside the requested removal", async ({ page }) => {
   await page.goto("/about");
 
   await expect(page.getByText("Building the origination layer between fragmented B2B platforms and lenders", { exact: true })).toBeAttached();
   await expect(page.getByText(/Kubar Protocol is longer-term R&D focused on digital trade assets/)).toBeAttached();
+  await expect(page.getByRole("heading", { name: "The path so far" })).toHaveCount(0);
+  await expect(page.locator('div.w-16 img[alt="Kubar Labs"]')).toHaveCount(1);
+  await expect(page.locator(".built-status-text", { hasText: "Live" })).toHaveCount(1);
+  await expect(page.getByText("Launching", { exact: true })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Products" })).toBeVisible();
   await page.getByRole("button", { name: "Products" }).hover();
-  await expect(page.getByRole("button", { name: /Business Rules Engine/ })).toBeDisabled();
+  const desktopMenu = page.locator("#desktop-products-menu");
+  await expect(desktopMenu.getByRole("link", { name: /NavDhan/ })).toHaveAttribute("href", "/products/navdhan");
+  await expect(desktopMenu.getByRole("link", { name: /Kubar Protocol/ })).toHaveAttribute("href", "/products/kubar-protocol");
+  await expect(page.getByRole("button", { name: /Business Rules Engine/ })).toHaveCount(0);
 });
 
 test("Team renders only the approved current people, portraits, and profile links", async ({ page }) => {
@@ -199,24 +219,38 @@ test("Team renders only the approved current people, portraits, and profile link
 });
 
 test("approved desktop and mobile product menus link both sibling products", async ({ page }) => {
-  await page.goto("/");
-  const productsButton = page.getByRole("button", { name: "Products" });
-  await productsButton.hover();
-  const desktopMenu = page.locator("#desktop-products-menu");
-  await expect(desktopMenu.getByRole("link", { name: /NavDhan/ })).toHaveAttribute("href", "/products/navdhan");
-  await expect(desktopMenu.getByRole("link", { name: /Kubar Protocol/ })).toHaveAttribute("href", "/products/kubar-protocol");
-  await productsButton.press("Escape");
-  await expect(desktopMenu).toHaveCount(0);
+  const routes = [
+    "/",
+    "/about",
+    "/contact",
+    "/for-platforms",
+    "/privacy",
+    "/products/navdhan",
+    "/products/kubar-protocol",
+    "/team",
+  ];
 
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.getByRole("button", { name: "Open navigation menu" }).click();
-  const mobileMenu = page.getByRole("dialog", { name: "Mobile navigation" });
-  await mobileMenu.getByRole("button", { name: "Products" }).click();
-  await expect(mobileMenu.getByRole("link", { name: /NavDhan/ })).toHaveAttribute("href", "/products/navdhan");
-  await expect(mobileMenu.getByRole("link", { name: /Kubar Protocol/ })).toHaveAttribute("href", "/products/kubar-protocol");
-  await page.keyboard.press("Escape");
-  await expect(mobileMenu).toHaveCount(0);
-  await expect(page.getByRole("button", { name: "Open navigation menu" })).toBeFocused();
+  for (const route of routes) {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(route);
+    const productsButton = page.getByRole("button", { name: "Products" });
+    await productsButton.hover();
+    const desktopMenu = page.locator("#desktop-products-menu");
+    await expect(desktopMenu.getByRole("link", { name: /NavDhan/ })).toHaveAttribute("href", "/products/navdhan");
+    await expect(desktopMenu.getByRole("link", { name: /Kubar Protocol/ })).toHaveAttribute("href", "/products/kubar-protocol");
+    await productsButton.press("Escape");
+    await expect(desktopMenu).toHaveCount(0);
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.getByRole("button", { name: "Open navigation menu" }).click();
+    const mobileMenu = page.getByRole("dialog", { name: "Mobile navigation" });
+    await mobileMenu.getByRole("button", { name: "Products" }).click();
+    await expect(mobileMenu.getByRole("link", { name: /NavDhan/ })).toHaveAttribute("href", "/products/navdhan");
+    await expect(mobileMenu.getByRole("link", { name: /Kubar Protocol/ })).toHaveAttribute("href", "/products/kubar-protocol");
+    await page.keyboard.press("Escape");
+    await expect(mobileMenu).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Open navigation menu" })).toBeFocused();
+  }
 });
 
 test("source marquees and mobile trust details keep their interaction contracts", async ({ page }) => {

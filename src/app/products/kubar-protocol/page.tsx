@@ -67,7 +67,6 @@ function AuthorityCard({
 
   return (
     <m.article className="protocol-authority-card" {...reveal}>
-      <p className="protocol-kicker">{t("eyebrow")}</p>
       <h2>{title}</h2>
       <p>{summary}</p>
       <button
@@ -99,7 +98,6 @@ export default function KubarProtocolPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="protocol-kicker">{t("hero.eyebrow")}</p>
             <h1>{t("hero.title")}</h1>
             <p className="protocol-hero__description">{t("hero.description")}</p>
             <span className="protocol-maturity">{t("hero.status")}</span>
@@ -119,7 +117,6 @@ export default function KubarProtocolPage() {
       <section className="protocol-progress">
         <div className="protocol-shell protocol-progress__grid">
           <m.div className="protocol-progress__intro" {...reveal}>
-            <p className="protocol-kicker">{t("progress.eyebrow")}</p>
             <h2>{t("progress.title")}</h2>
             <p>{t("progress.description")}</p>
             <small>{t("progress.note")}</small>

@@ -32,9 +32,9 @@ export default function Home() {
         <PartnerMarquee />
         <ProductIntroduction />
         <CompanyThesis />
+        <BuiltForTrustSection />
         <NewBharatTagline />
         <EcosystemPartners />
-        <BuiltForTrustSection />
         <ApprovedFooter />
       </main>
     </RouteIntlProvider>

@@ -21,15 +21,11 @@ export function ProductIntroduction() {
   return (
     <section id="built-by" className="approved-home-section approved-products">
       <m.div className="approved-home-container" {...reveal}>
-        <p className="approved-eyebrow">{t("eyebrow")}</p>
         <h2>{t("title")}</h2>
         <p className="approved-section-intro">{t("description")}</p>
 
         <div className="approved-product-grid">
           <Link className="approved-product-card" href="/products/navdhan">
-            <p className="approved-product-card__eyebrow">
-              {t("navdhan.eyebrow")}
-            </p>
             <Image
               className="approved-product-card__mark"
               src="/nd_logo.png"
@@ -52,9 +48,6 @@ export function ProductIntroduction() {
             className="approved-product-card approved-product-card--protocol"
             href="/products/kubar-protocol"
           >
-            <p className="approved-product-card__eyebrow">
-              {t("protocol.eyebrow")}
-            </p>
             <h3>Kubar Protocol</h3>
             <p className="approved-product-card__description">
               {t("protocol.description")}
@@ -79,7 +72,6 @@ export function CompanyThesis() {
     <section className="approved-home-section approved-thesis">
       <m.div className="approved-home-container approved-thesis__grid" {...reveal}>
         <div className="approved-thesis__copy">
-          <p className="approved-eyebrow">{t("eyebrow")}</p>
           <h2>{t("title")}</h2>
           <p className="approved-section-intro">{t("description")}</p>
           <Link className="approved-text-link" href="/about">
@@ -89,7 +81,6 @@ export function CompanyThesis() {
 
         <div className="approved-architecture" aria-label={t("architecture_aria")}>
           <div className="approved-architecture__parent">
-            <span>{t("parent_label")}</span>
             <Image src="/logo.png" alt="Kubar Labs" width={144} height={42} />
           </div>
           <div className="approved-architecture__branches" aria-hidden="true" />

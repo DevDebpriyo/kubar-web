@@ -38,9 +38,6 @@ function HeroHeadline() {
 
   return (
     <m.div variants={itemVariants} className="flex flex-col gap-0">
-      <p className="mb-5 text-[11px] font-semibold tracking-[0.09em] text-[#f0b429] sm:text-xs">
-        {t("badge")}
-      </p>
       <h1 className="font-extrabold leading-[1.08] tracking-[-0.045em] text-white">
         <span className="block text-[50px] sm:text-[58px] lg:text-[62px]">
           {t("title.line1")}

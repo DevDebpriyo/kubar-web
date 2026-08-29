@@ -63,7 +63,7 @@
 
 .navdhan-hero h1 {
   max-width: 650px;
-  margin: 1.25rem 0 0;
+  margin: 0;
   color: #f0f0f0;
   font-size: clamp(2.75rem, 4.4vw, 3.5rem);
   font-weight: 800;
@@ -195,7 +195,7 @@
 
 .navdhan-roles__copy h2 {
   max-width: 540px;
-  margin: 1.25rem 0 0;
+  margin: 0;
   white-space: pre-line;
   color: #f0f0f0;
   font-size: clamp(2.25rem, 4vw, 3rem);
@@ -288,7 +288,7 @@
 }
 
 .navdhan-responsibility-card h2 {
-  margin: 1.5rem 0 0;
+  margin: 0;
   color: #f0f0f0;
   font-size: 1.375rem;
   font-weight: 700;
@@ -300,6 +300,10 @@
   color: #c0c0cc;
   font-size: 1rem;
   line-height: 1.8;
+}
+
+.navdhan-direct-card > p:first-child {
+  margin-top: 0;
 }
 
 .navdhan-responsibility-card button,

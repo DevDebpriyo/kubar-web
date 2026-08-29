@@ -16,12 +16,14 @@ const protectedFileHashes: Record<string, string> = {
   "src/components/home/EcosystemPartners.tsx": "60f5f97370fd7c21a90195e59f26f8d6e49f032b918fe3cf5f7194bfcf42dddd",
   "src/components/home/BuiltForTrustSection.tsx": "c8e00b7eb3a8f801450ac4ab50b22918247144d4d5c970776886c6f2fe5b9d5b",
   "src/components/home/BuiltForTrustSection.css": "bf5626209f685c9b6a4dd79b6bad7721972f9fab9a1bdfbcf91ecd0867ce6ad3",
-  "src/app/about/page.tsx": "bcf43c338ff0c3b2dd12d2ae2442a62cae6ac2dfbea212578116a0827971b385",
+  // User-authorized Agentation exception: remove About's Recognition/Traction section.
+  "src/app/about/page.tsx": "f380d9fc352a60d42868f1a10ece7e8f067bea32a979a3a7e47ce8ac1fca60e0",
   "src/app/about/layout.tsx": "c76cab8755a8e063fa9c32d1bde364be69d6b22cd27055c0aec24b278b9dbd5d",
   "src/app/about/about.css": "5504ae1f49d8d65d53fd65d1b4bbca7b8abeadf08bf32299d8f6ee4ed0826c1f",
   "src/components/about/AboutHeroIllustration.tsx": "6b3daad72784dcf8a51c3e8ac431681ab0bbfcce239ecaf835ebef26e2361342",
   "src/components/about/RoadmapSection.tsx": "c01e4d5ced0444520f582776af05de5f39bfa74f63ae00f42ea47640924f4211",
-  "src/app/privacy/page.tsx": "ee02ff8458b2180472ba200fda9d2f0c9c687a3919f48025ad1f9edc9231c70c",
+  // User-authorized Agentation exception: remove the Privacy Legal overline.
+  "src/app/privacy/page.tsx": "19dda40b6e35916d3c189fde990638a75e63f0dd1146b0ead526965d20e40184",
   "src/app/api/contact/route.ts": "65eb84750ee9ba1fbed594a79ff81cc750d8347e2b0acf61e70721ca2b617b3e",
   "src/lib/contact-queue.ts": "cb97e66ee4ab7843b993acb43bf876ceeb0bf18647e136de768a2902fcd1c1eb",
   "workers/contact-email/src/index.ts": "2a8d54b1c516e242b6087ac982c4f3134200bf05ebfe5be435ecc6b55eb26800",
@@ -128,6 +130,12 @@ describe("approved website information architecture", () => {
     expect(home).not.toContain("VisualStorySection");
     expect(allImplementationCopy).not.toMatch(/One business context\. Two financing paths/i);
     expect(allImplementationCopy).not.toMatch(/How NavDhan is designed to work/i);
+    expect(home.indexOf("<BuiltForTrustSection />")).toBeLessThan(
+      home.indexOf("<NewBharatTagline />"),
+    );
+    expect(home.indexOf("<NewBharatTagline />")).toBeLessThan(
+      home.indexOf("<EcosystemPartners />"),
+    );
   });
 
   it("mounts the locked NavDhan journey once on NavDhan and preserves its anchor", () => {
@@ -160,6 +168,7 @@ describe("approved website information architecture", () => {
   });
 
   it("links both sibling products in approved desktop and mobile menus", () => {
+    expect(navbar).toContain('variant = "approved"');
     expect(navbar.match(/href: "\/products\/navdhan"/g)).toHaveLength(2);
     expect(navbar.match(/href: "\/products\/kubar-protocol"/g)).toHaveLength(2);
   });

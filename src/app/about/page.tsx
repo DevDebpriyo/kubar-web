@@ -9,21 +9,16 @@ import {
   Zap,
   Shield,
   Globe,
-  Award,
-  Briefcase,
   Building2,
   Users,
   MapPin,
   Rocket,
   Lock,
-  ChevronDown,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Navbar } from "@/components/layout/Navbar";
 import { RoadmapSection } from "@/components/about/RoadmapSection";
 import { AboutHeroIllustration } from "@/components/about/AboutHeroIllustration";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import "./about.css";
 import "@/components/home/BuiltBySection.css";
 import "@/components/home/BuiltForTrustSection.css";
@@ -49,192 +44,6 @@ function FadeInView({
     >
       {children}
     </m.div>
-  );
-}
-
-type TractionCardItem = {
-  id: number;
-  year: string;
-};
-
-function TractionFlipCard({
-  item,
-  index,
-  type,
-  title,
-}: {
-  item: TractionCardItem;
-  index: number;
-  type: "recognition" | "partnership";
-  title: string;
-}) {
-  const isRecognition = type === "recognition";
-  const Icon = isRecognition ? Award : Briefcase;
-  const tone = isRecognition
-    ? index % 2 === 0
-      ? "amber"
-      : "emerald"
-    : index % 2 === 0
-      ? "sky"
-      : "amber";
-  const delay = index * 0.08;
-  const [isExpanded, setIsExpanded] = React.useState(false);
-  const mobileContentId = `traction-mobile-details-${type}-${item.id}`;
-
-  return (
-    <m.article
-      className="trust-flip-card group"
-      data-tone={tone}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.5 }}
-      transition={{
-        duration: 0.6,
-        delay,
-        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-      }}
-      whileHover={{ y: -6 }}
-      tabIndex={0}
-      aria-label={`${title}. ${item.year}`}
-    >
-      <div className="trust-flip-card-inner">
-        <div className="trust-flip-face trust-flip-front">
-          <div className="trust-face-grid" aria-hidden="true" />
-
-          <div className="trust-front-meta">
-            <Badge variant="outline" className="trust-layer-badge">
-              {isRecognition ? "Recognition" : "Commercial Status"}
-            </Badge>
-            <div className="trust-front-icon-shell">
-              <Icon className="trust-front-icon" aria-hidden="true" />
-            </div>
-          </div>
-
-          <h3 className="trust-front-title line-clamp-3 leading-tight text-white mb-2">
-            {title}
-          </h3>
-          <p className="trust-front-tagline">Year: {item.year}</p>
-
-          <Separator className="trust-front-separator" />
-
-          <div className="trust-front-tags" aria-label="Tags">
-            <Badge variant="secondary" className="trust-tag-badge">
-              {item.year}
-            </Badge>
-            <Badge variant="secondary" className="trust-tag-badge">
-              {isRecognition ? "Award" : "Collaboration"}
-            </Badge>
-          </div>
-
-          <div className="trust-front-graphic" aria-hidden="true">
-            <div className="trust-graphic-glow" />
-
-            <div className="trust-graphic-logo font-mono text-xl sm:text-3xl font-black text-white/40 group-hover:text-white/70 transition-colors">
-              {String(index + 1).padStart(2, "0")}
-            </div>
-
-            <svg
-              className="trust-graphic-waves"
-              viewBox="0 0 200 60"
-              preserveAspectRatio="none"
-            >
-              <m.path
-                d="M0,45 C50,45 60,15 100,15 C140,15 150,45 200,45"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-                vectorEffect="non-scaling-stroke"
-                initial={{ strokeDasharray: "200 200", strokeDashoffset: 200 }}
-                animate={{ strokeDashoffset: 0 }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
-              <m.path
-                d="M0,30 C40,30 50,5 100,5 C150,5 160,30 200,30"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="0.5"
-                opacity="0.5"
-                vectorEffect="non-scaling-stroke"
-              />
-            </svg>
-            <Icon className="trust-graphic-icon opacity-50" strokeWidth={1} />
-            <div className="trust-graphic-scanline" />
-          </div>
-
-          <div className="trust-front-meter" aria-hidden="true">
-            <span className="trust-meter-segment" />
-            <span className="trust-meter-segment" />
-            <span className="trust-meter-segment" />
-          </div>
-
-          <div className="trust-mobile-controls">
-            <button
-              type="button"
-              className="trust-mobile-toggle"
-              aria-expanded={isExpanded}
-              aria-controls={mobileContentId}
-              onClick={() => setIsExpanded((prev) => !prev)}
-            >
-              <span className="trust-mobile-toggle-text">
-                {isExpanded ? "Hide Details" : "View Details"}
-              </span>
-              <ChevronDown
-                className="trust-mobile-toggle-icon"
-                aria-hidden="true"
-                data-expanded={isExpanded}
-              />
-            </button>
-          </div>
-
-          <div
-            id={mobileContentId}
-            className="trust-mobile-details"
-            data-expanded={isExpanded}
-          >
-            <div className="trust-back-meta">
-              <Badge variant="outline" className="trust-back-badge">
-                Details
-              </Badge>
-              <span className="trust-back-layer">{item.year}</span>
-            </div>
-            <h3 className="trust-back-title">{title}</h3>
-            <Separator className="trust-back-separator" />
-            <p className="trust-back-context">
-              {isRecognition
-                ? "This external recognition reflects progress in building embedded credit infrastructure for business lending."
-                : "The relationship stage must be read from the stated status and does not imply a live commercial deployment unless explicitly noted."}
-            </p>
-          </div>
-        </div>
-
-        <div className="trust-flip-face trust-flip-back">
-          <div className="trust-face-grid" aria-hidden="true" />
-          <div className="trust-back-meta">
-            <Badge variant="outline" className="trust-back-badge">
-              Details
-            </Badge>
-            <span className="trust-back-layer">{item.year}</span>
-          </div>
-          <h3 className="trust-back-title">{title}</h3>
-          <Separator className="trust-back-separator" />
-          <p className="trust-back-context">
-            {isRecognition
-              ? "This external recognition reflects progress in building embedded credit infrastructure for business lending."
-              : "The relationship stage must be read from the stated status and does not imply a live commercial deployment unless explicitly noted."}
-          </p>
-
-          <div className="trust-back-footer">
-            <Badge variant="secondary" className="trust-back-assurance">
-              {isRecognition ? "Industry Validation" : "Stated Relationship"}
-            </Badge>
-          </div>
-        </div>
-      </div>
-    </m.article>
   );
 }
 
@@ -565,7 +374,13 @@ export default function AboutPage() {
                     <Rocket className="w-40 h-40 text-[#d4920c]" />
                   </div>
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#d4920c] to-[#f5bc35] shadow-[0_0_20px_rgba(212,146,12,0.4)] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10">
-                    <Rocket className="w-8 h-8 text-[#0a0a0f]" />
+                    <Image
+                      src="/logo.png"
+                      alt="Kubar Labs"
+                      width={44}
+                      height={26}
+                      className="h-auto w-11"
+                    />
                   </div>
                   <h3 className="text-white font-bold text-2xl sm:text-3xl leading-snug relative z-10">
                     {t("why_we_exist.p4")}
@@ -774,7 +589,7 @@ export default function AboutPage() {
                         <div className="built-status-icon">
                           <Zap className="h-3.5 w-3.5" />
                         </div>
-                        <span className="built-status-text">Launching</span>
+                        <span className="built-status-text">Live</span>
                       </m.div>
                     </div>
 
@@ -847,54 +662,6 @@ export default function AboutPage() {
 
         {/* ── Timeline / Roadmap ────────────────────────────────── */}
         <RoadmapSection />
-
-        {/* ── Recognition / Traction ────────────────────────────── */}
-        <section className="pt-12 sm:pt-20 pb-14 relative overflow-hidden bg-[#05050a] border-t border-white/[0.02]">
-          {/* Animated Background Gradients */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#d4920c]/5 rounded-full filter blur-[120px] mix-blend-screen" />
-            <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[#138808]/5 rounded-full filter blur-[120px] mix-blend-screen" />
-          </div>
-
-          <div className="max-w-7xl mx-auto px-6 relative z-10">
-            {/* Header Section */}
-            <FadeInView className="flex flex-col items-center text-center mb-20 sm:mb-28">
-              <h2 className="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/60 mb-8 tracking-tight">
-                {t("traction.title")}
-              </h2>
-              <div className="relative p-8 sm:p-10 rounded-[2rem] bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.05] max-w-4xl mx-auto shadow-2xl">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-[#d4920c]/50 to-transparent" />
-                <p className="text-white/80 text-lg sm:text-xl leading-relaxed text-pretty font-light">
-                  {t("traction.desc")}
-                </p>
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-[#138808]/50 to-transparent" />
-              </div>
-            </FadeInView>
-
-            {/* Single Path Layout for Items */}
-            <div className="flex flex-col gap-20 -mt-14">
-              {/* Recognitions Section */}
-              <div>
-                <div className="trust-cards-grid">
-                  {[
-                    { id: 1, year: "2026" },
-                    { id: 3, year: "2024" },
-                    { id: 4, year: "2024" },
-                  ].map((item, index) => (
-                    <TractionFlipCard
-                      key={item.id}
-                      item={item}
-                      index={index}
-                      type="recognition"
-                      title={t(`traction.recognitions.${item.id}`)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
 
         {/* ── Work With Us ──────────────────────────────────────── */}
         <section className="about-section z-10 -mt-14 sm:-mt-16">

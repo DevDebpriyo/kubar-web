@@ -40,7 +40,6 @@
   },
   "hero": {
     "aria_label": "Kubar Labs connects commerce to capital",
-    "badge": "KUBAR LABS · COMMERCE TO CAPITAL",
     "title": {
       "line1": "Connect commerce",
       "line2": "to capital."
@@ -54,29 +53,24 @@
   },
   "home_current": {
     "products": {
-      "eyebrow": "BUILT BY KUBAR LABS",
       "title": "Two products.\nOne company.",
       "description": "Domestic credit and cross-border trade finance, built around the context of how businesses work.",
       "navdhan": {
-        "eyebrow": "DOMESTIC BUSINESS CREDIT",
         "description": "Unified credit infrastructure for commerce-tech and B2B platforms, designed for the breadth of loan products a business may need.",
         "status": "BUILT FOR EMBEDDED DISTRIBUTION",
         "link": "Explore NavDhan"
       },
       "protocol": {
-        "eyebrow": "CROSS-BORDER TRADE FINANCE",
         "description": "Cross-border trade-finance infrastructure, in development, connecting trade evidence, rights and financing context from order to settlement.",
         "status": "DEMONSTRATED WORKFLOW · IN DEVELOPMENT",
         "link": "Explore Kubar Protocol"
       }
     },
     "thesis": {
-      "eyebrow": "THE COMPANY BEHIND THE PRODUCTS",
       "title": "Financial infrastructure\nfor the way\nbusinesses trade.",
       "description": "Business activity carries the context that finance needs. Kubar Labs builds the connective infrastructure around it—while lenders, banks and document providers retain their responsibilities.",
       "link": "About Kubar Labs",
       "architecture_aria": "Kubar Labs parent company with sibling NavDhan and Kubar Protocol products",
-      "parent_label": "PARENT COMPANY",
       "navdhan_label": "DOMESTIC BUSINESS CREDIT",
       "navdhan_description": "Embedded business credit.",
       "protocol_label": "CROSS-BORDER TRADE FINANCE",
@@ -663,7 +657,6 @@
   },
   "navdhan_current": {
     "hero": {
-      "eyebrow": "A KUBAR LABS PRODUCT",
       "title": "Unified credit infrastructure for B2B commerce.",
       "description": "One credit infrastructure layer for commerce-tech and B2B platforms—designed to connect businesses to the breadth of loan products they may need.",
       "primary": "Discuss integration",
@@ -680,7 +673,6 @@
       "note": "Illustrative architecture. Connections and loan-product availability depend on lender and integration coverage."
     },
     "roles": {
-      "eyebrow": "EMBEDDED DISTRIBUTION FIRST",
       "title": "One embedded journey.\nA clear role for everyone.",
       "description": "The platform remains the place customers do business. The lender remains responsible for the lending decision. NavDhan connects the journey between them.",
       "platform_tab": "For platforms",
@@ -693,21 +685,18 @@
       "lender_note": "Lenders retain eligibility, pricing, underwriting, documentation and disbursal. A signal from NavDhan is not a credit approval."
     },
     "responsibility": {
-      "eyebrow": "CLEAR INSTITUTIONAL RESPONSIBILITY",
       "title": "Infrastructure, not a lender.",
       "summary": "Credit approval, pricing and disbursal remain with regulated lenders. Kubar does not lend or hold loan funds.",
       "detail": "NavDhan connects permissioned business context and applications with participating lenders. Each lender retains eligibility assessment, underwriting, pricing, documentation and disbursal. Product availability depends on lender and integration coverage.",
       "toggle": "Read how responsibilities are divided"
     },
     "direct": {
-      "eyebrow": "DIRECT ACCESS · SECONDARY CHANNEL",
       "description": "NavDhan is primarily designed to be embedded within commerce-tech and B2B platforms. For a limited period, businesses may also use navdhan.app directly to start an application.",
       "link": "Visit navdhan.app"
     }
   },
   "protocol": {
     "hero": {
-      "eyebrow": "KUBAR PROTOCOL · A KUBAR LABS PRODUCT",
       "title": "Trade finance, from order to settlement.",
       "description": "Cross-border trade-finance infrastructure, in development, that connects trade evidence, rights and financing context from order to settlement.",
       "status": "DEMONSTRATED PROTOTYPE",
@@ -727,7 +716,6 @@
       "qualification": "Banks, lenders and external document providers retain their authority. This is an illustrative workflow, not a live transaction."
     },
     "progress": {
-      "eyebrow": "WHERE THE PRODUCT STANDS",
       "title": "A demonstrated prototype.\nA product in development.",
       "description": "We demonstrated the lifecycle with synthetic trade data and simulated institutional adapters. No external money moved and no live partner, bank, venue or regulator system was contacted.",
       "note": "Development status: August 2026. Demonstration does not imply production availability.",
@@ -739,7 +727,6 @@
       "development_description": "Work continues on institution-facing integrations, permissioned access and operating controls. Availability remains subject to institutional readiness and applicable requirements."
     },
     "workflow": {
-      "eyebrow": "AN ILLUSTRATIVE LC-BACKED EXPORT JOURNEY",
       "title": "Follow the trade.\nKeep the authority clear.",
       "description": "An example lifecycle for LC-backed export finance. Availability depends on the institutions, approvals and regulated venues involved.",
       "badge": "KUBAR PROTOCOL · WORKFLOW",
@@ -771,7 +758,6 @@
       }
     },
     "authority": {
-      "eyebrow": "CLEAR INSTITUTIONAL RESPONSIBILITY",
       "toggle": "Read how responsibilities are divided",
       "bank_title": "Banks control money movement.",
       "bank_summary": "Credit approval and settlement stay with the relevant banks and regulated institutions. Kubar Protocol does not lend or hold financing proceeds.",

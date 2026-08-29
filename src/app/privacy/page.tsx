@@ -49,9 +49,6 @@ export default function PrivacyPage() {
       <main className="min-h-dvh bg-[#04040c] text-[#f0f0f0]">
       <Navbar />
       <section className="mx-auto max-w-4xl px-5 pb-20 pt-32 sm:px-8 sm:pt-40">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-[#f0b429]">
-          Legal
-        </p>
         <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
           Privacy Policy
         </h1>

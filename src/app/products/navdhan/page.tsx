@@ -97,7 +97,6 @@ function ResponsibilityCard() {
 
   return (
     <m.article className="navdhan-responsibility-card" {...reveal}>
-      <p className="navdhan-kicker">{t("eyebrow")}</p>
       <h2>{t("title")}</h2>
       <p>{t("summary")}</p>
       <button
@@ -137,7 +136,6 @@ export default function NavDhanPage() {
               height={66}
               priority
             />
-            <p className="navdhan-kicker">{t("hero.eyebrow")}</p>
             <h1>{t("hero.title")}</h1>
             <p className="navdhan-hero__description">{t("hero.description")}</p>
             <div className="navdhan-hero__actions">
@@ -163,7 +161,6 @@ export default function NavDhanPage() {
       <section className="navdhan-roles">
         <div className="navdhan-shell navdhan-roles__grid">
           <m.div className="navdhan-roles__copy" {...reveal}>
-            <p className="navdhan-kicker">{t("roles.eyebrow")}</p>
             <h2>{t("roles.title")}</h2>
             <p>{t("roles.description")}</p>
           </m.div>
@@ -177,7 +174,6 @@ export default function NavDhanPage() {
         <div className="navdhan-shell navdhan-access__grid">
           <ResponsibilityCard />
           <m.article className="navdhan-direct-card" {...reveal}>
-            <p className="navdhan-kicker">{t("direct.eyebrow")}</p>
             <p>{t("direct.description")}</p>
             <a href="https://navdhan.app/" target="_blank" rel="noopener noreferrer">
               {t("direct.link")}
