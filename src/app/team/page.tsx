@@ -200,7 +200,9 @@ function TeamMemberCard({
       <div className="team-member-content">
         {featured && <span className="team-founder-badge">Founder</span>}
         <h3 className="team-member-name">{member.name}</h3>
-        {member.role && <p className="team-member-role">{member.role}</p>}
+        {!featured && member.role && (
+          <p className="team-member-role">{member.role}</p>
+        )}
         {featured && member.achievements?.length ? (
           <ul className="team-member-achievements">
             {member.achievements.map((achievement) => (

@@ -186,6 +186,9 @@ test("Team renders only the approved current people, portraits, and profile link
   ];
 
   await page.goto("/team");
+
+  const founderCard = page.locator(".team-member-card-featured");
+  await expect(founderCard.getByText("Founder", { exact: true })).toHaveCount(1);
   await expect(page.locator(".team-member-card")).toHaveCount(10);
   for (const name of names) {
     await expect(page.getByRole("heading", { name, exact: true })).toHaveCount(1);
