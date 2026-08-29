@@ -14,8 +14,8 @@ const partners = [
   { name: "Eleven Labs", src: "/logos/eleven.png", visualScale: 1.25 },
   { name: "Amplitude", src: "/logos/amplitude.png", visualScale: 1.05 },
   { name: "Polkadot Blockchain Academy", src: "/logos/pba.png", visualScale: 0.8 },
-  { name: "Uniswap", src: "/logos/uniswap.png", visualScale: 1 },
-  { name: "Sarvam", src: "/logos/sarvam.svg", visualScale: 1.2 },
+  { name: "Uniswap", src: "/logos/uniswap.png", visualScale: 0.86 },
+  { name: "Sarvam", src: "/logos/sarvam.svg", visualScale: 0.92 },
   { name: "Cloudflare", src: "/logos/cloudflare.svg", visualScale: 0.8 },
 ];
 const partnerLoopDurationSeconds = 36;
@@ -28,12 +28,12 @@ export function EcosystemPartners() {
     <section
       ref={sectionRef}
       aria-label="Technology programmes, grants and infrastructure support"
-      className="relative z-10 overflow-hidden pt-3 pb-7 sm:pt-5 sm:pb-10"
+      className="relative z-10 overflow-hidden py-3 sm:py-4"
       style={{
         background: "rgba(4, 4, 12, 0.98)",
       }}
     >
-      <div className="mx-auto mb-4 max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+      <div className="mx-auto mb-3 max-w-7xl px-4 text-center sm:px-6 lg:px-8">
         <h2 className="text-base font-medium uppercase tracking-wide text-white/50 sm:text-lg">
           Technology Programmes, Grants &amp; Infrastructure Support
         </h2>
@@ -56,7 +56,7 @@ export function EcosystemPartners() {
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-[rgba(4,4,12,0.98)] to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-[rgba(4,4,12,0.98)] to-transparent" />
 
-        <div className="overflow-hidden py-4 sm:py-5">
+        <div className="overflow-hidden py-3">
           <div
             className="ecosystem-marquee focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d4920c]"
             aria-label="Programme and infrastructure partner logos"

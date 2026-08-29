@@ -79,7 +79,7 @@
 
 @media (min-width: 768px) {
   .footer-container {
-    gap: 4rem;
+    gap: 3rem;
   }
 }
 
@@ -283,23 +283,6 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.2s ease;
-}
-
-/* ─────────────────────────────────────────────────────────────────
-   Divider
-   ───────────────────────────────────────────────────────────────────── */
-
-.footer-divider {
-  height: 1px;
-  width: 60px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(212, 146, 12, 0.5) 50%,
-    transparent 100%
-  );
-  margin: 0 auto;
-  transform-origin: center;
 }
 
 /* ─────────────────────────────────────────────────────────────────

@@ -11,15 +11,17 @@ const protectedFileHashes: Record<string, string> = {
   "src/components/home/FloatingCards.tsx": "510371e05c817b8d32d2e3eab45d759c7919af0e7f3a566a81ff7353e7943076",
   "src/components/home/HeroBackground.tsx": "9d43ba8bdc464ecfd14029886fb74a79c2fe43dc70dde23aaa905c6584d6ee07",
   "src/components/home/VisualStorySection.tsx": "b98e7165fe81c50931bc97449a1d1228ae690b27e53a657f682aeaeb1b467e33",
-  "src/components/home/VisualStorySection.css": "1ff5acb152b30992311168deff0a53d5e429bef7b8fe63ee2d047ac127928bd3",
+  // User-authorized Agentation exception: tighten NavDhan section spacing.
+  "src/components/home/VisualStorySection.css": "82dfa9d1b466895d181dc529ab1382cfeddc18471c619d63d3846bd7ddb01f64",
   // User-authorized exception: revise marquee items and remove its pause control.
   "src/components/home/PartnerMarquee.tsx": "ddfff892932312fc87a9c939d4e0cef8f4057d86e576ee4f39112748cf06aa66",
-  // User-authorized exception: add Sarvam and Cloudflare and remove the pause control.
-  "src/components/home/EcosystemPartners.tsx": "db03573495dcf9892168384333d32c85018fe194b2bca886854e7d33408714ab",
+  // User-authorized Agentation exception: rebalance partner logo sizing and spacing.
+  "src/components/home/EcosystemPartners.tsx": "c9ed7ef899868bdca15827642f47b950aca01d2b0fe9abac9856db183376c850",
   "src/components/home/BuiltForTrustSection.tsx": "c8e00b7eb3a8f801450ac4ab50b22918247144d4d5c970776886c6f2fe5b9d5b",
-  "src/components/home/BuiltForTrustSection.css": "bf5626209f685c9b6a4dd79b6bad7721972f9fab9a1bdfbcf91ecd0867ce6ad3",
-  // User-authorized Agentation exception: remove About's Recognition/Traction section.
-  "src/app/about/page.tsx": "f380d9fc352a60d42868f1a10ece7e8f067bea32a979a3a7e47ce8ac1fca60e0",
+  // User-authorized Agentation exception: tighten the trust section spacing.
+  "src/components/home/BuiltForTrustSection.css": "de77b4640410394b8a7b92a75bd778ee74e45067982fc7f5bd8806099b9bd762",
+  // User-authorized Agentation exceptions: remove Recognition/Traction and tighten Work with us cards.
+  "src/app/about/page.tsx": "c3d317b9e34fc13660ce6b5d5f107729f5656b847fbe4e59beb56f62cba5b2f6",
   "src/app/about/layout.tsx": "c76cab8755a8e063fa9c32d1bde364be69d6b22cd27055c0aec24b278b9dbd5d",
   "src/app/about/about.css": "5504ae1f49d8d65d53fd65d1b4bbca7b8abeadf08bf32299d8f6ee4ed0826c1f",
   "src/components/about/AboutHeroIllustration.tsx": "6b3daad72784dcf8a51c3e8ac431681ab0bbfcce239ecaf835ebef26e2361342",

@@ -18,7 +18,7 @@
 
 @media (min-width: 1024px) {
   .story-section {
-    padding: 5rem 0;
+    padding: 3rem 0;
   }
 }
 
@@ -708,6 +708,5 @@
     transform: none;
   }
 }
-
 
 

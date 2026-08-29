@@ -5,6 +5,10 @@
   padding: 7.5rem 2.5rem;
 }
 
+.approved-products {
+  padding-bottom: 4rem;
+}
+
 .approved-home-container {
   width: 100%;
   max-width: 1248px;
@@ -137,7 +141,7 @@
 
 .approved-thesis {
   padding-top: 8.5rem;
-  padding-bottom: 8.5rem;
+  padding-bottom: 4rem;
 }
 
 .approved-thesis__grid {
@@ -218,7 +222,7 @@
 
 .approved-tagline-wrap {
   overflow: hidden;
-  padding: 5rem 1.25rem 4rem;
+  padding: 3rem 1.25rem 4rem;
   background: #04040c;
 }
 
@@ -232,6 +236,11 @@
 @media (max-width: 767px) {
   .approved-home-section {
     padding: 5rem 1.25rem;
+  }
+
+  .approved-products,
+  .approved-thesis {
+    padding-bottom: 3.5rem;
   }
 
   .approved-product-grid,
@@ -255,7 +264,7 @@
   }
 
   .approved-tagline-wrap {
-    padding-top: 4rem;
+    padding-top: 3rem;
     padding-bottom: 3rem;
   }
 }

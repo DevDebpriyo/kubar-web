@@ -105,20 +105,6 @@ export function FooterSection() {
           </m.div>
         </m.div>
 
-        {/* Divider */}
-        <m.div
-          className="footer-divider"
-          initial={{ opacity: 0, scaleX: 0 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.35,
-            ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-          }}
-          aria-hidden="true"
-        />
-
         {/* Footer Navigation */}
         <m.nav
           className="footer-nav"

@@ -690,12 +690,12 @@ export default function AboutPage() {
                 <FadeInView
                   key={i}
                   delay={i * 0.1}
-                  className="bg-[rgba(10,10,20,0.6)] backdrop-blur-md border border-[rgba(255,255,255,0.08)] p-8 sm:p-10 rounded-2xl hover:border-[rgba(212,146,12,0.3)] transition-colors duration-300 flex flex-col items-center text-center group"
+                  className="bg-[rgba(10,10,20,0.6)] backdrop-blur-md border border-[rgba(255,255,255,0.08)] p-8 rounded-2xl hover:border-[rgba(212,146,12,0.3)] transition-colors duration-300 flex flex-col items-center text-center group"
                 >
                   <h3 className="text-xl font-bold text-white mb-6 group-hover:text-[#d4920c] transition-colors">
                     {t(`work_with_us.items.${i}.title`)}
                   </h3>
-                  <p className="text-white/70 leading-relaxed mb-10 flex-1 text-[17px]">
+                  <p className="text-white/70 leading-relaxed mb-6 flex-1 text-[17px]">
                     {t(`work_with_us.items.${i}.desc`)}
                   </p>
                   <a
