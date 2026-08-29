@@ -4,7 +4,7 @@ import { RouteIntlProvider } from "@/i18n/RouteIntlProvider";
 export const metadata = createPageMetadata({
   title: "Contact",
   description:
-    "Contact Kubar Labs about lending partnerships, B2B platform integrations, support, or media enquiries.",
+    "Talk to Kubar Labs about embedded business credit, cross-border trade finance or working with our team.",
   path: "/contact",
   socialTitle: "Contact Kubar Labs",
 });

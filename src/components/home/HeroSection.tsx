@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { m, useInView, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { HeroBackground } from "./HeroBackground";
 import { FloatingCards } from "./FloatingCards";
@@ -34,31 +34,19 @@ const itemVariants = {
 /* ─── Sub-components ─────────────────────────────────────── */
 
 function HeroHeadline() {
-  const t = useTranslations("hero.title");
+  const t = useTranslations("hero");
 
   return (
     <m.div variants={itemVariants} className="flex flex-col gap-0">
-      {/* Line 1 - Supporting Cast */}
-      <h1 className="font-extrabold leading-[1.04] tracking-[-0.035em]">
-        <span className="block text-[28px] sm:text-[34px] lg:text-[38px] xl:text-[42px] text-white/45 font-medium mb-1 sm:mb-2 tracking-normal">
-          {t("line1")}
+      <p className="mb-5 text-[11px] font-semibold tracking-[0.09em] text-[#f0b429] sm:text-xs">
+        {t("badge")}
+      </p>
+      <h1 className="font-extrabold leading-[1.08] tracking-[-0.045em] text-white">
+        <span className="block text-[50px] sm:text-[58px] lg:text-[62px]">
+          {t("title.line1")}
         </span>
-        {/* Line 2 — Limelight */}
-        <span className="block text-[58px] sm:text-[68px] lg:text-[84px] xl:text-[98px] text-white">
-          {t("line2")}
-        </span>
-        {/* Line 3 — Limelight / Gold Focus */}
-        <span
-          className="block text-[58px] sm:text-[68px] lg:text-[84px] xl:text-[98px]"
-          style={{
-            background:
-              "linear-gradient(135deg, #ff9933 0%, #ff9933 32%, #ff9933 68%, #ff9933 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
-        >
-          {t("line3")}
+        <span className="block text-[50px] sm:text-[58px] lg:text-[62px]">
+          {t("title.line2")}
         </span>
       </h1>
     </m.div>
@@ -73,14 +61,7 @@ function HeroSubcopy() {
       variants={itemVariants}
       className="text-[16.5px] sm:text-[17.5px] lg:text-[18px] leading-[1.75] text-white/52 max-w-130 text-pretty"
     >
-      {t.rich("subtitle", {
-        nbfc: (chunks) => (
-          <span className="text-[#8eb8ff] font-medium">{chunks}</span>
-        ),
-        msme: (chunks) => (
-          <span className="text-[#4ed56f] font-semibold">{chunks}</span>
-        ),
-      })}
+      {t("subtitle")}
     </m.p>
   );
 }
@@ -95,7 +76,7 @@ function HeroCTAs() {
     >
       {/* Primary CTA */}
       <m.a
-        href="/contact"
+        href="#built-by"
         className="group relative flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-[15px] text-[#080602] overflow-hidden select-none cursor-pointer"
         style={{
           background: "linear-gradient(135deg, #f5bc35 0%, #d4920c 100%)",
@@ -133,21 +114,14 @@ function HeroCTAs() {
 
       {/* Secondary CTA */}
       <m.a
-        href="#story"
-        className="group flex items-center gap-2.5 px-6 py-3.25 rounded-full border border-white/12 text-white/65 font-medium text-[15px] transition-all duration-300 hover:border-white/22 hover:text-white hover:bg-white/4 cursor-pointer select-none"
+        href="/about"
+        className="group flex items-center justify-center gap-2.5 px-6 py-3.25 rounded-full border border-white/12 text-white/65 font-medium text-[15px] transition-all duration-300 hover:border-white/22 hover:text-white hover:bg-white/4 cursor-pointer select-none"
         whileHover={{
           y: -2,
           transition: { type: "spring", stiffness: 420, damping: 20 },
         }}
         whileTap={{ scale: 0.97 }}
       >
-        {/* Play icon circle */}
-        <div className="w-6.5 h-6.5 rounded-full border border-white/16 flex items-center justify-center group-hover:border-white/30 transition-colors duration-200 shrink-0">
-          <Play
-            className="w-2.25 h-2.25 fill-white/65 text-white/65 group-hover:fill-white group-hover:text-white transition-colors duration-200 ml-px"
-            aria-hidden="true"
-          />
-        </div>
         {t("cta_secondary")}
       </m.a>
     </m.div>

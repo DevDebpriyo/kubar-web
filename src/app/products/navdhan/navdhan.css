@@ -1,689 +1,379 @@
-/* ═══════════════════════════════════════════════════════════════════
-   NAVDHAN PRODUCT PAGE STYLES
-   ═══════════════════════════════════════════════════════════════════ */
-
 .navdhan-main {
-  background: #04040c;
+  min-height: 100vh;
+  overflow-x: clip;
   color: #f0f0f0;
-  overflow-x: hidden;
+  background: #04040c;
 }
 
-/* ─── Hero Section ─────────────────────────────────────── */
+.navdhan-shell {
+  width: min(1248px, calc(100% - 5rem));
+  margin: 0 auto;
+}
+
+.navdhan-kicker {
+  margin: 0;
+  color: #f0b429;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
 
 .navdhan-hero {
   position: relative;
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 24px 80px;
   overflow: hidden;
+  padding: 8.5rem 0 7rem;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(26, 79, 163, 0.09), transparent 34%),
+    radial-gradient(circle at 17% 26%, rgba(212, 146, 12, 0.07), transparent 30%),
+    #04040c;
 }
 
-.navdhan-hero::before {
+.navdhan-hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    ellipse at 50% 0%,
-    rgba(251, 146, 60, 0.08) 0%,
-    transparent 40%
-  );
   pointer-events: none;
+  opacity: 0.3;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: linear-gradient(90deg, transparent 4%, #000 50%, transparent 96%);
 }
 
-.navdhan-container {
-  max-width: 1200px;
-  margin: 0 auto;
+.navdhan-hero__grid,
+.navdhan-roles__grid {
   position: relative;
   z-index: 1;
-  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  align-items: center;
+  gap: 4.5rem;
 }
 
-.navdhan-hero-grid {
+.navdhan-hero__copy {
   display: flex;
   flex-direction: column;
-  gap: 0;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
 }
 
-.navdhan-hero-content {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  max-width: 700px;
-}
-
-.navdhan-hero-title {
-  font-size: clamp(2.5rem, 8vw, 3.5rem);
-  font-weight: 700;
-  line-height: 1.1;
-  background: linear-gradient(135deg, #f0f0f0 0%, #a0a0a0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.navdhan-hero-description {
-  font-size: 1.125rem;
-  color: #a0a0a0;
-  line-height: 1.6;
-  font-weight: 400;
-}
-
-.navdhan-hero-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 32px;
-  width: fit-content;
-  background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-  border: none;
-  border-radius: 12px;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 24px rgba(251, 146, 60, 0.3);
-  white-space: nowrap;
-}
-
-.navdhan-hero-cta:hover {
-  box-shadow: 0 12px 32px rgba(251, 146, 60, 0.4);
-  transform: translateY(-2px);
-}
-
-/* ─── Image Showcase Section ────────────────────────────– */
-
-.navdhan-image-showcase {
-  padding: 80px 24px;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(251, 146, 60, 0.02) 50%,
-    transparent 100%
-  );
-}
-
-.navdhan-image-showcase-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-}
-
-.navdhan-showcase-image {
-  width: 100%;
-  max-width: 1200px;
+.navdhan-hero__logo {
+  width: 148px;
   height: auto;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(251, 146, 60, 0.2), 0 0 1px rgba(251, 146, 60, 0.3);
-  border: 1px solid rgba(251, 146, 60, 0.15);
-  object-fit: contain;
-  display: block;
+  margin-bottom: 1.5rem;
 }
 
-/* ─── Problem Section ──────────────────────────────────── */
-
-.navdhan-problem-section {
-  padding: 100px 24px;
-  position: relative;
-}
-
-.navdhan-problem-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.navdhan-eyebrow {
-  display: inline-block;
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: #fb923c;
-  margin-bottom: 16px;
-}
-
-.navdhan-section-title {
-  font-size: clamp(2rem, 6vw, 2.75rem);
-  font-weight: 700;
-  line-height: 1.2;
+.navdhan-hero h1 {
+  max-width: 650px;
+  margin: 1.25rem 0 0;
   color: #f0f0f0;
-  margin-bottom: 0;
+  font-size: clamp(2.75rem, 4.4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.16;
+  letter-spacing: -0.055em;
 }
 
-.navdhan-problem-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  max-width: 1000px;
-  margin: 0 auto;
+.navdhan-hero__description {
+  max-width: 620px;
+  margin: 1.5rem 0 0;
+  color: #c0c0cc;
+  font-size: 1.125rem;
+  line-height: 1.75;
 }
 
-.navdhan-problem-text {
-  font-size: 1.05rem;
-  color: #c0c0c0;
-  line-height: 1.7;
-  padding: 32px 28px;
-  background: linear-gradient(
-    135deg,
-    rgba(30, 30, 40, 0.4) 0%,
-    rgba(40, 40, 60, 0.3) 100%
-  );
-  border: 1px solid rgba(251, 146, 60, 0.15);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-}
-
-.navdhan-problem-solution {
-  border-color: rgba(34, 197, 94, 0.15);
-}
-
-/* ─── Use Cases Section ────────────────────────────────── */
-
-.navdhan-use-cases {
-  padding: 100px 24px;
-  background: linear-gradient(
-    180deg,
-    rgba(15, 15, 30, 0.5) 0%,
-    transparent 100%
-  );
-}
-
-.navdhan-use-cases-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 32px;
-  margin-top: 60px;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.navdhan-use-case-card {
-  padding: 40px 32px;
-  background: linear-gradient(
-    135deg,
-    rgba(30, 30, 40, 0.5) 0%,
-    rgba(40, 40, 60, 0.3) 100%
-  );
-  border: 1px solid rgba(100, 100, 120, 0.2);
-  border-radius: 16px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.navdhan-use-case-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(251, 146, 60, 0.05) 0%,
-    transparent 100%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.navdhan-use-case-card:hover {
-  border-color: rgba(251, 146, 60, 0.3);
-  background: linear-gradient(
-    135deg,
-    rgba(30, 30, 40, 0.7) 0%,
-    rgba(40, 40, 60, 0.5) 100%
-  );
-}
-
-.navdhan-use-case-card:hover::before {
-  opacity: 1;
-}
-
-.navdhan-use-case-icon {
-  font-size: 2.5rem;
-  margin-bottom: 16px;
-  color: #fb923c;
-}
-
-.navdhan-use-case-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #f0f0f0;
-  margin-bottom: 12px;
-  position: relative;
-  z-index: 1;
-}
-
-.navdhan-use-case-description {
-  font-size: 0.95rem;
-  color: #a0a0a0;
-  line-height: 1.6;
-  position: relative;
-  z-index: 1;
-}
-
-/* ─── Why NavDhan Works Section ────────────────────────── */
-
-.navdhan-why-works {
-  padding: 100px 24px;
-}
-
-.navdhan-why-works-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-  max-width: 1200px;
-  margin: 60px auto 0;
-}
-
-.navdhan-why-works-intro {
+.navdhan-hero__actions {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
-.navdhan-why-works-tagline {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: #fb923c;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.navdhan-why-works-message {
-  font-size: 1.05rem;
-  color: #c0c0c0;
-  line-height: 1.7;
-  margin: 0;
-}
-
-.navdhan-why-works-features {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.navdhan-feature-bullet {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 16px 0;
-  border-bottom: 1px solid rgba(100, 100, 120, 0.1);
-}
-
-.navdhan-feature-bullet:last-child {
-  border-bottom: none;
-}
-
-.navdhan-check-icon {
-  width: 24px;
-  height: 24px;
-  color: #fb923c;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.navdhan-feature-bullet > span {
-  font-size: 1rem;
-  color: #d4d4d8;
-  line-height: 1.6;
-}
-
-/* ─── Integrations Section ─────────────────────────────– */
-
-.navdhan-integrations {
-  padding: 100px 24px;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(251, 146, 60, 0.02) 50%,
-    transparent 100%
-  );
-}
-
-.navdhan-integrations-header {
-  text-align: center;
-  margin-bottom: 60px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.navdhan-integrations-subtitle {
-  font-size: 1.05rem;
-  color: #a0a0a0;
-  line-height: 1.6;
-  margin-top: 16px;
-  margin-bottom: 0;
-}
-
-.navdhan-integrations-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.navdhan-integration-layer {
-  padding: 32px 28px;
-  background: linear-gradient(
-    135deg,
-    rgba(30, 30, 40, 0.6) 0%,
-    rgba(40, 40, 60, 0.4) 100%
-  );
-  border: 1px solid rgba(251, 146, 60, 0.2);
-  border-radius: 12px;
-}
-
-.navdhan-integration-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #fb923c;
-  margin-bottom: 20px;
-  margin-top: 0;
-}
-
-.navdhan-integration-items {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.navdhan-integration-item {
-  padding: 12px 16px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
-  font-size: 0.95rem;
-  color: #d4d4d8;
-  border: 1px solid rgba(100, 100, 120, 0.15);
-  transition: all 0.3s ease;
-}
-
-.navdhan-integration-item:hover {
-  border-color: rgba(251, 146, 60, 0.3);
-  background: rgba(251, 146, 60, 0.05);
-  color: #f0f0f0;
-}
-
-/* ─── CTA Sections ─────────────────────────────────────– */
-
-.navdhan-for-banks,
-.navdhan-for-msmes {
-  padding: 100px 24px;
-}
-
-.navdhan-for-banks {
-  background: linear-gradient(
-    135deg,
-    rgba(251, 146, 60, 0.04) 0%,
-    transparent 100%
-  );
-}
-
-.navdhan-for-msmes {
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    rgba(34, 197, 94, 0.04) 100%
-  );
-}
-
-.navdhan-cta-section {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.navdhan-cta-left {
-  text-align: left;
-}
-
-.navdhan-cta-right {
-  text-align: right;
-  margin-left: auto;
-}
-
-.navdhan-cta-content {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.navdhan-cta-title {
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: #f0f0f0;
-  line-height: 1.2;
-  margin-bottom: 0;
-}
-
-.navdhan-cta-subtitle {
-  font-size: 1.1rem;
-  color: #a0a0a0;
-  line-height: 1.6;
-  margin-bottom: 8px;
-}
-
-.navdhan-cta-features {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.navdhan-cta-feature {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px 0;
-}
-
-.navdhan-cta-feature-icon {
-  width: 20px;
-  height: 20px;
-  color: #fb923c;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.navdhan-cta-feature {
-  color: #c0c0c0;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-.navdhan-cta-tagline {
-  font-size: 1rem;
-  color: #a0a0a0;
-  line-height: 1.6;
-  margin-top: 12px;
-  margin-bottom: 0;
-  padding: 20px 0;
-  border-top: 1px solid rgba(100, 100, 120, 0.2);
-}
-
-.navdhan-cta-button {
+.navdhan-action {
+  min-height: 3.25rem;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  width: fit-content;
-  padding: 14px 32px;
-  background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-  border-radius: 12px;
-  color: white;
-  font-size: 1rem;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 0.9375rem;
   font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 24px rgba(251, 146, 60, 0.3);
-  white-space: nowrap;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.navdhan-cta-button:hover {
-  box-shadow: 0 12px 32px rgba(251, 146, 60, 0.4);
+.navdhan-action:hover {
   transform: translateY(-2px);
 }
 
-/* ─── Responsive Design ────────────────────────────────– */
+.navdhan-action svg {
+  width: 1rem;
+  height: 1rem;
+}
 
-@media (max-width: 1024px) {
-  .navdhan-problem-grid {
-    gap: 40px;
+.navdhan-action--primary {
+  color: #080602;
+  background: linear-gradient(135deg, #f5bc35, #d4920c);
+}
+
+.navdhan-action--primary:hover {
+  box-shadow: 0 5px 22px rgba(212, 146, 12, 0.32);
+}
+
+.navdhan-action--secondary {
+  color: #f0f0f0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.navdhan-action--secondary:hover {
+  border-color: rgba(255, 255, 255, 0.26);
+}
+
+.navdhan-hero__notice {
+  margin: 0.9rem 0 0;
+  color: #7a7a90;
+  font-size: 0.75rem;
+}
+
+.navdhan-integration {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  border-radius: 1.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(7, 7, 19, 0.82);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45), 0 0 60px rgba(212, 146, 12, 0.06);
+}
+
+.navdhan-integration__node {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: #0a0a18;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.navdhan-integration__node h2 {
+  margin: 0 0 0.65rem;
+  color: #f0f0f0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.navdhan-integration__node p {
+  margin: 0;
+  color: #c0c0cc;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.navdhan-integration__bridge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  color: #d4920c;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+}
+
+.navdhan-integration__bridge img {
+  width: 120px;
+  height: auto;
+}
+
+.navdhan-integration__note {
+  margin: 0;
+  color: #7a7a90;
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
+.navdhan-roles {
+  padding: 7.5rem 0;
+  background: linear-gradient(180deg, #04040c, rgba(8, 8, 20, 0.92), #04040c);
+}
+
+.navdhan-roles__copy h2 {
+  max-width: 540px;
+  margin: 1.25rem 0 0;
+  white-space: pre-line;
+  color: #f0f0f0;
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+.navdhan-roles__copy > p:last-child {
+  max-width: 570px;
+  margin: 1.5rem 0 0;
+  color: #c0c0cc;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.navdhan-audience {
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  background: #0a0a18;
+}
+
+.navdhan-audience__tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.navdhan-audience__tabs button {
+  min-height: 3.5rem;
+  border-radius: 0.75rem;
+  color: #c0c0cc;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.navdhan-audience__tabs button.is-active {
+  color: #f0b429;
+  background: rgba(212, 146, 12, 0.08);
+  box-shadow: inset 0 -2px #f0b429;
+}
+
+.navdhan-audience [role="tabpanel"] {
+  padding-top: 1.5rem;
+}
+
+.navdhan-audience h3 {
+  margin: 0;
+  color: #f0f0f0;
+  font-size: 1.375rem;
+  font-weight: 700;
+}
+
+.navdhan-audience p {
+  margin: 1rem 0 0;
+  color: #c0c0cc;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.navdhan-audience small {
+  display: block;
+  margin-top: 1rem;
+  color: #7a7a90;
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.navdhan-access {
+  padding: 7.5rem 0;
+  background: #04040c;
+}
+
+.navdhan-access__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 2rem;
+}
+
+.navdhan-responsibility-card,
+.navdhan-direct-card {
+  min-height: 310px;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #0a0a18;
+}
+
+.navdhan-responsibility-card h2 {
+  margin: 1.5rem 0 0;
+  color: #f0f0f0;
+  font-size: 1.375rem;
+  font-weight: 700;
+}
+
+.navdhan-responsibility-card > p:not(.navdhan-kicker),
+.navdhan-direct-card > p:not(.navdhan-kicker) {
+  margin: 1rem 0 0;
+  color: #c0c0cc;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.navdhan-responsibility-card button,
+.navdhan-direct-card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 3.25rem;
+  margin-top: 1rem;
+  color: #f0b429;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+  cursor: pointer;
+}
+
+.navdhan-responsibility-card button svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.25s ease;
+}
+
+.navdhan-responsibility-card button svg.is-open {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 980px) {
+  .navdhan-hero__grid,
+  .navdhan-roles__grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
 
-  .navdhan-why-works-grid {
-    gap: 60px;
-  }
-
-  .navdhan-showcase-image {
-    max-width: 100%;
+  .navdhan-hero__copy {
+    max-width: 720px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
+  .navdhan-shell {
+    width: calc(100% - 2.5rem);
+  }
+
   .navdhan-hero {
-    padding: 100px 16px 60px;
-    min-height: auto;
+    padding: 7rem 0 5rem;
   }
 
-  .navdhan-hero-grid {
+  .navdhan-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .navdhan-hero__actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .navdhan-action {
+    width: 100%;
+  }
+
+  .navdhan-integration,
+  .navdhan-audience,
+  .navdhan-responsibility-card,
+  .navdhan-direct-card {
+    padding: 1.25rem;
+  }
+
+  .navdhan-roles,
+  .navdhan-access {
+    padding: 5rem 0;
+  }
+
+  .navdhan-access__grid {
     grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .navdhan-hero-title {
-    font-size: clamp(1.75rem, 6vw, 2.5rem);
-  }
-
-  .navdhan-hero-description {
-    font-size: 1rem;
-  }
-
-  .navdhan-image-showcase {
-    padding: 60px 16px;
-  }
-
-  .navdhan-showcase-image {
-    border-radius: 16px;
-  }
-
-  .navdhan-problem-section {
-    padding: 80px 16px;
-  }
-
-  .navdhan-problem-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .navdhan-use-cases {
-    padding: 80px 16px;
-  }
-
-  .navdhan-use-cases-grid {
-    gap: 24px;
-  }
-
-  .navdhan-why-works {
-    padding: 80px 16px;
-  }
-
-  .navdhan-why-works-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .navdhan-integrations {
-    padding: 80px 16px;
-  }
-
-  .navdhan-integrations-grid {
-    gap: 24px;
-  }
-
-  .navdhan-for-banks,
-  .navdhan-for-msmes {
-    padding: 80px 16px;
-  }
-
-  .navdhan-cta-title {
-    font-size: 1.75rem;
-  }
-
-  .navdhan-section-title {
-    font-size: clamp(1.5rem, 5vw, 2rem);
-  }
-
-  .navdhan-orb-1,
-  .navdhan-orb-2 {
-    opacity: 0.5;
-  }
-}
-
-@media (max-width: 640px) {
-  .navdhan-hero {
-    padding: 80px 12px 50px;
-  }
-
-  .navdhan-hero-title {
-    font-size: clamp(1.5rem, 5vw, 2rem);
-  }
-
-  .navdhan-hero-cta {
-    padding: 12px 24px;
-    font-size: 0.95rem;
-  }
-
-  .navdhan-image-showcase {
-    padding: 50px 12px;
-  }
-
-  .navdhan-showcase-image {
-    border-radius: 12px;
-  }
-
-  .navdhan-problem-section {
-    padding: 60px 12px;
-  }
-
-  .navdhan-problem-text {
-    padding: 24px 20px;
-    font-size: 0.95rem;
-  }
-
-  .navdhan-use-cases {
-    padding: 60px 12px;
-  }
-
-  .navdhan-section-title {
-    font-size: clamp(1.25rem, 5vw, 1.75rem);
-  }
-
-  .navdhan-use-case-card {
-    padding: 28px 20px;
-  }
-
-  .navdhan-why-works {
-    padding: 60px 12px;
-  }
-
-  .navdhan-cta-title {
-    font-size: 1.5rem;
-  }
-
-  .navdhan-cta-subtitle {
-    font-size: 1rem;
-  }
-
-  .navdhan-eyebrow {
-    font-size: 0.75rem;
   }
 }

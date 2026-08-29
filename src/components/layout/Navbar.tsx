@@ -24,6 +24,8 @@ type NavLink = {
   href: string;
 };
 
+type NavbarVariant = "source" | "approved";
+
 function IntentLink({
   href,
   onPointerEnter,
@@ -72,27 +74,43 @@ function KubarLogo() {
   );
 }
 
-function ProductsDropdown() {
+function ProductsDropdown({ variant }: { variant: NavbarVariant }) {
   const t = useTranslations("nav");
   const [isOpen, setIsOpen] = useState(false);
 
-  const products = [
-    {
-      name: t("products_dropdown.navdhan.name"),
-      description: t("products_dropdown.navdhan.description"),
-      href: t("products_dropdown.navdhan.href"),
-    },
-    {
-      name: t("products_dropdown.bre.name"),
-      description: t("products_dropdown.bre.description"),
-      status: t("products_dropdown.bre.status"),
-    },
-    {
-      name: t("products_dropdown.underwriting.name"),
-      description: t("products_dropdown.underwriting.description"),
-      status: t("products_dropdown.underwriting.status"),
-    },
-  ];
+  const products =
+    variant === "approved"
+      ? [
+          {
+            name: "NavDhan",
+            description:
+              "Unified credit infrastructure for commerce-tech and B2B platforms",
+            href: "/products/navdhan",
+          },
+          {
+            name: "Kubar Protocol",
+            description:
+              "Cross-border trade-finance infrastructure in development",
+            href: "/products/kubar-protocol",
+          },
+        ]
+      : [
+          {
+            name: t("products_dropdown.navdhan.name"),
+            description: t("products_dropdown.navdhan.description"),
+            href: t("products_dropdown.navdhan.href"),
+          },
+          {
+            name: t("products_dropdown.bre.name"),
+            description: t("products_dropdown.bre.description"),
+            status: t("products_dropdown.bre.status"),
+          },
+          {
+            name: t("products_dropdown.underwriting.name"),
+            description: t("products_dropdown.underwriting.description"),
+            status: t("products_dropdown.underwriting.status"),
+          },
+        ];
 
   return (
     <m.div
@@ -314,7 +332,13 @@ function SocialsDropdown() {
   );
 }
 
-function DesktopNav({ navLinks }: { navLinks: NavLink[] }) {
+function DesktopNav({
+  navLinks,
+  variant,
+}: {
+  navLinks: NavLink[];
+  variant: NavbarVariant;
+}) {
   const t = useTranslations("nav");
   // Filter out 'products' and 'socials' from navLinks as we handle them separately
   const filteredLinks = navLinks.filter((link) => link.href !== "#products" && link.href !== "#socials");
@@ -325,7 +349,7 @@ function DesktopNav({ navLinks }: { navLinks: NavLink[] }) {
       aria-label={t("main_nav_aria")}
     >
       {/* Products Dropdown */}
-      <ProductsDropdown />
+      <ProductsDropdown variant={variant} />
 
       {/* Other nav links */}
       {filteredLinks.map((link, i) => (
@@ -382,6 +406,7 @@ function MobileMenu({
   ctaLabel,
   closeMenuAria,
   mobileNavAria,
+  variant,
 }: {
   isOpen: boolean;
   onClose: () => void;
@@ -389,6 +414,7 @@ function MobileMenu({
   ctaLabel: string;
   closeMenuAria: string;
   mobileNavAria: string;
+  variant: NavbarVariant;
 }) {
   const t = useTranslations("nav");
   const [isProductsOpen, setIsProductsOpen] = useState(false);
@@ -435,23 +461,39 @@ function MobileMenu({
     };
   }, [isOpen, onClose]);
 
-  const products = [
-    {
-      name: t("products_dropdown.navdhan.name"),
-      description: t("products_dropdown.navdhan.description"),
-      href: t("products_dropdown.navdhan.href"),
-    },
-    {
-      name: t("products_dropdown.bre.name"),
-      description: t("products_dropdown.bre.description"),
-      status: t("products_dropdown.bre.status"),
-    },
-    {
-      name: t("products_dropdown.underwriting.name"),
-      description: t("products_dropdown.underwriting.description"),
-      status: t("products_dropdown.underwriting.status"),
-    },
-  ];
+  const products =
+    variant === "approved"
+      ? [
+          {
+            name: "NavDhan",
+            description:
+              "Unified credit infrastructure for commerce-tech and B2B platforms",
+            href: "/products/navdhan",
+          },
+          {
+            name: "Kubar Protocol",
+            description:
+              "Cross-border trade-finance infrastructure in development",
+            href: "/products/kubar-protocol",
+          },
+        ]
+      : [
+          {
+            name: t("products_dropdown.navdhan.name"),
+            description: t("products_dropdown.navdhan.description"),
+            href: t("products_dropdown.navdhan.href"),
+          },
+          {
+            name: t("products_dropdown.bre.name"),
+            description: t("products_dropdown.bre.description"),
+            status: t("products_dropdown.bre.status"),
+          },
+          {
+            name: t("products_dropdown.underwriting.name"),
+            description: t("products_dropdown.underwriting.description"),
+            status: t("products_dropdown.underwriting.status"),
+          },
+        ];
 
   const socials = [
     { name: "Substack", href: "https://kubarlabs.substack.com/" },
@@ -709,7 +751,7 @@ function MobileMenu({
   );
 }
 
-export function Navbar() {
+export function Navbar({ variant = "source" }: { variant?: NavbarVariant }) {
   const t = useTranslations("nav");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -724,10 +766,17 @@ export function Navbar() {
   const navLinks: NavLink[] = [
     { label: t("products"), href: "#products" },
     { label: "Socials", href: "#socials" },
-    { label: t("about"), href: "/about" },
+    {
+      label: variant === "approved" ? "About" : t("about"),
+      href: "/about",
+    },
     { label: t("contact"), href: "/contact" },
-    { label: t("team"), href: "/team" },
+    {
+      label: variant === "approved" ? "Team" : t("team"),
+      href: "/team",
+    },
   ];
+  const ctaLabel = variant === "approved" ? "Get in touch" : t("cta");
 
   useEffect(() => {
     let ticking = false;
@@ -863,12 +912,12 @@ export function Navbar() {
 
             {/* Desktop nav (centered) */}
             <div className="hidden lg:flex flex-1 justify-center">
-              <DesktopNav navLinks={navLinks} />
+              <DesktopNav navLinks={navLinks} variant={variant} />
             </div>
 
             {/* Right side: CTA + mobile trigger */}
             <div className="flex shrink-0 items-center gap-3">
-              <CTAButton ctaLabel={t("cta")} />
+              <CTAButton ctaLabel={ctaLabel} />
 
               {/* Mobile menu button */}
               <m.button
@@ -892,9 +941,10 @@ export function Navbar() {
         isOpen={isMobileMenuOpen}
         onClose={closeMobileMenu}
         navLinks={navLinks}
-        ctaLabel={t("cta")}
+        ctaLabel={ctaLabel}
         closeMenuAria={t("close_menu_aria")}
         mobileNavAria={t("mobile_nav_aria")}
+        variant={variant}
       />
     </>
   );

@@ -2,8 +2,8 @@
 
 import { m, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { CheckCircle, X, Sparkles } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { CheckCircle, X } from "lucide-react";
+import { useEffect, useRef, type RefObject } from "react";
 
 /* ─── Overlay backdrop variants ─────────────────────────────── */
 const overlayVariants: Variants = {
@@ -48,59 +48,17 @@ const itemVariants: Variants = {
   },
 };
 
-/* ─── Floating particle ────────────────────────────────────── */
-function FloatingParticle({
-  delay,
-  x,
-  y,
-  size,
-  color,
-}: {
-  delay: number;
-  x: number;
-  y: number;
-  size: number;
-  color: string;
-}) {
-  const variation = ((x * 31 + y * 17 + size * 13 + delay * 100) % 100) / 100;
-
-  return (
-    <m.div
-      className="absolute rounded-full pointer-events-none"
-      style={{
-        width: size,
-        height: size,
-        background: color,
-        left: `${x}%`,
-        top: `${y}%`,
-      }}
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{
-        opacity: [0, 0.8, 0],
-        scale: [0, 1.2, 0],
-        y: [0, -40 - variation * 30],
-        x: [(variation - 0.5) * 40],
-      }}
-      transition={{
-        duration: 2 + variation,
-        delay: delay,
-        repeat: Infinity,
-        repeatDelay: 1 + variation * 2,
-        ease: "easeOut",
-      }}
-    />
-  );
-}
-
 /* ─── Main Success Modal ────────────────────────────────────── */
 export function ContactSuccessModal({
   isOpen,
   onClose,
   senderName,
+  returnFocusRef,
 }: {
   isOpen: boolean;
   onClose: () => void;
   senderName?: string;
+  returnFocusRef?: RefObject<HTMLElement | null>;
 }) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -121,7 +79,8 @@ export function ContactSuccessModal({
   useEffect(() => {
     if (!isOpen) return;
 
-    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const previouslyFocused =
+      returnFocusRef?.current ?? (document.activeElement as HTMLElement | null);
     const focusFrame = requestAnimationFrame(() => closeButtonRef.current?.focus());
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -156,7 +115,7 @@ export function ContactSuccessModal({
       window.removeEventListener("keydown", handleKeyDown);
       previouslyFocused?.focus();
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, returnFocusRef]);
 
   return (
     <AnimatePresence>
@@ -221,18 +180,6 @@ export function ContactSuccessModal({
               >
                 <X className="w-4 h-4 text-white/50" />
               </m.button>
-
-              {/* Floating celebration particles */}
-              <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
-                <FloatingParticle delay={0.3} x={20} y={30} size={4} color="rgba(212,146,12,0.6)" />
-                <FloatingParticle delay={0.5} x={70} y={50} size={3} color="rgba(59,130,246,0.5)" />
-                <FloatingParticle delay={0.8} x={40} y={70} size={5} color="rgba(34,197,94,0.5)" />
-                <FloatingParticle delay={1.1} x={80} y={25} size={3} color="rgba(212,146,12,0.5)" />
-                <FloatingParticle delay={1.4} x={15} y={60} size={4} color="rgba(59,130,246,0.4)" />
-                <FloatingParticle delay={0.6} x={55} y={20} size={3} color="rgba(34,197,94,0.4)" />
-                <FloatingParticle delay={1.0} x={85} y={65} size={4} color="rgba(212,146,12,0.4)" />
-                <FloatingParticle delay={1.3} x={30} y={85} size={3} color="rgba(59,130,246,0.3)" />
-              </div>
 
               {/* Top glow line */}
               <m.div
@@ -338,21 +285,6 @@ export function ContactSuccessModal({
                 >
                   Our team will review your inquiry and get back to you within 24 hours.
                 </m.p>
-
-                {/* Sparkles badge */}
-                <m.div
-                  variants={itemVariants}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full mb-7"
-                  style={{
-                    background: "rgba(212,146,12,0.08)",
-                    border: "1px solid rgba(212,146,12,0.15)",
-                  }}
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-[#f0b429]" />
-                  <span className="text-[12px] text-[#f0b429] font-medium tracking-wide uppercase">
-                    We&apos;ll be in touch soon
-                  </span>
-                </m.div>
 
                 {/* Close button */}
                 <m.button

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { m } from "framer-motion";
 import { Mail, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -37,6 +37,7 @@ const staggerContainer = {
 /* ─── Contact Form Component ────────────────────────────── */
 function ContactForm() {
   const t = useTranslations("contact");
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -272,6 +273,7 @@ function ContactForm() {
 
         {/* Submit button */}
         <m.button
+          ref={submitButtonRef}
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -292,6 +294,7 @@ function ContactForm() {
         isOpen={showSuccessModal}
         onClose={handleCloseModal}
         senderName={submittedName}
+        returnFocusRef={submitButtonRef}
       />
     </>
   );
@@ -305,19 +308,16 @@ function ContactInfo() {
     {
       label: t("contact_info.partner_label"),
       email: t("contact_info.partner_email"),
-      icon: "🤝",
       delay: 0.1,
     },
     {
       label: t("contact_info.support_label"),
       email: t("contact_info.support_email"),
-      icon: "💬",
       delay: 0.15,
     },
     {
       label: t("contact_info.media_label"),
       email: t("contact_info.media_email"),
-      icon: "📢",
       delay: 0.2,
     },
   ];
@@ -352,12 +352,11 @@ function ContactInfo() {
             whileHover={{ x: 4 }}
             className="contact-info-item"
           >
-            <div className="contact-info-icon">{item.icon}</div>
+            <Mail className="contact-info-icon" aria-hidden="true" />
             <div className="contact-info-content">
               <p className="contact-info-label">{item.label}</p>
               <p className="contact-info-email">{item.email}</p>
             </div>
-            <Mail className="contact-info-arrow" />
           </m.a>
         ))}
       </div>
@@ -371,7 +370,7 @@ export default function ContactPage() {
 
   return (
     <main className="contact-main">
-      <Navbar />
+      <Navbar variant="approved" />
 
       {/* Hero Section */}
       <section className="contact-hero">
@@ -396,11 +395,6 @@ export default function ContactPage() {
             </m.p>
           </m.div>
 
-          {/* Background elements */}
-          <div className="contact-hero-bg" aria-hidden="true">
-            <div className="contact-gradient-orb-1" />
-            <div className="contact-gradient-orb-2" />
-          </div>
         </div>
       </section>
 

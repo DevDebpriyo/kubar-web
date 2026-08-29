@@ -3,9 +3,8 @@
 import { m } from "framer-motion";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Linkedin } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
-import { FooterSection } from "@/components/home/FooterSection";
+import { ApprovedFooter } from "@/components/layout/ApprovedFooter";
 import "./team.css";
 
 /* ─── Team & Advisor Data Structure ──────────────────── */
@@ -216,8 +215,7 @@ function TeamMemberCard({
 
         {member.linkedin && (
           <div className="team-member-link">
-            <Linkedin className="h-4 w-4" aria-hidden="true" />
-            <span>View Profile</span>
+            <span>View Profile ↗</span>
           </div>
         )}
       </div>
@@ -265,7 +263,7 @@ export default function TeamPage() {
 
   return (
     <main className="team-main">
-      <Navbar />
+      <Navbar variant="approved" />
 
       {/* Hero Section */}
       <section className="team-hero">
@@ -296,7 +294,7 @@ export default function TeamPage() {
       {/* Team Members Section */}
       <section className="team-section">
         <div className="team-container">
-          <h2 className="sr-only">{t("team_section.title")}</h2>
+          <h2 className="team-build-title">Building NavDhan and Kubar Protocol.</h2>
           <div className="team-grid">
             <TeamMemberCard member={FOUNDER} delay={0.08} featured />
             {TEAM_MEMBERS.map((member, idx) => (
@@ -320,12 +318,12 @@ export default function TeamPage() {
             transition={{ duration: 0.8 }}
             className="team-section-header"
           >
-            <span className="team-eyebrow">
-              {t("advisors_section.subtitle")}
-            </span>
             <h2 className="team-section-title">
               {t("advisors_section.title")}
             </h2>
+            <p className="team-advisors-subtitle">
+              {t("advisors_section.subtitle")}
+            </p>
           </m.div>
 
           <div className="team-advisors-grid">
@@ -342,7 +340,10 @@ export default function TeamPage() {
       </section>
 
       {/* Footer */}
-      <FooterSection />
+      <ApprovedFooter
+        title="Build the next chapter with us."
+        description="Talk to Kubar Labs about NavDhan, Kubar Protocol or working with our team."
+      />
     </main>
   );
 }
