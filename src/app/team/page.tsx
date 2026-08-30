@@ -41,7 +41,7 @@ const team: TeamProfileData[] = [
   {
     id: "vaibhav-sharma",
     name: "Vaibhav Sharma",
-    role: "Founder",
+    role: "CEO",
     bio: "Built across digital assets, institutional tokenisation and financial infrastructure, informed by first-hand experience with family-run SMEs.",
     image: "/team/editorial/vaibhav.webp",
     linkedin: "https://www.linkedin.com/in/fenestbuc/",
