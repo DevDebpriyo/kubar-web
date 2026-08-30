@@ -4,7 +4,7 @@ import { RouteIntlProvider } from "@/i18n/RouteIntlProvider";
 export const metadata = createPageMetadata({
   title: "Team",
   description:
-    "Meet the people building NavDhan and Kubar Protocol at Kubar Labs.",
+    "Meet the multidisciplinary team building Kubar Labs, NavDhan and Kubar Protocol across credit, trade finance, compliance, applied ML, partnerships and design.",
   path: "/team",
   socialTitle: "Kubar Labs Team",
 });

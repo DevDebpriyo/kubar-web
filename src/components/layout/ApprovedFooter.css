@@ -22,6 +22,15 @@
   margin: 0 auto;
 }
 
+.approved-footer__eyebrow {
+  margin: 0 0 2rem;
+  color: #f0b429;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.015em;
+}
+
 .approved-footer h2 {
   max-width: 780px;
   margin: 0;

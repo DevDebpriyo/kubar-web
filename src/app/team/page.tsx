@@ -1,351 +1,247 @@
-"use client";
-
-import { m } from "framer-motion";
-import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { Navbar } from "@/components/layout/Navbar";
 import { ApprovedFooter } from "@/components/layout/ApprovedFooter";
+import { Navbar } from "@/components/layout/Navbar";
+import {
+  OperatingPrinciple,
+  type OperatingPrincipleData,
+} from "@/components/team/OperatingPrinciple";
+import {
+  TeamProfile,
+  type TeamProfileData,
+} from "@/components/team/TeamProfile";
 import "./team.css";
 
-/* ─── Team & Advisor Data Structure ──────────────────── */
+const disciplines = [
+  "PRODUCT",
+  "ENGINEERING",
+  "APPLIED ML",
+  "COMPLIANCE",
+  "PARTNERSHIPS",
+  "DESIGN",
+] as const;
 
-interface TeamMember {
-  id: string;
-  name: string;
-  role?: string;
-  description: string;
-  achievements?: string[];
-  image: string;
-  linkedin?: string;
-  accentColor:
-    | "orange"
-    | "green"
-    | "blue"
-    | "purple"
-    | "pink"
-    | "cyan"
-    | "amber";
-}
-
-const FOUNDER: TeamMember = {
-  id: "founder-1",
-  name: "Vaibhav Sharma",
-  role: "Founder",
-  description: "Founder",
-  achievements: [
-    "Grew up around family-run SMEs, seeing working-capital constraints and informal lending first-hand through his late father’s journey as an MSME owner",
-    "Built across digital assets, institutional tokenisation and financial infrastructure, with hands-on experience in RWA tokenisation and trade-finance workflows",
-    "Built NavDhan's origination stack, completed 4 months of lender co-design and initiated integrations/pilots across B2B platforms and FIs",
-  ],
-  image: "/team/vaibhav.jpg",
-  linkedin: "https://www.linkedin.com/in/fenestbuc/",
-  accentColor: "orange",
-};
-
-const TEAM_MEMBERS: TeamMember[] = [
+const principles: OperatingPrincipleData[] = [
   {
-    id: "member-3",
+    number: "01",
+    title: "Work from real commercial context.",
+    body: "Start with orders, documents and operating data, not an abstract credit request.",
+  },
+  {
+    number: "02",
+    title: "Keep institutional authority explicit.",
+    body: "Lenders, banks and regulated institutions retain their decisions, controls and settlement responsibilities.",
+  },
+  {
+    number: "03",
+    title: "Design the lifecycle, not a point solution.",
+    body: "Connect financing intent to execution, repayment and settlement without replacing existing institutional systems.",
+  },
+];
+
+const team: TeamProfileData[] = [
+  {
+    id: "vaibhav-sharma",
+    name: "Vaibhav Sharma",
+    role: "Founder",
+    bio: "Built across digital assets, institutional tokenisation and financial infrastructure, informed by first-hand experience with family-run SMEs.",
+    image: "/team/editorial/vaibhav.webp",
+    linkedin: "https://www.linkedin.com/in/fenestbuc/",
+  },
+  {
+    id: "rayansh-srivastava",
     name: "Rayansh Srivastava",
     role: "CTO",
-    description:
-      "Multi-Agent AI & ML Systems | Previously built wealth-tech solutions for European Family Offices | Ex-Samsung ML Research",
-    image: "/team/rayansh.png",
+    bio: "Builds Kubar’s AI and ML systems after wealth-tech work for European family offices and ML research at Samsung.",
+    image: "/team/editorial/rayansh.webp",
     linkedin: "https://www.linkedin.com/in/rayansh-srivastava-419951219/",
-    accentColor: "blue",
   },
   {
-    id: "member-4",
+    id: "keshav-dudani",
     name: "Keshav Dudani",
     role: "Founding ML Engineer",
-    description:
-      "Backend & Applied ML | Prediction Systems & Financial NLP | Built commodity-trading systems deployed across 5 enterprises",
-    image: "/team/keshav.png",
+    bio: "Builds backend and applied-ML systems across prediction and financial NLP, after commodity-trading deployments at five enterprises.",
+    image: "/team/editorial/keshav.webp",
     linkedin: "https://www.linkedin.com/in/keshav-dudani-617295251/",
-    accentColor: "green",
   },
   {
-    id: "member-5",
+    id: "manchit-sanan",
     name: "Manchit Sanan",
     role: "Compliance Lead",
-    description:
-      "17+ Years Enterprise IT | API & Regulatory Infrastructure | US Healthcare → FinTech",
-    image: "/team/manchit.png",
+    bio: "Leads compliance and regulatory infrastructure, bringing 17+ years across enterprise IT, APIs and US healthcare.",
+    image: "/team/editorial/manchit.webp",
     linkedin: "https://www.linkedin.com/in/manchit-sanan-6b9705158/",
-    accentColor: "purple",
   },
   {
-    id: "member-6",
+    id: "divyesh-reddy",
     name: "Divyesh Reddy",
     role: "Partnerships Lead",
-    description:
-      "MSME Credit Analytics | Previously built Buyer-Risk Intelligence for MSMEs | Lender & Ecosystem Partnerships",
-    image: "/team/divyesh.png",
-    linkedin: "https://www.linkedin.com/in/divyesh-reddy/?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
-    accentColor: "amber",
+    bio: "Leads lender and ecosystem partnerships, with experience in buyer-risk intelligence and MSME credit analytics.",
+    image: "/team/editorial/divyesh.webp",
+    linkedin: "https://www.linkedin.com/in/divyesh-reddy/",
   },
   {
-    id: "member-7",
+    id: "kavish-mahajan",
     name: "Kavish Mahajan",
     role: "Creative Director",
-    description:
-      "Brand & Product Design | Owns Kubar’s Brand, UI/UX & Design Systems | Previously founded & scaled a design agency",
-    image: "/team/kavish.png",
+    bio: "Leads brand, product design and Kubar’s design systems after founding and scaling a design agency.",
+    image: "/team/editorial/kavish.webp",
     linkedin: "https://www.linkedin.com/in/koverner/",
-    accentColor: "pink",
   },
 ];
 
-const ADVISORS: TeamMember[] = [
+const advisors: TeamProfileData[] = [
   {
-    id: "advisor-1",
+    id: "debayan-gupta",
     name: "Debayan Gupta",
-    description: "Professor, CS – MIT, Ashoka University",
-    image: "/advisors/debayan.png",
-    accentColor: "orange",
+    role: "Professor, CS – MIT, Ashoka University",
+    bio: "Advises on research-led technology choices and academic partnerships.",
+    image: "/team/editorial/debayan.webp",
+    linkedin: "https://www.linkedin.com/in/debayang/",
   },
   {
-    id: "advisor-3",
+    id: "amit-sagar",
     name: "Amit Sagar",
-    description:
-      "Lead System Architect at Bank of England | BOE CBDC Architecture Contributor",
-    image: "/advisors/amit.png",
-    accentColor: "blue",
+    role: "Lead System Architect at Bank of England",
+    bio: "Contributes system architecture and CBDC insight for secure infrastructure.",
+    image: "/team/editorial/amit.webp",
+    linkedin: "https://www.linkedin.com/in/amit-sagar-59286768/",
   },
   {
-    id: "advisor-4",
+    id: "shridhar-sethuram",
     name: "Shridhar Sethuram",
-    description: "Seasoned finance veteran, 25+ years in Private Equity",
-    image: "/advisors/shridhar.png",
-    accentColor: "purple",
+    role: "Finance veteran, 25+ years in Private Equity",
+    bio: "Brings long-term capital markets perspective to growth strategy.",
+    image: "/team/editorial/shridhar.webp",
+    linkedin: "https://www.linkedin.com/in/shridharsethuram/",
   },
   {
-    id: "advisor-5",
+    id: "tushar-jaruhar",
     name: "Tushar Jaruhar",
-    description: "Ex-Pricing Actuary at Zurich Insurance Co.",
-    image: "/advisors/tushar.png",
-    accentColor: "pink",
+    role: "Ex-Pricing Actuary at Zurich Insurance Co.",
+    bio: "Advises on pricing discipline and insurance-linked risk thinking.",
+    image: "/team/editorial/tushar.webp",
+    linkedin: "https://www.linkedin.com/in/tushar-jaruhar-9362959/",
   },
 ];
-
-/* ─── Animation Variants ─────────────────────────────── */
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 32 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-    },
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-/* ─── Team Member Card Component ─────────────────────– */
-
-function TeamMemberCard({
-  member,
-  delay,
-  featured = false,
-  advisor = false,
-}: {
-  member: TeamMember;
-  delay: number;
-  featured?: boolean;
-  advisor?: boolean;
-}) {
-  const accentMap = {
-    orange: "#fb923c",
-    green: "#22c55e",
-    blue: "#3b82f6",
-    purple: "#a855f7",
-    pink: "#ec4899",
-    cyan: "#06b6d4",
-    amber: "#f59e0b",
-  };
-
-  const cardClassName = `team-member-card ${featured ? "team-member-card-featured" : ""} ${advisor ? "team-member-card-advisor" : ""} ${member.linkedin ? "" : "team-member-card-static"}`;
-  const cardStyle = {
-    "--accent-color": accentMap[member.accentColor],
-  } as React.CSSProperties;
-  const cardContent = (
-    <>
-      {/* Image Container */}
-      <div className="team-member-image-wrapper">
-        <Image
-          src={member.image}
-          alt={member.name}
-          width={300}
-          height={300}
-          sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) calc(50vw - 40px), 300px"
-          priority={featured}
-          className="team-member-image"
-          quality={95}
-        />
-        <div className="team-member-image-border" />
-      </div>
-
-      {/* Content */}
-      <div className="team-member-content">
-        {featured && <span className="team-founder-badge">Founder</span>}
-        <h3 className="team-member-name">{member.name}</h3>
-        {!featured && member.role && (
-          <p className="team-member-role">{member.role}</p>
-        )}
-        {featured && member.achievements?.length ? (
-          <ul className="team-member-achievements">
-            {member.achievements.map((achievement) => (
-              <li key={achievement} className="team-member-achievement-item">
-                {achievement}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="team-member-description">{member.description}</p>
-        )}
-
-        {member.linkedin && (
-          <div className="team-member-link">
-            <span>View Profile ↗</span>
-          </div>
-        )}
-      </div>
-    </>
-  );
-
-  const motionProps = {
-    initial: { opacity: 0, y: 24 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.6, delay },
-    whileHover: member.linkedin ? { y: -8 } : undefined,
-  };
-
-  if (!member.linkedin) {
-    return (
-      <m.article
-        {...motionProps}
-        className={cardClassName}
-        style={cardStyle}
-      >
-        {cardContent}
-      </m.article>
-    );
-  }
-
-  return (
-    <m.a
-      {...motionProps}
-      href={member.linkedin}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={cardClassName}
-      style={cardStyle}
-    >
-      {cardContent}
-    </m.a>
-  );
-}
-
-/* ─── Main Page ──────────────────────────────────────– */
 
 export default function TeamPage() {
-  const t = useTranslations("team");
-
   return (
     <main className="team-main">
       <Navbar variant="approved" />
 
-      {/* Hero Section */}
-      <section className="team-hero">
-        <div className="team-container">
-          <m.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="team-hero-content"
-          >
-            <m.h1 variants={fadeInUp} className="team-hero-title">
-              {t("hero_section.title")}
-            </m.h1>
-
-            <m.p variants={fadeInUp} className="team-hero-description">
-              {t("hero_section.description")}
-            </m.p>
-          </m.div>
-        </div>
-
-        {/* Background elements */}
-        <div className="team-hero-bg" aria-hidden="true">
-          <div className="team-orb-1" />
-          <div className="team-orb-2" />
-        </div>
-      </section>
-
-      {/* Team Members Section */}
-      <section className="team-section">
-        <div className="team-container">
-          <h2 className="team-build-title">Building NavDhan and Kubar Protocol.</h2>
-          <div className="team-grid">
-            <TeamMemberCard member={FOUNDER} delay={0.08} featured />
-            {TEAM_MEMBERS.map((member, idx) => (
-              <TeamMemberCard
-                key={member.id}
-                member={member}
-                delay={0.1 + idx * 0.05}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Advisors Section */}
-      <section className="team-advisors-section">
-        <div className="team-container">
-          <m.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="team-section-header"
-          >
-            <h2 className="team-section-title">
-              {t("advisors_section.title")}
-            </h2>
-            <p className="team-advisors-subtitle">
-              {t("advisors_section.subtitle")}
+      <section className="team-editorial-hero" aria-labelledby="team-page-title">
+        <div className="team-editorial-container team-editorial-hero__layout">
+          <div className="team-editorial-hero__copy">
+            <p className="team-editorial-eyebrow">KUBAR LABS / TEAM</p>
+            <h1 id="team-page-title">
+              The people building the rails between commerce and regulated
+              capital.
+            </h1>
+            <p className="team-editorial-hero__description">
+              A multidisciplinary team working across product, credit,
+              compliance, applied ML, partnerships and design to build NavDhan
+              and Kubar Protocol.
             </p>
-          </m.div>
-
-          <div className="team-advisors-grid">
-            {ADVISORS.map((advisor, idx) => (
-              <TeamMemberCard
-                key={advisor.id}
-                member={advisor}
-                delay={0.1 + idx * 0.08}
-                advisor
-              />
-            ))}
+            <p className="team-editorial-hero__parent-note">
+              Kubar Labs is the parent company of NavDhan and Kubar Protocol.
+            </p>
           </div>
+
+          <aside className="discipline-index" aria-label="Team disciplines">
+            <p className="discipline-index__label">
+              SIX DISCIPLINES. ONE COMPANY.
+            </p>
+            <ol>
+              {disciplines.map((discipline, index) => (
+                <li key={discipline}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  {discipline}
+                </li>
+              ))}
+            </ol>
+          </aside>
         </div>
       </section>
 
-      {/* Footer */}
-      <ApprovedFooter
-        title="Build the next chapter with us."
-        description="Talk to Kubar Labs about NavDhan, Kubar Protocol or working with our team."
-      />
+      <section
+        className="operating-principles"
+        aria-labelledby="operating-principles-title"
+      >
+        <div className="team-editorial-container">
+          <header className="team-editorial-section-header">
+            <p className="team-editorial-eyebrow">HOW WE BUILD</p>
+            <h2 id="operating-principles-title">
+              Built for systems where context, authority and execution all
+              matter.
+            </h2>
+            <p>
+              Three principles guide how Kubar Labs builds across domestic
+              credit and cross-border trade finance.
+            </p>
+          </header>
+          <ol className="operating-principles__grid">
+            {principles.map((principle) => (
+              <OperatingPrinciple key={principle.number} principle={principle} />
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="editorial-people" aria-labelledby="team-section-title">
+        <div className="team-editorial-container">
+          <header className="team-editorial-section-header">
+            <p className="team-editorial-eyebrow">THE TEAM</p>
+            <h2 id="team-section-title">The team behind the systems.</h2>
+            <p>
+              Six people working across the disciplines required to connect
+              commerce workflows with regulated capital.
+            </p>
+          </header>
+          <ul className="editorial-profile-grid" aria-label="Kubar Labs team">
+            {team.map((profile) => (
+              <li key={profile.id}>
+                <TeamProfile profile={profile} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section
+        className="editorial-people editorial-people--advisors"
+        aria-labelledby="advisory-board-title"
+      >
+        <div className="team-editorial-container">
+          <header className="team-editorial-section-header">
+            <p className="team-editorial-eyebrow">ADVISORY BOARD</p>
+            <h2 id="advisory-board-title">
+              Guidance where the systems get difficult.
+            </h2>
+            <p>
+              Supporting Kubar Labs across financial infrastructure,
+              technology, capital markets and risk.
+            </p>
+          </header>
+          <ul
+            className="editorial-profile-grid editorial-profile-grid--advisors"
+            aria-label="Kubar Labs advisory board"
+          >
+            {advisors.map((profile) => (
+              <li key={profile.id}>
+                <TeamProfile profile={profile} variant="advisor" />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <div className="team-footer-wrap">
+        <ApprovedFooter
+          animateOnView={false}
+          eyebrow="FOR PLATFORMS AND FINANCIAL INSTITUTIONS"
+          title="Build the next chapter with us."
+          description="Talk to Kubar Labs about NavDhan, Kubar Protocol or working with our team."
+        />
+      </div>
     </main>
   );
 }

@@ -199,22 +199,26 @@ describe("approved website source data contracts", () => {
     ]);
 
     for (const expected of [
-      "/team/vaibhav.jpg",
-      "/team/rayansh.png",
-      "/team/keshav.png",
-      "/team/manchit.png",
-      "/team/divyesh.png",
-      "/team/kavish.png",
-      "/advisors/debayan.png",
-      "/advisors/amit.png",
-      "/advisors/shridhar.png",
-      "/advisors/tushar.png",
+      "/team/editorial/vaibhav.webp",
+      "/team/editorial/rayansh.webp",
+      "/team/editorial/keshav.webp",
+      "/team/editorial/manchit.webp",
+      "/team/editorial/divyesh.webp",
+      "/team/editorial/kavish.webp",
+      "/team/editorial/debayan.webp",
+      "/team/editorial/amit.webp",
+      "/team/editorial/shridhar.webp",
+      "/team/editorial/tushar.webp",
       "https://www.linkedin.com/in/fenestbuc/",
       "https://www.linkedin.com/in/rayansh-srivastava-419951219/",
       "https://www.linkedin.com/in/keshav-dudani-617295251/",
       "https://www.linkedin.com/in/manchit-sanan-6b9705158/",
-      "https://www.linkedin.com/in/divyesh-reddy/?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
+      "https://www.linkedin.com/in/divyesh-reddy/",
       "https://www.linkedin.com/in/koverner/",
+      "https://www.linkedin.com/in/debayang/",
+      "https://www.linkedin.com/in/amit-sagar-59286768/",
+      "https://www.linkedin.com/in/shridharsethuram/",
+      "https://www.linkedin.com/in/tushar-jaruhar-9362959/",
     ]) {
       expect(team).toContain(expected);
     }

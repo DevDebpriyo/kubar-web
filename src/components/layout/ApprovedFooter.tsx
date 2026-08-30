@@ -17,10 +17,14 @@ const footerLinks = [
 ] as const;
 
 export function ApprovedFooter({
+  animateOnView = true,
+  eyebrow,
   title = "Let’s connect commerce to capital.",
   description =
     "Talk to us about embedded business credit or cross-border trade finance.",
 }: {
+  animateOnView?: boolean;
+  eyebrow?: string;
   title?: string;
   description?: string;
 }) {
@@ -28,11 +32,12 @@ export function ApprovedFooter({
     <footer className="approved-footer">
       <m.div
         className="approved-footer__inner"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={animateOnView ? { opacity: 0, y: 24 } : false}
+        whileInView={animateOnView ? { opacity: 1, y: 0 } : undefined}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
       >
+        {eyebrow && <p className="approved-footer__eyebrow">{eyebrow}</p>}
         <h2>{title}</h2>
         <p className="approved-footer__description">{description}</p>
 

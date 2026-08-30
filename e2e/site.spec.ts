@@ -213,15 +213,79 @@ test("Team renders only the approved current people, portraits, and profile link
 
   await page.goto("/team");
 
-  const founderCard = page.locator(".team-member-card-featured");
+  const founderCard = page.locator(".editorial-profile").first();
   await expect(founderCard.getByText("Founder", { exact: true })).toHaveCount(1);
-  await expect(page.locator(".team-member-card")).toHaveCount(10);
+  await expect(page.locator(".editorial-profile")).toHaveCount(10);
   for (const name of names) {
     await expect(page.getByRole("heading", { name, exact: true })).toHaveCount(1);
-    await expect(page.getByRole("img", { name, exact: true })).toHaveCount(1);
+    await expect(page.getByRole("img", { name: new RegExp(`^${name},`) })).toHaveCount(1);
   }
-  await expect(page.locator('.team-member-card[href^="https://www.linkedin.com/"]')).toHaveCount(6);
-  await expect(page.locator(".team-member-description").first()).toHaveCSS("-webkit-line-clamp", "none");
+  await expect(page.locator('.editorial-profile a[href^="https://www.linkedin.com/"]')).toHaveCount(10);
+  await expect(page.locator(".editorial-profile__bio").first()).toHaveCSS("-webkit-line-clamp", "none");
+});
+
+test("Team remains complete, readable, and overflow-free at approved responsive widths", async ({ page }) => {
+  const consoleErrors: string[] = [];
+  const pageErrors: string[] = [];
+
+  page.on("console", (message) => {
+    if (message.type() === "error") consoleErrors.push(message.text());
+  });
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+  await page.emulateMedia({ reducedMotion: "reduce" });
+
+  for (const width of [1440, 1280, 1024, 768, 390, 360]) {
+    await page.setViewportSize({ width, height: width <= 390 ? 844 : 900 });
+    await page.goto("/team");
+
+    expect(
+      await page.evaluate(() =>
+        document.documentElement.scrollWidth <=
+        document.documentElement.clientWidth,
+      ),
+      `horizontal overflow at ${width}px`,
+    ).toBe(true);
+    await expect(page.locator(".operating-principle")).toHaveCount(3);
+    await expect(page.locator(".editorial-profile")).toHaveCount(10);
+
+    await page.evaluate(async () => {
+      for (let y = 0; y < document.body.scrollHeight; y += innerHeight / 2) {
+        scrollTo(0, y);
+        await new Promise((resolve) => setTimeout(resolve, 20));
+      }
+    });
+
+    for (const portrait of await page.locator(".editorial-profile img").all()) {
+      expect(
+        await portrait.evaluate(
+          (image: HTMLImageElement) => image.complete && image.naturalWidth > 0,
+        ),
+        `portrait failed to load at ${width}px`,
+      ).toBe(true);
+    }
+
+    for (const card of await page.locator(".editorial-profile").all()) {
+      expect(
+        await card.evaluate((element) => element.scrollHeight <= element.clientHeight),
+        `profile content clipped at ${width}px`,
+      ).toBe(true);
+    }
+
+    await expect(page.locator(".approved-footer__inner")).toHaveCSS("opacity", "1");
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/team");
+  const firstLinkedIn = page.locator(".editorial-profile a").first();
+  await firstLinkedIn.focus();
+  await expect(firstLinkedIn).toBeFocused();
+  await expect(firstLinkedIn).toHaveCSS("outline-style", "solid");
+  expect(
+    await page.evaluate(() => matchMedia("(prefers-reduced-motion: reduce)").matches),
+  ).toBe(true);
+
+  expect(consoleErrors.filter((message) => /hydration|uncaught/i.test(message))).toEqual([]);
+  expect(pageErrors).toEqual([]);
 });
 
 test("approved desktop and mobile product menus link both sibling products", async ({ page }) => {
