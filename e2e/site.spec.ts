@@ -213,6 +213,16 @@ test("Team renders only the approved current people, portraits, and profile link
 
   await page.goto("/team");
 
+  for (const removedLabel of [
+    "KUBAR LABS / TEAM",
+    "Kubar Labs is the parent company of NavDhan and Kubar Protocol.",
+    "HOW WE BUILD",
+    "THE TEAM",
+    "FOR PLATFORMS AND FINANCIAL INSTITUTIONS",
+  ]) {
+    await expect(page.getByText(removedLabel, { exact: true })).toHaveCount(0);
+  }
+
   const ceoCard = page.locator(".editorial-profile").first();
   await expect(ceoCard.getByText("CEO", { exact: true })).toHaveCount(1);
   await expect(page.locator(".editorial-profile")).toHaveCount(10);

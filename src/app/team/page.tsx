@@ -131,7 +131,6 @@ export default function TeamPage() {
       <section className="team-editorial-hero" aria-labelledby="team-page-title">
         <div className="team-editorial-container team-editorial-hero__layout">
           <div className="team-editorial-hero__copy">
-            <p className="team-editorial-eyebrow">KUBAR LABS / TEAM</p>
             <h1 id="team-page-title">
               The people building the rails between commerce and regulated
               capital.
@@ -140,9 +139,6 @@ export default function TeamPage() {
               A multidisciplinary team working across product, credit,
               compliance, applied ML, partnerships and design to build NavDhan
               and Kubar Protocol.
-            </p>
-            <p className="team-editorial-hero__parent-note">
-              Kubar Labs is the parent company of NavDhan and Kubar Protocol.
             </p>
           </div>
 
@@ -168,7 +164,6 @@ export default function TeamPage() {
       >
         <div className="team-editorial-container">
           <header className="team-editorial-section-header">
-            <p className="team-editorial-eyebrow">HOW WE BUILD</p>
             <h2 id="operating-principles-title">
               Built for systems where context, authority and execution all
               matter.
@@ -189,7 +184,6 @@ export default function TeamPage() {
       <section className="editorial-people" aria-labelledby="team-section-title">
         <div className="team-editorial-container">
           <header className="team-editorial-section-header">
-            <p className="team-editorial-eyebrow">THE TEAM</p>
             <h2 id="team-section-title">The team behind the systems.</h2>
             <p>
               Six people working across the disciplines required to connect
@@ -237,7 +231,6 @@ export default function TeamPage() {
       <div className="team-footer-wrap">
         <ApprovedFooter
           animateOnView={false}
-          eyebrow="FOR PLATFORMS AND FINANCIAL INSTITUTIONS"
           title="Build the next chapter with us."
           description="Talk to Kubar Labs about NavDhan, Kubar Protocol or working with our team."
         />
