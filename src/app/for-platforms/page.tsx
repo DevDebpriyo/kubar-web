@@ -6,7 +6,7 @@ import { FooterSection } from "@/components/home/FooterSection";
 import { RouteIntlProvider } from "@/i18n/RouteIntlProvider";
 
 export const metadata = createPageMetadata({
-  title: "For Platforms — Coming Soon",
+  title: "For Platforms | Coming Soon",
   description:
     "Kubar Labs is preparing NavDhan's embedded origination experience for B2B platforms.",
   path: "/for-platforms",

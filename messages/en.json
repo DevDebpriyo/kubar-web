@@ -68,7 +68,7 @@
     },
     "thesis": {
       "title": "Financial infrastructure\nfor the way\nbusinesses trade.",
-      "description": "Business activity carries the context that finance needs. Kubar Labs builds the connective infrastructure around it—while lenders, banks and document providers retain their responsibilities.",
+      "description": "Business activity carries the context that finance needs. Kubar Labs builds the connective infrastructure around it, while lenders, banks and document providers retain their responsibilities.",
       "link": "About Kubar Labs",
       "architecture_aria": "Kubar Labs parent company with sibling NavDhan and Kubar Protocol products",
       "navdhan_label": "DOMESTIC BUSINESS CREDIT",
@@ -504,11 +504,11 @@
       },
       "partnerships_title": "Commercial and Ecosystem Status",
       "partnerships": {
-        "1": "AgriGrader and CargoFirst — Phase 1 platform design partners for domestic financing; CargoFirst separately represents trade-finance pilot interest.",
-        "2": "betterfinance and Interestng — Phase 1 lending partners.",
-        "3": "Ninjacart and QuID Capital — active integration discussions for the Embedded Credit SDK.",
-        "4": "Clix Capital and Shriram Finance — pilot interest for the SDK phase.",
-        "5": "AgriNext, Credore, GFTN and EximPe — ecosystem relationships or pilot interest for agri-value-chain and trade-finance expansion."
+        "1": "AgriGrader and CargoFirst: Phase 1 platform design partners for domestic financing; CargoFirst separately represents trade-finance pilot interest.",
+        "2": "betterfinance and Interestng: Phase 1 lending partners.",
+        "3": "Ninjacart and QuID Capital: active integration discussions for the Embedded Credit SDK.",
+        "4": "Clix Capital and Shriram Finance: pilot interest for the SDK phase.",
+        "5": "AgriNext, Credore, GFTN and EximPe: ecosystem relationships or pilot interest for agri-value-chain and trade-finance expansion."
       }
     },
     "roadmap": {
@@ -633,10 +633,10 @@
       "title": "NavDhan for Financial Institutions",
       "subtitle": "Reach high-intent businesses inside third-party workflows and receive structured applications mapped to your product and eligibility criteria.",
       "features": {
-        "1": "Embedded origination — Access credit demand inside fragmented B2B ecosystems",
-        "2": "Lender-ready applications — Receive structured files enriched with permissioned operating context",
-        "3": "Existing-system integration — Route applications into LOS, LMS, CRM or internal portals",
-        "4": "Contextual intelligence — Use platform-specific signals to support pre-qualification"
+        "1": "Embedded origination: Access credit demand inside fragmented B2B ecosystems",
+        "2": "Lender-ready applications: Receive structured files enriched with permissioned operating context",
+        "3": "Existing-system integration: Route applications into LOS, LMS, CRM or internal portals",
+        "4": "Contextual intelligence: Use platform-specific signals to support pre-qualification"
       },
       "tagline": "NavDhan expands the origination funnel; the regulated lender retains underwriting, pricing, approval and servicing.",
       "cta": "Schedule a Lender Briefing",
@@ -646,8 +646,8 @@
       "title": "NavDhan for Businesses",
       "subtitle": "Request financing inside the B2B platform you already use. NavDhan helps structure and route your application to eligible lenders; final offers and terms come from regulated lenders.",
       "features": {
-        "1": "Contextual applications — Use relevant business and transaction information with your consent",
-        "2": "Less repeated paperwork — Reuse structured information where integrations and lender policies allow"
+        "1": "Contextual applications: Use relevant business and transaction information with your consent",
+        "2": "Less repeated paperwork: Reuse structured information where integrations and lender policies allow"
       },
       "cta_primary": "Join Our WhatsApp Community",
       "cta_secondary": "Join the Waitlist"
@@ -656,7 +656,7 @@
   "navdhan_current": {
     "hero": {
       "title": "Unified credit infrastructure for B2B commerce.",
-      "description": "One credit infrastructure layer for commerce-tech and B2B platforms—designed to connect businesses to the breadth of loan products they may need.",
+      "description": "One credit infrastructure layer for commerce-tech and B2B platforms, designed to connect businesses to the breadth of loan products they may need.",
       "primary": "Discuss integration",
       "secondary": "Visit navdhan.app",
       "notice": "Temporary direct access. Embedded distribution comes first."
@@ -761,7 +761,7 @@
       "bank_summary": "Credit approval and settlement stay with the relevant banks and regulated institutions. Kubar Protocol does not lend or hold financing proceeds.",
       "bank_detail": "The bank executes the financing-proceeds waterfall: PCFC repayment and the exporter’s balance. The financier’s maturity payment is a separate, later event under the financing terms.",
       "evidence_title": "Evidence has an authoritative owner.",
-      "evidence_summary": "External document providers retain document control. An accepted receivable requires authoritative issuing-bank acceptance—not just uploaded documents.",
+      "evidence_summary": "External document providers retain document control. An accepted receivable requires authoritative issuing-bank acceptance, not just uploaded documents.",
       "evidence_detail": "Protocol links references and permissioned context. It is not the default controller of the electronic bill of lading, and does not replace the issuing bank or document provider’s authority.",
       "role_boundary": "Kubar Protocol does not become the lender, custodian, regulated venue or settlement bank."
     }

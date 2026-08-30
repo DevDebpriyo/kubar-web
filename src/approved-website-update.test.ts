@@ -71,7 +71,8 @@ const protectedTranslationHashes: Record<string, string> = {
   marquee: "c084e45fbc54a9e169b6a235c7a87c6de951cc76af2053772e04b57ead9349ba",
   built_for_trust: "80d3b12686e0df6989f1079d9680047b143968d40ddcab723d7c07816433635b",
   "built_by.tagline": "09dd389197be718e641e83f710210f9f05f47d51cd2fbda839dfcf222139d8f4",
-  about: "c21583bb0a90d9580c24fa76d41fdb11322bd54035df039d75496494350b6655",
+  // User-authorized exception: remove em dashes from About copy.
+  about: "96fe192a53fb914a5454496dac39f606dfba26cbec72c5b36c2867f828e4c17e",
   team: "35ae6a299613bd3c58922b3dcf001b7585dbfbbd3d6e1ad55deea8e3a7b6ae12",
   "contact.form": "80339b06e9a78a58e49709ee302e7ca41c216979fc93d55558c9440164b36a84",
   "contact.contact_info": "538690c893a2f69ffce5728cb5754993d4906d634333d877ed6402c5bff96105",
